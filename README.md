@@ -1,25 +1,50 @@
 # Ember-cli-idcos
 
-This README outlines the details of collaborating on this Ember addon.
+iDCOS 前端 ember 组件库
 
-## Installation
+## 使用方式
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+第一步：clone 项目到本地并执行 npm link
 
-## Running
+```shell
+  $ git clone ssh://vcs-user@phabricator.idcos.com:9993/diffusion/PECI/ember-cli-idcos.git
+  $ npm install
+  $ bower install
+  $ npm link ember-cli-idcos
+```
 
-* `ember server`
-* Visit your app at http://localhost:4200.
 
-## Running Tests
+第二步：在你的项中依赖 ember-cli-idcos
 
-* `ember test`
-* `ember test --server`
+```shell
+  your-project$ npm link ember-cli-idcos 
+  your-project$ vim package.json // 添加 dependencies ，"ember-cli-idcos": "*"
+```
 
-## Building
 
-* `ember build`
+## 开发
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+* 参考上面的使用
+* 直接修改 ember-cli-idcos 中的代码，修改并提交
+
+
+## TODO 
+
+### 组件列表
+
+[] 基础样式
+[] form 
+[] tree
+[] tab
+[] 交互组件
+[] ....
+
+### 组件网站
+
+[] 完整组件使用教程
+
+
+
+
+
+
