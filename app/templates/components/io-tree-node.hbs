@@ -1,0 +1,35 @@
+{{#if show}}
+<div class="io-tree-node-content">
+	{{#if (or node.children node.async)}}
+		{{#if node.isFolded}}
+			{{#if node.async}}
+			<span class="toggle" {{action "getAsyncNode" node}}> <i class="fa fa-caret-right"></i></span>
+           	{{else}}
+            <span class="toggle" {{action "toggleFold" node}}> <i class="fa fa-caret-right" ></i></span>
+           	{{/if}}
+        {{else}}
+            <span class="toggle" {{action "toggleFold" node}}> <i class="fa fa-caret-down"></i></span>
+        {{/if}}
+	{{/if}}
+
+	{{#if node.hasCheckbox}}
+        {{input checked=node.checked type="checkbox"}}
+    {{/if}}
+
+	{{#if node.linkTo}}
+		{{#link-to node.linkTo node.params}}
+		<span class="text" {{action 'onClick'}}>  {{#if node.icon}}  <i class="fa {{node.icon}}"/> {{/if}} {{node.text}}</span>
+		{{/link-to}}
+	{{else}}
+		<span class="text" {{action 'onClick'}}>  {{#if node.icon}}  <i class="fa {{node.icon}}"/> {{/if}} {{node.text}}</span>
+	{{/if}}
+</div>
+
+{{#if (and node.children (not node.isFolded))}}
+<ul class="menu">
+	{{#each node.children as |child|}}
+        {{common/io-tree-node node=child tree=tree parent=node}}
+    {{/each}}
+</ul>
+{{/if}}
+{{/if}}

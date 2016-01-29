@@ -1,0 +1,8 @@
+<div class="io-tree-header">
+	{{yield}}
+</div>
+<ul class="menu menu-l1">
+    {{#each nodes as |node|}}
+        {{io-tree-node node=node tree=this action="clickItem"}}
+    {{/each}}
+</ul>
