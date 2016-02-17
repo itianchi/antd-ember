@@ -33,11 +33,16 @@ iDCOS 前端 ember 组件库
 ### 组件列表
 
 [] 基础样式
+[] button
 [] form 
-[] tree
-[] tab
-[] 交互组件
-[] ....
+[] tab 
+[] tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
+[] select   [ember-select-guru](https://www.npmjs.com/package/ember-select-guru) 
+[] table  [ember-table](http://addepar.github.io/ember-table/#/simple)  [ember-models-table](http://onechiporenko.github.io/ember-models-table/)
+[] datepicker
+[] ember-moment 
+[] autentication 
+[] modal
 
 ### 组件网站
 
