@@ -28,25 +28,39 @@ iDCOS 前端 ember 组件库
 * 直接修改 ember-cli-idcos 中的代码，修改并提交
 
 
-## TODO 
-
-### 组件列表
-
+## BACKLOGS
 [] 基础样式
 [] button
 [] form 
+[] form-validator
 [] tab 
 [] tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
-[] select   [ember-select-guru](https://www.npmjs.com/package/ember-select-guru) 
-[] table  [ember-table](http://addepar.github.io/ember-table/#/simple)  [ember-models-table](http://onechiporenko.github.io/ember-models-table/)
 [] datepicker
 [] ember-moment 
 [] autentication 
 [] modal
 
-### 组件网站
+## SPRINT (one week)
+- select 组件
+    -  参考
+        -  https://www.npmjs.com/package/ember-select-guru
+        -  https://tedconf.github.io/ember-searchable-select/
+    -  功能
+        -  下拉选择
+        -  下拉搜索
+        -  多选 
+        -  远程搜索 
+- table 组件 
+    - 参考
+        - http://addepar.github.io/ember-table/#/simple
+        - http://onechiporenko.github.io/ember-models-table/
+    - 功能
+- form 组件系列
+- modal + tree
+## DONE 
 
-[] 完整组件使用教程
+
+
 
 
 
