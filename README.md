@@ -7,7 +7,7 @@ iDCOS 前端 ember 组件库
 第一步：clone 项目到本地并执行 npm link
 
 ```shell
-  $ git clone ssh://vcs-user@phabricator.idcos.com:9993/diffusion/PECI/ember-cli-idcos.git
+  $ git clone git@gitlab.idcos.net:CXJ/ember-cli-idcos.git
   $ npm install
   $ bower install
   $ npm link ember-cli-idcos
