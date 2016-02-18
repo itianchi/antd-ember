@@ -3,7 +3,7 @@
 module.exports = {
     name: 'ember-cli-idcos',
     blueprintsPath: function() {
-        return path.join(__dirname, 'blueprints');
+        // return path.join(__dirname, 'blueprints');
     },
     included: function(app, parentAddon) {
         this._super.included(app);
