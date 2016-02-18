@@ -30,19 +30,16 @@ iDCOS 前端 ember 组件库
 
 ## BACKLOGS
 [] 基础样式
-[] button
 [] form 
 [] form-validator
 [] tab 
-[] tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
 [] datepicker
 [] ember-moment 
 [] autentication 
-[] modal
 
 ## SPRINT (one week)
-- tree
 - form 组件系列
+- tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
 
 ## SPRINT DONE 
 - modal

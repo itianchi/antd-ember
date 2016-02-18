@@ -1,35 +1,43 @@
-{{#if show}}
-<div class="io-tree-node-content">
-	{{#if (or node.children node.async)}}
-		{{#if node.isFolded}}
-			{{#if node.async}}
-			<span class="toggle" {{action "getAsyncNode" node}}> <i class="fa fa-caret-right"></i></span>
-           	{{else}}
-            <span class="toggle" {{action "toggleFold" node}}> <i class="fa fa-caret-right" ></i></span>
-           	{{/if}}
-        {{else}}
-            <span class="toggle" {{action "toggleFold" node}}> <i class="fa fa-caret-down"></i></span>
-        {{/if}}
-	{{/if}}
-
-	{{#if node.hasCheckbox}}
-        {{input checked=node.checked type="checkbox"}}
-    {{/if}}
-
-	{{#if node.linkTo}}
-		{{#link-to node.linkTo node.params}}
-		<span class="text" {{action 'onClick'}}>  {{#if node.icon}}  <i class="fa {{node.icon}}"/> {{/if}} {{node.text}}</span>
-		{{/link-to}}
-	{{else}}
-		<span class="text" {{action 'onClick'}}>  {{#if node.icon}}  <i class="fa {{node.icon}}"/> {{/if}} {{node.text}}</span>
-	{{/if}}
-</div>
-
-{{#if (and node.children (not node.isFolded))}}
-<ul class="menu">
-	{{#each node.children as |child|}}
-        {{common/io-tree-node node=child tree=tree parent=node}}
-    {{/each}}
-</ul>
+<span>
+{{#if hasIcon}}
+    <i {{action 'toggle'}} class="{{iconClass}}"></i>
+{{else}}
+    <a {{action 'toggle'}} class="text">*</a>
 {{/if}}
+</span>
+
+{{#if tree.in-multi-selection}}
+    <span class="em-tree-node-multiselection">
+    {{#if multi-selected}}
+        <i {{action 'toggleSelection'}} class="{{tree.selected-icon}}"></i>
+    {{else}}
+        <i {{action 'toggleSelection'}} class="{{tree.unselected-icon}}"></i>
+    {{/if}}
+    </span>
+{{/if}}
+
+<i {{action 'select'}} class="fa fa-square-o"></i>
+<span {{action 'select'}} class="{{nodeSelectedClasses}}">
+{{model.title}}
+{{#if tree.hovered-actions}}
+    <span class="actions">
+    {{#each hoveredActions}}
+        {{io-tree-node-action meta=this model=model}}
+    {{/each}}
+    </span>
+{{/if}}
+</span>
+
+{{#if expanded}}
+<ul class="io-tree-branch fa-ul">
+{{#each model.children as |child|}} 
+    {{io-tree-node 
+        model=child
+        requestReload=requestReload 
+        tree=tree 
+        async=async 
+        targetObject=targetObject
+    }}
+{{/each}}
+</ul>
 {{/if}}

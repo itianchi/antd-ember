@@ -1,1 +1,1 @@
-export { default } from 'ember-cli-idcos/components/io-tree';
+export { default } from 'ember-cli-idcos/components/io-tree/tree';
