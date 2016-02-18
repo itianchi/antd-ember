@@ -41,6 +41,15 @@ iDCOS 前端 ember 组件库
 [] modal
 
 ## SPRINT (one week)
+- table 组件 
+    - 参考
+        - http://addepar.github.io/ember-table/#/simple
+        - http://onechiporenko.github.io/ember-models-table/
+    - 功能
+- form 组件系列
+- modal + tree
+
+## SPRINT DONE 
 - select 组件
     -  参考
         -  https://www.npmjs.com/package/ember-select-guru
@@ -50,14 +59,8 @@ iDCOS 前端 ember 组件库
         -  下拉搜索
         -  多选 
         -  远程搜索 
-- table 组件 
-    - 参考
-        - http://addepar.github.io/ember-table/#/simple
-        - http://onechiporenko.github.io/ember-models-table/
-    - 功能
-- form 组件系列
-- modal + tree
-## DONE 
+
+## PRODUCT
 
 
 
