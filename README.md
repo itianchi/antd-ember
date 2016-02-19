@@ -38,10 +38,39 @@ iDCOS 前端 ember 组件库
 [] autentication 
 
 ## SPRINT (one week)
-- form 组件系列
+
+- 快速入门教程
+- 安装配置教程 
+- layout 布局教程 
+  - bootstrap grid
+  - block flexbox 
+
+- Tabs
+- Dropdown 
+- Tooltip 
+- Alert 提示
+
+- Message 消息 
+- DatePicker 日期选择器
+- icon 文档 
+
+- Slider 华东输入 
+- Upload 文件上传 
 
 ## SPRINT DONE 
+
+## PRODUCT
+- 文档网站 
+  - 网站设计
+    - 首页
+    - 文档页面
+  - 网站实现 
+    - 文档样式
+    - 语法高亮
+    - demo 展示
 - modal
+- form 组件系列
+  - form-validator
 - tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
 - table 组件 
     - 参考
@@ -57,5 +86,3 @@ iDCOS 前端 ember 组件库
         -  下拉搜索
         -  多选
         -  远程搜索
-
-## PRODUCT
