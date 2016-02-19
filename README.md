@@ -39,10 +39,10 @@ iDCOS 前端 ember 组件库
 
 ## SPRINT (one week)
 - form 组件系列
-- tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
 
 ## SPRINT DONE 
 - modal
+- tree  [ember-idx-tree](http://indexiatech.github.io/ember-idx-tree/simple)
 - table 组件 
     - 参考
         - http://addepar.github.io/ember-table/#/simple
@@ -55,16 +55,7 @@ iDCOS 前端 ember 组件库
     -  功能
         -  下拉选择
         -  下拉搜索
-        -  多选 
-        -  远程搜索 
+        -  多选
+        -  远程搜索
 
 ## PRODUCT
-
-
-
-
-
-
-
-
-
