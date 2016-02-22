@@ -26,13 +26,14 @@ export default Ember.Component.extend({
 	type: 'default',
 	shape: 'default',
 	role: 'button',
+	loading: false,
 	/**
 	 * [classNameBindings description]
 	 * @type {Array}
 	 */
 	classNames: 'io-btn',
 	classNamePrefix: 'io-btn-',
-	classNameBindings: ['class', 'typeClass', 'shapeClass', 'sizeClass'],
+	classNameBindings: ['class', 'typeClass', 'shapeClass', 'sizeClass', 'loadingClass'],
 	typeClass: function() {
 		return this.get('classNamePrefix') + this.get('type');
 	}.property('type'),
@@ -60,6 +61,13 @@ export default Ember.Component.extend({
 			}
 		}
 	}.property('size'),
+	loadingClass: function() {
+		if (this.get('loading')) {
+			return this.get('classNamePrefix') + 'loading';
+		} else {
+			return '';
+		}
+	}.property('loading'),
 	/**
 	 * [onClick default action]
 	 * @return {[type]} [description]
