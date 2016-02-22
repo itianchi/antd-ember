@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 /**
- * Button Component
+ * ButtonGroup Component
  ```html
     {{#io-button-group}}
     	{{#io-button}} button 1 {{/io-button}}
