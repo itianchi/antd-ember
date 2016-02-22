@@ -10,3 +10,7 @@
     on-change=(action "update")}}
 ```
 
+
+```html
+<i class="fa fa-{{icon-name}}"></i>
+```

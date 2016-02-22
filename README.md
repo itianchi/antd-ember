@@ -29,18 +29,25 @@ iDCOS 前端 ember 组件库
 
 
 ## BACKLOGS
-[] 基础样式
-[] form 
-[] form-validator
-[] tab 
-[] datepicker
 [] ember-moment 
-[] autentication 
+[] autentication
+[] 级联选择器
+[] 基础控件样式
+  - checkbox
+  - radio
+  - switcher 
+[] transfer http://ant.design/components/transfer/ 
+[] treeSelect http://ant.design/components/tree-select/ 
+[] 文件上传 http://ant.design/components/upload/ 
+[] 日历 
+[] 图标库
+[] popover http://ant.design/components/popconfirm/
+[] progress 
+
 
 ## SPRINT (one week)
 
 - 快速入门教程
-- 安装配置教程 
 - layout 布局教程 
   - bootstrap grid
   - block flexbox 
