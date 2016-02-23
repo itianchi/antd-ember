@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 		var $el = this.$('pre');
 
 		// attributes
-		var  key = this.get('key'), 
+		var key = this.get('key'), 
 			data = this.get('data'), 
 			content = this.get('content') || this.get('data.' + key) || '', 
 			editable = this.get('editable');

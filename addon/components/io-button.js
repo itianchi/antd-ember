@@ -33,7 +33,7 @@ export default Ember.Component.extend({
 	 */
 	classNames: 'io-btn',
 	classNamePrefix: 'io-btn-',
-	classNameBindings: ['class', 'typeClass', 'shapeClass', 'sizeClass', 'loadingClass'],
+	classNameBindings: ['typeClass', 'shapeClass', 'sizeClass', 'loadingClass'],
 	typeClass: function() {
 		return this.get('classNamePrefix') + this.get('type');
 	}.property('type'),

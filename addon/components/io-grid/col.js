@@ -18,23 +18,23 @@ export default Ember.Component.extend({
 	spanClass: function() {
 		return 'col-' + this.get('span');
 	}.property('span'),
-	// spanClass: function() {
-	// 	if (this.get('offset')) {
-	// 		return 'col-offset-' + this.get('offset');
-	// 	} else {
-	// 		return '';
-	// 	}
-	// }.property('offset'),
-	// pushpullClass: function() {
-	// 	var ret = '';
-	// 	if (this.get('push')) {
-	// 		ret += ' col-push-' + this.get('push');
-	// 	}
+	offsetClass: function() {
+		if (this.get('offset')) {
+			return 'col-offset-' + this.get('offset');
+		} else {
+			return '';
+		}
+	}.property('offset'),
+	pushpullClass: function() {
+		var ret = '';
+		if (this.get('push')) {
+			ret += ' col-push-' + this.get('push');
+		}
 
-	// 	if (this.get('pull')) {
-	// 		ret += ' col-pull-' + this.get('pull');
-	// 	}
-	// 	return ret;
+		if (this.get('pull')) {
+			ret += ' col-pull-' + this.get('pull');
+		}
+		return ret;
 
-	// }.property('push', 'pull')
+	}.property('push', 'pull')
 });
