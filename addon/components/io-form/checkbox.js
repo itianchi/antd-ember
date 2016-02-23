@@ -14,8 +14,8 @@ export default Ember.Component.extend({
 	tagName: 'span',
 	classNames: 'io-checkbox',
 	classNamePrefix: 'io-checkbox-',
-	attributeBindings: ['checked', 'haha'],
-	classNameBindings: ['checkedClass', 'offsetClass', 'pushpullClass'],
+	attributeBindings: ['checked', 'disabled'],
+	classNameBindings: ['checkedClass', 'disabledClass'],
 	checkedClass: function() {
 		if (this.get('checked') === true) {
 			return this.get('classNamePrefix') + 'checked';
@@ -23,6 +23,13 @@ export default Ember.Component.extend({
 			return '';
 		}
 	}.property('checked'),
+	disabledClass: function() {
+		if (this.get('disabled')) {
+			return this.get('classNamePrefix') + 'disabled';
+		} else {
+			return '';
+		}
+	}.property('disabled'),
 	/**
 	 * [checked attribute for component]
 	 * @type {Boolean}
