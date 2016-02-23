@@ -113,10 +113,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
     border: 1px solid @border-color-base;
-    border-left: 0;
 
     > span.@{radio-prefix-cls}-button {
-      margin-left: 0;
       display: none;
     }
 
@@ -166,6 +164,7 @@
 
     &:hover {
       color: @primary-color;
+      border-color: @primary-color;
       position: relative;
     }
 
@@ -180,7 +179,8 @@
       background: #fff;
       border-color: @primary-color;
       color: @primary-color;
-      box-shadow: -1px 0 0 0 @primary-color;
+      // box-shadow: 1px 0 0 0 @primary-color;
+      z-index: 2;
 
       &:before {
         display: none;
@@ -193,13 +193,13 @@
 
       &:hover {
         border-color: tint(@primary-color, 20%);
-        box-shadow: -1px 0 0 0 tint(@primary-color, 20%);
+        // box-shadow: 1px 0 0 0 tint(@primary-color, 20%);
         color: tint(@primary-color, 20%);
       }
 
       &:active {
         border-color: shade(@primary-color, 5%);
-        box-shadow: -1px 0 0 0 shade(@primary-color, 5%);
+        // box-shadow: 1px 0 0 0 shade(@primary-color, 5%);
         color: shade(@primary-color, 5%);
       }
     }
