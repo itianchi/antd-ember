@@ -25,5 +25,8 @@ export default Ember.Component.extend({
 			return 'fa fa-' + this.get('type');
 		}
 		return  'ioicon ioicon-' + this.get('type');
-	}.property('type')
+	}.property('type'),
+	click: function() {
+		this.sendAction('onClick');
+	}
 });
