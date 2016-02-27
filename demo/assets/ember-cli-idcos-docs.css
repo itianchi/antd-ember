@@ -14504,6 +14504,7 @@ fieldset[disabled] .io-btn-dashed.active {
   zoom: 1;
   position: absolute;
   right: 4px;
+  top: 0;
   padding: 0 0 0 8px;
 }
 .io-select-selection--multiple .io-select-selection__choice__remove:before {
@@ -14575,8 +14576,8 @@ fieldset[disabled] .io-btn-dashed.active {
   border-radius: 6px;
   box-sizing: border-box;
   z-index: 1070;
-  left: -9999px;
-  top: -9999px;
+  left: 0 ;
+  top: 35px;
   position: absolute;
   outline: none;
   overflow: hidden;
@@ -23299,6 +23300,18 @@ ul li.io-transfer-list-highlight-enter {
 }
 .io-cascader {
   font-size: 12px;
+  /**
+   * cascader value 
+   */
+  /**
+   * picker
+   */
+  /**
+   * open visible
+   */
+  /**
+   * menus
+   */
 }
 .io-cascader-input {
   width: 172px;
@@ -23368,7 +23381,12 @@ ul li.io-transfer-list-highlight-enter {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+.io-cascader-open .io-cascader-menus {
+  display: inline-block;
+}
 .io-cascader-menus {
+  display: none;
+  top: 31px;
   font-size: 12px;
   overflow: hidden;
   background: #fff;
@@ -23403,6 +23421,7 @@ ul li.io-transfer-list-highlight-enter {
   height: 180px;
   list-style: none;
   margin: 0;
+  margin-left: -2px;
   padding: 0;
   border-right: 1px solid #e9e9e9;
   overflow: auto;
@@ -24913,8 +24932,8 @@ ul.ioicons-list li:after {
   background-image: linear-gradient(90deg, #F5F5F5 4.16666667%, transparent 4.16666667%, transparent 8.33333333%, #F5F5F5 8.33333333%, #F5F5F5 12.5%, transparent 12.5%, transparent 16.66666667%, #F5F5F5 16.66666667%, #F5F5F5 20.83333333%, transparent 20.83333333%, transparent 25%, #F5F5F5 25%, #F5F5F5 29.16666667%, transparent 29.16666667%, transparent 33.33333333%, #F5F5F5 33.33333333%, #F5F5F5 37.5%, transparent 37.5%, transparent 41.66666667%, #F5F5F5 41.66666667%, #F5F5F5 45.83333333%, transparent 45.83333333%, transparent 50%, #F5F5F5 50%, #F5F5F5 54.16666667%, transparent 54.16666667%, transparent 58.33333333%, #F5F5F5 58.33333333%, #F5F5F5 62.5%, transparent 62.5%, transparent 66.66666667%, #F5F5F5 66.66666667%, #F5F5F5 70.83333333%, transparent 70.83333333%, transparent 75%, #F5F5F5 75%, #F5F5F5 79.16666667%, transparent 79.16666667%, transparent 83.33333333%, #F5F5F5 83.33333333%, #F5F5F5 87.5%, transparent 87.5%, transparent 91.66666667%, #F5F5F5 91.66666667%, #F5F5F5 95.83333333%, transparent 95.83333333%);
   overflow: hidden;
 }
-.row div,
-.row-flex div {
+.demo-grid .row div,
+.demo-grid .row-flex div {
   padding: 5px 0;
   background: rgba(24, 115, 216, 0.7);
   text-align: center;
@@ -24924,7 +24943,7 @@ ul.ioicons-list li:after {
   margin-bottom: 10px;
   color: #fff;
 }
-.row .demo-col {
+.demo-grid .row .demo-col {
   text-align: center;
   padding: 40px 0;
   color: #fff;

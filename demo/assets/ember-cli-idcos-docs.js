@@ -28,7 +28,7 @@ define('ember-cli-idcos-docs/application/route', ['exports', 'ember'], function 
 
 	exports['default'] = Ember['default'].Route.extend({
 		beforeModel: function beforeModel() {
-			if (window.location.pathname === '/') {
+			if (window.location.hash === '') {
 				this.transitionTo('home');
 			}
 		},
@@ -440,6 +440,15 @@ define('ember-cli-idcos-docs/components/io-button', ['exports', 'ember-cli-idcos
 	exports['default'] = io_button['default'];
 
 });
+define('ember-cli-idcos-docs/components/io-cascader', ['exports', 'ember-cli-idcos/components/io-cascader/cascader'], function (exports, cascader) {
+
+	'use strict';
+
+
+
+	exports['default'] = cascader['default'];
+
+});
 define('ember-cli-idcos-docs/components/io-checkbox', ['exports', 'ember-cli-idcos/components/io-form/checkbox'], function (exports, checkbox) {
 
 	'use strict';
@@ -503,6 +512,15 @@ define('ember-cli-idcos-docs/components/io-icon', ['exports', 'ember-cli-idcos/c
 	exports['default'] = io_icon['default'];
 
 });
+define('ember-cli-idcos-docs/components/io-input', ['exports', 'ember-cli-idcos/components/io-form/input'], function (exports, input) {
+
+	'use strict';
+
+
+
+	exports['default'] = input['default'];
+
+});
 define('ember-cli-idcos-docs/components/io-menu-item-group', ['exports', 'ember-cli-idcos/components/io-menu/menu-item-group'], function (exports, menu_item_group) {
 
 	'use strict';
@@ -546,6 +564,15 @@ define('ember-cli-idcos-docs/components/io-modal', ['exports', 'ember-cli-idcos/
 
 
 	exports['default'] = io_modal['default'];
+
+});
+define('ember-cli-idcos-docs/components/io-option', ['exports', 'ember-cli-idcos/components/io-select/option'], function (exports, option) {
+
+	'use strict';
+
+
+
+	exports['default'] = option['default'];
 
 });
 define('ember-cli-idcos-docs/components/io-pagination-page-item', ['exports', 'ember-cli-idcos/components/io-pagination-page-item'], function (exports, io_pagination_page_item) {
@@ -618,6 +645,15 @@ define('ember-cli-idcos-docs/components/io-searchable-select', ['exports', 'embe
 
 
 	exports['default'] = searchable_select['default'];
+
+});
+define('ember-cli-idcos-docs/components/io-select', ['exports', 'ember-cli-idcos/components/io-select/select'], function (exports, select) {
+
+	'use strict';
+
+
+
+	exports['default'] = select['default'];
 
 });
 define('ember-cli-idcos-docs/components/io-table', ['exports', 'ember-cli-idcos/components/io-table'], function (exports, io_table) {
@@ -2853,6 +2889,120 @@ define('ember-cli-idcos-docs/document/button/template', ['exports'], function (e
   }()));
 
 });
+define('ember-cli-idcos-docs/document/cascader/controller', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError('Cannot destructure undefined'); }
+
+  _objectDestructuringEmpty(
+  // get,
+  // set
+  Ember['default']);
+
+  var options = [{
+    value: 'zhejiang',
+    id: 'zhejiang',
+    label: '浙江',
+    children: [{
+      value: 'hangzhou',
+      id: 'hangzhou',
+      label: '杭州',
+      children: [{
+        value: 'xihu',
+        id: 'xihu',
+        label: '西湖'
+      }]
+    }]
+  }, {
+    value: 'jiangsu',
+    id: 'jiangsu',
+    label: '江苏',
+    children: [{
+      value: 'nanjing',
+      id: 'nanjing',
+      label: '南京',
+      disabled: true,
+      children: [{
+        value: 'zhonghuamen',
+        id: 'zhonghuamen',
+        label: '中华门'
+      }]
+    }]
+  }];
+
+  exports['default'] = Ember['default'].Controller.extend({
+    options: options,
+    actions: {
+      onClick: function onClick() {
+        alert('click button');
+      },
+      onChange: function onChange(values) {
+        console.log(values);
+      }
+    }
+  });
+
+});
+define('ember-cli-idcos-docs/document/cascader/route', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Route.extend({});
+
+});
+define('ember-cli-idcos-docs/document/cascader/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 6,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/document/cascader/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h1");
+        var el2 = dom.createTextNode("Cascader 级联选择器");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment,2,2,contextualElement);
+        return morphs;
+      },
+      statements: [
+        ["inline","io-cascader",[],["options",["subexpr","@mut",[["get","options",["loc",[null,[3,22],[3,29]]]]],[],[]],"onChange","onChange"],["loc",[null,[3,0],[3,51]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/document/checkbox/controller', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -3115,17 +3265,225 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
 
   exports['default'] = Ember.HTMLBars.template((function() {
     var child0 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 12,
+                "column": 16
+              },
+              "end": {
+                "line": 18,
+                "column": 16
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n                      \n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["inline","io-input",[],["type","text","size","large","placeholder","请输入文字"],["loc",[null,[13,20],[16,45]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 19,
+                "column": 16
+              },
+              "end": {
+                "line": 24,
+                "column": 16
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n                      \n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["inline","io-input",[],["type","text","placeholder","请输入文字"],["loc",[null,[20,20],[22,45]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child2 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 25,
+                "column": 16
+              },
+              "end": {
+                "line": 30,
+                "column": 16
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["inline","io-input",[],["type","text","size","small","placeholder","请输入文字"],["loc",[null,[26,20],[29,45]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 13,
+              "line": 11,
               "column": 12
             },
             "end": {
-              "line": 53,
+              "line": 31,
+              "column": 12
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+          morphs[1] = dom.createMorphAt(fragment,1,1,contextualElement);
+          morphs[2] = dom.createMorphAt(fragment,2,2,contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [
+          ["block","io-col",[],["span",6],0,null,["loc",[null,[12,16],[18,27]]]],
+          ["block","io-col",[],["span",6],1,null,["loc",[null,[19,16],[24,27]]]],
+          ["block","io-col",[],["span",6],2,null,["loc",[null,[25,16],[30,27]]]]
+        ],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    }());
+    var child1 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 102,
+                "column": 16
+              },
+              "end": {
+                "line": 102,
+                "column": 50
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" submit ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 69,
+              "column": 12
+            },
+            "end": {
+              "line": 104,
               "column": 12
             }
           },
@@ -3186,7 +3544,7 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
           dom.appendChild(el3, el4);
           var el4 = dom.createComment("");
           dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode("\n                    ");
+          var el4 = dom.createTextNode("\n                        记住我\n                    ");
           dom.appendChild(el3, el4);
           dom.appendChild(el2, el3);
           var el3 = dom.createTextNode("\n                ");
@@ -3194,11 +3552,7 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n                ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createElement("button");
-          dom.setAttribute(el2,"type","submit");
-          dom.setAttribute(el2,"class","btn btn-default");
-          var el3 = dom.createTextNode("\n                    Submit\n                ");
-          dom.appendChild(el2, el3);
+          var el2 = dom.createComment("");
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n            ");
           dom.appendChild(el1, el2);
@@ -3209,19 +3563,21 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var element0 = dom.childAt(fragment, [1]);
-          var morphs = new Array(3);
+          var morphs = new Array(4);
           morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]),3,3);
           morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]),3,3);
           morphs[2] = dom.createMorphAt(dom.childAt(element0, [5, 1]),1,1);
+          morphs[3] = dom.createMorphAt(element0,7,7);
           return morphs;
         },
         statements: [
-          ["inline","input",[],["class","form-control","value",["subexpr","@mut",[["get","model.email",["loc",[null,[21,27],[21,38]]]]],[],[]],"type","email","id","assetsNo","required",true,"placeholder","Email"],["loc",[null,[19,20],[26,23]]]],
-          ["inline","input",[],["class","form-control","value",["subexpr","@mut",[["get","model.password",["loc",[null,[34,27],[34,41]]]]],[],[]],"type","password","required",true,"placeholder","Password"],["loc",[null,[32,20],[38,23]]]],
-          ["inline","input",[],["class","form-control","checked",["subexpr","@mut",[["get","model.checkMeOut",["loc",[null,[44,30],[44,46]]]]],[],[]],"required",true,"type","checkbox"],["loc",[null,[42,24],[46,39]]]]
+          ["inline","io-input",[],["value",["subexpr","@mut",[["get","model.email",["loc",[null,[76,27],[76,38]]]]],[],[]],"type","email","id","assetsNo","required",true,"placeholder","Email"],["loc",[null,[75,20],[81,23]]]],
+          ["inline","io-input",[],["value",["subexpr","@mut",[["get","model.password",["loc",[null,[88,27],[88,41]]]]],[],[]],"type","password","required",true,"placeholder","Password"],["loc",[null,[87,20],[92,23]]]],
+          ["inline","io-checkbox",[],["checked",["subexpr","@mut",[["get","model.checkMeOut",["loc",[null,[97,30],[97,46]]]]],[],[]],"required",true],["loc",[null,[96,24],[98,38]]]],
+          ["block","io-button",[],["submit",true],0,null,["loc",[null,[102,16],[102,64]]]]
         ],
         locals: [],
-        templates: []
+        templates: [child0]
       };
     }());
     return {
@@ -3234,8 +3590,8 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
             "column": 0
           },
           "end": {
-            "line": 206,
-            "column": 0
+            "line": 150,
+            "column": 2
           }
         },
         "moduleName": "ember-cli-idcos-docs/document/form/template.hbs"
@@ -3249,15 +3605,74 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         var el2 = dom.createTextNode("\n    Form 表单\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("br");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("a");
-        dom.setAttribute(el1,"href","http://1000hz.github.io/bootstrap-validator/");
-        var el2 = dom.createTextNode("表单验证规则参考");
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","demo-type");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h2");
+        var el3 = dom.createTextNode(" input 输入");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","demo");
+        var el3 = dom.createTextNode("\n\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-example");
+        var el4 = dom.createTextNode("\n");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("        ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-code");
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("pre");
+        var el5 = dom.createElement("code");
+        dom.setAttribute(el5,"class","language-html");
+        dom.setAttribute(el5,"data-lang","html");
+        var el6 = dom.createTextNode("   \n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{#io-row}}\n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{#io-col span=6}}\n        ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{io-input \n            type=\"text\" \n            size=\"large\"\n            placeholder=\"请输入文字\"}}\n          \n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{/io-col}}\n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{#io-col span=6}}\n        ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{io-input \n            type=\"text\" \n            placeholder=\"请输入文字\"}}\n          \n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{/io-col}}\n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{#io-col span=6}}\n        ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{io-input \n            type=\"text\" \n            size=\"small\"\n            placeholder=\"请输入文字\"}}\n    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{/io-col}}\n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{/io-row}}\n            ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -3268,6 +3683,19 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("h2");
         var el3 = dom.createTextNode("\n        基本表单\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"href","http://1000hz.github.io/bootstrap-validator/");
+        var el4 = dom.createTextNode("表单验证规则参考");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n    ");
@@ -3377,7 +3805,7 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode(">\n            ");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{input \n                class=\"form-control\"\n                value=model.email\n                type=\"email\" \n                id=\"assetsNo\" \n                required=true\n                placeholder=\"Email\"\n                }}\n        </");
+        var el7 = dom.createTextNode("{{io-input \n                value=model.email\n                type=\"email\" \n                id=\"assetsNo\" \n                required=true\n                placeholder=\"Email\"\n                }}\n        </");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("span");
         dom.setAttribute(el7,"class","pl-ent");
@@ -3455,7 +3883,7 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode(">\n            ");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{input \n                class=\"form-control\"\n                value=model.password\n                type=\"password\"  \n                required=true\n                placeholder=\"Password\"\n                }}\n        </");
+        var el7 = dom.createTextNode("{{io-input \n                value=model.password\n                type=\"password\"  \n                required=true\n                placeholder=\"Password\"\n                }}\n        </");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("span");
         dom.setAttribute(el7,"class","pl-ent");
@@ -3502,7 +3930,7 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode(">\n                ");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{input \n                    class=\"form-control\"\n                    checked=model.checkMeOut\n                    required=true\n                    type=\"checkbox\"}}\n            </");
+        var el7 = dom.createTextNode("{{io-checkbox \n                    checked=model.checkMeOut\n                    required=true }}\n            </");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("span");
         dom.setAttribute(el7,"class","pl-ent");
@@ -3605,374 +4033,22 @@ define('ember-cli-idcos-docs/document/form/template', ['exports'], function (exp
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","demo-type");
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        var el3 = dom.createTextNode("\n        水平排列\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","demo");
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","demo-example");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("form");
-        dom.setAttribute(el4,"class","form-horizontal");
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5,"class","form-group");
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("label");
-        dom.setAttribute(el6,"for","inputEmail3");
-        dom.setAttribute(el6,"class","col-sm-2 control-label");
-        var el7 = dom.createTextNode("\n                        Email\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6,"class","col-sm-10");
-        var el7 = dom.createTextNode("\n                        ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("input");
-        dom.setAttribute(el7,"type","email");
-        dom.setAttribute(el7,"class","form-control");
-        dom.setAttribute(el7,"id","inputEmail3");
-        dom.setAttribute(el7,"placeholder","Email");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5,"class","form-group");
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("label");
-        dom.setAttribute(el6,"for","inputPassword3");
-        dom.setAttribute(el6,"class","col-sm-2 control-label");
-        var el7 = dom.createTextNode("\n                        Password\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6,"class","col-sm-10");
-        var el7 = dom.createTextNode("\n                        ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("input");
-        dom.setAttribute(el7,"type","password");
-        dom.setAttribute(el7,"class","form-control");
-        dom.setAttribute(el7,"id","inputPassword3");
-        dom.setAttribute(el7,"placeholder","Password");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5,"class","form-group");
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6,"class","col-sm-offset-2 col-sm-10");
-        var el7 = dom.createTextNode("\n                        ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("div");
-        dom.setAttribute(el7,"class","checkbox");
-        var el8 = dom.createTextNode("\n                            ");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createElement("label");
-        var el9 = dom.createTextNode("\n                                ");
-        dom.appendChild(el8, el9);
-        var el9 = dom.createElement("input");
-        dom.setAttribute(el9,"type","checkbox");
-        dom.appendChild(el8, el9);
-        var el9 = dom.createTextNode("\n                                Remember me\n                            ");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode("\n                        ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5,"class","form-group");
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6,"class","col-sm-offset-2 col-sm-10");
-        var el7 = dom.createTextNode("\n                        ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("button");
-        dom.setAttribute(el7,"type","submit");
-        dom.setAttribute(el7,"class","btn btn-default");
-        var el8 = dom.createTextNode("\n                            Sign in\n                        ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n                    ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","demo-type");
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        var el3 = dom.createTextNode("\n        输入组\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","demo");
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","demo-example");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","input-group");
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5,"class","input-group-addon");
-        dom.setAttribute(el5,"id","basic-addon1");
-        var el6 = dom.createTextNode("\n                    @\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5,"type","text");
-        dom.setAttribute(el5,"class","form-control");
-        dom.setAttribute(el5,"placeholder","Username");
-        dom.setAttribute(el5,"aria-describedby","basic-addon1");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("br");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","input-group");
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5,"type","text");
-        dom.setAttribute(el5,"class","form-control");
-        dom.setAttribute(el5,"placeholder","Recipient's username");
-        dom.setAttribute(el5,"aria-describedby","basic-addon2");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5,"class","input-group-addon");
-        dom.setAttribute(el5,"id","basic-addon2");
-        var el6 = dom.createTextNode("\n                    @example.com\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("br");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","input-group");
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5,"class","input-group-addon");
-        var el6 = dom.createTextNode("\n                    $\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("input");
-        dom.setAttribute(el5,"type","text");
-        dom.setAttribute(el5,"class","form-control");
-        dom.setAttribute(el5,"aria-label","Amount (to the nearest dollar)");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5,"class","input-group-addon");
-        var el6 = dom.createTextNode("\n                    .00\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","demo-type");
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        var el3 = dom.createTextNode("\n        输入组尺寸\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","demo");
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","input-group input-group-lg");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4,"class","input-group-addon");
-        dom.setAttribute(el4,"id","sizing-addon1");
-        var el5 = dom.createTextNode("\n                @\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("input");
-        dom.setAttribute(el4,"type","text");
-        dom.setAttribute(el4,"class","form-control");
-        dom.setAttribute(el4,"placeholder","Username");
-        dom.setAttribute(el4,"aria-describedby","sizing-addon1");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","input-group");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4,"class","input-group-addon");
-        dom.setAttribute(el4,"id","sizing-addon2");
-        var el5 = dom.createTextNode("\n                @\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("input");
-        dom.setAttribute(el4,"type","text");
-        dom.setAttribute(el4,"class","form-control");
-        dom.setAttribute(el4,"placeholder","Username");
-        dom.setAttribute(el4,"aria-describedby","sizing-addon2");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","input-group input-group-sm");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4,"class","input-group-addon");
-        dom.setAttribute(el4,"id","sizing-addon3");
-        var el5 = dom.createTextNode("\n                @\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("input");
-        dom.setAttribute(el4,"type","text");
-        dom.setAttribute(el4,"class","form-control");
-        dom.setAttribute(el4,"placeholder","Username");
-        dom.setAttribute(el4,"aria-describedby","sizing-addon3");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
+        var el1 = dom.createTextNode("\n  ");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [6, 3, 1]),1,1);
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2, 3, 1]),1,1);
+        morphs[1] = dom.createMorphAt(dom.childAt(fragment, [4, 5, 1]),1,1);
         return morphs;
       },
       statements: [
-        ["block","io-form-validator",[],["submitForm","saveAction"],0,null,["loc",[null,[13,12],[53,34]]]]
+        ["block","io-row",[],[],0,null,["loc",[null,[11,12],[31,23]]]],
+        ["block","io-form-validator",[],["submitForm","saveAction"],1,null,["loc",[null,[69,12],[104,34]]]]
       ],
       locals: [],
-      templates: [child0]
+      templates: [child0, child1]
     };
   }()));
 
@@ -6740,12 +6816,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 20,
-                "column": 4
+                "line": 21,
+                "column": 5
               },
               "end": {
-                "line": 20,
-                "column": 32
+                "line": 21,
+                "column": 33
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6774,12 +6850,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 21,
-                "column": 4
+                "line": 22,
+                "column": 5
               },
               "end": {
-                "line": 21,
-                "column": 32
+                "line": 22,
+                "column": 33
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6807,12 +6883,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           "loc": {
             "source": null,
             "start": {
-              "line": 19,
-              "column": 3
+              "line": 20,
+              "column": 4
             },
             "end": {
-              "line": 22,
-              "column": 3
+              "line": 23,
+              "column": 4
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6822,11 +6898,11 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("				");
+          var el1 = dom.createTextNode("					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -6841,8 +6917,8 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-col",[],["span","12"],0,null,["loc",[null,[20,4],[20,43]]]],
-          ["block","io-col",[],["span","12"],1,null,["loc",[null,[21,4],[21,43]]]]
+          ["block","io-col",[],["span","12"],0,null,["loc",[null,[21,5],[21,44]]]],
+          ["block","io-col",[],["span","12"],1,null,["loc",[null,[22,5],[22,44]]]]
         ],
         locals: [],
         templates: [child0, child1]
@@ -6856,12 +6932,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 24,
-                "column": 4
+                "line": 25,
+                "column": 5
               },
               "end": {
-                "line": 24,
-                "column": 30
+                "line": 25,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6890,12 +6966,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 25,
-                "column": 4
+                "line": 26,
+                "column": 5
               },
               "end": {
-                "line": 25,
-                "column": 30
+                "line": 26,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6924,12 +7000,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 26,
-                "column": 4
+                "line": 27,
+                "column": 5
               },
               "end": {
-                "line": 26,
-                "column": 30
+                "line": 27,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6957,12 +7033,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
-              "column": 3
+              "line": 24,
+              "column": 4
             },
             "end": {
-              "line": 27,
-              "column": 3
+              "line": 28,
+              "column": 4
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -6972,15 +7048,15 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("				");
+          var el1 = dom.createTextNode("					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -6996,9 +7072,9 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-col",[],["span","8"],0,null,["loc",[null,[24,4],[24,41]]]],
-          ["block","io-col",[],["span","8"],1,null,["loc",[null,[25,4],[25,41]]]],
-          ["block","io-col",[],["span","8"],2,null,["loc",[null,[26,4],[26,41]]]]
+          ["block","io-col",[],["span","8"],0,null,["loc",[null,[25,5],[25,42]]]],
+          ["block","io-col",[],["span","8"],1,null,["loc",[null,[26,5],[26,42]]]],
+          ["block","io-col",[],["span","8"],2,null,["loc",[null,[27,5],[27,42]]]]
         ],
         locals: [],
         templates: [child0, child1, child2]
@@ -7012,12 +7088,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 29,
-                "column": 4
+                "line": 30,
+                "column": 5
               },
               "end": {
-                "line": 29,
-                "column": 30
+                "line": 30,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -7046,12 +7122,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 30,
-                "column": 4
+                "line": 31,
+                "column": 5
               },
               "end": {
-                "line": 30,
-                "column": 30
+                "line": 31,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -7080,12 +7156,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 31,
-                "column": 4
+                "line": 32,
+                "column": 5
               },
               "end": {
-                "line": 31,
-                "column": 30
+                "line": 32,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -7114,12 +7190,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 32,
-                "column": 4
+                "line": 33,
+                "column": 5
               },
               "end": {
-                "line": 32,
-                "column": 30
+                "line": 33,
+                "column": 31
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -7147,12 +7223,12 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           "loc": {
             "source": null,
             "start": {
-              "line": 28,
-              "column": 3
+              "line": 29,
+              "column": 4
             },
             "end": {
-              "line": 33,
-              "column": 3
+              "line": 34,
+              "column": 4
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/layout/template.hbs"
@@ -7162,19 +7238,19 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("				");
+          var el1 = dom.createTextNode("					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n				");
+          var el1 = dom.createTextNode("\n					");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -7191,10 +7267,10 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-col",[],["span","6"],0,null,["loc",[null,[29,4],[29,41]]]],
-          ["block","io-col",[],["span","6"],1,null,["loc",[null,[30,4],[30,41]]]],
-          ["block","io-col",[],["span","6"],2,null,["loc",[null,[31,4],[31,41]]]],
-          ["block","io-col",[],["span","6"],3,null,["loc",[null,[32,4],[32,41]]]]
+          ["block","io-col",[],["span","6"],0,null,["loc",[null,[30,5],[30,42]]]],
+          ["block","io-col",[],["span","6"],1,null,["loc",[null,[31,5],[31,42]]]],
+          ["block","io-col",[],["span","6"],2,null,["loc",[null,[32,5],[32,42]]]],
+          ["block","io-col",[],["span","6"],3,null,["loc",[null,[33,5],[33,42]]]]
         ],
         locals: [],
         templates: [child0, child1, child2, child3]
@@ -7210,7 +7286,7 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
             "column": 0
           },
           "end": {
-            "line": 60,
+            "line": 63,
             "column": 0
           }
         },
@@ -7330,114 +7406,121 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","demo-type");
-        var el2 = dom.createTextNode("\n	");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        var el3 = dom.createTextNode("使用方法");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n      ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("p");
-        var el3 = dom.createTextNode("可同时使用自带图标和 font-awesome 图标");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
+        dom.setAttribute(el1,"class","demo-grid");
         var el2 = dom.createTextNode("\n	");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","demo");
+        dom.setAttribute(el2,"class","demo-type");
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h2");
+        var el4 = dom.createTextNode("使用方法");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n	      ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("可同时使用自带图标和 font-awesome 图标");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","demo-example");
-        var el4 = dom.createTextNode("\n");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("		");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n		");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","demo-code");
-        var el4 = dom.createTextNode("\n                  ");
+        dom.setAttribute(el3,"class","demo");
+        var el4 = dom.createTextNode("\n			");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","highlight");
+        dom.setAttribute(el4,"class","demo-example");
         var el5 = dom.createTextNode("\n");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("pre");
-        var el6 = dom.createElement("code");
-        dom.setAttribute(el6,"class","language-html");
-        dom.setAttribute(el6,"data-lang","html");
-        var el7 = dom.createTextNode("\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-row}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"12\"}}.col-12");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"12\"}}.col-12");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-row}}\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-row class=\"testRowClassName\"}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-row}}\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-row class=\"\"}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-col}}\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-row}}\n");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                  ");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("			");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4,"class","demo-code");
+        var el5 = dom.createTextNode("\n	                  ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","highlight");
+        var el6 = dom.createTextNode("\n	");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("pre");
+        var el7 = dom.createElement("code");
+        dom.setAttribute(el7,"class","language-html");
+        dom.setAttribute(el7,"data-lang","html");
+        var el8 = dom.createTextNode("\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-row}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"12\"}}.col-12");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"12\"}}.col-12");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-row}}\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-row class=\"testRowClassName\"}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"8\"}}.col-8");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-row}}\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-row class=\"\"}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n		");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{#io-col span=\"6\"}}.col-6");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-col}}\n	");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode("{{/io-row}}\n	");
+        dom.appendChild(el7, el8);
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n	                  ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n	            ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n	");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
+        var el2 = dom.createTextNode("\n	\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n\n");
@@ -7445,7 +7528,7 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [10, 5, 1]);
+        var element0 = dom.childAt(fragment, [10, 1, 5, 1]);
         var morphs = new Array(3);
         morphs[0] = dom.createMorphAt(element0,1,1);
         morphs[1] = dom.createMorphAt(element0,2,2);
@@ -7453,9 +7536,9 @@ define('ember-cli-idcos-docs/document/layout/template', ['exports'], function (e
         return morphs;
       },
       statements: [
-        ["block","io-row",[],[],0,null,["loc",[null,[19,3],[22,14]]]],
-        ["block","io-row",[],["class","testRowClassName"],1,null,["loc",[null,[23,3],[27,14]]]],
-        ["block","io-row",[],["class",""],2,null,["loc",[null,[28,3],[33,14]]]]
+        ["block","io-row",[],[],0,null,["loc",[null,[20,4],[23,15]]]],
+        ["block","io-row",[],["class","testRowClassName"],1,null,["loc",[null,[24,4],[28,15]]]],
+        ["block","io-row",[],["class",""],2,null,["loc",[null,[29,4],[34,15]]]]
       ],
       locals: [],
       templates: [child0, child1, child2]
@@ -10168,7 +10251,7 @@ define('ember-cli-idcos-docs/document/radio/template', ['exports'], function (ex
   }()));
 
 });
-define('ember-cli-idcos-docs/document/select/controller', ['exports', 'ember'], function (exports, Ember) {
+define('ember-cli-idcos-docs/document/searchable-select/controller', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
 
@@ -10226,7 +10309,7 @@ define('ember-cli-idcos-docs/document/select/controller', ['exports', 'ember'], 
     });
 
 });
-define('ember-cli-idcos-docs/document/select/template', ['exports'], function (exports) {
+define('ember-cli-idcos-docs/document/searchable-select/template', ['exports'], function (exports) {
 
   'use strict';
 
@@ -10245,7 +10328,7 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "column": 0
           }
         },
-        "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+        "moduleName": "ember-cli-idcos-docs/document/searchable-select/template.hbs"
       },
       arity: 0,
       cachedFragment: null,
@@ -10504,6 +10587,555 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
   }()));
 
 });
+define('ember-cli-idcos-docs/document/select/controller', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Controller.extend({
+		checked: '1',
+		value: 'lucy',
+		values: ['lucy', 'jack'],
+		_checkedChange: (function () {
+			window.alert('checked radio value: ' + this.get('checked'));
+		}).observes('checked')
+	});
+
+});
+define('ember-cli-idcos-docs/document/select/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 5,
+                "column": 1
+              },
+              "end": {
+                "line": 5,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" jack ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 6,
+                "column": 1
+              },
+              "end": {
+                "line": 6,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" lucy ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child2 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 7,
+                "column": 1
+              },
+              "end": {
+                "line": 7,
+                "column": 56
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" disabled ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child3 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 8,
+                "column": 1
+              },
+              "end": {
+                "line": 8,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" 6174 ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 0
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(4);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          morphs[1] = dom.createMorphAt(fragment,3,3,contextualElement);
+          morphs[2] = dom.createMorphAt(fragment,5,5,contextualElement);
+          morphs[3] = dom.createMorphAt(fragment,7,7,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["block","io-option",[],["value","jack"],0,null,["loc",[null,[5,1],[5,48]]]],
+          ["block","io-option",[],["value","lucy"],1,null,["loc",[null,[6,1],[6,48]]]],
+          ["block","io-option",[],["value","disabled","disabled",true],2,null,["loc",[null,[7,1],[7,70]]]],
+          ["block","io-option",[],["value","6174"],3,null,["loc",[null,[8,1],[8,48]]]]
+        ],
+        locals: [],
+        templates: [child0, child1, child2, child3]
+      };
+    }());
+    var child1 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 13,
+                "column": 1
+              },
+              "end": {
+                "line": 13,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" jack ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 14,
+                "column": 1
+              },
+              "end": {
+                "line": 14,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" lucy ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child2 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 1
+              },
+              "end": {
+                "line": 15,
+                "column": 56
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" disabled ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child3 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 16,
+                "column": 1
+              },
+              "end": {
+                "line": 16,
+                "column": 34
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" 6174 ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child4 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 17,
+                "column": 1
+              },
+              "end": {
+                "line": 17,
+                "column": 38
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" golang ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child5 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 18,
+                "column": 1
+              },
+              "end": {
+                "line": 18,
+                "column": 38
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode(" ubuntu ");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() { return []; },
+          statements: [
+
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 12,
+              "column": 0
+            },
+            "end": {
+              "line": 19,
+              "column": 0
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(6);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          morphs[1] = dom.createMorphAt(fragment,3,3,contextualElement);
+          morphs[2] = dom.createMorphAt(fragment,5,5,contextualElement);
+          morphs[3] = dom.createMorphAt(fragment,7,7,contextualElement);
+          morphs[4] = dom.createMorphAt(fragment,9,9,contextualElement);
+          morphs[5] = dom.createMorphAt(fragment,11,11,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["block","io-option",[],["value","jack"],0,null,["loc",[null,[13,1],[13,48]]]],
+          ["block","io-option",[],["value","lucy"],1,null,["loc",[null,[14,1],[14,48]]]],
+          ["block","io-option",[],["value","disabled","disabled",true],2,null,["loc",[null,[15,1],[15,70]]]],
+          ["block","io-option",[],["value","6174"],3,null,["loc",[null,[16,1],[16,48]]]],
+          ["block","io-option",[],["value","golang"],4,null,["loc",[null,[17,1],[17,52]]]],
+          ["block","io-option",[],["value","ubuntu"],5,null,["loc",[null,[18,1],[18,52]]]]
+        ],
+        locals: [],
+        templates: [child0, child1, child2, child3, child4, child5]
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 19,
+            "column": 14
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h1");
+        var el2 = dom.createTextNode("\n    Select 下拉选择\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(fragment,2,2,contextualElement);
+        morphs[1] = dom.createMorphAt(fragment,7,7,contextualElement);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [
+        ["block","io-select",[],["width",200,"value","lucy"],0,null,["loc",[null,[4,0],[9,14]]]],
+        ["block","io-select",[],["width",200,"value",["subexpr","@mut",[["get","values",["loc",[null,[12,29],[12,35]]]]],[],[]],"multiple",true],1,null,["loc",[null,[12,0],[19,14]]]]
+      ],
+      locals: [],
+      templates: [child0, child1]
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/document/table/controller', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -10527,7 +11159,8 @@ define('ember-cli-idcos-docs/document/table/controller', ['exports', 'ember'], f
             "title": "Last Name"
         }, {
             "propertyName": "city",
-            "title": "City"
+            "title": "City",
+            "template": "snippets/city-template"
         }],
         data: [{
             "id": 1,
@@ -12798,7 +13431,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             },
             "end": {
               "line": 14,
-              "column": 54
+              "column": 86
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/template.hbs"
@@ -12808,7 +13441,14 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("Checkbox 复选框");
+          var el1 = dom.createTextNode("Cascader ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","chinese");
+          var el2 = dom.createTextNode("级联选择器");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" ");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -12832,7 +13472,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             },
             "end": {
               "line": 15,
-              "column": 48
+              "column": 83
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/template.hbs"
@@ -12842,7 +13482,12 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("Radio 单选框");
+          var el1 = dom.createTextNode("Checkbox ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","chinese");
+          var el2 = dom.createTextNode("复选框");
+          dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -12866,6 +13511,45 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             },
             "end": {
               "line": 16,
+              "column": 77
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("Radio ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","chinese");
+          var el2 = dom.createTextNode("单选框");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child8 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 17,
+              "column": 10
+            },
+            "end": {
+              "line": 17,
               "column": 80
             }
           },
@@ -12893,18 +13577,52 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child8 = (function() {
+    var child9 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 18,
               "column": 10
             },
             "end": {
-              "line": 17,
+              "line": 18,
+              "column": 67
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("Searchable Select");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child10 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 19,
+              "column": 10
+            },
+            "end": {
+              "line": 19,
               "column": 74
             }
           },
@@ -12932,18 +13650,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child9 = (function() {
+    var child11 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
+              "line": 25,
               "column": 9
             },
             "end": {
-              "line": 23,
+              "line": 25,
               "column": 76
             }
           },
@@ -12971,18 +13689,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child10 = (function() {
+    var child12 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 24,
+              "line": 26,
               "column": 10
             },
             "end": {
-              "line": 24,
+              "line": 26,
               "column": 75
             }
           },
@@ -13010,18 +13728,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child11 = (function() {
+    var child13 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 25,
+              "line": 27,
               "column": 10
             },
             "end": {
-              "line": 25,
+              "line": 27,
               "column": 72
             }
           },
@@ -13049,18 +13767,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child12 = (function() {
+    var child14 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 36,
+              "line": 38,
               "column": 6
             },
             "end": {
-              "line": 36,
+              "line": 38,
               "column": 72
             }
           },
@@ -13098,7 +13816,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             "column": 0
           },
           "end": {
-            "line": 53,
+            "line": 55,
             "column": 10
           }
         },
@@ -13183,6 +13901,24 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         var el6 = dom.createElement("li");
         dom.setAttribute(el6,"class","type-divider");
         var el7 = dom.createTextNode("表单");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n					");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("li");
+        var el7 = dom.createTextNode(" ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode(" ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n					");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("li");
+        var el7 = dom.createTextNode(" ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n					");
@@ -13501,7 +14237,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0, 1, 1]);
         var element1 = dom.childAt(element0, [1, 1]);
-        var morphs = new Array(14);
+        var morphs = new Array(16);
         morphs[0] = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [3]),1,1);
         morphs[2] = dom.createMorphAt(dom.childAt(element1, [7]),1,1);
@@ -13511,11 +14247,13 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         morphs[6] = dom.createMorphAt(dom.childAt(element1, [17]),1,1);
         morphs[7] = dom.createMorphAt(dom.childAt(element1, [19]),1,1);
         morphs[8] = dom.createMorphAt(dom.childAt(element1, [21]),1,1);
-        morphs[9] = dom.createMorphAt(dom.childAt(element1, [31]),0,0);
-        morphs[10] = dom.createMorphAt(dom.childAt(element1, [33]),1,1);
-        morphs[11] = dom.createMorphAt(dom.childAt(element1, [35]),1,1);
-        morphs[12] = dom.createMorphAt(dom.childAt(element1, [51]),1,1);
-        morphs[13] = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
+        morphs[9] = dom.createMorphAt(dom.childAt(element1, [23]),1,1);
+        morphs[10] = dom.createMorphAt(dom.childAt(element1, [25]),1,1);
+        morphs[11] = dom.createMorphAt(dom.childAt(element1, [35]),0,0);
+        morphs[12] = dom.createMorphAt(dom.childAt(element1, [37]),1,1);
+        morphs[13] = dom.createMorphAt(dom.childAt(element1, [39]),1,1);
+        morphs[14] = dom.createMorphAt(dom.childAt(element1, [55]),1,1);
+        morphs[15] = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
         return morphs;
       },
       statements: [
@@ -13524,18 +14262,20 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         ["block","link-to",["document.button"],[],2,null,["loc",[null,[9,10],[9,91]]]],
         ["block","link-to",["document.icon"],[],3,null,["loc",[null,[10,10],[10,86]]]],
         ["block","link-to",["document.layout"],[],4,null,["loc",[null,[11,10],[11,91]]]],
-        ["block","link-to",["document.checkbox"],[],5,null,["loc",[null,[14,10],[14,66]]]],
-        ["block","link-to",["document.radio"],[],6,null,["loc",[null,[15,10],[15,60]]]],
-        ["block","link-to",["document.select"],[],7,null,["loc",[null,[16,10],[16,92]]]],
-        ["block","link-to",["document.form"],[],8,null,["loc",[null,[17,10],[17,86]]]],
-        ["block","link-to",["document.modal"],[],9,null,["loc",[null,[23,9],[23,88]]]],
-        ["block","link-to",["document.table"],[],10,null,["loc",[null,[24,10],[24,87]]]],
-        ["block","link-to",["document.tree"],[],11,null,["loc",[null,[25,10],[25,84]]]],
-        ["block","link-to",["document.menu"],[],12,null,["loc",[null,[36,6],[36,84]]]],
-        ["content","outlet",["loc",[null,[49,4],[49,14]]]]
+        ["block","link-to",["document.cascader"],[],5,null,["loc",[null,[14,10],[14,98]]]],
+        ["block","link-to",["document.checkbox"],[],6,null,["loc",[null,[15,10],[15,95]]]],
+        ["block","link-to",["document.radio"],[],7,null,["loc",[null,[16,10],[16,89]]]],
+        ["block","link-to",["document.select"],[],8,null,["loc",[null,[17,10],[17,92]]]],
+        ["block","link-to",["document.searchableSelect"],[],9,null,["loc",[null,[18,10],[18,79]]]],
+        ["block","link-to",["document.form"],[],10,null,["loc",[null,[19,10],[19,86]]]],
+        ["block","link-to",["document.modal"],[],11,null,["loc",[null,[25,9],[25,88]]]],
+        ["block","link-to",["document.table"],[],12,null,["loc",[null,[26,10],[26,87]]]],
+        ["block","link-to",["document.tree"],[],13,null,["loc",[null,[27,10],[27,84]]]],
+        ["block","link-to",["document.menu"],[],14,null,["loc",[null,[38,6],[38,84]]]],
+        ["content","outlet",["loc",[null,[51,4],[51,14]]]]
       ],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14]
     };
   }()));
 
@@ -14262,6 +15002,7 @@ define('ember-cli-idcos-docs/router', ['exports', 'ember', 'ember-cli-idcos-docs
     this.route('document', function () {
       this.route('button');
       this.route('select');
+      this.route('searchableSelect');
       this.route('table');
       this.route('modal');
       this.route('tree');
@@ -14274,6 +15015,7 @@ define('ember-cli-idcos-docs/router', ['exports', 'ember', 'ember-cli-idcos-docs
       this.route('checkbox');
       this.route('radio');
       this.route('menu');
+      this.route('cascader');
     });
   });
 
@@ -14333,6 +15075,236 @@ define('ember-cli-idcos-docs/templates/components/io-ansi', ['exports'], functio
   }()));
 
 });
+define('ember-cli-idcos-docs/templates/components/io-cascader', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 5,
+              "column": 1
+            },
+            "end": {
+              "line": 7,
+              "column": 1
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-cascader.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("		");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["inline","io-icon",[],["class","io-cascader-picker-clear","type","cross-circle","onClick","clearValues"],["loc",[null,[6,2],[6,88]]]]
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child1 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 13,
+                "column": 3
+              },
+              "end": {
+                "line": 20,
+                "column": 3
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-cascader.hbs"
+          },
+          arity: 1,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("				");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("li");
+            var el2 = dom.createTextNode("\n					");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n				");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var morphs = new Array(3);
+            morphs[0] = dom.createAttrMorph(element0, 'class');
+            morphs[1] = dom.createElementMorph(element0);
+            morphs[2] = dom.createMorphAt(element0,1,1);
+            return morphs;
+          },
+          statements: [
+            ["attribute","class",["concat",["io-cascader-menu-item \n\t\t\t\t\t",["subexpr","if",[["get","option.model.active",["loc",[null,[16,10],[16,29]]]],"io-cascader-menu-item-active"],[],["loc",[null,[16,5],[16,62]]]]," \n\t\t\t\t\t",["subexpr","if",[["get","option.model.disabled",["loc",[null,[17,10],[17,31]]]],"io-cascader-menu-item-disabled"],[],["loc",[null,[17,5],[17,66]]]]]]],
+            ["element","action",["selectOption",["get","option",["loc",[null,[14,32],[14,38]]]]],[],["loc",[null,[14,8],[14,41]]]],
+            ["content","option.model.label",["loc",[null,[18,5],[18,27]]]]
+          ],
+          locals: ["option"],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 11,
+              "column": 1
+            },
+            "end": {
+              "line": 22,
+              "column": 1
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-cascader.hbs"
+        },
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("		");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("ul");
+          dom.setAttribute(el1,"class","io-cascader-menu");
+          var el2 = dom.createTextNode("\n");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("		");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]),1,1);
+          return morphs;
+        },
+        statements: [
+          ["block","each",[["get","menu",["loc",[null,[13,11],[13,15]]]]],[],0,null,["loc",[null,[13,3],[20,12]]]]
+        ],
+        locals: ["menu"],
+        templates: [child0]
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 24,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-cascader.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("span");
+        dom.setAttribute(el1,"class","io-input-wrapper");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("input");
+        dom.setAttribute(el2,"class","io-cascader-input io-input ");
+        dom.setAttribute(el2,"style","width:100%;");
+        dom.setAttribute(el2,"readonly","true");
+        dom.setAttribute(el2,"type","text");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("	");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","io-cascader-menus  io-cascader-menus-placement-bottomLeft");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element1 = dom.childAt(fragment, [0]);
+        var element2 = dom.childAt(element1, [1]);
+        var morphs = new Array(6);
+        morphs[0] = dom.createElementMorph(element1);
+        morphs[1] = dom.createAttrMorph(element2, 'placeholder');
+        morphs[2] = dom.createAttrMorph(element2, 'value');
+        morphs[3] = dom.createMorphAt(fragment,2,2,contextualElement);
+        morphs[4] = dom.createMorphAt(fragment,4,4,contextualElement);
+        morphs[5] = dom.createMorphAt(dom.childAt(fragment, [6]),1,1);
+        return morphs;
+      },
+      statements: [
+        ["element","action",["toggleMenu"],[],["loc",[null,[1,32],[1,55]]]],
+        ["attribute","placeholder",["concat",[["get","placeholder",["loc",[null,[2,26],[2,37]]]]]]],
+        ["attribute","value",["concat",[["get","_value",["loc",[null,[2,106],[2,112]]]]]]],
+        ["block","if",[["subexpr","gt",[["get","values.length",["loc",[null,[5,11],[5,24]]]],0],[],["loc",[null,[5,7],[5,27]]]]],[],0,null,["loc",[null,[5,1],[7,8]]]],
+        ["inline","io-icon",[],["class","io-cascader-picker-arrow","type","down"],["loc",[null,[8,1],[8,57]]]],
+        ["block","each",[["get","_showMenus",["loc",[null,[11,9],[11,19]]]]],[],1,null,["loc",[null,[11,1],[22,10]]]]
+      ],
+      locals: [],
+      templates: [child0, child1]
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/templates/components/io-checkbox', ['exports'], function (exports) {
 
   'use strict';
@@ -14348,8 +15320,8 @@ define('ember-cli-idcos-docs/templates/components/io-checkbox', ['exports'], fun
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 85
+            "line": 7,
+            "column": 20
           }
         },
         "moduleName": "ember-cli-idcos-docs/templates/components/io-checkbox.hbs"
@@ -14375,7 +15347,7 @@ define('ember-cli-idcos-docs/templates/components/io-checkbox', ['exports'], fun
         return morphs;
       },
       statements: [
-        ["inline","input",[],["type","checkbox","class","io-checkbox-input","checked",["subexpr","@mut",[["get","checked",["loc",[null,[2,58],[2,65]]]]],[],[]],"disabled",["subexpr","@mut",[["get","disabled",["loc",[null,[2,75],[2,83]]]]],[],[]]],["loc",[null,[2,0],[2,85]]]]
+        ["inline","input",[],["type","checkbox","class","io-checkbox-input","checked",["subexpr","@mut",[["get","checked",["loc",[null,[5,9],[5,16]]]]],[],[]],"disabled",["subexpr","@mut",[["get","disabled",["loc",[null,[6,10],[6,18]]]]],[],[]],"required",["subexpr","@mut",[["get","required",["loc",[null,[7,10],[7,18]]]]],[],[]]],["loc",[null,[2,0],[7,20]]]]
       ],
       locals: [],
       templates: []
@@ -14832,6 +15804,52 @@ define('ember-cli-idcos-docs/templates/components/io-form-validator', ['exports'
       },
       statements: [
         ["content","yield",["loc",[null,[1,0],[1,9]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
+define('ember-cli-idcos-docs/templates/components/io-input', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 15,
+            "column": 2
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-input.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [
+        ["inline","input",[],["class",["subexpr","@mut",[["get","inputClass",["loc",[null,[2,7],[2,17]]]]],[],[]],"disabled",["subexpr","@mut",[["get","disabled",["loc",[null,[3,10],[3,18]]]]],[],[]],"type",["subexpr","@mut",[["get","type",["loc",[null,[4,6],[4,10]]]]],[],[]],"value",["subexpr","@mut",[["get","value",["loc",[null,[5,7],[5,12]]]]],[],[]],"role","input","required",["subexpr","@mut",[["get","required",["loc",[null,[7,10],[7,18]]]]],[],[]],"max",["subexpr","@mut",[["get","max",["loc",[null,[8,5],[8,8]]]]],[],[]],"min",["subexpr","@mut",[["get","min",["loc",[null,[9,5],[9,8]]]]],[],[]],"data-error",["subexpr","@mut",[["get","dataError",["loc",[null,[10,12],[10,21]]]]],[],[]],"maxlength",["subexpr","@mut",[["get","maxlength",["loc",[null,[11,11],[11,20]]]]],[],[]],"minlength",["subexpr","@mut",[["get","minlength",["loc",[null,[12,11],[12,20]]]]],[],[]],"pattern",["subexpr","@mut",[["get","pattern",["loc",[null,[13,9],[13,16]]]]],[],[]],"placeholder",["subexpr","@mut",[["get","placeholder",["loc",[null,[14,13],[14,24]]]]],[],[]]],["loc",[null,[1,0],[15,2]]]]
       ],
       locals: [],
       templates: []
@@ -16484,6 +17502,370 @@ define('ember-cli-idcos-docs/templates/components/io-searchable-select', ['expor
       ],
       locals: [],
       templates: [child0, child1, child2, child3]
+    };
+  }()));
+
+});
+define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 3,
+                "column": 5
+              },
+              "end": {
+                "line": 5,
+                "column": 5
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("	    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("span");
+            dom.setAttribute(el1,"style","display: block;");
+            dom.setAttribute(el1,"class","io-select-search__field__placeholder");
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]),0,0);
+            return morphs;
+          },
+          statements: [
+            ["content","placeholder",["loc",[null,[4,80],[4,95]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        var child0 = (function() {
+          return {
+            meta: {
+              "revision": "Ember@1.13.7",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 7,
+                  "column": 6
+                },
+                "end": {
+                  "line": 15,
+                  "column": 9
+                }
+              },
+              "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+            },
+            arity: 1,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("	        ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("li");
+              dom.setAttribute(el1,"class","io-select-selection__choice");
+              dom.setAttribute(el1,"title","a10");
+              var el2 = dom.createTextNode("\n	            ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("span");
+              dom.setAttribute(el2,"class","io-select-selection__choice__content");
+              var el3 = dom.createTextNode("\n	                ");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createTextNode("\n	            ");
+              dom.appendChild(el2, el3);
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n	            ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("span");
+              dom.setAttribute(el2,"class","io-select-selection__choice__remove");
+              var el3 = dom.createTextNode("\n	            ");
+              dom.appendChild(el2, el3);
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n	        ");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element0 = dom.childAt(fragment, [1]);
+              var element1 = dom.childAt(element0, [3]);
+              var morphs = new Array(2);
+              morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]),1,1);
+              morphs[1] = dom.createElementMorph(element1);
+              return morphs;
+            },
+            statements: [
+              ["content","val",["loc",[null,[10,17],[10,24]]]],
+              ["element","action",["removeOption",["get","val",["loc",[null,[12,87],[12,90]]]]],["bubbles",false],["loc",[null,[12,63],[12,106]]]]
+            ],
+            locals: ["val"],
+            templates: []
+          };
+        }());
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 5,
+                "column": 5
+              },
+              "end": {
+                "line": 17,
+                "column": 5
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("	    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("ul");
+            dom.setAttribute(el1,"class","io-select-selection__rendered");
+            dom.setAttribute(el1,"style","margin-bottom: 0;");
+            var el2 = dom.createTextNode("\n");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("	    ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]),1,1);
+            return morphs;
+          },
+          statements: [
+            ["block","each",[["get","value",["loc",[null,[7,14],[7,19]]]]],[],0,null,["loc",[null,[7,6],[15,18]]]]
+          ],
+          locals: [],
+          templates: [child0]
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 2,
+              "column": 4
+            },
+            "end": {
+              "line": 18,
+              "column": 4
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [
+          ["block","if",[["subexpr","eq",[["get","value.length",["loc",[null,[3,15],[3,27]]]],0],[],["loc",[null,[3,11],[3,30]]]]],[],0,1,["loc",[null,[3,5],[17,12]]]]
+        ],
+        locals: [],
+        templates: [child0, child1]
+      };
+    }());
+    var child1 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 18,
+              "column": 4
+            },
+            "end": {
+              "line": 25,
+              "column": 4
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("    ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","io-select-selection__rendered");
+          var el2 = dom.createTextNode("\n        ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("span");
+          var el3 = dom.createTextNode("\n            ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n        ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n    ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","io-select-arrow");
+          dom.setAttribute(el1,"tabindex","-1");
+          dom.setAttribute(el1,"style","outline:none;");
+          var el2 = dom.createTextNode(" ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("b");
+          var el3 = dom.createTextNode(" ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode(" ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1]),1,1);
+          return morphs;
+        },
+        statements: [
+          ["content","value",["loc",[null,[21,12],[21,21]]]]
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 34,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("span");
+        dom.setAttribute(el1,"role","combobox");
+        dom.setAttribute(el1,"aria-autocomplete","list");
+        dom.setAttribute(el1,"aria-haspopup","true");
+        dom.setAttribute(el1,"aria-expanded","false");
+        dom.setAttribute(el1,"tabindex","0");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("span");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("ul");
+        dom.setAttribute(el2,"class","io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root");
+        dom.setAttribute(el2,"role","menu");
+        dom.setAttribute(el2,"aria-activedescendant","");
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element2 = dom.childAt(fragment, [0]);
+        var element3 = dom.childAt(fragment, [2]);
+        var morphs = new Array(7);
+        morphs[0] = dom.createAttrMorph(element2, 'class');
+        morphs[1] = dom.createAttrMorph(element2, 'style');
+        morphs[2] = dom.createElementMorph(element2);
+        morphs[3] = dom.createMorphAt(element2,1,1);
+        morphs[4] = dom.createAttrMorph(element3, 'class');
+        morphs[5] = dom.createAttrMorph(element3, 'style');
+        morphs[6] = dom.createMorphAt(dom.childAt(element3, [1]),1,1);
+        return morphs;
+      },
+      statements: [
+        ["attribute","class",["concat",["io-select-selection ",["get","multipleClass",["loc",[null,[1,35],[1,48]]]]]]],
+        ["attribute","style",["concat",["width: ",["get","width",["loc",[null,[1,191],[1,196]]]],"px;"]]],
+        ["element","action",["toggleHidden"],[],["loc",[null,[1,149],[1,174]]]],
+        ["block","if",[["get","multiple",["loc",[null,[2,10],[2,18]]]]],[],0,1,["loc",[null,[2,4],[25,11]]]],
+        ["attribute","class",["concat",["io-select-dropdown ",["get","hiddenClass",["loc",[null,[29,34],[29,45]]]]]]],
+        ["attribute","style",["concat",["width: ",["get","width",["loc",[null,[29,65],[29,70]]]],"px;"]]],
+        ["content","yield",["loc",[null,[31,8],[31,17]]]]
+      ],
+      locals: [],
+      templates: [child0, child1]
     };
   }()));
 
@@ -19122,6 +20504,46 @@ define('ember-cli-idcos-docs/templates/document/form-validator', ['exports'], fu
   }()));
 
 });
+define('ember-cli-idcos-docs/templates/snippets/city-template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 5
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/snippets/city-template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("haha	");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() { return []; },
+      statements: [
+
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/tests/app.jshint', function () {
 
   'use strict';
@@ -19163,6 +20585,28 @@ define('ember-cli-idcos-docs/tests/document/button/controller.jshint', function 
   QUnit.test('document/button/controller.js should pass jshint', function(assert) { 
     assert.expect(1);
     assert.ok(false, 'document/button/controller.js should pass jshint.\ndocument/button/controller.js: line 3, col 7, Empty destructuring.\ndocument/button/controller.js: line 16, col 34, Missing semicolon.\n\n2 errors'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/document/cascader/controller.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - document/cascader');
+  QUnit.test('document/cascader/controller.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(false, 'document/cascader/controller.js should pass jshint.\ndocument/cascader/controller.js: line 3, col 7, Empty destructuring.\ndocument/cascader/controller.js: line 44, col 34, Missing semicolon.\n\n2 errors'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/document/cascader/route.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - document/cascader');
+  QUnit.test('document/cascader/route.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'document/cascader/route.js should pass jshint.'); 
   });
 
 });
@@ -19309,6 +20753,17 @@ define('ember-cli-idcos-docs/tests/document/radio/route.jshint', function () {
   });
 
 });
+define('ember-cli-idcos-docs/tests/document/searchable-select/controller.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - document/searchable-select');
+  QUnit.test('document/searchable-select/controller.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(false, 'document/searchable-select/controller.js should pass jshint.\ndocument/searchable-select/controller.js: line 3, col 7, Empty destructuring.\ndocument/searchable-select/controller.js: line 48, col 20, Missing semicolon.\ndocument/searchable-select/controller.js: line 32, col 26, \'searchText\' is defined but never used.\n\n3 errors'); 
+  });
+
+});
 define('ember-cli-idcos-docs/tests/document/select/controller.jshint', function () {
 
   'use strict';
@@ -19316,7 +20771,7 @@ define('ember-cli-idcos-docs/tests/document/select/controller.jshint', function 
   QUnit.module('JSHint - document/select');
   QUnit.test('document/select/controller.js should pass jshint', function(assert) { 
     assert.expect(1);
-    assert.ok(false, 'document/select/controller.js should pass jshint.\ndocument/select/controller.js: line 3, col 7, Empty destructuring.\ndocument/select/controller.js: line 48, col 20, Missing semicolon.\ndocument/select/controller.js: line 32, col 26, \'searchText\' is defined but never used.\n\n3 errors'); 
+    assert.ok(true, 'document/select/controller.js should pass jshint.'); 
   });
 
 });
@@ -19327,7 +20782,7 @@ define('ember-cli-idcos-docs/tests/document/table/controller.jshint', function (
   QUnit.module('JSHint - document/table');
   QUnit.test('document/table/controller.js should pass jshint', function(assert) { 
     assert.expect(1);
-    assert.ok(false, 'document/table/controller.js should pass jshint.\ndocument/table/controller.js: line 2, col 7, Empty destructuring.\ndocument/table/controller.js: line 97, col 26, \'searchText\' is defined but never used.\n\n2 errors'); 
+    assert.ok(false, 'document/table/controller.js should pass jshint.\ndocument/table/controller.js: line 2, col 7, Empty destructuring.\ndocument/table/controller.js: line 98, col 26, \'searchText\' is defined but never used.\n\n2 errors'); 
   });
 
 });
@@ -19449,6 +20904,32 @@ define('ember-cli-idcos-docs/tests/test-helper.jshint', function () {
   QUnit.test('test-helper.js should pass jshint', function(assert) { 
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass jshint.'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/cascader/route-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleFor('route:document/cascader', 'Unit | Route | document/cascader', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  ember_qunit.test('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/cascader/route-test.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - unit/document/cascader');
+  QUnit.test('unit/document/cascader/route-test.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'unit/document/cascader/route-test.js should pass jshint.'); 
   });
 
 });
@@ -19804,7 +21285,7 @@ catch(err) {
 if (runningTests) {
   require("ember-cli-idcos-docs/tests/test-helper");
 } else {
-  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+435f62b4"});
+  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+d29d3ff1"});
 }
 
 /* jshint ignore:end */

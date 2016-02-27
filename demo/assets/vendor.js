@@ -86832,7 +86832,7 @@ define('ember-cli-idcos/components/io-button', ['exports', 'ember'], function (e
 	  * [tagName description]
 	  */
 		tagName: 'button',
-		attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+		attributeBindings: ['state', 'disabled', 'onClick', 'role', 'htmlType:type'],
 		/**
 	  * [attibutes]
 	  * @type {String}
@@ -86882,6 +86882,13 @@ define('ember-cli-idcos/components/io-button', ['exports', 'ember'], function (e
 				return '';
 			}
 		}).property('loading'),
+		htmlType: (function () {
+			if (this.get('submit')) {
+				return 'submit';
+			} else {
+				return null;
+			}
+		}).property('submit'),
 		/**
 	  * [onClick default action]
 	  * @return {[type]} [description]
@@ -86891,6 +86898,179 @@ define('ember-cli-idcos/components/io-button', ['exports', 'ember'], function (e
 				this.sendAction('onClick');
 			} else {
 				this.sendAction();
+			}
+		}
+	});
+
+});
+define('ember-cli-idcos/components/io-cascader/cascader', ['exports', 'ember', 'ember-cli-idcos/mixin/disabled-class', 'ember-cli-idcos/mixin/outside-click', 'ember-cli-idcos/utils/tree-model'], function (exports, Ember, DisabledClass, OutsideClick, TreeModel) {
+
+	'use strict';
+
+	var get = Ember['default'].get;
+	var set = Ember['default'].set;
+
+	/**
+	 * io-cascader-picker Component
+	 ```js
+		const options = [{
+		  value: 'zhejiang',
+		  id: 'zhejiang',
+		  label: '浙江',
+		  children: [{
+		    value: 'hangzhou',
+		    id: 'hangzhou',
+		    label: '杭州',
+		    children: [{
+		      value: 'xihu',
+		      id: 'xihu',
+		      label: '西湖',
+		    }],
+		  }],
+		}, {
+		  value: 'jiangsu',
+		  id: 'jiangsu',
+		  label: '江苏',
+		  children: [{
+		    value: 'nanjing',
+		    id: 'nanjing',
+		    label: '南京',
+		    children: [{
+		      value: 'zhonghuamen',
+		      id: 'zhonghuamen',
+		      label: '中华门',
+		    }],
+		  }],
+		}];
+	 ``` 
+	 */
+
+	exports['default'] = Ember['default'].Component.extend(DisabledClass['default'], OutsideClick['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'span',
+		classNames: 'io-cascader-picker io-cascader',
+		classNamePrefix: 'io-cascader-',
+		attributeBindings: ['disabled', 'name'],
+		classNameBindings: ['openClass'],
+		/**
+	  * [placeholder for input]
+	  * @type {Boolean}
+	  */
+		placeholder: '请选择',
+		/**
+	  * [options in tree model]
+	  * @type {[type]}
+	  */
+		options: null,
+		/**
+	  * [_tree transform options into tree model]
+	  * @type {TreeModel}
+	  */
+		_tree: new TreeModel['default'](),
+		/**
+	  * [_treeRoot root node of tree ]
+	  * @return {[type]} [description]
+	  */
+		_treeRoot: (function () {
+			return this.get('_tree').parse({
+				id: 'root',
+				children: this.get('options')
+			});
+		}).property('options'),
+		/**
+	  * [_activeOptions get current active options]
+	  * @return {[type]} [description]
+	  */
+		_activeOptions: (function () {
+			var values = this.get('values');
+			var options = this.get('options');
+			var rootNode = this.get('_treeRoot');
+			var activeOptions = values.map(function (value) {
+				return rootNode.first(function (node) {
+					return node.model.id === value;
+				});
+			});
+
+			rootNode.walk(function (node) {
+				if (values.contains(node.model.id)) {
+					set(node, 'model.active', true);
+				} else {
+					set(node, 'model.active', false);
+				}
+			});
+			return activeOptions;
+		}).property('values', 'options'),
+		/**
+	  * [_showMenus get shown menus from activeOptions]
+	  * @return {[type]} [description]
+	  */
+		_showMenus: (function () {
+			var values = this.get('values');
+			var menus = this.get('_activeOptions').filter(function (option) {
+				return option.children && option.children.length > 0;
+			}).map(function (option) {
+				return option.children;
+			});
+
+			menus.unshift(this.get('_treeRoot').children);
+			return menus;
+		}).property('values', 'options'),
+		/**
+	  * [values  option id array]
+	  * @type {Array}
+	  */
+		values: ['zhejiang'],
+		/**
+	  * [_value for input value]
+	  * @return {[type]} [description]
+	  */
+		_value: (function () {
+			var rootNode = this.get('_treeRoot');
+			return this.get('values').map(function (value) {
+				var node = rootNode.first(function (node) {
+					return node.model.id === value;
+				});
+				return node.model.label;
+			}).join('/');
+		}).property('values'),
+		/**
+	  * [_open description]
+	  * @type {Boolean}
+	  */
+		_open: false,
+		openClass: (function () {
+			if (this.get('_open')) {
+				return this.get('classNamePrefix') + 'open';
+			} else {
+				return '';
+			}
+		}).property('_open'),
+		actions: {
+			toggleMenu: function toggleMenu() {
+				this.set('_open', !this.get('_open'));
+			},
+			selectOption: function selectOption(option) {
+				if (option.model.disabled) {
+					return;
+				}
+
+				var path = option.getPath();
+				var values = [];
+				path.forEach(function (node) {
+					values.push(node.model.id);
+				});
+				values.shift();
+				this.set('values', values);
+				this.sendAction('onChange', values);
+			},
+			clearValues: function clearValues() {
+				set(this, 'values', Ember['default'].A());
+				this.sendAction('onChange', []);
+			},
+			outsideClick: function outsideClick() {
+				set(this, '_open', false);
 			}
 		}
 	});
@@ -87051,6 +87231,60 @@ define('ember-cli-idcos/components/io-form/checkbox', ['exports', 'ember'], func
 		onChecked: (function () {
 			this.sendAction('onChange', this.get('checked'));
 		}).observes('checked')
+	});
+
+});
+define('ember-cli-idcos/components/io-form/input', ['exports', 'ember', 'ember-cli-idcos/mixin/disabled-class', 'ember-cli-idcos/utils/translate-size'], function (exports, Ember, DisabledClass, translateSize) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend(DisabledClass['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'span',
+		attributeBindings: ['state', 'disabled', 'type', 'role'],
+		classNames: 'io-input-wrapper',
+		classNamePrefix: ['io-input-'],
+		role: 'input',
+		/**
+	  * @attribute  value
+	  */
+		value: '',
+		/**
+	  * @attribute type
+	  */
+		type: 'text',
+		/**
+	  * @attribute diabled
+	  */
+		disabled: false,
+		/**
+	  * @attribute  disabled
+	  */
+		size: 'default',
+		/**
+	  * @attribute placeholder 
+	  * @type {String}
+	  */
+		placeholder: '请输入',
+		dataError: Ember['default'].computed.alias('data-error'),
+		/**
+	  * @state inputClass
+	  */
+		inputClass: (function () {
+			var ret = 'io-input ';
+
+			if (this.get('size')) {
+				ret += this.get('classNamePrefix') + translateSize['default'](this.get('size')) + ' ';
+			}
+
+			if (this.get('disabled')) {
+				ret += this.get('classNamePrefix') + 'disabled ';
+			}
+
+			return ret;
+		}).property('disabled', 'size')
 	});
 
 });
@@ -87259,7 +87493,10 @@ define('ember-cli-idcos/components/io-icon', ['exports', 'ember'], function (exp
 				return 'fa fa-' + this.get('type');
 			}
 			return 'ioicon ioicon-' + this.get('type');
-		}).property('type')
+		}).property('type'),
+		click: function click() {
+			this.sendAction('onClick');
+		}
 	});
 
 });
@@ -87983,6 +88220,195 @@ define('ember-cli-idcos/components/io-searchable-select/searchable-select', ['ex
             }
         }
     });
+
+});
+define('ember-cli-idcos/components/io-select/option', ['exports', 'ember', 'ember-cli-idcos/mixin/selected-class', 'ember-cli-idcos/mixin/disabled-class', 'ember-cli-idcos/mixin/component-child'], function (exports, Ember, SelectedClass, DisabledClass, ComponentChild) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend(ComponentChild['default'], SelectedClass['default'], DisabledClass['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'li',
+		attributeBindings: ['state', 'disabled', 'role', 'selected'],
+		classNames: 'io-select-dropdown-menu-item',
+		classNamePrefix: ['io-select-dropdown-menu-item-'],
+		role: 'select-option',
+		click: function click() {
+			var parent = this.get('parent');
+			parent.send('onSelect', this);
+		}
+	});
+
+});
+define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'ember-cli-idcos/mixin/disabled-class', 'ember-cli-idcos/mixin/outside-click', 'ember-cli-idcos/mixin/component-parent', 'ember-cli-idcos/utils/tree-model'], function (exports, Ember, DisabledClass, OutsideClick, ComponentParent, TreeModel) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend(ComponentParent['default'], DisabledClass['default'], OutsideClick['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'span',
+		attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+		classNames: 'io-select',
+		classNamePrefix: 'io-select-',
+		classNameBindings: ['enabledClass', 'openClass'],
+		role: 'select',
+		/**
+	  * @attribute value 
+	  * @type {String | Array}
+	  */
+		value: null,
+		/**
+	  * @attribute width 
+	  * @type {Number}
+	  */
+		width: 120,
+		/**
+	  * @attribute options 
+	  * @type {[type]}
+	  */
+		options: null,
+		/**
+	  * @attribute disabled 
+	  */
+		disabled: false,
+		/**
+	  * @attribute showSearch
+	  * @type {[Boolean]}
+	  * @description [show search input in dropdown menu if true]
+	  */
+		showSearch: false,
+		/**
+	  * @attribute multiple
+	  * @description  [multiple select]
+	  */
+		multiple: false,
+		/** 
+	  * @attribute [placeholder]
+	  */
+		placeholder: '请选择',
+		/**
+	  * @state _hidden
+	  * @type {Boolean}
+	  * @description [hidden dropdown menu]
+	  */
+		_hidden: true,
+		/**
+	  * @stae multipleClass
+	  * @description [multiple select class]
+	  */
+		multipleClass: (function () {
+			var type = this.get('multiple') ? 'multiple' : 'single';
+			return this.get('classNamePrefix') + 'selection--' + type;
+		}).property('multiple'),
+		/**
+	  * @state hiddenClass
+	  */
+		hiddenClass: (function () {
+			if (this.get('_hidden')) {
+				return this.get('classNamePrefix') + 'dropdown-hidden';
+			} else {
+				return '';
+			}
+		}).property('_hidden'),
+		openClass: (function () {
+			if (!this.get('_hidden')) {
+				return this.get('classNamePrefix') + 'open';
+			} else {
+				return '';
+			}
+		}).property('_hidden'),
+		/**
+	  * @state enabledClass
+	  */
+		enabledClass: (function () {
+			if (!this.get('disabled')) {
+				return this.get('classNamePrefix') + 'enabled';
+			} else {
+				return '';
+			}
+		}).property('disabled'),
+		/**
+	  * @observe selectedChildren
+	  */
+		_selectOptions: (function () {
+			this.send('selectOptions');
+		}).observes('value', 'value.length'),
+		didInsertElement: function didInsertElement() {
+			var _this = this;
+			Ember['default'].run.later(function () {
+				_this.send('selectOptions');
+			}, 10);
+		},
+		/**
+	  * [actions description]
+	  * @type {Object}
+	  */
+		actions: {
+			toggleHidden: function toggleHidden() {
+				this.set('_hidden', !this.get('_hidden'));
+			},
+			selectOptions: function selectOptions() {
+				var _this = this;
+				var children = this.get('children');
+				children.forEach(function (child) {
+					if (_this.isSelectedOption(child)) {
+						child.set('selected', true);
+					} else {
+						child.set('selected', false);
+					}
+				});
+			},
+			onSelect: function onSelect(option) {
+				if (this.get('multiple')) {
+					if (this.isSelectedOption(option)) {
+						this.set('value', this.get('value').removeObject(option.get('value')));
+					} else {
+						this.set('value', this.get('value').addObject(option.get('value')));
+					}
+				} else {
+					this.set('value', option.get('value'));
+				}
+				this.send('onChange');
+			},
+			removeOption: function removeOption(value) {
+				this.set('value', this.get('value').removeObject(value));
+				this.send('onChange');
+			},
+			outsideClick: function outsideClick() {
+				this.set('_hidden', true);
+			},
+			onChange: function onChange() {
+				Ember['default'].run.later((function () {
+					var $el = this.$();
+					var $menu = this.$('.io-select-dropdown');
+					$menu.css('top', $el.height() + 5 + 'px');
+				}).bind(this), 100);
+
+				if (this.get('onChange')) {
+					this.send('onChange', option);
+				}
+			}
+		},
+		/**
+	  * [isSelectedOption description]
+	  * @param  {[type]}  child [description]
+	  * @return {Boolean}       [description]
+	  */
+		isSelectedOption: function isSelectedOption(child) {
+			var multiple = this.get('multiple');
+			var childValue = child.get('value');
+			var value = this.get('value');
+			if (multiple) {
+				return value.contains(childValue);
+			} else {
+				return childValue === value;
+			}
+		}
+	});
 
 });
 define('ember-cli-idcos/components/io-table', ['exports', 'ember', 'ember-cli-idcos/utils/fmt'], function (exports, Ember, fmt) {
@@ -89835,6 +90261,7 @@ define('ember-cli-idcos/mixin/component-child', ['exports', 'ember', 'ember-cli-
     _didInsertElement: Ember['default'].on('didInsertElement', function () {
       var parent = this.nearestOfType(ComponentParentMixin['default']);
       if (parent) {
+        this.set('parent', parent);
         parent.registerChild(this);
       }
     }),
@@ -89842,10 +90269,10 @@ define('ember-cli-idcos/mixin/component-child', ['exports', 'ember', 'ember-cli-
     _willDestroyElement: Ember['default'].on('willDestroyElement', function () {
       var parent = this.nearestOfType(ComponentParentMixin['default']);
       if (parent) {
+        this.set('parent', null);
         parent.removeChild(this);
       }
     })
-
   });
 
 });
@@ -89998,6 +90425,40 @@ define('ember-cli-idcos/mixin/hotkeys-bindings', ['exports', 'ember'], function 
             return this.keyPressHandler(e);
         }
     });
+
+});
+define('ember-cli-idcos/mixin/outside-click', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    exports['default'] = Ember['default'].Mixin.create({
+        _destroyed: false,
+        _bindwillDestroyElement: (function () {
+            $('body').off('mousedown touchstart', this._sendOutSideClick);
+        }).on('willDestroyElement'),
+        _bindOutsideClick: (function () {
+            this.set('_sendOutSideClick', this.get('_sendOutSideClick').bind(this));
+            $('body').on('mousedown touchstart', this._sendOutSideClick);
+        }).on('didInsertElement'),
+        _sendOutSideClick: function _sendOutSideClick(ev) {
+            var $el = this.$();
+            if (!contains($el[0], ev.target)) {
+                this.send('outsideClick');
+            }
+        }
+    });
+
+    function contains(root, n) {
+        var node = n;
+        while (node) {
+            if (node === root) {
+                return true;
+            }
+            node = node.parentNode;
+        }
+
+        return false;
+    };
 
 });
 define('ember-cli-idcos/mixin/selected-class', ['exports', 'ember'], function (exports, Ember) {
@@ -90373,6 +90834,399 @@ define('ember-cli-idcos/utils/register-helper', ['exports', 'ember'], function (
 			registerHelperIteration2(name, helperFunction);
 		}
 	}
+
+});
+define('ember-cli-idcos/utils/translate-size', ['exports'], function (exports) {
+
+	'use strict';
+
+
+	exports['default'] = translateSize;
+	/**
+	 * [translateSize description]
+	 * @param  {[type]} size [description]
+	 * @return {[type]}      [description]
+	 */
+	function translateSize(size) {
+		var ret = '';
+		switch (size) {
+			case 'large':
+				ret = 'lg';
+				break;
+			case 'small':
+				ret = 'sm';
+				break;
+			default:
+				break;
+		}
+		return ret;
+	}
+
+});
+define('ember-cli-idcos/utils/tree-model', ['exports'], function (exports) {
+
+    'use strict';
+
+    exports['default'] = new function () {
+        var define, module, exports;
+        return (function e(t, n, r) {
+            function s(o, u) {
+                if (!n[o]) {
+                    if (!t[o]) {
+                        var a = typeof require == "function" && require;
+                        if (!u && a) return a(o, !0);
+                        if (i) return i(o, !0);
+                        var f = new Error("Cannot find module '" + o + "'");
+                        throw (f.code = "MODULE_NOT_FOUND", f);
+                    }
+                    var l = n[o] = {
+                        exports: {}
+                    };
+                    t[o][0].call(l.exports, function (e) {
+                        var n = t[o][1][e];
+                        return s(n ? n : e);
+                    }, l, l.exports, e, t, n, r);
+                }
+                return n[o].exports;
+            }
+            var i = typeof require == "function" && require;
+            for (var o = 0; o < r.length; o++) s(r[o]);
+            return s;
+        })({
+            1: [function (require, module, exports) {
+                var mergeSort, findInsertIndex;
+                mergeSort = require('mergesort');
+                findInsertIndex = require('find-insert-index');
+                module.exports = (function () {
+                    'use strict';
+                    var walkStrategies;
+                    walkStrategies = {};
+
+                    function k(result) {
+                        return function () {
+                            return result;
+                        };
+                    }
+
+                    function TreeModel(config) {
+                        config = config || {};
+                        this.config = config;
+                        this.config.childrenPropertyName = config.childrenPropertyName || 'children';
+                        this.config.modelComparatorFn = config.modelComparatorFn;
+                    }
+                    TreeModel.prototype.parse = function (model) {
+                        var i, childCount, node;
+                        if (!(model instanceof Object)) {
+                            throw new TypeError('Model must be of type object.');
+                        }
+                        node = new Node(this.config, model);
+                        if (model[this.config.childrenPropertyName] instanceof Array) {
+                            if (this.config.modelComparatorFn) {
+                                model[this.config.childrenPropertyName] = mergeSort(this.config.modelComparatorFn, model[this.config.childrenPropertyName]);
+                            }
+                            for (i = 0, childCount = model[this.config.childrenPropertyName].length; i < childCount; i++) {
+                                addChildToNode(node, this.parse(model[this.config.childrenPropertyName][i]));
+                            }
+                        }
+                        return node;
+                    };
+
+                    function addChildToNode(node, child) {
+                        child.parent = node;
+                        node.children.push(child);
+                        return child;
+                    }
+
+                    function hasComparatorFunction(node) {
+                        return typeof node.config.modelComparatorFn === 'function';
+                    }
+
+                    function Node(config, model) {
+                        this.config = config;
+                        this.model = model;
+                        this.children = [];
+                    }
+                    Node.prototype.isRoot = function () {
+                        return this.parent === undefined;
+                    };
+                    Node.prototype.hasChildren = function () {
+                        return this.children.length > 0;
+                    };
+                    Node.prototype.addChild = function (child) {
+                        return addChild(this, child);
+                    };
+                    Node.prototype.addChildAtIndex = function (child, index) {
+                        if (hasComparatorFunction(this)) {
+                            throw new Error('Cannot add child at index when using a comparator function.');
+                        }
+                        return addChild(this, child, index);
+                    };
+                    Node.prototype.setIndex = function (index) {
+                        if (hasComparatorFunction(this)) {
+                            throw new Error('Cannot set node index when using a comparator function.');
+                        }
+                        if (this.isRoot()) {
+                            if (index === 0) {
+                                return this;
+                            }
+                            throw new Error('Invalid index.');
+                        }
+                        if (index < 0 || index >= this.parent.children.length) {
+                            throw new Error('Invalid index.');
+                        }
+                        var oldIndex = this.parent.children.indexOf(this);
+                        this.parent.children.splice(index, 0, this.parent.children.splice(oldIndex, 1)[0]);
+                        this.parent.model[this.parent.config.childrenPropertyName].splice(index, 0, this.parent.model[this.parent.config.childrenPropertyName].splice(oldIndex, 1)[0]);
+                        return this;
+                    };
+
+                    function addChild(self, child, insertIndex) {
+                        var index;
+                        if (!(child instanceof Node)) {
+                            throw new TypeError('Child must be of type Node.');
+                        }
+                        child.parent = self;
+                        if (!(self.model[self.config.childrenPropertyName] instanceof Array)) {
+                            self.model[self.config.childrenPropertyName] = [];
+                        }
+                        if (hasComparatorFunction(self)) {
+                            // Find the index to insert the child
+                            index = findInsertIndex(self.config.modelComparatorFn, self.model[self.config.childrenPropertyName], child.model);
+                            // Add to the model children
+                            self.model[self.config.childrenPropertyName].splice(index, 0, child.model);
+                            // Add to the node children
+                            self.children.splice(index, 0, child);
+                        } else {
+                            if (insertIndex === undefined) {
+                                self.model[self.config.childrenPropertyName].push(child.model);
+                                self.children.push(child);
+                            } else {
+                                if (insertIndex < 0 || insertIndex > self.children.length) {
+                                    throw new Error('Invalid index.');
+                                }
+                                self.model[self.config.childrenPropertyName].splice(insertIndex, 0, child.model);
+                                self.children.splice(insertIndex, 0, child);
+                            }
+                        }
+                        return child;
+                    }
+                    Node.prototype.getPath = function () {
+                        var path = [];
+                        (function addToPath(node) {
+                            path.unshift(node);
+                            if (!node.isRoot()) {
+                                addToPath(node.parent);
+                            }
+                        })(this);
+                        return path;
+                    };
+                    Node.prototype.getIndex = function () {
+                        if (this.isRoot()) {
+                            return 0;
+                        }
+                        return this.parent.children.indexOf(this);
+                    };
+                    /**
+                     * Parse the arguments of traversal functions. These functions can take one optional
+                     * first argument which is an options object. If present, this object will be stored
+                     * in args.options. The only mandatory argument is the callback function which can
+                     * appear in the first or second position (if an options object is given). This
+                     * function will be saved to args.fn. The last optional argument is the context on
+                     * which the callback function will be called. It will be available in args.ctx.
+                     *
+                     * @returns Parsed arguments.
+                     */
+                    function parseArgs() {
+                        var args = {};
+                        if (arguments.length === 1) {
+                            if (typeof arguments[0] === 'function') {
+                                args.fn = arguments[0];
+                            } else {
+                                args.options = arguments[0];
+                            }
+                        } else if (arguments.length === 2) {
+                            if (typeof arguments[0] === 'function') {
+                                args.fn = arguments[0];
+                                args.ctx = arguments[1];
+                            } else {
+                                args.options = arguments[0];
+                                args.fn = arguments[1];
+                            }
+                        } else {
+                            args.options = arguments[0];
+                            args.fn = arguments[1];
+                            args.ctx = arguments[2];
+                        }
+                        args.options = args.options || {};
+                        if (!args.options.strategy) {
+                            args.options.strategy = 'pre';
+                        }
+                        if (!walkStrategies[args.options.strategy]) {
+                            throw new Error('Unknown tree walk strategy. Valid strategies are \'pre\' [default], \'post\' and \'breadth\'.');
+                        }
+                        return args;
+                    }
+                    Node.prototype.walk = function () {
+                        var args;
+                        args = parseArgs.apply(this, arguments);
+                        walkStrategies[args.options.strategy].call(this, args.fn, args.ctx);
+                    };
+                    walkStrategies.pre = function depthFirstPreOrder(callback, context) {
+                        var i, childCount, keepGoing;
+                        keepGoing = callback.call(context, this);
+                        for (i = 0, childCount = this.children.length; i < childCount; i++) {
+                            if (keepGoing === false) {
+                                return false;
+                            }
+                            keepGoing = depthFirstPreOrder.call(this.children[i], callback, context);
+                        }
+                        return keepGoing;
+                    };
+                    walkStrategies.post = function depthFirstPostOrder(callback, context) {
+                        var i, childCount, keepGoing;
+                        for (i = 0, childCount = this.children.length; i < childCount; i++) {
+                            keepGoing = depthFirstPostOrder.call(this.children[i], callback, context);
+                            if (keepGoing === false) {
+                                return false;
+                            }
+                        }
+                        keepGoing = callback.call(context, this);
+                        return keepGoing;
+                    };
+                    walkStrategies.breadth = function breadthFirst(callback, context) {
+                        var queue = [this];
+                        (function processQueue() {
+                            var i, childCount, node;
+                            if (queue.length === 0) {
+                                return;
+                            }
+                            node = queue.shift();
+                            for (i = 0, childCount = node.children.length; i < childCount; i++) {
+                                queue.push(node.children[i]);
+                            }
+                            if (callback.call(context, node) !== false) {
+                                processQueue();
+                            }
+                        })();
+                    };
+                    Node.prototype.all = function () {
+                        var args,
+                            all = [];
+                        args = parseArgs.apply(this, arguments);
+                        args.fn = args.fn || k(true);
+                        walkStrategies[args.options.strategy].call(this, function (node) {
+                            if (args.fn.call(args.ctx, node)) {
+                                all.push(node);
+                            }
+                        }, args.ctx);
+                        return all;
+                    };
+                    Node.prototype.first = function () {
+                        var args, first;
+                        args = parseArgs.apply(this, arguments);
+                        args.fn = args.fn || k(true);
+                        walkStrategies[args.options.strategy].call(this, function (node) {
+                            if (args.fn.call(args.ctx, node)) {
+                                first = node;
+                                return false;
+                            }
+                        }, args.ctx);
+                        return first;
+                    };
+                    Node.prototype.drop = function () {
+                        var indexOfChild;
+                        if (!this.isRoot()) {
+                            indexOfChild = this.parent.children.indexOf(this);
+                            this.parent.children.splice(indexOfChild, 1);
+                            this.parent.model[this.config.childrenPropertyName].splice(indexOfChild, 1);
+                            this.parent = undefined;
+                            delete this.parent;
+                        }
+                        return this;
+                    };
+                    return TreeModel;
+                })();
+            }, {
+                "find-insert-index": 2,
+                "mergesort": 3
+            }],
+            2: [function (require, module, exports) {
+                module.exports = (function () {
+                    'use strict';
+                    /**
+                     * Find the index to insert an element in array keeping the sort order.
+                     *
+                     * @param {function} comparatorFn The comparator function which sorted the array.
+                     * @param {array} arr The sorted array.
+                     * @param {object} el The element to insert.
+                     */
+                    function findInsertIndex(comparatorFn, arr, el) {
+                        var i, len;
+                        for (i = 0, len = arr.length; i < len; i++) {
+                            if (comparatorFn(arr[i], el) > 0) {
+                                break;
+                            }
+                        }
+                        return i;
+                    }
+                    return findInsertIndex;
+                })();
+            }, {}],
+            3: [function (require, module, exports) {
+                module.exports = (function () {
+                    'use strict';
+                    /**
+                     * Sort an array using the merge sort algorithm.
+                     *
+                     * @param {function} comparatorFn The comparator function.
+                     * @param {array} arr The array to sort.
+                     * @returns {array} The sorted array.
+                     */
+                    function mergeSort(comparatorFn, arr) {
+                        var len = arr.length,
+                            firstHalf,
+                            secondHalf;
+                        if (len >= 2) {
+                            firstHalf = arr.slice(0, len / 2);
+                            secondHalf = arr.slice(len / 2, len);
+                            return merge(comparatorFn, mergeSort(comparatorFn, firstHalf), mergeSort(comparatorFn, secondHalf));
+                        } else {
+                            return arr.slice();
+                        }
+                    }
+                    /**
+                     * The merge part of the merge sort algorithm.
+                     *
+                     * @param {function} comparatorFn The comparator function.
+                     * @param {array} arr1 The first sorted array.
+                     * @param {array} arr2 The second sorted array.
+                     * @returns {array} The merged and sorted array.
+                     */
+                    function merge(comparatorFn, arr1, arr2) {
+                        var result = [],
+                            left1 = arr1.length,
+                            left2 = arr2.length;
+                        while (left1 > 0 && left2 > 0) {
+                            if (comparatorFn(arr1[0], arr2[0]) <= 0) {
+                                result.push(arr1.shift());
+                                left1--;
+                            } else {
+                                result.push(arr2.shift());
+                                left2--;
+                            }
+                        }
+                        if (left1 > 0) {
+                            result.push.apply(result, arr1);
+                        } else {
+                            result.push.apply(result, arr2);
+                        }
+                        return result;
+                    }
+                    return mergeSort;
+                })();
+            }, {}]
+        }, {}, [1])(1);
+    }();
 
 });
 define('ember-cli-idcos/utils/truth-convert', ['exports', 'ember'], function (exports, Ember) {
