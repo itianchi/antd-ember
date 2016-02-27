@@ -153,7 +153,7 @@ export default Ember.Component.extend(DisabledClass, OutsideClick, {
 		},
 		selectOption: function(option) {
 			if (option.model.disabled) {
-				return
+				return;
 			}
 			
 			var path = option.getPath();
@@ -167,6 +167,7 @@ export default Ember.Component.extend(DisabledClass, OutsideClick, {
 		},
 		clearValues: function() {
 			set(this, 'values', Ember.A());
+			this.sendAction('onChange', []);
 		},
 		outsideClick: function() {
 			set(this, '_open', false);

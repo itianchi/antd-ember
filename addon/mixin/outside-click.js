@@ -7,15 +7,20 @@ import Ember from 'ember';
  * @namespace Mixins
  */
 export default Ember.Mixin.create({
+    _destroyed: false,
+    _bindwillDestroyElement: function() {
+        $('body').off('mousedown touchstart', this._sendOutSideClick);
+    }.on('willDestroyElement'),
     _bindOutsideClick: function() {
+        this.set('_sendOutSideClick', this.get('_sendOutSideClick').bind(this));
+        $('body').on('mousedown touchstart', this._sendOutSideClick);
+    }.on('didInsertElement'),
+    _sendOutSideClick: function(ev) {
         var $el = this.$();
-        var _this = this;
-        $('body').on('mousedown touchstart', function(ev) {
-            if (!contains($el[0], ev.target)) {
-                _this.send('outsideClick');
-            }
-        });
-    }.on('didInsertElement')
+        if (!contains($el[0], ev.target)) {
+            this.send('outsideClick');
+        }
+    }
 });
 
 function contains(root, n) {
