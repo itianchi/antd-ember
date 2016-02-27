@@ -38,6 +38,7 @@ export default Ember.Component.extend(DisabledClass, {
 	 * @type {String}
 	 */
 	placeholder: '请输入',
+	dataError: Ember.computed.alias('data-error'),
 	/**
 	 * @state inputClass
 	 */

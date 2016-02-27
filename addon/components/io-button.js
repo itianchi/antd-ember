@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'button',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+	attributeBindings: ['state', 'disabled', 'onClick', 'role', 'htmlType:type'],
 	/**
 	 * [attibutes]
 	 * @type {String}
@@ -68,6 +68,13 @@ export default Ember.Component.extend({
 			return '';
 		}
 	}.property('loading'),
+	htmlType: function() {
+		if (this.get('submit')) {
+			return 'submit';
+		} else {
+			return null;
+		}
+	}.property('submit'),
 	/**
 	 * [onClick default action]
 	 * @return {[type]} [description]
