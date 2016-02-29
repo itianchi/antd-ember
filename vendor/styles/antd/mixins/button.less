@@ -133,6 +133,47 @@
   }
 }
 
+.btn-success() {
+  .button-variant(@btn-success-color; @btn-success-bg; @success-color);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @btn-success-color;
+  }
+}
+
+.btn-waring() {
+  .button-variant(@btn-waring-color; @btn-waring-bg; @waring-color);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @btn-waring-color;
+  }
+}
+
+.btn-danger() {
+  .button-variant(@btn-danger-color; @btn-danger-bg; @danger-color);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @btn-danger-color;
+  }
+}
+
+.btn-danger() {
+  .button-variant(@btn-danger-color; @btn-danger-bg; @danger-color);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @btn-danger-color;
+  }
+}
+
+
 // default button style
 .btn-default() {
   .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
