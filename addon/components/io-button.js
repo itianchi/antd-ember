@@ -81,9 +81,9 @@ export default Ember.Component.extend({
 	 */
 	click: function() {
 		if (this.get('onClick')) {
-			this.sendAction('onClick');
+			this.sendAction('onClick', this);
 		} else {
-			this.sendAction();
+			this.sendAction(this);
 		}
 	}
 });
