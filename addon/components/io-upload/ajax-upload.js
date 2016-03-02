@@ -16,10 +16,9 @@ const {
 
 export default Ember.Component.extend({
 	tagName: 'span',
-	attributeBindings: ['role', 'tabIndex'],
+	attributeBindings: ['tabIndex'],
 	classNames: 'io-upload',
 	tabIndex: 0,
-	role: 'button',
 	/**
 	 * @attribute action
 	 */
@@ -143,7 +142,6 @@ export default Ember.Component.extend({
 	 * @return {[type]}       [description]
 	 */
 	keydown(event) {
-		console.log('keydown');
 		event.preventDefault();
 		if (event.key === 'Enter') {
 			this.$('input').trigger('click');
@@ -154,7 +152,8 @@ export default Ember.Component.extend({
 	 * [uploadFiles description]
 	 * @return {[type]} [description]
 	 */
-	uploadFiles() {
+	uploadFiles(files) {
+		const parentComponent = this.get('parentComponent');
 		const len = files.length;
 		if (len > 0) {
 			for (let i = 0; i < len; i++) {
@@ -163,10 +162,19 @@ export default Ember.Component.extend({
 				this.uploadFile(file);
 			}
 
+			if (!this.get('onStart')) {
+				return;
+			}
+
 			if (this.get('multiple')) {
-				this.onStart(Array.prototype.slice.call(files));
+				parentComponent
+					? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files))
+					: this.sendAction('onStart', Array.prototype.slice.call(files));
+
 			} else {
-				this.onStart(Array.prototype.slice.call(files)[0]);
+				parentComponent
+					? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files)[0])
+					: this.sendAction('onStart', Array.prototype.slice.call(files)[0]);
 			}
 		}
 	},
@@ -185,6 +193,7 @@ export default Ember.Component.extend({
 	 * @return {[type]} [description]
 	 */
 	uploadFile(file) {
+		const parentComponent = this.get('parent');
 		if (!this.get('beforeUpload')) {
 			return this.postFile(file);
 		}
@@ -194,7 +203,10 @@ export default Ember.Component.extend({
 			this.postFile(file);
 		});
 
-		this.sendAction('beforeUpload', defer);
+		parentComponent 
+			? parentComponent.send(this.get('beforeUpload'), defer)
+			: this.send('beforeUpload', defer);
+
 	},
 
 	/**
@@ -203,6 +215,7 @@ export default Ember.Component.extend({
 	 * @return {[type]}      [description]
 	 */
 	postFile(file) {
+		const parentComponent = this.get('parent');
 		let data = this.get('data');
 		request({
 			action: this.get('action'),
@@ -213,17 +226,23 @@ export default Ember.Component.extend({
 			withCredentials: this.get('withCredentials'),
 			onProgress: e => {
 				if (this.get('onProgress')) {
-					this.sendAction('onProgress', e, file);
+					parentComponent 
+						? parentComponent.send(this.get('onProgress'), e, file)
+						: this.sendAction('onProgress', e, file);
 				}
 			},
 			onSuccess: ret => {
 				if (this.get('onSuccess')) {
-					this.sendAction('onSuccess', ret, file);
+					parentComponent
+						? parentComponent.send(this.get('onSuccess'), ret, file)
+						: this.sendAction('onSuccess', ret, file);
 				}
 			},
-			onError: (err, ret) {
+			onError: (err, ret) => {
 				if (this.get('onError')) {
-					this.sendAction('onError', err, ret, file);
+					parentComponent 
+						? parentComponent.send(this.get('onError'), err, ret, file)
+						: this.sendAction('onError', err, ret, file);
 				}
 			}
 		});
