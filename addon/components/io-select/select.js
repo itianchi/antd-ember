@@ -151,7 +151,7 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 			}.bind(this), 100);
 
 			if (this.get('onChange')) {
-				this.send('onChange', option);
+				this.send('onChange', this.get('value'));
 			}
 		}
 	},
