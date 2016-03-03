@@ -53,6 +53,10 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 */
 	placeholder: '请选择',
 	/**
+	 * @attribute [options]
+	 */
+	options: Ember.A(),
+	/**
 	 * @state _hidden
 	 * @type {Boolean}
 	 * @description [hidden dropdown menu]
@@ -132,6 +136,7 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 					this.set('value', this.get('value').addObject(option.get('value')));
 				}
 			} else {
+				this.set('_hidden', true);
 				this.set('value', option.get('value'));
 			}
 			this.send('onChange');

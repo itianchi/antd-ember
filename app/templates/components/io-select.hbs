@@ -18,7 +18,11 @@
     {{else}}
     <span class="io-select-selection__rendered">
         <span>
-            {{value}}
+        	{{#if value}} 
+        		{{value}}
+        	{{else}}
+        		{{placeholder}}
+        	{{/if}}
         </span>
     </span>
     <span class="io-select-arrow" tabindex="-1" style="outline:none;"> <b> </b> </span>
@@ -28,6 +32,12 @@
 {{!-- io-select-dropdown-placement-bottomLeft --}}
 <span class="io-select-dropdown {{hiddenClass}}" style="width: {{width}}px;">
     <ul class="io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root" role="menu" aria-activedescendant="" >
-        {{yield}}
+    	{{#if (gt options.length 0)}}
+    		{{#each options as |option|}}
+    			{{#io-select-option value=option.value }} {{option.label}} {{/io-select-option}}
+    		{{/each}}
+    	{{else}}
+	        {{yield}}
+    	{{/if}}
     </ul>
 </span>
