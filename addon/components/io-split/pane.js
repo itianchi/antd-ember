@@ -17,7 +17,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'div',
-	classNames: 'io-split-panel ',
+	classNames: 'io-split split',
 	/**
 	 * @attribute  size
 	 * @description  percentage of parent
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
 	 */
 	didInsertElement() {
 		Ember.run.later(() => {
-			const children = this.$('.io-split-panel');
+			const children = this.$('>.split');
 			let sizes = [];
 			let minSize = [];
 			let els = [];
@@ -56,7 +56,7 @@ export default Ember.Component.extend({
 				sizes.push(size);
 				minSize.push(Math.max(selfMinSize, _minSize || 0));
 				els.push(child);
-
+				$child.addClass('split-' + direction);
 			})
 
 			Split(els,{

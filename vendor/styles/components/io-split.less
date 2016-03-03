@@ -22,7 +22,7 @@
           box-sizing: border-box;
 }
 
-.split, .gutter.gutter-horizontal {
+.split.split-horizontal, .gutter.gutter-horizontal {
   height: 100%;
   float: left;
 }
@@ -30,4 +30,7 @@
 .split {
   overflow-y: auto;
   overflow-x: hidden;
+  >.io-split {
+    height: 100%;
+  }
 }
