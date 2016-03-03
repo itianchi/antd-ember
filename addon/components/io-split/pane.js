@@ -44,6 +44,11 @@ export default Ember.Component.extend({
 			let direction = this.get('direction');
 			const selfMinSize = this.get('minSize');
 
+			if (children.length === 1) {
+				children.addClass('split-' + direction);
+				children.css('float', 'none');
+			}
+
 			if (children.length <= 1) {
 				return;
 			}
