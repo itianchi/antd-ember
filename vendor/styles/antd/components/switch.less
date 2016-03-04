@@ -1,4 +1,4 @@
-@switch-prefix-cls:ant-switch;
+@switch-prefix-cls: ~"@{css-prefix}switch";
 
 @switch-duration:.3s;
 
@@ -52,6 +52,10 @@
   &-small&-checked:after {
     left: 14px;
   }
+  
+  .checked {
+    display: none;
+  }
 
   &-checked {
     border: 1px solid @primary-color;
@@ -59,6 +63,14 @@
 
     .@{switch-prefix-cls}-inner {
       left: 6px;
+    }
+    
+    .checked {
+      display: initial;
+    }
+    
+    .unchecked {
+      display: none;
     }
 
     &:after {
