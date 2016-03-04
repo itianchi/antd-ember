@@ -413,15 +413,6 @@ define('ember-cli-idcos-docs/components/docs-header/template', ['exports'], func
   }()));
 
 });
-define('ember-cli-idcos-docs/components/io-ajax-upload', ['exports', 'ember-cli-idcos/components/io-upload/ajax-upload'], function (exports, ajax_upload) {
-
-	'use strict';
-
-
-
-	exports['default'] = ajax_upload['default'];
-
-});
 define('ember-cli-idcos-docs/components/io-ansi', ['exports', 'ember-cli-idcos/components/io-ansi/component'], function (exports, component) {
 
 	'use strict';
@@ -519,15 +510,6 @@ define('ember-cli-idcos-docs/components/io-icon', ['exports', 'ember-cli-idcos/c
 
 
 	exports['default'] = io_icon['default'];
-
-});
-define('ember-cli-idcos-docs/components/io-iframe-upload', ['exports', 'ember-cli-idcos/components/io-upload/iframe-upload'], function (exports, iframe_upload) {
-
-	'use strict';
-
-
-
-	exports['default'] = iframe_upload['default'];
 
 });
 define('ember-cli-idcos-docs/components/io-input', ['exports', 'ember-cli-idcos/components/io-form/input'], function (exports, input) {
@@ -674,6 +656,15 @@ define('ember-cli-idcos-docs/components/io-select', ['exports', 'ember-cli-idcos
 	exports['default'] = select['default'];
 
 });
+define('ember-cli-idcos-docs/components/io-split', ['exports', 'ember-cli-idcos/components/io-split/pane'], function (exports, pane) {
+
+	'use strict';
+
+
+
+	exports['default'] = pane['default'];
+
+});
 define('ember-cli-idcos-docs/components/io-table', ['exports', 'ember-cli-idcos/components/io-table'], function (exports, io_table) {
 
 	'use strict';
@@ -708,15 +699,6 @@ define('ember-cli-idcos-docs/components/io-tree', ['exports', 'ember-cli-idcos/c
 
 
 	exports['default'] = tree['default'];
-
-});
-define('ember-cli-idcos-docs/components/io-upload', ['exports', 'ember-cli-idcos/components/io-upload/upload'], function (exports, upload) {
-
-	'use strict';
-
-
-
-	exports['default'] = upload['default'];
 
 });
 define('ember-cli-idcos-docs/controllers/array', ['exports', 'ember'], function (exports, Ember) {
@@ -10620,8 +10602,22 @@ define('ember-cli-idcos-docs/document/select/controller', ['exports', 'ember'], 
 
 	exports['default'] = Ember['default'].Controller.extend({
 		checked: '1',
-		value: 'lucy',
+		value: '',
 		values: ['lucy', 'jack'],
+		options: [{
+			value: '1',
+			label: 'jack'
+		}, {
+			value: '2',
+			label: 'lucy'
+		}, {
+			value: '3',
+			label: 'disabled',
+			disabled: true
+		}, {
+			value: '4',
+			label: '6174'
+		}],
 		_valueChange: (function () {
 			alert('value change' + this.get('value'));
 		}).observes('value'),
@@ -10651,7 +10647,7 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
               },
               "end": {
                 "line": 11,
-                "column": 37
+                "column": 34
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
@@ -10685,7 +10681,7 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
               },
               "end": {
                 "line": 12,
-                "column": 37
+                "column": 34
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
@@ -10753,7 +10749,7 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
               },
               "end": {
                 "line": 14,
-                "column": 37
+                "column": 34
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/select/template.hbs"
@@ -10825,10 +10821,10 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-option",[],["value","jack"],0,null,["loc",[null,[11,4],[11,51]]]],
-          ["block","io-option",[],["value","lucy"],1,null,["loc",[null,[12,4],[12,51]]]],
+          ["block","io-option",[],["value","1"],0,null,["loc",[null,[11,4],[11,48]]]],
+          ["block","io-option",[],["value","2"],1,null,["loc",[null,[12,4],[12,48]]]],
           ["block","io-option",[],["value","disabled","disabled",true],2,null,["loc",[null,[13,4],[13,73]]]],
-          ["block","io-option",[],["value","6174"],3,null,["loc",[null,[14,4],[14,51]]]]
+          ["block","io-option",[],["value","3"],3,null,["loc",[null,[14,4],[14,48]]]]
         ],
         locals: [],
         templates: [child0, child1, child2, child3]
@@ -10842,11 +10838,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 37,
+                "line": 43,
                 "column": 4
               },
               "end": {
-                "line": 37,
+                "line": 43,
                 "column": 37
               }
             },
@@ -10876,11 +10872,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 38,
+                "line": 44,
                 "column": 4
               },
               "end": {
-                "line": 38,
+                "line": 44,
                 "column": 37
               }
             },
@@ -10910,11 +10906,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 39,
+                "line": 45,
                 "column": 4
               },
               "end": {
-                "line": 39,
+                "line": 45,
                 "column": 59
               }
             },
@@ -10944,11 +10940,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 40,
+                "line": 46,
                 "column": 4
               },
               "end": {
-                "line": 40,
+                "line": 46,
                 "column": 37
               }
             },
@@ -10978,11 +10974,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 41,
+                "line": 47,
                 "column": 4
               },
               "end": {
-                "line": 41,
+                "line": 47,
                 "column": 41
               }
             },
@@ -11012,11 +11008,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 42,
+                "line": 48,
                 "column": 4
               },
               "end": {
-                "line": 42,
+                "line": 48,
                 "column": 41
               }
             },
@@ -11045,11 +11041,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
           "loc": {
             "source": null,
             "start": {
-              "line": 36,
+              "line": 42,
               "column": 3
             },
             "end": {
-              "line": 43,
+              "line": 49,
               "column": 3
             }
           },
@@ -11099,12 +11095,12 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-option",[],["value","jack"],0,null,["loc",[null,[37,4],[37,51]]]],
-          ["block","io-option",[],["value","lucy"],1,null,["loc",[null,[38,4],[38,51]]]],
-          ["block","io-option",[],["value","disabled","disabled",true],2,null,["loc",[null,[39,4],[39,73]]]],
-          ["block","io-option",[],["value","6174"],3,null,["loc",[null,[40,4],[40,51]]]],
-          ["block","io-option",[],["value","golang"],4,null,["loc",[null,[41,4],[41,55]]]],
-          ["block","io-option",[],["value","ubuntu"],5,null,["loc",[null,[42,4],[42,55]]]]
+          ["block","io-option",[],["value","jack"],0,null,["loc",[null,[43,4],[43,51]]]],
+          ["block","io-option",[],["value","lucy"],1,null,["loc",[null,[44,4],[44,51]]]],
+          ["block","io-option",[],["value","disabled","disabled",true],2,null,["loc",[null,[45,4],[45,73]]]],
+          ["block","io-option",[],["value","6174"],3,null,["loc",[null,[46,4],[46,51]]]],
+          ["block","io-option",[],["value","golang"],4,null,["loc",[null,[47,4],[47,55]]]],
+          ["block","io-option",[],["value","ubuntu"],5,null,["loc",[null,[48,4],[48,55]]]]
         ],
         locals: [],
         templates: [child0, child1, child2, child3, child4, child5]
@@ -11120,7 +11116,7 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
             "column": 0
           },
           "end": {
-            "line": 62,
+            "line": 68,
             "column": 0
           }
         },
@@ -11163,7 +11159,11 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("		");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
@@ -11179,27 +11179,29 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
         var el5 = dom.createElement("pre");
         var el6 = dom.createElement("code");
         dom.setAttribute(el6,"class","language-html");
-        var el7 = dom.createTextNode("\n");
+        var el7 = dom.createTextNode("\n// io-option\n");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-select width=200 value=value }}\n	");
+        var el7 = dom.createTextNode("{{#io-select width=200 value=value placeholder=\"请选择名称\" }}\n	");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-option value=\"jack\"}} jack ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-option}}\n	");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-option value=\"lucy\"}} lucy ");
+        var el7 = dom.createTextNode("{{#io-option value=\"1\"}} jack ");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("{{/io-option}}\n	");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-option value=\"disabled\" disabled=true}} disabled ");
+        var el7 = dom.createTextNode("{{#io-option value=\"2\"}} lucy ");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("{{/io-option}}\n	");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{#io-option value=\"6174\"}} 6174 ");
+        var el7 = dom.createTextNode("{{#io-option value=\"3\" disabled=true}} disabled ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{/io-option}}\n	");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{#io-option value=\"4\"}} 6174 ");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("{{/io-option}}\n");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("{{/io-select}}\n");
+        var el7 = dom.createTextNode("{{/io-select}}\n\n// options\n");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{io-select width=200 value=value placeholder=\"请选择名称\" options=options}}\n");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
@@ -11302,14 +11304,17 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2, 5, 1]),1,1);
-        morphs[1] = dom.createMorphAt(dom.childAt(fragment, [4, 3, 1]),1,1);
+        var element0 = dom.childAt(fragment, [2, 5, 1]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(element0,1,1);
+        morphs[1] = dom.createMorphAt(element0,3,3);
+        morphs[2] = dom.createMorphAt(dom.childAt(fragment, [4, 3, 1]),1,1);
         return morphs;
       },
       statements: [
-        ["block","io-select",[],["width",200,"value",["subexpr","@mut",[["get","value",["loc",[null,[10,32],[10,37]]]]],[],[]]],0,null,["loc",[null,[10,3],[15,17]]]],
-        ["block","io-select",[],["width",200,"value",["subexpr","@mut",[["get","values",["loc",[null,[36,32],[36,38]]]]],[],[]],"multiple",true],1,null,["loc",[null,[36,3],[43,17]]]]
+        ["block","io-select",[],["width",200,"value",["subexpr","@mut",[["get","value",["loc",[null,[10,32],[10,37]]]]],[],[]],"placeholder","请选择名称"],0,null,["loc",[null,[10,3],[15,17]]]],
+        ["inline","io-select",[],["width",200,"value",["subexpr","@mut",[["get","value",["loc",[null,[17,31],[17,36]]]]],[],[]],"placeholder","请选择名称","options",["subexpr","@mut",[["get","options",["loc",[null,[17,65],[17,72]]]]],[],[]]],["loc",[null,[17,3],[17,74]]]],
+        ["block","io-select",[],["width",200,"value",["subexpr","@mut",[["get","values",["loc",[null,[42,32],[42,38]]]]],[],[]],"multiple",true],1,null,["loc",[null,[42,3],[49,17]]]]
       ],
       locals: [],
       templates: [child0, child1]
@@ -15414,64 +15419,6 @@ define('ember-cli-idcos-docs/routes/document/form-validator', ['exports', 'ember
 	exports['default'] = Ember['default'].Route.extend({});
 
 });
-define('ember-cli-idcos-docs/templates/components/io-ajax-upload', ['exports'], function (exports) {
-
-  'use strict';
-
-  exports['default'] = Ember.HTMLBars.template((function() {
-    return {
-      meta: {
-        "revision": "Ember@1.13.7",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 10,
-            "column": 9
-          }
-        },
-        "moduleName": "ember-cli-idcos-docs/templates/components/io-ajax-upload.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("input");
-        dom.setAttribute(el1,"class","io-upload__input");
-        dom.setAttribute(el1,"type","file");
-        dom.setAttribute(el1,"ref","file");
-        dom.setAttribute(el1,"style","display: none;");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n	\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var morphs = new Array(3);
-        morphs[0] = dom.createAttrMorph(element0, 'accept');
-        morphs[1] = dom.createAttrMorph(element0, 'multiple');
-        morphs[2] = dom.createMorphAt(fragment,2,2,contextualElement);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [
-        ["attribute","accept",["get","accept",["loc",[null,[6,10],[6,16]]]]],
-        ["attribute","multiple",["get","multiple",["loc",[null,[7,12],[7,20]]]]],
-        ["content","yield",["loc",[null,[10,0],[10,9]]]]
-      ],
-      locals: [],
-      templates: []
-    };
-  }()));
-
-});
 define('ember-cli-idcos-docs/templates/components/io-ansi', ['exports'], function (exports) {
 
   'use strict';
@@ -16254,44 +16201,6 @@ define('ember-cli-idcos-docs/templates/components/io-form-validator', ['exports'
   }()));
 
 });
-define('ember-cli-idcos-docs/templates/components/io-iframe-upload', ['exports'], function (exports) {
-
-  'use strict';
-
-  exports['default'] = Ember.HTMLBars.template((function() {
-    return {
-      meta: {
-        "revision": "Ember@1.13.7",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 1,
-            "column": 0
-          }
-        },
-        "moduleName": "ember-cli-idcos-docs/templates/components/io-iframe-upload.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes() { return []; },
-      statements: [
-
-      ],
-      locals: [],
-      templates: []
-    };
-  }()));
-
-});
 define('ember-cli-idcos-docs/templates/components/io-input', ['exports'], function (exports) {
 
   'use strict';
@@ -16486,6 +16395,136 @@ define('ember-cli-idcos-docs/templates/components/io-modal', ['exports'], functi
       ],
       locals: [],
       templates: []
+    };
+  }()));
+
+});
+define('ember-cli-idcos-docs/templates/components/io-option', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 0
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-option.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["content","label",["loc",[null,[2,1],[2,10]]]]
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child1 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 0
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-option.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("	");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["content","yield",["loc",[null,[4,1],[4,10]]]]
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 5,
+            "column": 7
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-option.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [
+        ["block","if",[["get","label",["loc",[null,[1,6],[1,11]]]]],[],0,1,["loc",[null,[1,0],[5,7]]]]
+      ],
+      locals: [],
+      templates: [child0, child1]
     };
   }()));
 
@@ -18101,10 +18140,10 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
               return morphs;
             },
             statements: [
-              ["content","val",["loc",[null,[10,17],[10,24]]]],
-              ["element","action",["removeOption",["get","val",["loc",[null,[12,87],[12,90]]]]],["bubbles",false],["loc",[null,[12,63],[12,106]]]]
+              ["content","option.label",["loc",[null,[10,17],[10,33]]]],
+              ["element","action",["removeOption",["get","option.value",["loc",[null,[12,87],[12,99]]]]],["bubbles",false],["loc",[null,[12,63],[12,115]]]]
             ],
-            locals: ["val"],
+            locals: ["option"],
             templates: []
           };
         }());
@@ -18151,7 +18190,7 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
             return morphs;
           },
           statements: [
-            ["block","each",[["get","value",["loc",[null,[7,14],[7,19]]]]],[],0,null,["loc",[null,[7,6],[15,18]]]]
+            ["block","each",[["get","_selectedOptions",["loc",[null,[7,14],[7,30]]]]],[],0,null,["loc",[null,[7,6],[15,18]]]]
           ],
           locals: [],
           templates: [child0]
@@ -18190,13 +18229,97 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
           return morphs;
         },
         statements: [
-          ["block","if",[["subexpr","eq",[["get","value.length",["loc",[null,[3,15],[3,27]]]],0],[],["loc",[null,[3,11],[3,30]]]]],[],0,1,["loc",[null,[3,5],[17,12]]]]
+          ["block","if",[["subexpr","eq",[["get","_selectedOptions.length",["loc",[null,[3,15],[3,38]]]],0],[],["loc",[null,[3,11],[3,41]]]]],[],0,1,["loc",[null,[3,5],[17,12]]]]
         ],
         locals: [],
         templates: [child0, child1]
       };
     }());
     var child1 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 21,
+                "column": 9
+              },
+              "end": {
+                "line": 23,
+                "column": 9
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        		");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["content","_selectedOptions.label",["loc",[null,[22,10],[22,36]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 23,
+                "column": 9
+              },
+              "end": {
+                "line": 25,
+                "column": 9
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        		");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["content","placeholder",["loc",[null,[24,10],[24,25]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
       return {
         meta: {
           "revision": "Ember@1.13.7",
@@ -18207,7 +18330,7 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
               "column": 4
             },
             "end": {
-              "line": 25,
+              "line": 29,
               "column": 4
             }
           },
@@ -18225,11 +18348,11 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
           var el2 = dom.createTextNode("\n        ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("span");
-          var el3 = dom.createTextNode("\n            ");
+          var el3 = dom.createTextNode("\n");
           dom.appendChild(el2, el3);
           var el3 = dom.createComment("");
           dom.appendChild(el2, el3);
-          var el3 = dom.createTextNode("\n        ");
+          var el3 = dom.createTextNode("        ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n    ");
@@ -18260,7 +18383,131 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
           return morphs;
         },
         statements: [
-          ["content","value",["loc",[null,[21,12],[21,21]]]]
+          ["block","if",[["get","_selectedOptions",["loc",[null,[21,15],[21,31]]]]],[],0,1,["loc",[null,[21,9],[25,16]]]]
+        ],
+        locals: [],
+        templates: [child0, child1]
+      };
+    }());
+    var child2 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 36,
+                "column": 6
+              },
+              "end": {
+                "line": 38,
+                "column": 6
+              }
+            },
+            "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+          },
+          arity: 1,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("    			");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["inline","io-option",[],["value",["subexpr","@mut",[["get","option.value",["loc",[null,[37,25],[37,37]]]]],[],[]],"disabled",["subexpr","@mut",[["get","option.disabled",["loc",[null,[37,48],[37,63]]]]],[],[]],"label",["subexpr","@mut",[["get","option.label",["loc",[null,[37,70],[37,82]]]]],[],[]]],["loc",[null,[37,7],[37,84]]]]
+          ],
+          locals: ["option"],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 35,
+              "column": 5
+            },
+            "end": {
+              "line": 39,
+              "column": 5
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [
+          ["block","each",[["get","options",["loc",[null,[36,14],[36,21]]]]],[],0,null,["loc",[null,[36,6],[38,15]]]]
+        ],
+        locals: [],
+        templates: [child0]
+      };
+    }());
+    var child3 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 39,
+              "column": 5
+            },
+            "end": {
+              "line": 41,
+              "column": 5
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-select.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("	        ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["content","yield",["loc",[null,[40,9],[40,18]]]]
         ],
         locals: [],
         templates: []
@@ -18276,7 +18523,7 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
             "column": 0
           },
           "end": {
-            "line": 34,
+            "line": 44,
             "column": 0
           }
         },
@@ -18309,11 +18556,11 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
         dom.setAttribute(el2,"class","io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root");
         dom.setAttribute(el2,"role","menu");
         dom.setAttribute(el2,"aria-activedescendant","");
-        var el3 = dom.createTextNode("\n        ");
+        var el3 = dom.createTextNode("\n");
         dom.appendChild(el2, el3);
         var el3 = dom.createComment("");
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
+        var el3 = dom.createTextNode("    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -18340,13 +18587,13 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
         ["attribute","class",["concat",["io-select-selection ",["get","multipleClass",["loc",[null,[1,35],[1,48]]]]]]],
         ["attribute","style",["concat",["width: ",["get","width",["loc",[null,[1,191],[1,196]]]],"px;"]]],
         ["element","action",["toggleHidden"],[],["loc",[null,[1,149],[1,174]]]],
-        ["block","if",[["get","multiple",["loc",[null,[2,10],[2,18]]]]],[],0,1,["loc",[null,[2,4],[25,11]]]],
-        ["attribute","class",["concat",["io-select-dropdown ",["get","hiddenClass",["loc",[null,[29,34],[29,45]]]]]]],
-        ["attribute","style",["concat",["width: ",["get","width",["loc",[null,[29,65],[29,70]]]],"px;"]]],
-        ["content","yield",["loc",[null,[31,8],[31,17]]]]
+        ["block","if",[["get","multiple",["loc",[null,[2,10],[2,18]]]]],[],0,1,["loc",[null,[2,4],[29,11]]]],
+        ["attribute","class",["concat",["io-select-dropdown ",["get","hiddenClass",["loc",[null,[33,34],[33,45]]]]]]],
+        ["attribute","style",["concat",["width: ",["get","width",["loc",[null,[33,65],[33,70]]]],"px;"]]],
+        ["block","if",[["subexpr","gt",[["get","options.length",["loc",[null,[35,15],[35,29]]]],0],[],["loc",[null,[35,11],[35,32]]]]],[],2,3,["loc",[null,[35,5],[41,12]]]]
       ],
       locals: [],
-      templates: [child0, child1]
+      templates: [child0, child1, child2, child3]
     };
   }()));
 
@@ -19831,99 +20078,6 @@ define('ember-cli-idcos-docs/templates/components/io-tree', ['exports'], functio
       ],
       locals: [],
       templates: []
-    };
-  }()));
-
-});
-define('ember-cli-idcos-docs/templates/components/io-upload', ['exports'], function (exports) {
-
-  'use strict';
-
-  exports['default'] = Ember.HTMLBars.template((function() {
-    var child0 = (function() {
-      return {
-        meta: {
-          "revision": "Ember@1.13.7",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 2,
-              "column": 1
-            },
-            "end": {
-              "line": 16,
-              "column": 1
-            }
-          },
-          "moduleName": "ember-cli-idcos-docs/templates/components/io-upload.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("		");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
-          return morphs;
-        },
-        statements: [
-          ["content","yield",["loc",[null,[15,2],[15,11]]]]
-        ],
-        locals: [],
-        templates: []
-      };
-    }());
-    return {
-      meta: {
-        "revision": "Ember@1.13.7",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 18,
-            "column": 0
-          }
-        },
-        "moduleName": "ember-cli-idcos-docs/templates/components/io-upload.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("span");
-        dom.setAttribute(el1,"role","button");
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]),1,1);
-        return morphs;
-      },
-      statements: [
-        ["block","io-ajax-upload",[],["parent",["subexpr","@mut",[["get","this",["loc",[null,[3,9],[3,13]]]]],[],[]],"name",["subexpr","@mut",[["get","name",["loc",[null,[4,7],[4,11]]]]],[],[]],"action",["subexpr","@mut",[["get","action",["loc",[null,[5,9],[5,15]]]]],[],[]],"headers",["subexpr","@mut",[["get","headers",["loc",[null,[6,10],[6,17]]]]],[],[]],"multipart",["subexpr","@mut",[["get","multipart",["loc",[null,[7,12],[7,21]]]]],[],[]],"dragdrop",["subexpr","@mut",[["get","_dragdrop",["loc",[null,[8,11],[8,20]]]]],[],[]],"withCredentials",["subexpr","@mut",[["get","withCredentials",["loc",[null,[9,18],[9,33]]]]],[],[]],"beforeUpload","beforeUpload","onStart","onStart","onProgress","onProgress","onSuccess","onSuccess","onError","onError"],0,null,["loc",[null,[2,1],[16,20]]]]
-      ],
-      locals: [],
-      templates: [child0]
     };
   }()));
 
@@ -21907,7 +22061,7 @@ catch(err) {
 if (runningTests) {
   require("ember-cli-idcos-docs/tests/test-helper");
 } else {
-  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+c14aa1f8"});
+  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+1f1236ba"});
 }
 
 /* jshint ignore:end */

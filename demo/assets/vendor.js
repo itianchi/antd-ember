@@ -88291,6 +88291,10 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 	  */
 		placeholder: '请选择',
 		/**
+	  * @attribute [options]
+	  */
+		options: Ember['default'].A(),
+		/**
 	  * @state _hidden
 	  * @type {Boolean}
 	  * @description [hidden dropdown menu]
@@ -88332,6 +88336,10 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 			}
 		}).property('disabled'),
 		/**
+	  * @selectedOptions
+	  */
+		_selectedOptions: null,
+		/**
 	  * @observe selectedChildren
 	  */
 		_selectOptions: (function () {
@@ -88352,15 +88360,29 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 				this.set('_hidden', !this.get('_hidden'));
 			},
 			selectOptions: function selectOptions() {
-				var _this = this;
+				var _this2 = this;
+
 				var children = this.get('children');
+				var multiple = this.get('multiple');
+				var selectedOptions = [];
+
 				children.forEach(function (child) {
-					if (_this.isSelectedOption(child)) {
+					if (_this2.isSelectedOption(child)) {
 						child.set('selected', true);
+						selectedOptions.push({
+							value: child.get('value'),
+							label: child.$().text()
+						});
 					} else {
 						child.set('selected', false);
 					}
 				});
+
+				if (!multiple) {
+					this.set('_selectedOptions', selectedOptions[0]);
+				} else {
+					this.set('_selectedOptions', selectedOptions);
+				}
 			},
 			onSelect: function onSelect(option) {
 				if (this.get('multiple')) {
@@ -88370,6 +88392,7 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 						this.set('value', this.get('value').addObject(option.get('value')));
 					}
 				} else {
+					this.set('_hidden', true);
 					this.set('value', option.get('value'));
 				}
 				this.send('onChange');
@@ -88389,7 +88412,7 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 				}).bind(this), 100);
 
 				if (this.get('onChange')) {
-					this.send('onChange', option);
+					this.send('onChange', this.get('value'));
 				}
 			}
 		},
@@ -88409,6 +88432,422 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 			}
 		}
 	});
+
+});
+define('ember-cli-idcos/components/io-split/pane', ['exports', 'ember', 'ember-cli-idcos/components/io-split/split'], function (exports, Ember, Split) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend({
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'div',
+		classNames: 'io-split split',
+		/**
+	  * @attribute  size
+	  * @description  percentage of parent
+	  */
+		size: 5,
+		/**
+	  * @attribute  minSize in px
+	  */
+		minSize: 100,
+		/**
+	  * @attribute  direction [horizontal | vertical] 
+	  */
+		direction: 'horizontal',
+		/**
+	  * [didInsertElement description]
+	  * @return {[type]} [description]
+	  */
+		didInsertElement: function didInsertElement() {
+			var _this = this;
+
+			Ember['default'].run.later(function () {
+				var children = _this.$('>.split');
+				var sizes = [];
+				var minSize = [];
+				var els = [];
+				var direction = _this.get('direction');
+				var selfMinSize = _this.get('minSize');
+
+				if (children.length === 1) {
+					children.addClass('split-' + direction);
+					children.css('float', 'none');
+				}
+
+				if (children.length <= 1) {
+					return;
+				}
+
+				children.each(function (index, child) {
+					var $child = $(child);
+					var size = $child.attr('size') - 0;
+					var _minSize = $child.attr('minsize') - 0;
+
+					sizes.push(size);
+					minSize.push(Math.max(selfMinSize, _minSize || 0));
+					els.push(child);
+					$child.addClass('split-' + direction);
+				});
+
+				Split['default'](els, {
+					sizes: sizes,
+					minSize: minSize,
+					direction: direction
+				});
+			}, 10);
+		}
+	});
+
+});
+define('ember-cli-idcos/components/io-split/split', ['exports'], function (exports) {
+
+    'use strict';
+
+    /**
+     * split js
+     * @type {[type]}
+     */
+    var global = window,
+        addEventListener = 'addEventListener',
+        removeEventListener = 'removeEventListener',
+        getBoundingClientRect = 'getBoundingClientRect',
+        isIE8 = global.attachEvent && !global[addEventListener],
+        document = global.document,
+        calc = (function () {
+        var el,
+            prefixes = ["", "-webkit-", "-moz-", "-o-"];
+
+        for (var i = 0; i < prefixes.length; i++) {
+            el = document.createElement('div');
+            el.style.cssText = "width:" + prefixes[i] + "calc(9px)";
+
+            if (el.style.length) {
+                return prefixes[i] + "calc";
+            }
+        }
+    })(),
+        elementOrSelector = function elementOrSelector(el) {
+        if (typeof el === 'string' || el instanceof String) {
+            return document.querySelector(el);
+        } else {
+            return el;
+        }
+    },
+        Split = function Split(ids, options) {
+        var dimension,
+            i,
+            clientDimension,
+            clientAxis,
+            position,
+            gutterClass,
+            paddingA,
+            paddingB,
+            pairs = [];
+
+        // Set defaults
+
+        options = typeof options !== 'undefined' ? options : {};
+
+        if (typeof options.gutterSize === 'undefined') options.gutterSize = 10;
+        if (typeof options.minSize === 'undefined') options.minSize = 100;
+        if (typeof options.snapOffset === 'undefined') options.snapOffset = 30;
+        if (typeof options.direction === 'undefined') options.direction = 'horizontal';
+
+        if (options.direction == 'horizontal') {
+            dimension = 'width';
+            clientDimension = 'clientWidth';
+            clientAxis = 'clientX';
+            position = 'left';
+            gutterClass = 'gutter gutter-horizontal';
+            paddingA = 'paddingLeft';
+            paddingB = 'paddingRight';
+            if (!options.cursor) options.cursor = 'ew-resize';
+        } else if (options.direction == 'vertical') {
+            dimension = 'height';
+            clientDimension = 'clientHeight';
+            clientAxis = 'clientY';
+            position = 'top';
+            gutterClass = 'gutter gutter-vertical';
+            paddingA = 'paddingTop';
+            paddingB = 'paddingBottom';
+            if (!options.cursor) options.cursor = 'ns-resize';
+        }
+
+        // Event listeners for drag events, bound to a pair object.
+        // Calculate the pair's position and size when dragging starts.
+        // Prevent selection on start and re-enable it when done.
+
+        var startDragging = function startDragging(e) {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (!self.dragging && options.onDragStart) {
+                options.onDragStart();
+            }
+
+            e.preventDefault();
+
+            self.dragging = true;
+            self.move = drag.bind(self);
+            self.stop = stopDragging.bind(self);
+
+            global[addEventListener]('mouseup', self.stop);
+            global[addEventListener]('touchend', self.stop);
+            global[addEventListener]('touchcancel', self.stop);
+
+            self.parent[addEventListener]('mousemove', self.move);
+            self.parent[addEventListener]('touchmove', self.move);
+
+            a[addEventListener]('selectstart', preventSelection);
+            a[addEventListener]('dragstart', preventSelection);
+            b[addEventListener]('selectstart', preventSelection);
+            b[addEventListener]('dragstart', preventSelection);
+
+            a.style.userSelect = 'none';
+            a.style.webkitUserSelect = 'none';
+            a.style.MozUserSelect = 'none';
+            a.style.pointerEvents = 'none';
+
+            b.style.userSelect = 'none';
+            b.style.webkitUserSelect = 'none';
+            b.style.MozUserSelect = 'none';
+            b.style.pointerEvents = 'none';
+
+            self.gutter.style.cursor = options.cursor;
+            self.parent.style.cursor = options.cursor;
+
+            calculateSizes.call(self);
+        },
+            stopDragging = function stopDragging() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (self.dragging && options.onDragEnd) {
+                options.onDragEnd();
+            }
+
+            self.dragging = false;
+
+            global[removeEventListener]('mouseup', self.stop);
+            global[removeEventListener]('touchend', self.stop);
+            global[removeEventListener]('touchcancel', self.stop);
+
+            self.parent[removeEventListener]('mousemove', self.move);
+            self.parent[removeEventListener]('touchmove', self.move);
+
+            delete self.stop;
+            delete self.move;
+
+            a[removeEventListener]('selectstart', preventSelection);
+            a[removeEventListener]('dragstart', preventSelection);
+            b[removeEventListener]('selectstart', preventSelection);
+            b[removeEventListener]('dragstart', preventSelection);
+
+            a.style.userSelect = '';
+            a.style.webkitUserSelect = '';
+            a.style.MozUserSelect = '';
+            a.style.pointerEvents = '';
+
+            b.style.userSelect = '';
+            b.style.webkitUserSelect = '';
+            b.style.MozUserSelect = '';
+            b.style.pointerEvents = '';
+
+            self.gutter.style.cursor = '';
+            self.parent.style.cursor = '';
+        },
+            drag = function drag(e) {
+            var offset;
+
+            if (!this.dragging) return;
+
+            // Get the relative position of the event from the first side of the
+            // pair.
+
+            if ('touches' in e) {
+                offset = e.touches[0][clientAxis] - this.start;
+            } else {
+                offset = e[clientAxis] - this.start;
+            }
+
+            // If within snapOffset of min or max, set offset to min or max
+
+            if (offset <= this.aMin + options.snapOffset) {
+                offset = this.aMin;
+            } else if (offset >= this.size - this.bMin - options.snapOffset) {
+                offset = this.size - this.bMin;
+            }
+
+            adjust.call(this, offset);
+
+            if (options.onDrag) {
+                options.onDrag();
+            }
+        },
+            calculateSizes = function calculateSizes() {
+            // Calculate the pairs size, and percentage of the parent size
+            var computedStyle = global.getComputedStyle(this.parent),
+                parentSize = this.parent[clientDimension] - parseFloat(computedStyle[paddingA]) - parseFloat(computedStyle[paddingB]);
+
+            this.size = this.a[getBoundingClientRect]()[dimension] + this.b[getBoundingClientRect]()[dimension] + this.aGutterSize + this.bGutterSize;
+            this.percentage = Math.min(this.size / parentSize * 100, 100);
+            this.start = this.a[getBoundingClientRect]()[position];
+        },
+            adjust = function adjust(offset) {
+            // A size is the same as offset. B size is total size - A size.
+            // Both sizes are calculated from the initial parent percentage.
+
+            this.a.style[dimension] = calc + '(' + offset / this.size * this.percentage + '% - ' + this.aGutterSize + 'px)';
+            this.b.style[dimension] = calc + '(' + (this.percentage - offset / this.size * this.percentage) + '% - ' + this.bGutterSize + 'px)';
+        },
+            fitMin = function fitMin() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (a[getBoundingClientRect]()[dimension] < self.aMin) {
+                a.style[dimension] = self.aMin - self.aGutterSize + 'px';
+                b.style[dimension] = self.size - self.aMin - self.aGutterSize + 'px';
+            } else if (b[getBoundingClientRect]()[dimension] < self.bMin) {
+                a.style[dimension] = self.size - self.bMin - self.bGutterSize + 'px';
+                b.style[dimension] = self.bMin - self.bGutterSize + 'px';
+            }
+        },
+            fitMinReverse = function fitMinReverse() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (b[getBoundingClientRect]()[dimension] < self.bMin) {
+                a.style[dimension] = self.size - self.bMin - self.bGutterSize + 'px';
+                b.style[dimension] = self.bMin - self.bGutterSize + 'px';
+            } else if (a[getBoundingClientRect]()[dimension] < self.aMin) {
+                a.style[dimension] = self.aMin - self.aGutterSize + 'px';
+                b.style[dimension] = self.size - self.aMin - self.aGutterSize + 'px';
+            }
+        },
+            balancePairs = function balancePairs(pairs) {
+            for (var i = 0; i < pairs.length; i++) {
+                calculateSizes.call(pairs[i]);
+                fitMin.call(pairs[i]);
+            }
+
+            for (i = pairs.length - 1; i >= 0; i--) {
+                calculateSizes.call(pairs[i]);
+                fitMinReverse.call(pairs[i]);
+            }
+        },
+            preventSelection = function preventSelection() {
+            return false;
+        },
+            parent = elementOrSelector(ids[0]).parentNode;
+
+        if (!options.sizes) {
+            var percent = 100 / ids.length;
+
+            options.sizes = [];
+
+            for (i = 0; i < ids.length; i++) {
+                options.sizes.push(percent);
+            }
+        }
+
+        if (!Array.isArray(options.minSize)) {
+            var minSizes = [];
+
+            for (i = 0; i < ids.length; i++) {
+                minSizes.push(options.minSize);
+            }
+
+            options.minSize = minSizes;
+        }
+
+        for (i = 0; i < ids.length; i++) {
+            var el = elementOrSelector(ids[i]),
+                isFirst = i == 1,
+                isLast = i == ids.length - 1,
+                size,
+                gutterSize = options.gutterSize,
+                pair;
+
+            if (i > 0) {
+                pair = {
+                    a: elementOrSelector(ids[i - 1]),
+                    b: el,
+                    aMin: options.minSize[i - 1],
+                    bMin: options.minSize[i],
+                    dragging: false,
+                    parent: parent,
+                    isFirst: isFirst,
+                    isLast: isLast,
+                    direction: options.direction
+                };
+
+                // For first and last pairs, first and last gutter width is half.
+
+                pair.aGutterSize = options.gutterSize;
+                pair.bGutterSize = options.gutterSize;
+
+                if (isFirst) {
+                    pair.aGutterSize = options.gutterSize / 2;
+                }
+
+                if (isLast) {
+                    pair.bGutterSize = options.gutterSize / 2;
+                }
+            }
+
+            // IE9 and above
+            if (!isIE8) {
+                if (i > 0) {
+                    var gutter = document.createElement('div');
+
+                    gutter.className = gutterClass;
+                    gutter.style[dimension] = options.gutterSize + 'px';
+
+                    gutter[addEventListener]('mousedown', startDragging.bind(pair));
+                    gutter[addEventListener]('touchstart', startDragging.bind(pair));
+
+                    parent.insertBefore(gutter, el);
+
+                    pair.gutter = gutter;
+                }
+
+                if (i === 0 || i == ids.length - 1) {
+                    gutterSize = options.gutterSize / 2;
+                }
+
+                if (typeof options.sizes[i] === 'string' || options.sizes[i] instanceof String) {
+                    size = options.sizes[i];
+                } else {
+                    size = calc + '(' + options.sizes[i] + '% - ' + gutterSize + 'px)';
+                }
+
+                // IE8 and below
+            } else {
+                    if (typeof options.sizes[i] === 'string' || options.sizes[i] instanceof String) {
+                        size = options.sizes[i];
+                    } else {
+                        size = options.sizes[i] + '%';
+                    }
+                }
+
+            el.style[dimension] = size;
+
+            if (i > 0) {
+                pairs.push(pair);
+            }
+        }
+
+        balancePairs(pairs);
+    };
+
+    exports['default'] = Split;
 
 });
 define('ember-cli-idcos/components/io-table', ['exports', 'ember', 'ember-cli-idcos/utils/fmt'], function (exports, Ember, fmt) {
@@ -89920,725 +90359,6 @@ define('ember-cli-idcos/components/io-tree', ['exports', 'ember'], function (exp
             }
         }
     });
-
-});
-define('ember-cli-idcos/components/io-upload/ajax-upload', ['exports', 'ember', 'ember-cli-idcos/components/io-upload/uid', 'ember-cli-idcos/components/io-upload/request'], function (exports, Ember, uid, request) {
-
-	'use strict';
-
-	var get = Ember['default'].get;
-	var set = Ember['default'].set;
-	var RSVP = Ember['default'].RSVP;
-
-	/**
-	 * AjaxUpload Component
-	 ```html
-	 ``` 
-	 */
-
-	exports['default'] = Ember['default'].Component.extend({
-		tagName: 'span',
-		attributeBindings: ['tabIndex'],
-		classNames: 'io-upload',
-		tabIndex: 0,
-		/**
-	  * @attribute action
-	  */
-		action: null,
-		/**
-	  * @attribute data
-	  */
-		data: null,
-		/**
-	  * @attribute [headers description]
-	  * @type {Object}
-	  */
-		headers: {},
-		/**
-	  * @attribute [name description]
-	  * @type {String}
-	  */
-		name: 'file',
-		multipart: false,
-		withCredentials: false,
-		/**
-	  * @attribute drapdrop enabled
-	  * @type {Boolean}
-	  */
-		dragdrop: false,
-
-		/**
-	  * @attribute  
-	  */
-		multiple: false,
-
-		/**
-	  * @state enter
-	  */
-		_dragEnter: false,
-
-		/**
-	  * @lifecycle didInsert
-	  */
-		didInsertElement: function didInsertElement() {
-			this.$('input').on('change', (function (ev) {
-				this.send('onChange', ev);
-			}).bind(this));
-		},
-
-		/**
-	  * @lifecycle destroy
-	  */
-		willDestroyElement: function willDestroyElement() {
-			this.$('input').off('change');
-		},
-
-		/**
-	  * @events data
-	  */
-		click: function click(event) {
-			if (!$(event.target).hasClass('io-upload__input')) {
-				this.$('input').trigger('click');
-				this.$('input').val('');
-			}
-		},
-
-		/**
-	  * [dragEnter description]
-	  * @param  {[type]} event [description]
-	  * @return {[type]}       [description]
-	  */
-		dragEnter: function dragEnter(event) {
-			event.preventDefault();
-			if (!this.get('dragdrop')) {
-				return;
-			}
-
-			if (!this.get('multiple')) {}
-
-			this.set('_dragEnter', true);
-		},
-
-		/**
-	  * [dragOver description]
-	  * @param  {[type]} event [description]
-	  * @return {[type]}       [description]
-	  */
-		dragOver: function dragOver(event) {
-			event.preventDefault();
-		},
-
-		/**
-	  * [dragLeave description]
-	  * @param  {[type]} event [description]
-	  * @return {[type]}       [description]
-	  */
-		dragLeave: function dragLeave(event) {
-			if (!this.get('dragdrop')) {
-				return;
-			}
-			this.set('_dragEnter', false);
-		},
-
-		/**
-	  * [drop description]
-	  * @param  {[type]} event [description]
-	  * @return {[type]}       [description]
-	  */
-		drop: function drop(event) {
-			if (!this.get('dragdrop')) {
-				return;
-			}
-			var files = e.dataTransfer.files;
-			this.set('_dragEnter', false);
-			this.uploadFiles(files);
-			event.preventDefault();
-		},
-
-		/**
-	  * [keydown description]
-	  * @param  {[type]} event [description]
-	  * @return {[type]}       [description]
-	  */
-		keydown: function keydown(event) {
-			event.preventDefault();
-			if (event.key === 'Enter') {
-				this.$('input').trigger('click');
-			}
-		},
-
-		/**
-	  * [uploadFiles description]
-	  * @return {[type]} [description]
-	  */
-		uploadFiles: function uploadFiles(files) {
-			var parentComponent = this.get('parentComponent');
-			var len = files.length;
-			if (len > 0) {
-				for (var i = 0; i < len; i++) {
-					var file = files.item(i);
-					file.uid = uid['default']();
-					this.uploadFile(file);
-				}
-
-				if (!this.get('onStart')) {
-					return;
-				}
-
-				if (this.get('multiple')) {
-					parentComponent ? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files)) : this.sendAction('onStart', Array.prototype.slice.call(files));
-				} else {
-					parentComponent ? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files)[0]) : this.sendAction('onStart', Array.prototype.slice.call(files)[0]);
-				}
-			}
-		},
-
-		/**
-	  * [uploadFile description]
-	  * actions: {
-	  * 	beforeUploadAction(defer) {
-	  * 	    // before okay
-	  * 		defer.resolve()
-	  * 		
-	  * 		// before failed
-	  * 		defer.reject()
-	  * 	}
-	  * }
-	  * @return {[type]} [description]
-	  */
-		uploadFile: function uploadFile(file) {
-			var _this = this;
-
-			var parentComponent = this.get('parent');
-			if (!this.get('beforeUpload')) {
-				return this.postFile(file);
-			}
-
-			var defer = RSVP.defer();
-			defer.promise.then(function () {
-				_this.postFile(file);
-			});
-
-			parentComponent ? parentComponent.send(this.get('beforeUpload'), defer) : this.send('beforeUpload', defer);
-		},
-
-		/**
-	  * [postFile description]
-	  * @param  {[type]} file [description]
-	  * @return {[type]}      [description]
-	  */
-		postFile: function postFile(file) {
-			var _this2 = this;
-
-			var parentComponent = this.get('parent');
-			var data = this.get('data');
-			request['default']({
-				action: this.get('action'),
-				filename: this.get('name'),
-				file: file,
-				data: data,
-				headers: this.get('headers'),
-				withCredentials: this.get('withCredentials'),
-				onProgress: function onProgress(e) {
-					if (_this2.get('onProgress')) {
-						parentComponent ? parentComponent.send(_this2.get('onProgress'), e, file) : _this2.sendAction('onProgress', e, file);
-					}
-				},
-				onSuccess: function onSuccess(ret) {
-					if (_this2.get('onSuccess')) {
-						parentComponent ? parentComponent.send(_this2.get('onSuccess'), ret, file) : _this2.sendAction('onSuccess', ret, file);
-					}
-				},
-				onError: function onError(err, ret) {
-					if (_this2.get('onError')) {
-						parentComponent ? parentComponent.send(_this2.get('onError'), err, ret, file) : _this2.sendAction('onError', err, ret, file);
-					}
-				}
-			});
-		},
-
-		/**
-	  * [actions description]
-	  * @type {Object}
-	  */
-		actions: {
-			onChange: function onChange(ev) {
-				this.uploadFiles(ev.target.files);
-			}
-		}
-	});
-
-});
-define('ember-cli-idcos/components/io-upload/iframe-upload', ['exports', 'ember', 'ember-cli-idcos/components/io-upload/uid'], function (exports, Ember, uid) {
-
-	'use strict';
-
-	exports['default'] = Ember['default'].Component.extend({
-		tagName: 'span',
-		attributeBindings: ['role', 'tabIndex'],
-		classNames: 'io-upload',
-		tabIndex: 0,
-		role: 'button',
-		/**
-	  * @events data
-	  */
-		actions: {
-			click: function click() {},
-			keydown: function keydown() {},
-			drop: function drop() {},
-			dragOver: function dragOver() {},
-			onChange: function onChange() {}
-		}
-	});
-
-});
-define('ember-cli-idcos/components/io-upload/list', ['exports', 'ember'], function (exports, Ember) {
-
-	'use strict';
-
-	exports['default'] = Ember['default'].Component.extend({
-		tagName: 'div',
-		attributeBindings: ['role', 'tabIndex'],
-		classNames: 'io-upload-list',
-		tabIndex: 0,
-		role: 'upload-file-list',
-		/**
-	  * @events data
-	  */
-		actions: {
-			remove: function remove() {}
-		}
-	});
-
-});
-define('ember-cli-idcos/components/io-upload/request', ['exports'], function (exports) {
-
-  'use strict';
-
-
-
-  exports['default'] = upload;
-  function getError(option, xhr) {
-    var msg = 'cannot post ' + option.action + ' ' + xhr.status + '\'';
-    var err = new Error(msg);
-    err.status = xhr.status;
-    err.method = 'post';
-    err.url = option.action;
-    return err;
-  }
-
-  function getBody(xhr) {
-    var text = xhr.responseText || xhr.response;
-    if (!text) {
-      return text;
-    }
-
-    try {
-      return JSON.parse(text);
-    } catch (e) {
-      return text;
-    }
-  }
-  function upload(option) {
-    if (typeof XMLHttpRequest === 'undefined') {
-      return;
-    }
-
-    var xhr = new XMLHttpRequest();
-    if (xhr.upload) {
-      xhr.upload.onprogress = function progress(e) {
-        if (e.total > 0) {
-          e.percent = e.loaded / e.total * 100;
-        }
-        option.onProgress(e);
-      };
-    }
-
-    var formData = new FormData();
-    formData.append(option.filename, option.file);
-    if (option.data) {
-      Object.keys(option.data).map(function (key) {
-        formData.append(key, option.data[key]);
-      });
-    }
-
-    xhr.onerror = function error(e) {
-      option.onError(e);
-    };
-
-    xhr.onload = function onload() {
-      if (xhr.status !== 200) {
-        return option.onError(getError(option, xhr), getBody(xhr));
-      }
-
-      option.onSuccess(getBody(xhr));
-    };
-
-    if (option.withCredentials && 'withCredentials' in xhr) {
-      xhr.withCredentials = true;
-    }
-
-    xhr.open('post', option.action, true);
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    var headers = option.headers || {};
-    for (var h in headers) {
-      if (headers.hasOwnProperty(h)) {
-        xhr.setRequestHeader(h, headers[h]);
-      }
-    }
-    xhr.send(formData);
-  }
-
-});
-define('ember-cli-idcos/components/io-upload/uid', ['exports'], function (exports) {
-
-  'use strict';
-
-
-
-  exports['default'] = uid;
-  var now = +new Date();
-  var index = 0;
-  function uid() {
-    return 'rc-upload-' + now + '-' + ++index;
-  }
-
-});
-define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'ember-cli-idcos/components/io-upload/uid'], function (exports, Ember, uid) {
-
-	'use strict';
-
-	function noop() {}
-	function T() {
-		return true;
-	}
-
-	// Fix IE file.status problem
-	// via coping a new Object
-	function fileToObject(file) {
-		return {
-			lastModified: file.lastModified,
-			lastModifiedDate: file.lastModifiedDate,
-			name: file.filename || file.name,
-			size: file.size,
-			type: file.type,
-			uid: file.uid,
-			response: file.response,
-			error: file.error,
-			percent: 0,
-			originFileObj: file
-		};
-	}
-
-	/**
-	 * generate Progress percent: 0.1 -> 0.98
-	 *   - for ie
-	 */
-	function genPercentAdd() {
-		var k = 0.1;
-		var i = 0.01;
-		var end = 0.98;
-		return function (s) {
-			var start = s;
-			if (start >= end) {
-				return start;
-			}
-
-			start += k;
-			k = k - i;
-			if (k < 0.001) {
-				k = 0.001;
-			}
-			return start * 100;
-		};
-	}
-
-	function getFileItem(file, fileList) {
-		var matchWay = !file.uid ? 'byName' : 'byUid';
-		var target = fileList.filter(function (item) {
-			if (matchWay === 'byName') {
-				return item.name === file.name;
-			}
-			return item.uid === file.uid;
-		})[0];
-		return target;
-	}
-
-	exports['default'] = Ember['default'].Component.extend({
-		tagName: 'span',
-		attributeBindings: ['role', 'tabIndex'],
-		classNames: 'io-upload',
-		classNamePrefix: 'io-upload-',
-		classNameBindings: ['typeClass'],
-		tabIndex: 0,
-		role: 'upload-button',
-		//------------------------------
-		//        ATTRIBUTES
-		//------------------------------
-		/**
-	  * @attribute showUploadList
-	  * @type {Object}
-	  */
-		showUploadList: false,
-		/**
-	  * @attribute listType 
-	  * @type {String} [file|card]
-	  */
-		listType: 'file',
-		/**
-	  * @attribute 
-	  * @type {String} [drag|select]
-	  * @type {Object}
-	  */
-		type: 'select',
-		/**
-	  * @attribute multipart
-	  * @type {Boolean}
-	  */
-		multipart: false,
-		/**
-	  * @attribute
-	  * @type {Boolean}
-	  */
-		withCredentials: false,
-		/**
-	  * @attribute  name
-	  * @type {String}
-	  */
-		name: 'file',
-		/**
-	  * @attribute  actions
-	  */
-		action: '',
-		/**
-	  * @attribute headers
-	  * @type {Object}
-	  */
-		headers: {},
-		//------------------------------
-		//        STATES
-		//------------------------------
-		/*
-	  * @state _dragdrop
-	  */
-		_dragdrop: (function () {
-			return this.get('type') === 'drag';
-		}).property('type'),
-		/**
-	  * @state _dragState
-	  *
-	  * current drag drop state 
-	  * 
-	  * @type {String}
-	  */
-		_dragState: 'drop',
-		/**
-	  * @state _fileList
-	  */
-		_file: null,
-		_fileList: Ember['default'].A(),
-		_recentUploadStatus: false,
-		/**
-	  * @state typeClass
-	  */
-		typeClass: (function () {
-			return this.get('classNamePrefix') + this.get('type');
-		}).property('type'),
-
-		//------------------------------
-		//        FUNCTIONS
-		//------------------------------
-		/**
-	  * [autoUpdateProgress description]
-	  * @param  {[type]} precent [description]
-	  * @param  {[type]} file    [description]
-	  * @return {[type]}         [description]
-	  */
-		autoUpdateProgress: function autoUpdateProgress(precent, file) {
-			var _this = this;
-
-			var getPercent = genPercentAdd();
-			var curPercent = 0;
-			var progressTimer = window.setInterval(function () {
-				curPercent = getPercent(curPercent);
-				_this.onProgress({
-					percent: curPercent
-				}, file);
-			}, 200);
-			this.set('_progressTimer', progressTimer);
-		},
-		clearProgressTimer: function clearProgressTimer() {
-			window.clearInterval(this.get('_progressTimer'));
-		},
-		/**
-	  * [handleRemove description]
-	  * @param  {[type]} file [description]
-	  * @return {[type]}      [description]
-	  */
-		handleRemove: function handleRemove(file) {
-			var fileList = this.get('_fileList');
-			var targetItem = getFileItem(file, fileList);
-			fileList.removeObject(targetItem);
-			this.send('onChange', {
-				file: targetItem,
-				fileList: fileList
-			});
-		},
-		actions: {
-			/**
-	   * [onStart description]
-	   * @param  {[type]} file [description]
-	   * @return {[type]}      [description]
-	   */
-			onStart: function onStart(file) {
-				console.log('onStart', files);
-
-				if (!this.get('_recentUploadStatus')) {
-					return;
-				}
-
-				var targetItem = undefined;
-				var nextFileList = this.get('_fileList').concat();
-
-				if (file.length > 0) {
-					targetItem = file.map(function (f) {
-						var fileObject = fileToObject(f);
-						fileObject.status = 'uploading';
-						return fileObject;
-					});
-					nextFileList = nextFileList.concat(targetItem);
-				} else {
-					targetItem = fileToObject(file);
-					targetItem.status = 'uploading';
-					nextFileList.pushObject(targetItem);
-				}
-
-				this.send('onChange', {
-					file: targetItem,
-					fileList: nextFileList
-				});
-
-				if (!window.FormData) {
-					this.autoUpdateProgress(0, targetItem);
-				}
-			},
-			/**
-	   * [beforeUpload ]
-	   * 
-	   * beforeUpload will send an 'beforeUpload' action
-	   * if get false, then upload wont start 
-	   * 
-	   * @param  {[type]} defer [description]
-	   * @return {[type]}       [description]
-	   */
-			beforeUpload: function beforeUpload(defer) {
-				var _this2 = this;
-
-				console.log('onBeforeUpload');
-				if (!this.get('beforeUpload')) {
-					defer.resolve();
-					this.set('_recentUploadStatus', true);
-					return true;
-				} else {
-					var _defer = Ember['default'].RSVP.defer();
-					_defer.promise.then(function (ret) {
-						_this2.set('_recentUploadStatus', ret);
-						defer.resolve();
-					});
-					this.sendAction('beforeUpload', defer, file);
-				}
-			},
-			/**
-	   * [onProgress description]
-	   * @param  {[type]} event [description]
-	   * @param  {[type]} file  [description]
-	   * @return {[type]}       [description]
-	   */
-			onProgress: function onProgress(event, file) {
-				console.log('onProgress', event, file);
-				var fileList = this.get('_fileList');
-				var targetItem = getFileItem(file, fileList);
-				if (!targetItem) {
-					return;
-				}
-				targetItem.percent = event.precent;
-				this.send('onChange', {
-					event: event,
-					file: file,
-					fileList: fileList
-				});
-			},
-			/**
-	   * [onSuccess description]
-	   * @param  {[type]} ret  [description]
-	   * @param  {[type]} file [description]
-	   * @return {[type]}      [description]
-	   */
-			onSuccess: function onSuccess(ret, file) {
-				console.log('onSuccess', ret, file);
-				this.clearProgressTimer();
-
-				try {
-					if (typeof response === 'string') {
-						JSON.parse(response);
-					}
-				} catch (e) {
-					this.send('onError', new Error('No response'), response, file);
-					return;
-				}
-
-				var fileList = this.get('_fileList');
-				var targetItem = getFileItem(file, fileList);
-				if (targetItem) {
-					targetItem.status = 'done';
-					targetItem.response = response;
-					this.send('onChange', {
-						file: targetItem,
-						fileList: fileList
-					});
-				}
-			},
-			/**
-	   * [onError description]
-	   * @param  {[type]} ret  [description]
-	   * @param  {[type]} file [description]
-	   * @return {[type]}      [description]
-	   */
-			onError: function onError(error, response, file) {
-				console.log('onError');
-				this.clearProgressTimer();
-				var fileList = this.get('fileList');
-				var targetItem = getFileItem(file, fileList);
-				targetItem.error = error;
-				targetItem.status = 'error';
-				this.handleRemove(targetItem);
-			},
-			/**
-	   * [onChange description]
-	   * @param  {[type]} ev [description]
-	   * @return {[type]}    [description]
-	   */
-			onChange: function onChange(ev) {
-				this.set('_file', ev.file);
-				this.set('_fileList', ev.nextFileList);
-				if (this.get('onChange')) {
-					this.sendAction('onChange', ev);
-				}
-			},
-			/**
-	   * [onRemove description]
-	   *
-	   * manual remove action
-	   * 
-	   * @param  {[type]} file [description]
-	   * @return {[type]}      [description]
-	   */
-			onRemove: function onRemove(file) {
-				file.status = 'remvoed';
-				this.handleRemove(file);
-			}
-		}
-	});
 
 });
 define('ember-cli-idcos/config', ['exports', 'ember'], function (exports, Em) {
