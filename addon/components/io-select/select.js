@@ -98,6 +98,10 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 		}
 	}.property('disabled'),
 	/**
+	 * @selectedOptions
+	 */
+	_selectedOptions: null,
+	/**
 	 * @observe selectedChildren
 	 */
 	_selectOptions: function() {
@@ -118,15 +122,28 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 			this.set('_hidden', !this.get('_hidden'));
 		},
 		selectOptions: function() {
-			var _this = this;
-			var children = this.get('children');
-			children.forEach(function(child) {
-				if (_this.isSelectedOption(child)) {
+			const children = this.get('children');
+			const multiple = this.get('multiple');
+			let selectedOptions = [];
+
+			children.forEach((child) => {
+				if (this.isSelectedOption(child)) {
 					child.set('selected', true);
+					selectedOptions.push({
+						value: child.get('value'),
+						label: child.$().text()
+					});
 				} else  {
 					child.set('selected', false);
 				}
 			});
+
+			if (!multiple) {
+				this.set('_selectedOptions', selectedOptions[0])
+			} else {
+				this.set('_selectedOptions', selectedOptions);
+			}
+
 		},
 		onSelect: function(option) {
 			if (this.get('multiple')) {
