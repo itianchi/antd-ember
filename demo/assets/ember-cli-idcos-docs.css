@@ -14401,7 +14401,7 @@ fieldset[disabled] .io-btn-danger.active {
 .io-btn > span + .ioicon {
   margin-left: 0.5em;
 }
-.ant-switch {
+.io-switch {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -14416,13 +14416,13 @@ fieldset[disabled] .io-btn-danger.active {
   transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
   user-select: none;
 }
-.ant-switch-inner {
+.io-switch-inner {
   color: #fff;
   font-size: 12px;
   position: absolute;
   left: 24px;
 }
-.ant-switch:after {
+.io-switch:after {
   position: absolute;
   width: 18px;
   height: 18px;
@@ -14434,40 +14434,49 @@ fieldset[disabled] .io-btn-danger.active {
   cursor: pointer;
   transition: left 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
 }
-.ant-switch-small {
+.io-switch-small {
   height: 14px;
   line-height: 12px;
   width: 28px;
 }
-.ant-switch-small:after {
+.io-switch-small:after {
   width: 12px;
   height: 12px;
   top: 0;
   left: 0;
 }
-.ant-switch-small.ant-switch-checked:after {
+.io-switch-small.io-switch-checked:after {
   left: 14px;
 }
-.ant-switch-checked {
+.io-switch .checked {
+  display: none;
+}
+.io-switch-checked {
   border: 1px solid #2db7f5;
   background-color: #2db7f5;
 }
-.ant-switch-checked .ant-switch-inner {
+.io-switch-checked .io-switch-inner {
   left: 6px;
 }
-.ant-switch-checked:after {
+.io-switch-checked .checked {
+  display: initial;
+}
+.io-switch-checked .unchecked {
+  display: none;
+}
+.io-switch-checked:after {
   left: 22px;
 }
-.ant-switch-disabled {
+.io-switch-disabled {
   cursor: not-allowed;
   background: #f4f4f4;
   border-color: #f4f4f4;
 }
-.ant-switch-disabled:after {
+.io-switch-disabled:after {
   background: #ccc;
   cursor: not-allowed;
 }
-.ant-switch-disabled-inner {
+.io-switch-disabled-inner {
   color: #ccc;
 }
 .io-dropdown {
@@ -24910,19 +24919,10 @@ pre {
   box-sizing: border-box;
   padding: 0;
 }
-.markdown-body table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-.markdown-body td,
-.markdown-body th {
-  padding: 0;
-}
 .markdown-body input {
   font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .markdown-body a {
-  color: #4078c0;
   text-decoration: none;
 }
 .markdown-body a:hover,
@@ -25039,7 +25039,6 @@ pre {
   margin-bottom: 0 !important;
 }
 .markdown-body a:not([href]) {
-  color: inherit;
   text-decoration: none;
 }
 .markdown-body .anchor {
@@ -25202,22 +25201,6 @@ pre {
 }
 .markdown-body blockquote > :last-child {
   margin-bottom: 0;
-}
-.markdown-body table {
-  width: 100%;
-  overflow: auto;
-  word-break: normal;
-  word-break: keep-all;
-}
-.markdown-body table th {
-  font-weight: bold;
-}
-.markdown-body table th,
-.markdown-body table td {
-  padding: 6px 13px;
-}
-.markdown-body table tr {
-  background-color: #fff;
 }
 .markdown-body img {
   max-width: 100%;
@@ -25534,5 +25517,8 @@ section.main-content {
   color: #666;
   background: white;
   padding-bottom: 30px;
+}
+.models-table-wrapper ul li {
+  list-style-type: none !important;
 }
 /*# sourceMappingURL=/assets/ember-cli-idcos-docs.css.map */

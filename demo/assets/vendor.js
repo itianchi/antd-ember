@@ -88850,6 +88850,46 @@ define('ember-cli-idcos/components/io-split/split', ['exports'], function (expor
     exports['default'] = Split;
 
 });
+define('ember-cli-idcos/components/io-switch', ['exports', 'ember', 'ember-cli-idcos/mixin/disabled-class'], function (exports, Ember, DisabledClass) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend(DisabledClass['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'span',
+		attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+		classNames: 'io-switch',
+		classNamePrefix: 'io-switch-',
+		classNameBindings: ['checkedClass'],
+		/**
+	  * @attribute  checked
+	  */
+		checked: false,
+		/**
+	  * @state
+	  */
+		checkedClass: (function () {
+			if (this.get('checked')) {
+				return this.get('classNamePrefix') + 'checked';
+			}
+			return '';
+		}).property('checked'),
+		click: function click() {
+			this.send('toggle');
+		},
+		actions: {
+			toggle: function toggle() {
+				this.set('checked', !this.get('checked'));
+				if (this.get('onChange')) {
+					this.sendAction('onChange', this.get('checked'));
+				}
+			}
+		}
+	});
+
+});
 define('ember-cli-idcos/components/io-table', ['exports', 'ember', 'ember-cli-idcos/utils/fmt'], function (exports, Ember, fmt) {
 
     'use strict';

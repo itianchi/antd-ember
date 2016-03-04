@@ -665,6 +665,15 @@ define('ember-cli-idcos-docs/components/io-split', ['exports', 'ember-cli-idcos/
 	exports['default'] = pane['default'];
 
 });
+define('ember-cli-idcos-docs/components/io-switch', ['exports', 'ember-cli-idcos/components/io-switch'], function (exports, io_switch) {
+
+	'use strict';
+
+
+
+	exports['default'] = io_switch['default'];
+
+});
 define('ember-cli-idcos-docs/components/io-table', ['exports', 'ember-cli-idcos/components/io-table'], function (exports, io_table) {
 
 	'use strict';
@@ -11322,6 +11331,231 @@ define('ember-cli-idcos-docs/document/select/template', ['exports'], function (e
   }()));
 
 });
+define('ember-cli-idcos-docs/document/split/route', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Route.extend({});
+
+});
+define('ember-cli-idcos-docs/document/split/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/document/split/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+        dom.insertBoundary(fragment, 0);
+        return morphs;
+      },
+      statements: [
+        ["content","outlet",["loc",[null,[1,0],[1,10]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
+define('ember-cli-idcos-docs/document/switch/route', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Route.extend({});
+
+});
+define('ember-cli-idcos-docs/document/switch/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 10,
+              "column": 3
+            },
+            "end": {
+              "line": 13,
+              "column": 3
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/switch/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("				");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","checked");
+          var el2 = dom.createTextNode("开");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n				");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","unchecked");
+          var el2 = dom.createTextNode("关");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("	\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 26,
+            "column": 6
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/document/switch/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h1");
+        var el2 = dom.createTextNode(" Switch 开关 ");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","demo-type");
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h2");
+        var el3 = dom.createTextNode("基本使用");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","demo");
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-example");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("		");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-code");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("pre");
+        var el5 = dom.createTextNode(" ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("code");
+        dom.setAttribute(el5,"class","language-html");
+        var el6 = dom.createTextNode("\n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{io-switch checked=true}}\n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{io-switch checked=false}}\n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{#io-switch checked=false}}\n	<span class=\"checked\">开</span>\n	<span class=\"unchecked\">关</span>	\n");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("{{/io-switch}}\n			");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n	");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [2, 3, 1]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(element0,1,1);
+        morphs[1] = dom.createMorphAt(element0,3,3);
+        morphs[2] = dom.createMorphAt(element0,5,5);
+        return morphs;
+      },
+      statements: [
+        ["inline","io-switch",[],["checked",true],["loc",[null,[8,3],[8,29]]]],
+        ["inline","io-switch",[],["checked",false],["loc",[null,[9,3],[9,30]]]],
+        ["block","io-switch",[],["checked",false],0,null,["loc",[null,[10,3],[13,17]]]]
+      ],
+      locals: [],
+      templates: [child0]
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/document/table/controller', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -13736,6 +13970,45 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             },
             "end": {
               "line": 17,
+              "column": 78
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/document/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("Switch ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("span");
+          dom.setAttribute(el1,"class","chinese");
+          var el2 = dom.createTextNode("开关");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child9 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 18,
+              "column": 10
+            },
+            "end": {
+              "line": 18,
               "column": 80
             }
           },
@@ -13763,18 +14036,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child9 = (function() {
+    var child10 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 18,
+              "line": 19,
               "column": 10
             },
             "end": {
-              "line": 18,
+              "line": 19,
               "column": 67
             }
           },
@@ -13797,18 +14070,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child10 = (function() {
+    var child11 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 19,
+              "line": 20,
               "column": 10
             },
             "end": {
-              "line": 19,
+              "line": 20,
               "column": 74
             }
           },
@@ -13836,18 +14109,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child11 = (function() {
+    var child12 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 22,
+              "line": 23,
               "column": 10
             },
             "end": {
-              "line": 22,
+              "line": 23,
               "column": 81
             }
           },
@@ -13877,18 +14150,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child12 = (function() {
+    var child13 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 25,
+              "line": 26,
               "column": 9
             },
             "end": {
-              "line": 25,
+              "line": 26,
               "column": 76
             }
           },
@@ -13916,18 +14189,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child13 = (function() {
+    var child14 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 26,
+              "line": 27,
               "column": 10
             },
             "end": {
-              "line": 26,
+              "line": 27,
               "column": 75
             }
           },
@@ -13955,18 +14228,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child14 = (function() {
+    var child15 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 27,
+              "line": 28,
               "column": 10
             },
             "end": {
-              "line": 27,
+              "line": 28,
               "column": 72
             }
           },
@@ -13994,18 +14267,18 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         templates: []
       };
     }());
-    var child15 = (function() {
+    var child16 = (function() {
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 38,
+              "line": 39,
               "column": 6
             },
             "end": {
-              "line": 38,
+              "line": 39,
               "column": 72
             }
           },
@@ -14043,7 +14316,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
             "column": 0
           },
           "end": {
-            "line": 55,
+            "line": 56,
             "column": 10
           }
         },
@@ -14138,6 +14411,14 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode(" ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n					");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("li");
+        var el7 = dom.createTextNode(" ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n					");
@@ -14458,7 +14739,7 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0, 1, 1]);
         var element1 = dom.childAt(element0, [1, 1]);
-        var morphs = new Array(17);
+        var morphs = new Array(18);
         morphs[0] = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [3]),1,1);
         morphs[2] = dom.createMorphAt(dom.childAt(element1, [7]),1,1);
@@ -14470,12 +14751,13 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         morphs[8] = dom.createMorphAt(dom.childAt(element1, [21]),1,1);
         morphs[9] = dom.createMorphAt(dom.childAt(element1, [23]),1,1);
         morphs[10] = dom.createMorphAt(dom.childAt(element1, [25]),1,1);
-        morphs[11] = dom.createMorphAt(dom.childAt(element1, [31]),1,1);
-        morphs[12] = dom.createMorphAt(dom.childAt(element1, [35]),0,0);
-        morphs[13] = dom.createMorphAt(dom.childAt(element1, [37]),1,1);
+        morphs[11] = dom.createMorphAt(dom.childAt(element1, [27]),1,1);
+        morphs[12] = dom.createMorphAt(dom.childAt(element1, [33]),1,1);
+        morphs[13] = dom.createMorphAt(dom.childAt(element1, [37]),0,0);
         morphs[14] = dom.createMorphAt(dom.childAt(element1, [39]),1,1);
-        morphs[15] = dom.createMorphAt(dom.childAt(element1, [55]),1,1);
-        morphs[16] = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
+        morphs[15] = dom.createMorphAt(dom.childAt(element1, [41]),1,1);
+        morphs[16] = dom.createMorphAt(dom.childAt(element1, [57]),1,1);
+        morphs[17] = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
         return morphs;
       },
       statements: [
@@ -14487,18 +14769,19 @@ define('ember-cli-idcos-docs/document/template', ['exports'], function (exports)
         ["block","link-to",["document.cascader"],[],5,null,["loc",[null,[14,10],[14,98]]]],
         ["block","link-to",["document.checkbox"],[],6,null,["loc",[null,[15,10],[15,95]]]],
         ["block","link-to",["document.radio"],[],7,null,["loc",[null,[16,10],[16,89]]]],
-        ["block","link-to",["document.select"],[],8,null,["loc",[null,[17,10],[17,92]]]],
-        ["block","link-to",["document.searchableSelect"],[],9,null,["loc",[null,[18,10],[18,79]]]],
-        ["block","link-to",["document.form"],[],10,null,["loc",[null,[19,10],[19,86]]]],
-        ["block","link-to",["document.upload"],[],11,null,["loc",[null,[22,10],[22,93]]]],
-        ["block","link-to",["document.modal"],[],12,null,["loc",[null,[25,9],[25,88]]]],
-        ["block","link-to",["document.table"],[],13,null,["loc",[null,[26,10],[26,87]]]],
-        ["block","link-to",["document.tree"],[],14,null,["loc",[null,[27,10],[27,84]]]],
-        ["block","link-to",["document.menu"],[],15,null,["loc",[null,[38,6],[38,84]]]],
-        ["content","outlet",["loc",[null,[51,4],[51,14]]]]
+        ["block","link-to",["document.switch"],[],8,null,["loc",[null,[17,10],[17,90]]]],
+        ["block","link-to",["document.select"],[],9,null,["loc",[null,[18,10],[18,92]]]],
+        ["block","link-to",["document.searchableSelect"],[],10,null,["loc",[null,[19,10],[19,79]]]],
+        ["block","link-to",["document.form"],[],11,null,["loc",[null,[20,10],[20,86]]]],
+        ["block","link-to",["document.upload"],[],12,null,["loc",[null,[23,10],[23,93]]]],
+        ["block","link-to",["document.modal"],[],13,null,["loc",[null,[26,9],[26,88]]]],
+        ["block","link-to",["document.table"],[],14,null,["loc",[null,[27,10],[27,87]]]],
+        ["block","link-to",["document.tree"],[],15,null,["loc",[null,[28,10],[28,84]]]],
+        ["block","link-to",["document.menu"],[],16,null,["loc",[null,[39,6],[39,84]]]],
+        ["content","outlet",["loc",[null,[52,4],[52,14]]]]
       ],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14, child15]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14, child15, child16]
     };
   }()));
 
@@ -15406,6 +15689,8 @@ define('ember-cli-idcos-docs/router', ['exports', 'ember', 'ember-cli-idcos-docs
       this.route('menu');
       this.route('cascader');
       this.route('upload');
+      this.route('switch');
+      this.route('split');
     });
   });
 
@@ -18598,6 +18883,57 @@ define('ember-cli-idcos-docs/templates/components/io-select', ['exports'], funct
   }()));
 
 });
+define('ember-cli-idcos-docs/templates/components/io-switch', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 7
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-switch.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("span");
+        dom.setAttribute(el1,"class","io-switch-inner");
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]),1,1);
+        return morphs;
+      },
+      statements: [
+        ["content","yield",["loc",[null,[2,1],[2,10]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], function (exports) {
 
   'use strict';
@@ -18719,7 +19055,8 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             dom.appendChild(el1, el2);
             var el2 = dom.createTextNode("\n              ");
             dom.appendChild(el1, el2);
-            var el2 = dom.createElement("span");
+            var el2 = dom.createElement("i");
+            dom.setAttribute(el2,"style","color: #999; font-size: 12px; margin-left: 12px;");
             dom.appendChild(el1, el2);
             var el2 = dom.createTextNode("\n            ");
             dom.appendChild(el1, el2);
@@ -18742,7 +19079,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             ["attribute","class",["concat",[["get","classes.theadCell",["loc",[null,[23,25],[23,42]]]]]]],
             ["element","action",["sort",["get","column",["loc",[null,[23,62],[23,68]]]]],[],["loc",[null,[23,46],[23,70]]]],
             ["content","column.title",["loc",[null,[24,14],[24,30]]]],
-            ["attribute","class",["concat",[["subexpr","if",[["get","column.sortAsc",["loc",[null,[25,32],[25,46]]]],["get","icons.sort-asc",["loc",[null,[25,47],[25,61]]]]],[],["loc",[null,[25,27],[25,63]]]]," ",["subexpr","if",[["get","column.sortDesc",["loc",[null,[25,69],[25,84]]]],["get","icons.sort-desc",["loc",[null,[25,85],[25,100]]]]],[],["loc",[null,[25,64],[25,102]]]]]]]
+            ["attribute","class",["concat",["ioicon ",["subexpr","if",[["get","column.sortAsc",["loc",[null,[25,36],[25,50]]]],"ioicon-caret-up"],[],["loc",[null,[25,31],[25,70]]]]," ",["subexpr","if",[["get","column.sortDesc",["loc",[null,[25,76],[25,91]]]],"ioicon-caret-down"],[],["loc",[null,[25,71],[25,113]]]]]]]
           ],
           locals: [],
           templates: []
@@ -18799,11 +19136,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                     "loc": {
                       "source": null,
                       "start": {
-                        "line": 38,
+                        "line": 39,
                         "column": 22
                       },
                       "end": {
-                        "line": 42,
+                        "line": 43,
                         "column": 22
                       }
                     },
@@ -18837,9 +19174,9 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                     return morphs;
                   },
                   statements: [
-                    ["attribute","value",["concat",[["get","item",["loc",[null,[39,41],[39,45]]]]]]],
-                    ["attribute","selected",["subexpr","is-equal",[["get","item",["loc",[null,[39,69],[39,73]]]],["get","selectedValue",["loc",[null,[39,74],[39,87]]]]],[],["loc",[null,[39,58],[39,89]]]]],
-                    ["content","item",["loc",[null,[40,26],[40,34]]]]
+                    ["attribute","value",["concat",[["get","item",["loc",[null,[40,41],[40,45]]]]]]],
+                    ["attribute","selected",["subexpr","is-equal",[["get","item",["loc",[null,[40,69],[40,73]]]],["get","selectedValue",["loc",[null,[40,74],[40,87]]]]],[],["loc",[null,[40,58],[40,89]]]]],
+                    ["content","item",["loc",[null,[41,26],[41,34]]]]
                   ],
                   locals: ["item"],
                   templates: []
@@ -18851,11 +19188,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                   "loc": {
                     "source": null,
                     "start": {
-                      "line": 36,
+                      "line": 37,
                       "column": 18
                     },
                     "end": {
-                      "line": 44,
+                      "line": 45,
                       "column": 18
                     }
                   },
@@ -18889,9 +19226,9 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                   return morphs;
                 },
                 statements: [
-                  ["attribute","class",["concat",["form-control changeFilterForColumn ",["get","column.propertyName",["loc",[null,[37,72],[37,91]]]]]]],
-                  ["element","action",["changeFilterForColumn",["get","column",["loc",[null,[37,128],[37,134]]]]],["on","change"],["loc",[null,[37,95],[37,148]]]],
-                  ["block","each",[["get","column.filterOptions",["loc",[null,[38,30],[38,50]]]]],["key","@index"],0,null,["loc",[null,[38,22],[42,31]]]]
+                  ["attribute","class",["concat",["form-control changeFilterForColumn ",["get","column.propertyName",["loc",[null,[38,72],[38,91]]]]]]],
+                  ["element","action",["changeFilterForColumn",["get","column",["loc",[null,[38,128],[38,134]]]]],["on","change"],["loc",[null,[38,95],[38,148]]]],
+                  ["block","each",[["get","column.filterOptions",["loc",[null,[39,30],[39,50]]]]],["key","@index"],0,null,["loc",[null,[39,22],[43,31]]]]
                 ],
                 locals: [],
                 templates: [child0]
@@ -18904,11 +19241,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                   "loc": {
                     "source": null,
                     "start": {
-                      "line": 44,
+                      "line": 45,
                       "column": 18
                     },
                     "end": {
-                      "line": 46,
+                      "line": 47,
                       "column": 18
                     }
                   },
@@ -18933,7 +19270,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                   return morphs;
                 },
                 statements: [
-                  ["inline","input",[],["type","text","value",["subexpr","@mut",[["get","column.filterString",["loc",[null,[45,46],[45,65]]]]],[],[]],"class","form-control"],["loc",[null,[45,20],[45,88]]]]
+                  ["inline","input",[],["type","text","value",["subexpr","@mut",[["get","column.filterString",["loc",[null,[46,46],[46,65]]]]],[],[]],"class","form-control"],["loc",[null,[46,20],[46,88]]]]
                 ],
                 locals: [],
                 templates: []
@@ -18945,11 +19282,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                 "loc": {
                   "source": null,
                   "start": {
-                    "line": 35,
+                    "line": 36,
                     "column": 16
                   },
                   "end": {
-                    "line": 47,
+                    "line": 48,
                     "column": 16
                   }
                 },
@@ -18972,7 +19309,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                 return morphs;
               },
               statements: [
-                ["block","if",[["get","column.filterWithSelect",["loc",[null,[36,24],[36,47]]]]],[],0,1,["loc",[null,[36,18],[46,25]]]]
+                ["block","if",[["get","column.filterWithSelect",["loc",[null,[37,24],[37,47]]]]],[],0,1,["loc",[null,[37,18],[47,25]]]]
               ],
               locals: [],
               templates: [child0, child1]
@@ -18985,11 +19322,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
                 "loc": {
                   "source": null,
                   "start": {
-                    "line": 47,
+                    "line": 48,
                     "column": 16
                   },
                   "end": {
-                    "line": 49,
+                    "line": 50,
                     "column": 16
                   }
                 },
@@ -19018,11 +19355,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 33,
+                  "line": 34,
                   "column": 12
                 },
                 "end": {
-                  "line": 51,
+                  "line": 52,
                   "column": 12
                 }
               },
@@ -19055,8 +19392,8 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
               return morphs;
             },
             statements: [
-              ["attribute","class",["concat",[["get","classes.theadCell",["loc",[null,[34,27],[34,44]]]]]]],
-              ["block","if",[["get","column.useFilter",["loc",[null,[35,22],[35,38]]]]],[],0,1,["loc",[null,[35,16],[49,23]]]]
+              ["attribute","class",["concat",[["get","classes.theadCell",["loc",[null,[35,27],[35,44]]]]]]],
+              ["block","if",[["get","column.useFilter",["loc",[null,[36,22],[36,38]]]]],[],0,1,["loc",[null,[36,16],[50,23]]]]
             ],
             locals: [],
             templates: [child0, child1]
@@ -19068,11 +19405,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 32,
+                "line": 33,
                 "column": 10
               },
               "end": {
-                "line": 52,
+                "line": 53,
                 "column": 10
               }
             },
@@ -19095,7 +19432,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             return morphs;
           },
           statements: [
-            ["block","if",[["get","column.isVisible",["loc",[null,[33,18],[33,34]]]]],[],0,null,["loc",[null,[33,12],[51,19]]]]
+            ["block","if",[["get","column.isVisible",["loc",[null,[34,18],[34,34]]]]],[],0,null,["loc",[null,[34,12],[52,19]]]]
           ],
           locals: ["column"],
           templates: [child0]
@@ -19107,11 +19444,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           "loc": {
             "source": null,
             "start": {
-              "line": 30,
+              "line": 31,
               "column": 6
             },
             "end": {
-              "line": 54,
+              "line": 55,
               "column": 6
             }
           },
@@ -19142,7 +19479,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           return morphs;
         },
         statements: [
-          ["block","each",[["get","processedColumns",["loc",[null,[32,18],[32,34]]]]],[],0,null,["loc",[null,[32,10],[52,19]]]]
+          ["block","each",[["get","processedColumns",["loc",[null,[33,18],[33,34]]]]],[],0,null,["loc",[null,[33,10],[53,19]]]]
         ],
         locals: [],
         templates: [child0]
@@ -19155,11 +19492,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           "loc": {
             "source": null,
             "start": {
-              "line": 59,
+              "line": 60,
               "column": 6
             },
             "end": {
-              "line": 61,
+              "line": 62,
               "column": 6
             }
           },
@@ -19191,9 +19528,9 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           return morphs;
         },
         statements: [
-          ["attribute","colspan",["get","processedColumns.length",["loc",[null,[60,26],[60,49]]]]],
-          ["attribute","class",["concat",[["get","classes.noDataCell",["loc",[null,[60,61],[60,79]]]]]]],
-          ["content","messages.allColumnsAreHidden",["loc",[null,[60,83],[60,117]]]]
+          ["attribute","colspan",["get","processedColumns.length",["loc",[null,[61,26],[61,49]]]]],
+          ["attribute","class",["concat",[["get","classes.noDataCell",["loc",[null,[61,61],[61,79]]]]]]],
+          ["content","messages.allColumnsAreHidden",["loc",[null,[61,83],[61,117]]]]
         ],
         locals: [],
         templates: []
@@ -19208,11 +19545,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 63,
+                  "line": 64,
                   "column": 10
                 },
                 "end": {
-                  "line": 65,
+                  "line": 66,
                   "column": 10
                 }
               },
@@ -19237,7 +19574,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
               return morphs;
             },
             statements: [
-              ["inline","partial",[["get","rowTemplate",["loc",[null,[64,22],[64,33]]]]],[],["loc",[null,[64,12],[64,35]]]]
+              ["inline","partial",[["get","rowTemplate",["loc",[null,[65,22],[65,33]]]]],[],["loc",[null,[65,12],[65,35]]]]
             ],
             locals: ["record"],
             templates: []
@@ -19249,11 +19586,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 62,
+                "line": 63,
                 "column": 8
               },
               "end": {
-                "line": 66,
+                "line": 67,
                 "column": 8
               }
             },
@@ -19276,7 +19613,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             return morphs;
           },
           statements: [
-            ["block","each",[["get","visibleContent",["loc",[null,[63,18],[63,32]]]]],[],0,null,["loc",[null,[63,10],[65,19]]]]
+            ["block","each",[["get","visibleContent",["loc",[null,[64,18],[64,32]]]]],[],0,null,["loc",[null,[64,10],[66,19]]]]
           ],
           locals: [],
           templates: [child0]
@@ -19289,11 +19626,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 66,
+                "line": 67,
                 "column": 8
               },
               "end": {
-                "line": 68,
+                "line": 69,
                 "column": 8
               }
             },
@@ -19324,8 +19661,8 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             return morphs;
           },
           statements: [
-            ["attribute","colspan",["get","processedColumns.length",["loc",[null,[67,28],[67,51]]]]],
-            ["content","messages.noDataToShow",["loc",[null,[67,54],[67,81]]]]
+            ["attribute","colspan",["get","processedColumns.length",["loc",[null,[68,28],[68,51]]]]],
+            ["content","messages.noDataToShow",["loc",[null,[68,54],[68,81]]]]
           ],
           locals: [],
           templates: []
@@ -19337,11 +19674,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           "loc": {
             "source": null,
             "start": {
-              "line": 61,
+              "line": 62,
               "column": 6
             },
             "end": {
-              "line": 69,
+              "line": 70,
               "column": 6
             }
           },
@@ -19364,7 +19701,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           return morphs;
         },
         statements: [
-          ["block","if",[["get","visibleContent.length",["loc",[null,[62,14],[62,35]]]]],[],0,1,["loc",[null,[62,8],[68,15]]]]
+          ["block","if",[["get","visibleContent.length",["loc",[null,[63,14],[63,35]]]]],[],0,1,["loc",[null,[63,8],[69,15]]]]
         ],
         locals: [],
         templates: [child0, child1]
@@ -19377,11 +19714,11 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           "loc": {
             "source": null,
             "start": {
-              "line": 75,
+              "line": 76,
               "column": 2
             },
             "end": {
-              "line": 77,
+              "line": 78,
               "column": 2
             }
           },
@@ -19406,7 +19743,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
           return morphs;
         },
         statements: [
-          ["inline","partial",[["get","tableFooterTemplate",["loc",[null,[76,14],[76,33]]]]],[],["loc",[null,[76,4],[76,35]]]]
+          ["inline","partial",[["get","tableFooterTemplate",["loc",[null,[77,14],[77,33]]]]],[],["loc",[null,[77,4],[77,35]]]]
         ],
         locals: [],
         templates: []
@@ -19422,7 +19759,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
             "column": 0
           },
           "end": {
-            "line": 79,
+            "line": 80,
             "column": 6
           }
         },
@@ -19452,6 +19789,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
         var el2 = dom.createTextNode("\n\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","io-table-body");
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("table");
@@ -19460,6 +19798,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
         var el4 = dom.createTextNode("      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("thead");
+        dom.setAttribute(el4,"class","io-table-thead");
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("tr");
@@ -19482,6 +19821,7 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
         var el4 = dom.createTextNode("      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("tbody");
+        dom.setAttribute(el4,"class","io-table-tbody");
         var el5 = dom.createTextNode("\n");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
@@ -19506,31 +19846,26 @@ define('ember-cli-idcos-docs/templates/components/io-table', ['exports'], functi
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element7 = dom.childAt(fragment, [0]);
-        var element8 = dom.childAt(element7, [8]);
-        var element9 = dom.childAt(element8, [1]);
-        var element10 = dom.childAt(element9, [2]);
-        var morphs = new Array(9);
+        var element8 = dom.childAt(element7, [8, 1]);
+        var element9 = dom.childAt(element8, [2]);
+        var morphs = new Array(7);
         morphs[0] = dom.createAttrMorph(element7, 'class');
         morphs[1] = dom.createMorphAt(element7,1,1);
         morphs[2] = dom.createMorphAt(element7,2,2);
-        morphs[3] = dom.createAttrMorph(element8, 'class');
-        morphs[4] = dom.createAttrMorph(element9, 'class');
-        morphs[5] = dom.createMorphAt(dom.childAt(element10, [1]),1,1);
-        morphs[6] = dom.createMorphAt(element10,3,3);
-        morphs[7] = dom.createMorphAt(dom.childAt(element9, [5]),1,1);
-        morphs[8] = dom.createMorphAt(element7,10,10);
+        morphs[3] = dom.createMorphAt(dom.childAt(element9, [1]),1,1);
+        morphs[4] = dom.createMorphAt(element9,3,3);
+        morphs[5] = dom.createMorphAt(dom.childAt(element8, [5]),1,1);
+        morphs[6] = dom.createMorphAt(element7,10,10);
         return morphs;
       },
       statements: [
-        ["attribute","class",["concat",[["get","classes.outerTableWrapper",["loc",[null,[1,14],[1,39]]]]]]],
+        ["attribute","class",["concat",[["get","classes.outerTableWrapper",["loc",[null,[1,14],[1,39]]]]," io-table io-table-large"]]],
         ["block","if",[["get","showGlobalFilter",["loc",[null,[3,8],[3,24]]]]],[],0,null,["loc",[null,[3,2],[5,9]]]],
         ["block","if",[["get","showColumnsDropdown",["loc",[null,[8,8],[8,27]]]]],[],1,null,["loc",[null,[8,2],[10,9]]]],
-        ["attribute","class",["concat",[["get","classes.innerTableWrapper",["loc",[null,[16,16],[16,41]]]]]]],
-        ["attribute","class",["concat",[["get","classes.table",["loc",[null,[17,20],[17,33]]]]]]],
         ["block","each",[["get","processedColumns",["loc",[null,[21,16],[21,32]]]]],[],2,null,["loc",[null,[21,8],[28,17]]]],
-        ["block","if",[["get","useFilteringByColumns",["loc",[null,[30,12],[30,33]]]]],[],3,null,["loc",[null,[30,6],[54,13]]]],
-        ["block","if",[["get","allColumnsAreHidden",["loc",[null,[59,12],[59,31]]]]],[],4,5,["loc",[null,[59,6],[69,13]]]],
-        ["block","if",[["get","showTableFooter",["loc",[null,[75,8],[75,23]]]]],[],6,null,["loc",[null,[75,2],[77,9]]]]
+        ["block","if",[false],[],3,null,["loc",[null,[31,6],[55,13]]]],
+        ["block","if",[["get","allColumnsAreHidden",["loc",[null,[60,12],[60,31]]]]],[],4,5,["loc",[null,[60,6],[70,13]]]],
+        ["block","if",[["get","showTableFooter",["loc",[null,[76,8],[76,23]]]]],[],6,null,["loc",[null,[76,2],[78,9]]]]
       ],
       locals: [],
       templates: [child0, child1, child2, child3, child4, child5, child6]
@@ -20348,7 +20683,7 @@ define('ember-cli-idcos-docs/templates/components/models-table/global-filter', [
             "column": 0
           },
           "end": {
-            "line": 7,
+            "line": 5,
             "column": 6
           }
         },
@@ -20363,23 +20698,14 @@ define('ember-cli-idcos-docs/templates/components/models-table/global-filter', [
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("form");
-        dom.setAttribute(el2,"class","form-inline globalSearch");
+        dom.setAttribute(el2,"class","globalSearch");
         dom.setAttribute(el2,"action","");
-        var el3 = dom.createTextNode("\n    ");
+        var el3 = dom.createTextNode("\n      ");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","form-group");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("label");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode(" ");
-        dom.appendChild(el3, el4);
+        var el3 = dom.createElement("label");
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
+        var el4 = dom.createTextNode(" ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -20392,17 +20718,14 @@ define('ember-cli-idcos-docs/templates/components/models-table/global-filter', [
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
-        var element1 = dom.childAt(element0, [1, 1]);
-        var morphs = new Array(3);
+        var morphs = new Array(2);
         morphs[0] = dom.createAttrMorph(element0, 'class');
-        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]),0,0);
-        morphs[2] = dom.createMorphAt(element1,3,3);
+        morphs[1] = dom.createMorphAt(dom.childAt(element0, [1, 1]),0,0);
         return morphs;
       },
       statements: [
         ["attribute","class",["concat",[["get","classes.globalFilterWrapper",["loc",[null,[1,14],[1,41]]]]]]],
-        ["content","messages.searchLabel",["loc",[null,[4,13],[4,37]]]],
-        ["inline","input",[],["type","text","value",["subexpr","@mut",[["get","filterString",["loc",[null,[4,72],[4,84]]]]],[],[]],"class","form-control filterString"],["loc",[null,[4,46],[4,120]]]]
+        ["inline","io-input",[],["type","text","style","float: right;","placeholder","搜索","value",["subexpr","@mut",[["get","filterString",["loc",[null,[3,81],[3,93]]]]],[],[]]],["loc",[null,[3,13],[3,95]]]]
       ],
       locals: [],
       templates: []
@@ -20424,11 +20747,11 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
               "source": null,
               "start": {
                 "line": 4,
-                "column": 6
+                "column": 9
               },
               "end": {
                 "line": 6,
-                "column": 6
+                "column": 9
               }
             },
             "moduleName": "ember-cli-idcos-docs/templates/components/models-table/numeric-pagination.hbs"
@@ -20438,11 +20761,20 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("        ");
+            var el1 = dom.createTextNode("		       ");
             dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1,"type","button");
-            var el2 = dom.createComment("");
+            var el1 = dom.createElement("li");
+            var el2 = dom.createTextNode(" ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("a");
+            var el3 = dom.createTextNode(" ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode(" ");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" ");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
@@ -20451,16 +20783,18 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
             var element1 = dom.childAt(fragment, [1]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createAttrMorph(element1, 'class');
-            morphs[1] = dom.createElementMorph(element1);
-            morphs[2] = dom.createMorphAt(element1,0,0);
+            var morphs = new Array(4);
+            morphs[0] = dom.createAttrMorph(element1, 'title');
+            morphs[1] = dom.createAttrMorph(element1, 'class');
+            morphs[2] = dom.createElementMorph(element1);
+            morphs[3] = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
             return morphs;
           },
           statements: [
-            ["attribute","class",["concat",[["subexpr","if",[["get","page.isActive",["loc",[null,[5,42],[5,55]]]],"active"],[],["loc",[null,[5,37],[5,66]]]]," ",["get","classes.buttonDefault",["loc",[null,[5,69],[5,90]]]]]]],
-            ["element","action",["gotoCustomPage",["get","page.label",["loc",[null,[5,120],[5,130]]]]],[],["loc",[null,[5,94],[5,132]]]],
-            ["content","page.label",["loc",[null,[5,133],[5,147]]]]
+            ["attribute","title",["concat",[["get","page.label",["loc",[null,[5,22],[5,32]]]]]]],
+            ["attribute","class",["concat",["io-pagination-item io-pagination-item-",["get","page.label",["loc",[null,[5,84],[5,94]]]]," ",["subexpr","if",[["get","page.isActive",["loc",[null,[5,102],[5,115]]]],"io-pagination-item-active"],[],["loc",[null,[5,97],[5,145]]]]," "]]],
+            ["element","action",["gotoCustomPage",["get","page.label",["loc",[null,[5,175],[5,185]]]]],[],["loc",[null,[5,149],[5,187]]]],
+            ["content","page.label",["loc",[null,[5,194],[5,208]]]]
           ],
           locals: [],
           templates: []
@@ -20474,11 +20808,11 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
               "source": null,
               "start": {
                 "line": 6,
-                "column": 6
+                "column": 9
               },
               "end": {
                 "line": 8,
-                "column": 6
+                "column": 9
               }
             },
             "moduleName": "ember-cli-idcos-docs/templates/components/models-table/numeric-pagination.hbs"
@@ -20488,12 +20822,21 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("        ");
+            var el1 = dom.createTextNode("	        	");
             dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
+            var el1 = dom.createElement("li");
             dom.setAttribute(el1,"disabled","disabled");
-            dom.setAttribute(el1,"type","button");
-            var el2 = dom.createComment("");
+            var el2 = dom.createTextNode(" ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("a");
+            var el3 = dom.createTextNode(" ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode(" ");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" ");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
@@ -20502,16 +20845,18 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
             var element0 = dom.childAt(fragment, [1]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createAttrMorph(element0, 'class');
-            morphs[1] = dom.createElementMorph(element0);
-            morphs[2] = dom.createMorphAt(element0,0,0);
+            var morphs = new Array(4);
+            morphs[0] = dom.createAttrMorph(element0, 'title');
+            morphs[1] = dom.createAttrMorph(element0, 'class');
+            morphs[2] = dom.createElementMorph(element0);
+            morphs[3] = dom.createMorphAt(dom.childAt(element0, [1]),1,1);
             return morphs;
           },
           statements: [
-            ["attribute","class",["concat",[["get","classes.buttonDefault",["loc",[null,[7,59],[7,80]]]]]]],
-            ["element","action",["gotoCustomPage",["get","page.label",["loc",[null,[7,110],[7,120]]]]],[],["loc",[null,[7,84],[7,122]]]],
-            ["content","page.label",["loc",[null,[7,123],[7,137]]]]
+            ["attribute","title",["concat",[["get","page.label",["loc",[null,[7,23],[7,33]]]]]]],
+            ["attribute","class",["concat",["io-pagination-item io-pagination-item-",["get","page.label",["loc",[null,[7,104],[7,114]]]]]]],
+            ["element","action",["gotoCustomPage",["get","page.label",["loc",[null,[7,145],[7,155]]]]],[],["loc",[null,[7,119],[7,157]]]],
+            ["content","page.label",["loc",[null,[7,164],[7,178]]]]
           ],
           locals: [],
           templates: []
@@ -20524,11 +20869,11 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
             "source": null,
             "start": {
               "line": 3,
-              "column": 4
+              "column": 8
             },
             "end": {
               "line": 9,
-              "column": 4
+              "column": 8
             }
           },
           "moduleName": "ember-cli-idcos-docs/templates/components/models-table/numeric-pagination.hbs"
@@ -20550,7 +20895,7 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
           return morphs;
         },
         statements: [
-          ["block","if",[["get","page.isLink",["loc",[null,[4,12],[4,23]]]]],[],0,1,["loc",[null,[4,6],[8,13]]]]
+          ["block","if",[["get","page.isLink",["loc",[null,[4,15],[4,26]]]]],[],0,1,["loc",[null,[4,9],[8,16]]]]
         ],
         locals: ["page"],
         templates: [child0, child1]
@@ -20566,8 +20911,8 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
             "column": 0
           },
           "end": {
-            "line": 11,
-            "column": 6
+            "line": 12,
+            "column": 0
           }
         },
         "moduleName": "ember-cli-idcos-docs/templates/components/models-table/numeric-pagination.hbs"
@@ -20580,20 +20925,22 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
         var el1 = dom.createElement("div");
         dom.setAttribute(el1,"class","btn-toolbar pull-right");
         dom.setAttribute(el1,"role","toolbar");
-        var el2 = dom.createTextNode("\n  ");
+        var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2,"class","btn-group");
-        dom.setAttribute(el2,"role","group");
+        var el2 = dom.createElement("ul");
+        dom.setAttribute(el2,"class","io-pagination ");
+        dom.setAttribute(el2,"unselectable","unselectable");
         var el3 = dom.createTextNode("\n");
         dom.appendChild(el2, el3);
         var el3 = dom.createComment("");
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("  ");
+        var el3 = dom.createTextNode("    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -20603,7 +20950,7 @@ define('ember-cli-idcos-docs/templates/components/models-table/numeric-paginatio
         return morphs;
       },
       statements: [
-        ["block","each",[["get","visiblePageNumbers",["loc",[null,[3,12],[3,30]]]]],[],0,null,["loc",[null,[3,4],[9,13]]]]
+        ["block","each",[["get","visiblePageNumbers",["loc",[null,[3,16],[3,34]]]]],[],0,null,["loc",[null,[3,8],[9,17]]]]
       ],
       locals: [],
       templates: [child0]
@@ -20932,71 +21279,60 @@ define('ember-cli-idcos-docs/templates/components/models-table/table-footer', ['
 
   exports['default'] = Ember.HTMLBars.template((function() {
     var child0 = (function() {
-      return {
-        meta: {
-          "revision": "Ember@1.13.7",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 12,
-              "column": 8
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 19,
+                "column": 8
+              },
+              "end": {
+                "line": 21,
+                "column": 8
+              }
             },
-            "end": {
-              "line": 16,
-              "column": 8
-            }
+            "moduleName": "ember-cli-idcos-docs/templates/components/models-table/table-footer.hbs"
           },
-          "moduleName": "ember-cli-idcos-docs/templates/components/models-table/table-footer.hbs"
-        },
-        arity: 1,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("          ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("option");
-          var el2 = dom.createTextNode("\n            ");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n          ");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element2 = dom.childAt(fragment, [1]);
-          var morphs = new Array(3);
-          morphs[0] = dom.createAttrMorph(element2, 'value');
-          morphs[1] = dom.createAttrMorph(element2, 'selected');
-          morphs[2] = dom.createMorphAt(element2,1,1);
-          return morphs;
-        },
-        statements: [
-          ["attribute","value",["concat",[["get","item",["loc",[null,[13,27],[13,31]]]]]]],
-          ["attribute","selected",["subexpr","is-equal",[["get","item",["loc",[null,[13,55],[13,59]]]],["get","selectedValue",["loc",[null,[13,60],[13,73]]]]],[],["loc",[null,[13,44],[13,75]]]]],
-          ["content","item",["loc",[null,[14,12],[14,20]]]]
-        ],
-        locals: ["item"],
-        templates: []
-      };
-    }());
-    var child1 = (function() {
+          arity: 1,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("          ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["inline","io-option",[],["value",["subexpr","@mut",[["get","item",["loc",[null,[20,28],[20,32]]]]],[],[]],"label",["subexpr","@mut",[["get","item",["loc",[null,[20,39],[20,43]]]]],[],[]]],["loc",[null,[20,10],[20,45]]]]
+          ],
+          locals: ["item"],
+          templates: []
+        };
+      }());
       return {
         meta: {
           "revision": "Ember@1.13.7",
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
-              "column": 2
+              "line": 18,
+              "column": 6
             },
             "end": {
-              "line": 27,
-              "column": 2
+              "line": 22,
+              "column": 6
             }
           },
           "moduleName": "ember-cli-idcos-docs/templates/components/models-table/table-footer.hbs"
@@ -21006,84 +21342,22 @@ define('ember-cli-idcos-docs/templates/components/models-table/table-footer', ['
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("div");
-          var el2 = dom.createTextNode("\n      ");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n    ");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
+          var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element1 = dom.childAt(fragment, [1]);
-          var morphs = new Array(2);
-          morphs[0] = dom.createAttrMorph(element1, 'class');
-          morphs[1] = dom.createMorphAt(element1,1,1);
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,0,0,contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
           return morphs;
         },
         statements: [
-          ["attribute","class",["concat",[["get","classes.paginationWrapper",["loc",[null,[24,18],[24,43]]]]," ",["get","classes.paginationWrapperNumeric",["loc",[null,[24,48],[24,80]]]]]]],
-          ["inline","partial",[["get","numericPaginationTemplate",["loc",[null,[25,16],[25,41]]]]],[],["loc",[null,[25,6],[25,43]]]]
+          ["block","each",[["get","pageSizeValues",["loc",[null,[19,16],[19,30]]]]],[],0,null,["loc",[null,[19,8],[21,17]]]]
         ],
         locals: [],
-        templates: []
-      };
-    }());
-    var child2 = (function() {
-      return {
-        meta: {
-          "revision": "Ember@1.13.7",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 27,
-              "column": 2
-            },
-            "end": {
-              "line": 31,
-              "column": 2
-            }
-          },
-          "moduleName": "ember-cli-idcos-docs/templates/components/models-table/table-footer.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("div");
-          var el2 = dom.createTextNode("\n      ");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n    ");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element0 = dom.childAt(fragment, [1]);
-          var morphs = new Array(2);
-          morphs[0] = dom.createAttrMorph(element0, 'class');
-          morphs[1] = dom.createMorphAt(element0,1,1);
-          return morphs;
-        },
-        statements: [
-          ["attribute","class",["concat",[["get","classes.paginationWrapper",["loc",[null,[28,18],[28,43]]]]," ",["get","classes.paginationWrapperDefault",["loc",[null,[28,48],[28,80]]]]]]],
-          ["inline","partial",[["get","simplePaginationTemplate",["loc",[null,[29,16],[29,40]]]]],[],["loc",[null,[29,6],[29,42]]]]
-        ],
-        locals: [],
-        templates: []
+        templates: [child0]
       };
     }());
     return {
@@ -21096,7 +21370,7 @@ define('ember-cli-idcos-docs/templates/components/models-table/table-footer', ['
             "column": 0
           },
           "end": {
-            "line": 33,
+            "line": 31,
             "column": 6
           }
         },
@@ -21108,15 +21382,56 @@ define('ember-cli-idcos-docs/templates/components/models-table/table-footer', ['
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","row");
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("i");
+        dom.setAttribute(el3,"style","color: #999;");
+        var el4 = dom.createTextNode(" ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","col-sm-4");
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","col-sm-12");
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createComment("");
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"style","margin-right: 30px;");
+        var el4 = dom.createTextNode("\n");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("     ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -21124,63 +21439,33 @@ define('ember-cli-idcos-docs/templates/components/models-table/table-footer', ['
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        var el4 = dom.createTextNode("\n\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("select");
-        dom.setAttribute(el4,"class","form-control changePageSize");
-        var el5 = dom.createTextNode("\n");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element3 = dom.childAt(fragment, [0]);
-        var element4 = dom.childAt(element3, [2]);
-        var element5 = dom.childAt(element3, [5]);
-        var element6 = dom.childAt(element5, [1]);
-        var element7 = dom.childAt(element6, [1]);
-        var morphs = new Array(8);
-        morphs[0] = dom.createAttrMorph(element3, 'class');
-        morphs[1] = dom.createAttrMorph(element4, 'class');
-        morphs[2] = dom.createMorphAt(element4,1,1);
-        morphs[3] = dom.createAttrMorph(element5, 'class');
-        morphs[4] = dom.createAttrMorph(element6, 'class');
-        morphs[5] = dom.createElementMorph(element7);
-        morphs[6] = dom.createMorphAt(element7,1,1);
-        morphs[7] = dom.createMorphAt(element3,7,7);
+        var element0 = dom.childAt(fragment, [0]);
+        var element1 = dom.childAt(element0, [2]);
+        var element2 = dom.childAt(element0, [8]);
+        var element3 = dom.childAt(element2, [3]);
+        var morphs = new Array(5);
+        morphs[0] = dom.createAttrMorph(element1, 'class');
+        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
+        morphs[2] = dom.createMorphAt(element2,1,1);
+        morphs[3] = dom.createAttrMorph(element3, 'class');
+        morphs[4] = dom.createMorphAt(element3,1,1);
         return morphs;
       },
       statements: [
-        ["attribute","class",["concat",[["get","classes.tfooterWrapper",["loc",[null,[1,14],[1,36]]]]]]],
         ["attribute","class",["concat",[["subexpr","if",[["get","useNumericPagination",["loc",[null,[3,19],[3,39]]]],["get","classes.footerSummaryNumericPagination",["loc",[null,[3,40],[3,78]]]],["get","classes.footerSummaryDefaultPagination",["loc",[null,[3,79],[3,117]]]]],[],["loc",[null,[3,14],[3,119]]]]," ",["get","classes.footerSummary",["loc",[null,[3,122],[3,143]]]]]]],
-        ["content","summary",["loc",[null,[4,4],[4,15]]]],
-        ["attribute","class",["concat",[["get","classes.pageSizeWrapper",["loc",[null,[8,16],[8,39]]]]]]],
-        ["attribute","class",["concat",[["get","classes.pageSizeSelectWrapper",["loc",[null,[9,18],[9,47]]]]]]],
-        ["element","action",["changePageSize"],["on","change"],["loc",[null,[11,50],[11,89]]]],
-        ["block","each",[["get","pageSizeValues",["loc",[null,[12,16],[12,30]]]]],["key","@index"],0,null,["loc",[null,[12,8],[16,17]]]],
-        ["block","if",[["get","useNumericPagination",["loc",[null,[23,8],[23,28]]]]],[],1,2,["loc",[null,[23,2],[31,9]]]]
+        ["content","summary",["loc",[null,[4,29],[4,40]]]],
+        ["inline","partial",[["get","numericPaginationTemplate",["loc",[null,[16,14],[16,39]]]]],[],["loc",[null,[16,4],[16,41]]]],
+        ["attribute","class",["concat",[["get","classes.pageSizeSelectWrapper",["loc",[null,[17,18],[17,47]]]]," pull-right"]]],
+        ["block","io-select",[],["value",["subexpr","@mut",[["get","selectedValue",["loc",[null,[18,25],[18,38]]]]],[],[]],"placeholder","--每页显示--"],0,null,["loc",[null,[18,6],[22,20]]]]
       ],
       locals: [],
-      templates: [child0, child1, child2]
+      templates: [child0]
     };
   }()));
 
@@ -21500,6 +21785,28 @@ define('ember-cli-idcos-docs/tests/document/select/controller.jshint', function 
   QUnit.test('document/select/controller.js should pass jshint', function(assert) { 
     assert.expect(1);
     assert.ok(true, 'document/select/controller.js should pass jshint.'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/document/split/route.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - document/split');
+  QUnit.test('document/split/route.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'document/split/route.js should pass jshint.'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/document/switch/route.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - document/switch');
+  QUnit.test('document/switch/route.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'document/switch/route.js should pass jshint.'); 
   });
 
 });
@@ -21942,6 +22249,58 @@ define('ember-cli-idcos-docs/tests/unit/document/radio/route-test.jshint', funct
   QUnit.test('unit/document/radio/route-test.js should pass jshint', function(assert) { 
     assert.expect(1);
     assert.ok(true, 'unit/document/radio/route-test.js should pass jshint.'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/split/route-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleFor('route:document/split', 'Unit | Route | document/split', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  ember_qunit.test('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/split/route-test.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - unit/document/split');
+  QUnit.test('unit/document/split/route-test.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'unit/document/split/route-test.js should pass jshint.'); 
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/switch/route-test', ['ember-qunit'], function (ember_qunit) {
+
+  'use strict';
+
+  ember_qunit.moduleFor('route:document/switch', 'Unit | Route | document/switch', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  ember_qunit.test('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+
+});
+define('ember-cli-idcos-docs/tests/unit/document/switch/route-test.jshint', function () {
+
+  'use strict';
+
+  QUnit.module('JSHint - unit/document/switch');
+  QUnit.test('unit/document/switch/route-test.js should pass jshint', function(assert) { 
+    assert.expect(1);
+    assert.ok(true, 'unit/document/switch/route-test.js should pass jshint.'); 
   });
 
 });
