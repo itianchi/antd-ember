@@ -107,6 +107,9 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	_selectOptions: function() {
 		this.send('selectOptions');
 	}.observes('value', 'value.length'),
+	_childrenChange: function() {
+		this.send('selectOptions');
+	}.observes('children', 'children.length'),
 	didInsertElement: function() {
 		var _this = this;
 		Ember.run.later(function() {
