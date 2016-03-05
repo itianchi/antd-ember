@@ -1,15 +1,15 @@
 <span class="io-select-selection {{multipleClass}}" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" {{action 'toggleHidden'}} style="width: {{width}}px;">
     {{#if multiple}}
-	    {{#if (eq value.length 0)}}
+	    {{#if (eq _selectedOptions.length 0)}}
 	    <span style="display: block;" class="io-select-search__field__placeholder">{{placeholder}}</span>
 	    {{else}}
 	    <ul class="io-select-selection__rendered" style="margin-bottom: 0;">
-	    	{{#each value as |val|}}
+	    	{{#each _selectedOptions as |option|}}
 	        <li class="io-select-selection__choice" title="a10" >
 	            <span class="io-select-selection__choice__content" >
-	                {{val}}
+	                {{option.label}}
 	            </span>
-	            <span class="io-select-selection__choice__remove" {{action 'removeOption' val bubbles=false}}>
+	            <span class="io-select-selection__choice__remove" {{action 'removeOption' option.value bubbles=false}}>
 	            </span>
 	        </li>
 	        {{/each}}
@@ -18,7 +18,11 @@
     {{else}}
     <span class="io-select-selection__rendered">
         <span>
-            {{value}}
+        	{{#if _selectedOptions}} 
+        		{{_selectedOptions.label}}
+        	{{else}}
+        		{{placeholder}}
+        	{{/if}}
         </span>
     </span>
     <span class="io-select-arrow" tabindex="-1" style="outline:none;"> <b> </b> </span>
@@ -28,6 +32,12 @@
 {{!-- io-select-dropdown-placement-bottomLeft --}}
 <span class="io-select-dropdown {{hiddenClass}}" style="width: {{width}}px;">
     <ul class="io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root" role="menu" aria-activedescendant="" >
-        {{yield}}
+    	{{#if (gt options.length 0)}}
+    		{{#each options as |option|}}
+    			{{io-option value=option.value  disabled=option.disabled label=option.label}}
+    		{{/each}}
+    	{{else}}
+	        {{yield}}
+    	{{/if}}
     </ul>
 </span>

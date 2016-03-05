@@ -1,4 +1,4 @@
-<div class="{{classes.outerTableWrapper}}">
+<div class="{{classes.outerTableWrapper}} io-table io-table-large">
   {{! global filter start }}
   {{#if showGlobalFilter}}
     {{partial globalFilterTemplate}}
@@ -13,21 +13,22 @@
   <!-- Div needed by Firefox to reset floating positioning -->
   <div style="clear:both"/>
 
-  <div class="{{classes.innerTableWrapper}}">
-    <table class="{{classes.table}}">
+  <div class="io-table-body">
+    <table>
       {{! table header start }}
-      <thead>
+      <thead class="io-table-thead">
       <tr>
         {{#each processedColumns as |column|}}
           {{#if column.isVisible}}
             <th class="{{classes.theadCell}}" {{action "sort" column}}>
               {{column.title}}
-              <span class="{{if column.sortAsc icons.sort-asc}} {{if column.sortDesc icons.sort-desc}}"></span>
+              <i class="ioicon {{if column.sortAsc 'ioicon-caret-up'}} {{if column.sortDesc 'ioicon-caret-down'}}" style="color: #999; font-size: 12px; margin-left: 12px;"></i>
             </th>
           {{/if}}
         {{/each}}
       </tr>
-      {{#if useFilteringByColumns}}
+      {{!-- useFilteringByColumns --}}
+      {{#if false}}
         <tr>
           {{#each processedColumns as |column|}}
             {{#if column.isVisible}}
@@ -55,7 +56,7 @@
       </thead>
       {{! table header end }}
       {{! table body start }}
-      <tbody>
+      <tbody class="io-table-tbody">
       {{#if allColumnsAreHidden}}
         <tr><td colspan={{processedColumns.length}} class="{{classes.noDataCell}}">{{{messages.allColumnsAreHidden}}}</td></tr>
       {{else}}

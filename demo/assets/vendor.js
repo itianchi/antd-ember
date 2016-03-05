@@ -86895,9 +86895,9 @@ define('ember-cli-idcos/components/io-button', ['exports', 'ember'], function (e
 	  */
 		click: function click() {
 			if (this.get('onClick')) {
-				this.sendAction('onClick');
+				this.sendAction('onClick', this);
 			} else {
-				this.sendAction();
+				this.sendAction(this);
 			}
 		}
 	});
@@ -88291,6 +88291,10 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 	  */
 		placeholder: '请选择',
 		/**
+	  * @attribute [options]
+	  */
+		options: Ember['default'].A(),
+		/**
 	  * @state _hidden
 	  * @type {Boolean}
 	  * @description [hidden dropdown menu]
@@ -88332,6 +88336,10 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 			}
 		}).property('disabled'),
 		/**
+	  * @selectedOptions
+	  */
+		_selectedOptions: null,
+		/**
 	  * @observe selectedChildren
 	  */
 		_selectOptions: (function () {
@@ -88352,15 +88360,29 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 				this.set('_hidden', !this.get('_hidden'));
 			},
 			selectOptions: function selectOptions() {
-				var _this = this;
+				var _this2 = this;
+
 				var children = this.get('children');
+				var multiple = this.get('multiple');
+				var selectedOptions = [];
+
 				children.forEach(function (child) {
-					if (_this.isSelectedOption(child)) {
+					if (_this2.isSelectedOption(child)) {
 						child.set('selected', true);
+						selectedOptions.push({
+							value: child.get('value'),
+							label: child.$().text()
+						});
 					} else {
 						child.set('selected', false);
 					}
 				});
+
+				if (!multiple) {
+					this.set('_selectedOptions', selectedOptions[0]);
+				} else {
+					this.set('_selectedOptions', selectedOptions);
+				}
 			},
 			onSelect: function onSelect(option) {
 				if (this.get('multiple')) {
@@ -88370,6 +88392,7 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 						this.set('value', this.get('value').addObject(option.get('value')));
 					}
 				} else {
+					this.set('_hidden', true);
 					this.set('value', option.get('value'));
 				}
 				this.send('onChange');
@@ -88389,7 +88412,7 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 				}).bind(this), 100);
 
 				if (this.get('onChange')) {
-					this.send('onChange', option);
+					this.send('onChange', this.get('value'));
 				}
 			}
 		},
@@ -88406,6 +88429,462 @@ define('ember-cli-idcos/components/io-select/select', ['exports', 'ember', 'embe
 				return value.contains(childValue);
 			} else {
 				return childValue === value;
+			}
+		}
+	});
+
+});
+define('ember-cli-idcos/components/io-split/pane', ['exports', 'ember', 'ember-cli-idcos/components/io-split/split'], function (exports, Ember, Split) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend({
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'div',
+		classNames: 'io-split split',
+		/**
+	  * @attribute  size
+	  * @description  percentage of parent
+	  */
+		size: 5,
+		/**
+	  * @attribute  minSize in px
+	  */
+		minSize: 100,
+		/**
+	  * @attribute  direction [horizontal | vertical] 
+	  */
+		direction: 'horizontal',
+		/**
+	  * [didInsertElement description]
+	  * @return {[type]} [description]
+	  */
+		didInsertElement: function didInsertElement() {
+			var _this = this;
+
+			Ember['default'].run.later(function () {
+				var children = _this.$('>.split');
+				var sizes = [];
+				var minSize = [];
+				var els = [];
+				var direction = _this.get('direction');
+				var selfMinSize = _this.get('minSize');
+
+				if (children.length === 1) {
+					children.addClass('split-' + direction);
+					children.css('float', 'none');
+				}
+
+				if (children.length <= 1) {
+					return;
+				}
+
+				children.each(function (index, child) {
+					var $child = $(child);
+					var size = $child.attr('size') - 0;
+					var _minSize = $child.attr('minsize') - 0;
+
+					sizes.push(size);
+					minSize.push(Math.max(selfMinSize, _minSize || 0));
+					els.push(child);
+					$child.addClass('split-' + direction);
+				});
+
+				Split['default'](els, {
+					sizes: sizes,
+					minSize: minSize,
+					direction: direction
+				});
+			}, 10);
+		}
+	});
+
+});
+define('ember-cli-idcos/components/io-split/split', ['exports'], function (exports) {
+
+    'use strict';
+
+    /**
+     * split js
+     * @type {[type]}
+     */
+    var global = window,
+        addEventListener = 'addEventListener',
+        removeEventListener = 'removeEventListener',
+        getBoundingClientRect = 'getBoundingClientRect',
+        isIE8 = global.attachEvent && !global[addEventListener],
+        document = global.document,
+        calc = (function () {
+        var el,
+            prefixes = ["", "-webkit-", "-moz-", "-o-"];
+
+        for (var i = 0; i < prefixes.length; i++) {
+            el = document.createElement('div');
+            el.style.cssText = "width:" + prefixes[i] + "calc(9px)";
+
+            if (el.style.length) {
+                return prefixes[i] + "calc";
+            }
+        }
+    })(),
+        elementOrSelector = function elementOrSelector(el) {
+        if (typeof el === 'string' || el instanceof String) {
+            return document.querySelector(el);
+        } else {
+            return el;
+        }
+    },
+        Split = function Split(ids, options) {
+        var dimension,
+            i,
+            clientDimension,
+            clientAxis,
+            position,
+            gutterClass,
+            paddingA,
+            paddingB,
+            pairs = [];
+
+        // Set defaults
+
+        options = typeof options !== 'undefined' ? options : {};
+
+        if (typeof options.gutterSize === 'undefined') options.gutterSize = 10;
+        if (typeof options.minSize === 'undefined') options.minSize = 100;
+        if (typeof options.snapOffset === 'undefined') options.snapOffset = 30;
+        if (typeof options.direction === 'undefined') options.direction = 'horizontal';
+
+        if (options.direction == 'horizontal') {
+            dimension = 'width';
+            clientDimension = 'clientWidth';
+            clientAxis = 'clientX';
+            position = 'left';
+            gutterClass = 'gutter gutter-horizontal';
+            paddingA = 'paddingLeft';
+            paddingB = 'paddingRight';
+            if (!options.cursor) options.cursor = 'ew-resize';
+        } else if (options.direction == 'vertical') {
+            dimension = 'height';
+            clientDimension = 'clientHeight';
+            clientAxis = 'clientY';
+            position = 'top';
+            gutterClass = 'gutter gutter-vertical';
+            paddingA = 'paddingTop';
+            paddingB = 'paddingBottom';
+            if (!options.cursor) options.cursor = 'ns-resize';
+        }
+
+        // Event listeners for drag events, bound to a pair object.
+        // Calculate the pair's position and size when dragging starts.
+        // Prevent selection on start and re-enable it when done.
+
+        var startDragging = function startDragging(e) {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (!self.dragging && options.onDragStart) {
+                options.onDragStart();
+            }
+
+            e.preventDefault();
+
+            self.dragging = true;
+            self.move = drag.bind(self);
+            self.stop = stopDragging.bind(self);
+
+            global[addEventListener]('mouseup', self.stop);
+            global[addEventListener]('touchend', self.stop);
+            global[addEventListener]('touchcancel', self.stop);
+
+            self.parent[addEventListener]('mousemove', self.move);
+            self.parent[addEventListener]('touchmove', self.move);
+
+            a[addEventListener]('selectstart', preventSelection);
+            a[addEventListener]('dragstart', preventSelection);
+            b[addEventListener]('selectstart', preventSelection);
+            b[addEventListener]('dragstart', preventSelection);
+
+            a.style.userSelect = 'none';
+            a.style.webkitUserSelect = 'none';
+            a.style.MozUserSelect = 'none';
+            a.style.pointerEvents = 'none';
+
+            b.style.userSelect = 'none';
+            b.style.webkitUserSelect = 'none';
+            b.style.MozUserSelect = 'none';
+            b.style.pointerEvents = 'none';
+
+            self.gutter.style.cursor = options.cursor;
+            self.parent.style.cursor = options.cursor;
+
+            calculateSizes.call(self);
+        },
+            stopDragging = function stopDragging() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (self.dragging && options.onDragEnd) {
+                options.onDragEnd();
+            }
+
+            self.dragging = false;
+
+            global[removeEventListener]('mouseup', self.stop);
+            global[removeEventListener]('touchend', self.stop);
+            global[removeEventListener]('touchcancel', self.stop);
+
+            self.parent[removeEventListener]('mousemove', self.move);
+            self.parent[removeEventListener]('touchmove', self.move);
+
+            delete self.stop;
+            delete self.move;
+
+            a[removeEventListener]('selectstart', preventSelection);
+            a[removeEventListener]('dragstart', preventSelection);
+            b[removeEventListener]('selectstart', preventSelection);
+            b[removeEventListener]('dragstart', preventSelection);
+
+            a.style.userSelect = '';
+            a.style.webkitUserSelect = '';
+            a.style.MozUserSelect = '';
+            a.style.pointerEvents = '';
+
+            b.style.userSelect = '';
+            b.style.webkitUserSelect = '';
+            b.style.MozUserSelect = '';
+            b.style.pointerEvents = '';
+
+            self.gutter.style.cursor = '';
+            self.parent.style.cursor = '';
+        },
+            drag = function drag(e) {
+            var offset;
+
+            if (!this.dragging) return;
+
+            // Get the relative position of the event from the first side of the
+            // pair.
+
+            if ('touches' in e) {
+                offset = e.touches[0][clientAxis] - this.start;
+            } else {
+                offset = e[clientAxis] - this.start;
+            }
+
+            // If within snapOffset of min or max, set offset to min or max
+
+            if (offset <= this.aMin + options.snapOffset) {
+                offset = this.aMin;
+            } else if (offset >= this.size - this.bMin - options.snapOffset) {
+                offset = this.size - this.bMin;
+            }
+
+            adjust.call(this, offset);
+
+            if (options.onDrag) {
+                options.onDrag();
+            }
+        },
+            calculateSizes = function calculateSizes() {
+            // Calculate the pairs size, and percentage of the parent size
+            var computedStyle = global.getComputedStyle(this.parent),
+                parentSize = this.parent[clientDimension] - parseFloat(computedStyle[paddingA]) - parseFloat(computedStyle[paddingB]);
+
+            this.size = this.a[getBoundingClientRect]()[dimension] + this.b[getBoundingClientRect]()[dimension] + this.aGutterSize + this.bGutterSize;
+            this.percentage = Math.min(this.size / parentSize * 100, 100);
+            this.start = this.a[getBoundingClientRect]()[position];
+        },
+            adjust = function adjust(offset) {
+            // A size is the same as offset. B size is total size - A size.
+            // Both sizes are calculated from the initial parent percentage.
+
+            this.a.style[dimension] = calc + '(' + offset / this.size * this.percentage + '% - ' + this.aGutterSize + 'px)';
+            this.b.style[dimension] = calc + '(' + (this.percentage - offset / this.size * this.percentage) + '% - ' + this.bGutterSize + 'px)';
+        },
+            fitMin = function fitMin() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (a[getBoundingClientRect]()[dimension] < self.aMin) {
+                a.style[dimension] = self.aMin - self.aGutterSize + 'px';
+                b.style[dimension] = self.size - self.aMin - self.aGutterSize + 'px';
+            } else if (b[getBoundingClientRect]()[dimension] < self.bMin) {
+                a.style[dimension] = self.size - self.bMin - self.bGutterSize + 'px';
+                b.style[dimension] = self.bMin - self.bGutterSize + 'px';
+            }
+        },
+            fitMinReverse = function fitMinReverse() {
+            var self = this,
+                a = self.a,
+                b = self.b;
+
+            if (b[getBoundingClientRect]()[dimension] < self.bMin) {
+                a.style[dimension] = self.size - self.bMin - self.bGutterSize + 'px';
+                b.style[dimension] = self.bMin - self.bGutterSize + 'px';
+            } else if (a[getBoundingClientRect]()[dimension] < self.aMin) {
+                a.style[dimension] = self.aMin - self.aGutterSize + 'px';
+                b.style[dimension] = self.size - self.aMin - self.aGutterSize + 'px';
+            }
+        },
+            balancePairs = function balancePairs(pairs) {
+            for (var i = 0; i < pairs.length; i++) {
+                calculateSizes.call(pairs[i]);
+                fitMin.call(pairs[i]);
+            }
+
+            for (i = pairs.length - 1; i >= 0; i--) {
+                calculateSizes.call(pairs[i]);
+                fitMinReverse.call(pairs[i]);
+            }
+        },
+            preventSelection = function preventSelection() {
+            return false;
+        },
+            parent = elementOrSelector(ids[0]).parentNode;
+
+        if (!options.sizes) {
+            var percent = 100 / ids.length;
+
+            options.sizes = [];
+
+            for (i = 0; i < ids.length; i++) {
+                options.sizes.push(percent);
+            }
+        }
+
+        if (!Array.isArray(options.minSize)) {
+            var minSizes = [];
+
+            for (i = 0; i < ids.length; i++) {
+                minSizes.push(options.minSize);
+            }
+
+            options.minSize = minSizes;
+        }
+
+        for (i = 0; i < ids.length; i++) {
+            var el = elementOrSelector(ids[i]),
+                isFirst = i == 1,
+                isLast = i == ids.length - 1,
+                size,
+                gutterSize = options.gutterSize,
+                pair;
+
+            if (i > 0) {
+                pair = {
+                    a: elementOrSelector(ids[i - 1]),
+                    b: el,
+                    aMin: options.minSize[i - 1],
+                    bMin: options.minSize[i],
+                    dragging: false,
+                    parent: parent,
+                    isFirst: isFirst,
+                    isLast: isLast,
+                    direction: options.direction
+                };
+
+                // For first and last pairs, first and last gutter width is half.
+
+                pair.aGutterSize = options.gutterSize;
+                pair.bGutterSize = options.gutterSize;
+
+                if (isFirst) {
+                    pair.aGutterSize = options.gutterSize / 2;
+                }
+
+                if (isLast) {
+                    pair.bGutterSize = options.gutterSize / 2;
+                }
+            }
+
+            // IE9 and above
+            if (!isIE8) {
+                if (i > 0) {
+                    var gutter = document.createElement('div');
+
+                    gutter.className = gutterClass;
+                    gutter.style[dimension] = options.gutterSize + 'px';
+
+                    gutter[addEventListener]('mousedown', startDragging.bind(pair));
+                    gutter[addEventListener]('touchstart', startDragging.bind(pair));
+
+                    parent.insertBefore(gutter, el);
+
+                    pair.gutter = gutter;
+                }
+
+                if (i === 0 || i == ids.length - 1) {
+                    gutterSize = options.gutterSize / 2;
+                }
+
+                if (typeof options.sizes[i] === 'string' || options.sizes[i] instanceof String) {
+                    size = options.sizes[i];
+                } else {
+                    size = calc + '(' + options.sizes[i] + '% - ' + gutterSize + 'px)';
+                }
+
+                // IE8 and below
+            } else {
+                    if (typeof options.sizes[i] === 'string' || options.sizes[i] instanceof String) {
+                        size = options.sizes[i];
+                    } else {
+                        size = options.sizes[i] + '%';
+                    }
+                }
+
+            el.style[dimension] = size;
+
+            if (i > 0) {
+                pairs.push(pair);
+            }
+        }
+
+        balancePairs(pairs);
+    };
+
+    exports['default'] = Split;
+
+});
+define('ember-cli-idcos/components/io-switch', ['exports', 'ember', 'ember-cli-idcos/mixin/disabled-class'], function (exports, Ember, DisabledClass) {
+
+	'use strict';
+
+	exports['default'] = Ember['default'].Component.extend(DisabledClass['default'], {
+		/**
+	  * [tagName description]
+	  */
+		tagName: 'span',
+		attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+		classNames: 'io-switch',
+		classNamePrefix: 'io-switch-',
+		classNameBindings: ['checkedClass'],
+		/**
+	  * @attribute  checked
+	  */
+		checked: false,
+		/**
+	  * @state
+	  */
+		checkedClass: (function () {
+			if (this.get('checked')) {
+				return this.get('classNamePrefix') + 'checked';
+			}
+			return '';
+		}).property('checked'),
+		click: function click() {
+			this.send('toggle');
+		},
+		actions: {
+			toggle: function toggle() {
+				this.set('checked', !this.get('checked'));
+				if (this.get('onChange')) {
+					this.sendAction('onChange', this.get('checked'));
+				}
 			}
 		}
 	});
