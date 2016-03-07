@@ -86,51 +86,68 @@
       return !$el.val() || $el.val().length >= minlength
     },
     required: function($el) {
-      return $el.is('[required]') && $el.val() && $el.val() !== '';
+      if ($el.is('[required]')) {
+        return $el.val() && $el.val() !== '';
+      } 
+      return true;
     }
   }
 
   Validator.prototype.validateInput = function (e) {
+    var self       = this;
     var $el        = $(e.target)
     var prevErrors = $el.data('bs.validator.errors')
     var errors
+
 
     /**
      * [if custom input element]
      * @param  {[type]} #el.is('.input-custom') [description]
      * @return {[type]}                         [description]
      */
+    
+    if (!$el.is(inputSelector) && !$el.is('input')) {
+      $el = $el.parents('.input-custom');
+    }
+
+    if ($el.length < 1) {
+      return
+    }
+
     if ($el.is('.input-custom')) {
       $el.val = function() {
         return $el.data('value');
       }
+      setTimeout(doValidate, 5);
+      return
     }
 
     if ($el.is('[type="radio"]')) $el = this.$element.find('input[name="' + $el.attr('name') + '"]')
+    
+    setTimeout(doValidate, 5);
 
-    this.$element.trigger(e = $.Event('validate.bs.validator', {relatedTarget: $el[0]}))
+    function doValidate() {
+      self.$element.trigger(e = $.Event('validate.bs.validator', {relatedTarget: $el[0]}))
+      if (e.isDefaultPrevented()) return
 
-    if (e.isDefaultPrevented()) return
+      self.runValidators($el).done(function (errors) {
+        $el.data('bs.validator.errors', errors)
 
-    var self = this
+        errors.length ? self.showErrors($el) : self.clearErrors($el)
 
-    this.runValidators($el).done(function (errors) {
-      $el.data('bs.validator.errors', errors)
+        if (!prevErrors || errors.toString() !== prevErrors.toString()) {
+          e = errors.length
+            ? $.Event('invalid.bs.validator', {relatedTarget: $el[0], detail: errors})
+            : $.Event('valid.bs.validator', {relatedTarget: $el[0], detail: prevErrors})
 
-      errors.length ? self.showErrors($el) : self.clearErrors($el)
+          self.$element.trigger(e)
+        }
 
-      if (!prevErrors || errors.toString() !== prevErrors.toString()) {
-        e = errors.length
-          ? $.Event('invalid.bs.validator', {relatedTarget: $el[0], detail: errors})
-          : $.Event('valid.bs.validator', {relatedTarget: $el[0], detail: prevErrors})
+        self.toggleSubmit()
 
-        self.$element.trigger(e)
-      }
-
-      self.toggleSubmit()
-
-      self.$element.trigger($.Event('validated.bs.validator', {relatedTarget: $el[0]}))
-    })
+        self.$element.trigger($.Event('validated.bs.validator', {relatedTarget: $el[0]}))
+      })
+    }
   }
 
 
