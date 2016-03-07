@@ -29,7 +29,7 @@
 +function ($) {
   'use strict';
 
-  var inputSelector = ':input:not([type="submit"], button):enabled:visible'
+  var inputSelector = ':input:not([type="submit"], button):enabled:visible,.input-custom'
   // VALIDATOR CLASS DEFINITION
   // ==========================
 
@@ -84,6 +84,9 @@
     minlength: function ($el) {
       var minlength = $el.data('minlength')
       return !$el.val() || $el.val().length >= minlength
+    },
+    required: function($el) {
+      return $el.is('[required]') && $el.val() && $el.val() !== '';
     }
   }
 
@@ -91,6 +94,17 @@
     var $el        = $(e.target)
     var prevErrors = $el.data('bs.validator.errors')
     var errors
+
+    /**
+     * [if custom input element]
+     * @param  {[type]} #el.is('.input-custom') [description]
+     * @return {[type]}                         [description]
+     */
+    if ($el.is('.input-custom')) {
+      $el.val = function() {
+        return $el.data('value');
+      }
+    }
 
     if ($el.is('[type="radio"]')) $el = this.$element.find('input[name="' + $el.attr('name') + '"]')
 
@@ -136,7 +150,7 @@
     }
 
     $.each(Validator.VALIDATORS, $.proxy(function (key, validator) {
-      if (($el.data(key) || key == 'native') && !validator.call(this, $el)) {
+      if (($el.data(key) || key == 'required' || key == 'native') && !validator.call(this, $el)) {
         var error = getErrorMessage(key)
         !~errors.indexOf(error) && errors.push(error)
       }

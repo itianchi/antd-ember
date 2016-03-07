@@ -10,7 +10,7 @@ module.exports = {
         app = (parentAddon || app);
         var bowerDirectory = 'vendor/lib';
         app.import(bowerDirectory + '/bootstrap/dist/js/bootstrap.min.js');
-        app.import(bowerDirectory + '/bootstrap-validator/dist/validator.min.js');
+        app.import(bowerDirectory + '/bootstrap-validator/js/validator.js');
         app.import(bowerDirectory + '/bootstrap-sweetalert/lib/sweet-alert.min.js');
         app.import(bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
         app.import(bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });

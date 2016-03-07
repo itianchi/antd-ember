@@ -13,8 +13,8 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
-	classNames: 'io-select',
+	attributeBindings: ['state', 'disabled', 'onClick', 'role', 'value:data-value', 'required'],
+	classNames: 'io-select input-custom',
 	classNamePrefix: 'io-select-',
 	classNameBindings: ['enabledClass', 'openClass'],
 	role: 'select',
@@ -160,6 +160,9 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 				this.set('value', option.get('value'));
 			}
 			this.send('onChange');
+			setTimeout(() => {
+				this.$().trigger('input.bs.validator');
+			}, 500);
 		},
 		removeOption: function(value) {
 			this.set('value', this.get('value').removeObject(value));
