@@ -30,6 +30,7 @@
   'use strict';
 
   var inputSelector = ':input:not([type="submit"], button):enabled:visible,.input-custom'
+  var nativeInputSelector =  ':input:not([type="submit"], button):enabled:visible'
   // VALIDATOR CLASS DEFINITION
   // ==========================
 
@@ -118,13 +119,13 @@
       $el.val = function() {
         return $el.data('value');
       }
-      setTimeout(doValidate, 5);
+      doValidate();
       return
     }
 
     if ($el.is('[type="radio"]')) $el = this.$element.find('input[name="' + $el.attr('name') + '"]')
     
-    setTimeout(doValidate, 5);
+    doValidate();
 
     function doValidate() {
       self.$element.trigger(e = $.Event('validate.bs.validator', {relatedTarget: $el[0]}))
@@ -251,7 +252,7 @@
                                         $.trim(this.value) === ''
     }
 
-    return !!this.$element.find(inputSelector).filter('[required]').filter(fieldIncomplete).length
+    return !!this.$element.find(nativeInputSelector).filter('[required]').filter(fieldIncomplete).length
   }
 
   Validator.prototype.onSubmit = function (e) {
