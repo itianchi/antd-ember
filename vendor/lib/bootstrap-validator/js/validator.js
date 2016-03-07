@@ -88,7 +88,7 @@
     },
     required: function($el) {
       if ($el.is('[required]')) {
-        return $el.val() && $el.val() !== '';
+        return !!($el.val() && $el.val() !== '');
       } 
       return true;
     }
@@ -117,7 +117,7 @@
 
     if ($el.is('.input-custom')) {
       $el.val = function() {
-        return $el.data('value');
+        return $el.attr('data-value');
       }
       doValidate();
       return
