@@ -91094,6 +91094,7 @@ define('ember-cli-idcos/components/io-upload/request', ['exports'], function (ex
     }
 
     var formData = new FormData();
+
     formData.append(option.filename, option.file);
     if (option.data) {
       Object.keys(option.data).map(function (key) {
@@ -91194,6 +91195,7 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 
 	function getFileItem(file, fileList) {
 		var matchWay = !file.uid ? 'byName' : 'byUid';
+		fileList = fileList || [];
 		var target = fileList.filter(function (item) {
 			if (matchWay === 'byName') {
 				return item.name === file.name;
@@ -91275,7 +91277,7 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	  * @state _fileList
 	  */
 		_file: null,
-		_fileList: Ember['default'].A(),
+		_fileList: [],
 		_recentUploadStatus: false,
 		/**
 	  * @state typeClass
@@ -91330,7 +91332,6 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	   * @return {[type]}      [description]
 	   */
 			onStart: function onStart(file) {
-				console.log('onStart', files);
 
 				if (!this.get('_recentUploadStatus')) {
 					return;
@@ -91340,16 +91341,18 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 				var nextFileList = this.get('_fileList').concat();
 
 				if (file.length > 0) {
-					targetItem = file.map(function (f) {
+					targetItems = file.map(function (f) {
 						var fileObject = fileToObject(f);
 						fileObject.status = 'uploading';
+						fileObject.percent = 0;
 						return fileObject;
 					});
-					nextFileList = nextFileList.concat(targetItem);
+					nextFileList = nextFileList.concat(targetItems);
 				} else {
 					targetItem = fileToObject(file);
 					targetItem.status = 'uploading';
-					nextFileList.pushObject(targetItem);
+					targetItem.percent = 0;
+					nextFileList.push(targetItem);
 				}
 
 				this.send('onChange', {
@@ -91373,7 +91376,6 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 			beforeUpload: function beforeUpload(defer) {
 				var _this2 = this;
 
-				console.log('onBeforeUpload');
 				if (!this.get('beforeUpload')) {
 					defer.resolve();
 					this.set('_recentUploadStatus', true);
@@ -91385,6 +91387,7 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 						defer.resolve();
 					});
 					this.sendAction('beforeUpload', defer, file);
+					return false;
 				}
 			},
 			/**
@@ -91394,7 +91397,6 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	   * @return {[type]}       [description]
 	   */
 			onProgress: function onProgress(event, file) {
-				console.log('onProgress', event, file);
 				var fileList = this.get('_fileList');
 				var targetItem = getFileItem(file, fileList);
 				if (!targetItem) {
@@ -91414,7 +91416,6 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	   * @return {[type]}      [description]
 	   */
 			onSuccess: function onSuccess(ret, file) {
-				console.log('onSuccess', ret, file);
 				this.clearProgressTimer();
 
 				try {
@@ -91444,11 +91445,11 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	   * @return {[type]}      [description]
 	   */
 			onError: function onError(error, response, file) {
-				console.log('onError');
 				this.clearProgressTimer();
-				var fileList = this.get('fileList');
+				var fileList = this.get('_fileList');
 				var targetItem = getFileItem(file, fileList);
 				targetItem.error = error;
+				targetItem.response = response;
 				targetItem.status = 'error';
 				this.handleRemove(targetItem);
 			},
@@ -91459,7 +91460,7 @@ define('ember-cli-idcos/components/io-upload/upload', ['exports', 'ember', 'embe
 	   */
 			onChange: function onChange(ev) {
 				this.set('_file', ev.file);
-				this.set('_fileList', ev.nextFileList);
+				this.set('_fileList', ev.fileList);
 				if (this.get('onChange')) {
 					this.sendAction('onChange', ev);
 				}

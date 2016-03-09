@@ -14991,14 +14991,18 @@ define('ember-cli-idcos-docs/document/upload/controller', ['exports', 'ember'], 
             onClick: function onClick() {
                 alert('click button');
             },
-            onChange: function onChange(info) {
-                if (info.file.status !== 'uploading') {
-                    console.log(info.file, info.fileList);
+            onChange: function onChange(ev) {
+                if (ev.file.status !== 'uploading') {
+                    console.log(ev.file.name + ' 正在上传.... ' + ev.file.percent);
                 }
-                if (info.file.status === 'done') {
-                    message.success(info.file.name + ' 上传成功。');
-                } else if (info.file.status === 'error') {
-                    message.error(info.file.name + ' 上传失败。');
+
+                if (ev.file.status === 'done') {
+                    console.log(ev.file.name + ' 上传成功。');
+                }
+
+                if (ev.file.status === 'error') {
+                    console.log(ev.file.response);
+                    console.log(ev.file.name + ' 上传失败。');
                 }
             }
         }
@@ -15025,12 +15029,12 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
             "loc": {
               "source": null,
               "start": {
-                "line": 7,
-                "column": 1
+                "line": 12,
+                "column": 4
               },
               "end": {
-                "line": 7,
-                "column": 34
+                "line": 12,
+                "column": 37
               }
             },
             "moduleName": "ember-cli-idcos-docs/document/upload/template.hbs"
@@ -15058,12 +15062,12 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
           "loc": {
             "source": null,
             "start": {
-              "line": 3,
-              "column": 0
+              "line": 8,
+              "column": 3
             },
             "end": {
-              "line": 8,
-              "column": 0
+              "line": 13,
+              "column": 3
             }
           },
           "moduleName": "ember-cli-idcos-docs/document/upload/template.hbs"
@@ -15073,7 +15077,7 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("	");
+          var el1 = dom.createTextNode("				");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -15087,7 +15091,7 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
           return morphs;
         },
         statements: [
-          ["block","io-button",[],["type","ghost"],0,null,["loc",[null,[7,1],[7,48]]]]
+          ["block","io-button",[],["type","ghost"],0,null,["loc",[null,[12,4],[12,51]]]]
         ],
         locals: [],
         templates: [child0]
@@ -15103,7 +15107,7 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
             "column": 0
           },
           "end": {
-            "line": 9,
+            "line": 51,
             "column": 0
           }
         },
@@ -15118,20 +15122,80 @@ define('ember-cli-idcos-docs/document/upload/template', ['exports'], function (e
         var el2 = dom.createTextNode("Upload 上传组件");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
+        var el1 = dom.createElement("section");
+        dom.setAttribute(el1,"class","demo-type");
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h2");
+        var el3 = dom.createTextNode("基本用法");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","demo");
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-example");
+        var el4 = dom.createTextNode("\n");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","demo-code");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4,"class","highlight");
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("pre");
+        var el6 = dom.createElement("code");
+        dom.setAttribute(el6,"class","language-html");
+        dom.setAttribute(el6,"data-lang","html");
+        var el7 = dom.createTextNode("\n\n// template\n");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{#io-upload\n	action=\"/srv/app/ext/import/9e62f0a5-f69c-41aa-9b65-2420a7345f2b/dpUnit\"\n	name=\"importFile\" \n	onChange=\"onChange\"}}\n	");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{#io-button type=\"ghost\"}} 开始上传 ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{/io-button}}\n");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("{{/io-upload}}\n\n// controller onChange action\nonChange(ev) {\n    if (ev.file.status !== 'uploading') {\n        console.log(`${ev.file.name} 正在上传.... ${ev.file.percent}`);\n    }\n\n    if (ev.file.status === 'done') {\n        console.log(`${ev.file.name} 上传成功。`);\n    } \n\n    if (ev.file.status === 'error') {\n        console.log(ev.file.response);\n        console.log(`${ev.file.name} 上传失败。`);\n    }\n}\n");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n			");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("			\n		");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n	");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment,2,2,contextualElement);
-        dom.insertBoundary(fragment, null);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2, 3, 1]),1,1);
         return morphs;
       },
       statements: [
-        ["block","io-upload",[],["action",["subexpr","@mut",[["get","action",["loc",[null,[4,8],[4,14]]]]],[],[]],"name",["subexpr","@mut",[["get","name",["loc",[null,[5,6],[5,10]]]]],[],[]],"onChange","onChange"],0,null,["loc",[null,[3,0],[8,14]]]]
+        ["block","io-upload",[],["action","/srv/app/ext/import/9e62f0a5-f69c-41aa-9b65-2420a7345f2b/dpUnit","name","importFile","onChange","onChange"],0,null,["loc",[null,[8,3],[13,17]]]]
       ],
       locals: [],
       templates: [child0]
@@ -22064,7 +22128,7 @@ define('ember-cli-idcos-docs/tests/document/upload/controller.jshint', function 
   QUnit.module('JSHint - document/upload');
   QUnit.test('document/upload/controller.js should pass jshint', function(assert) { 
     assert.expect(1);
-    assert.ok(false, 'document/upload/controller.js should pass jshint.\ndocument/upload/controller.js: line 2, col 7, Empty destructuring.\ndocument/upload/controller.js: line 12, col 34, Missing semicolon.\ndocument/upload/controller.js: line 19, col 17, \'message\' is not defined.\ndocument/upload/controller.js: line 21, col 17, \'message\' is not defined.\n\n4 errors'); 
+    assert.ok(false, 'document/upload/controller.js should pass jshint.\ndocument/upload/controller.js: line 2, col 7, Empty destructuring.\ndocument/upload/controller.js: line 12, col 34, Missing semicolon.\n\n2 errors'); 
   });
 
 });
