@@ -44,7 +44,7 @@ const defaultMessages = {
     'columns-restoreDefaults': 'Restore Defaults',
     tableSummary: 'Show %@ - %@ of %@',
     allColumnsAreHidden: 'All columns are hidden. Use <strong>columns</strong>-dropdown to show some of them',
-    noDataToShow: 'No records to show'
+    noDataToShow: '无记录'
 };
 const defaultIcons = {
     'sort-asc': 'glyphicon glyphicon-triangle-bottom',
