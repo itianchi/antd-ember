@@ -413,6 +413,15 @@ define('ember-cli-idcos-docs/components/docs-header/template', ['exports'], func
   }()));
 
 });
+define('ember-cli-idcos-docs/components/io-ajax-upload', ['exports', 'ember-cli-idcos/components/io-upload/ajax-upload'], function (exports, ajax_upload) {
+
+	'use strict';
+
+
+
+	exports['default'] = ajax_upload['default'];
+
+});
 define('ember-cli-idcos-docs/components/io-ansi', ['exports', 'ember-cli-idcos/components/io-ansi/component'], function (exports, component) {
 
 	'use strict';
@@ -510,6 +519,15 @@ define('ember-cli-idcos-docs/components/io-icon', ['exports', 'ember-cli-idcos/c
 
 
 	exports['default'] = io_icon['default'];
+
+});
+define('ember-cli-idcos-docs/components/io-iframe-upload', ['exports', 'ember-cli-idcos/components/io-upload/iframe-upload'], function (exports, iframe_upload) {
+
+	'use strict';
+
+
+
+	exports['default'] = iframe_upload['default'];
 
 });
 define('ember-cli-idcos-docs/components/io-input', ['exports', 'ember-cli-idcos/components/io-form/input'], function (exports, input) {
@@ -708,6 +726,15 @@ define('ember-cli-idcos-docs/components/io-tree', ['exports', 'ember-cli-idcos/c
 
 
 	exports['default'] = tree['default'];
+
+});
+define('ember-cli-idcos-docs/components/io-upload', ['exports', 'ember-cli-idcos/components/io-upload/upload'], function (exports, upload) {
+
+	'use strict';
+
+
+
+	exports['default'] = upload['default'];
 
 });
 define('ember-cli-idcos-docs/controllers/array', ['exports', 'ember'], function (exports, Ember) {
@@ -15704,6 +15731,64 @@ define('ember-cli-idcos-docs/routes/document/form-validator', ['exports', 'ember
 	exports['default'] = Ember['default'].Route.extend({});
 
 });
+define('ember-cli-idcos-docs/templates/components/io-ajax-upload', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 9
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-ajax-upload.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("input");
+        dom.setAttribute(el1,"class","io-upload__input");
+        dom.setAttribute(el1,"type","file");
+        dom.setAttribute(el1,"ref","file");
+        dom.setAttribute(el1,"style","display: none;");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n	\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createAttrMorph(element0, 'accept');
+        morphs[1] = dom.createAttrMorph(element0, 'multiple');
+        morphs[2] = dom.createMorphAt(fragment,2,2,contextualElement);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [
+        ["attribute","accept",["get","accept",["loc",[null,[6,10],[6,16]]]]],
+        ["attribute","multiple",["get","multiple",["loc",[null,[7,12],[7,20]]]]],
+        ["content","yield",["loc",[null,[10,0],[10,9]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/templates/components/io-ansi', ['exports'], function (exports) {
 
   'use strict';
@@ -16479,6 +16564,44 @@ define('ember-cli-idcos-docs/templates/components/io-form-validator', ['exports'
       },
       statements: [
         ["content","yield",["loc",[null,[1,0],[1,9]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
+define('ember-cli-idcos-docs/templates/components/io-iframe-upload', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-iframe-upload.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() { return []; },
+      statements: [
+
       ],
       locals: [],
       templates: []
@@ -20417,6 +20540,99 @@ define('ember-cli-idcos-docs/templates/components/io-tree', ['exports'], functio
   }()));
 
 });
+define('ember-cli-idcos-docs/templates/components/io-upload', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.7",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 2,
+              "column": 1
+            },
+            "end": {
+              "line": 16,
+              "column": 1
+            }
+          },
+          "moduleName": "ember-cli-idcos-docs/templates/components/io-upload.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("		");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+          return morphs;
+        },
+        statements: [
+          ["content","yield",["loc",[null,[15,2],[15,11]]]]
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.7",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 18,
+            "column": 0
+          }
+        },
+        "moduleName": "ember-cli-idcos-docs/templates/components/io-upload.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("span");
+        dom.setAttribute(el1,"role","button");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]),1,1);
+        return morphs;
+      },
+      statements: [
+        ["block","io-ajax-upload",[],["parent",["subexpr","@mut",[["get","this",["loc",[null,[3,9],[3,13]]]]],[],[]],"name",["subexpr","@mut",[["get","name",["loc",[null,[4,7],[4,11]]]]],[],[]],"action",["subexpr","@mut",[["get","action",["loc",[null,[5,9],[5,15]]]]],[],[]],"headers",["subexpr","@mut",[["get","headers",["loc",[null,[6,10],[6,17]]]]],[],[]],"multipart",["subexpr","@mut",[["get","multipart",["loc",[null,[7,12],[7,21]]]]],[],[]],"dragdrop",["subexpr","@mut",[["get","_dragdrop",["loc",[null,[8,11],[8,20]]]]],[],[]],"withCredentials",["subexpr","@mut",[["get","withCredentials",["loc",[null,[9,18],[9,33]]]]],[],[]],"beforeUpload","beforeUpload","onStart","onStart","onProgress","onProgress","onSuccess","onSuccess","onError","onError"],0,null,["loc",[null,[2,1],[16,20]]]]
+      ],
+      locals: [],
+      templates: [child0]
+    };
+  }()));
+
+});
 define('ember-cli-idcos-docs/templates/components/models-table/columns-dropdown', ['exports'], function (exports) {
 
   'use strict';
@@ -20695,6 +20911,7 @@ define('ember-cli-idcos-docs/templates/components/models-table/global-filter', [
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","pull-right");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("form");
@@ -20717,15 +20934,12 @@ define('ember-cli-idcos-docs/templates/components/models-table/global-filter', [
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var morphs = new Array(2);
-        morphs[0] = dom.createAttrMorph(element0, 'class');
-        morphs[1] = dom.createMorphAt(dom.childAt(element0, [1, 1]),0,0);
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1, 1]),0,0);
         return morphs;
       },
       statements: [
-        ["attribute","class",["concat",[["get","classes.globalFilterWrapper",["loc",[null,[1,14],[1,41]]]]]]],
-        ["inline","io-input",[],["type","text","style","float: right;","placeholder","搜索","value",["subexpr","@mut",[["get","filterString",["loc",[null,[3,81],[3,93]]]]],[],[]]],["loc",[null,[3,13],[3,95]]]]
+        ["inline","io-input",[],["type","text","size","small","style","float: right;","placeholder","搜索","value",["subexpr","@mut",[["get","filterString",["loc",[null,[3,94],[3,106]]]]],[],[]]],["loc",[null,[3,13],[3,108]]]]
       ],
       locals: [],
       templates: []
@@ -22420,7 +22634,7 @@ catch(err) {
 if (runningTests) {
   require("ember-cli-idcos-docs/tests/test-helper");
 } else {
-  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+1f1236ba"});
+  require("ember-cli-idcos-docs/app")["default"].create({"name":"ember-cli-idcos-docs","version":"0.0.0+913cc91d"});
 }
 
 /* jshint ignore:end */
