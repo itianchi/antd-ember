@@ -54,6 +54,7 @@ function genPercentAdd() {
 
 function getFileItem(file, fileList) {
   let matchWay = (!file.uid) ? 'byName' : 'byUid';
+  fileList = fileList || [];
   let target = fileList.filter((item) => {
     if (matchWay === 'byName') {
       return item.name === file.name;
@@ -135,7 +136,7 @@ export default Ember.Component.extend({
 	 * @state _fileList
 	 */
 	_file: null,
-	_fileList: Ember.A(),
+	_fileList: [],
 	_recentUploadStatus: false,
 	/**
 	 * @state typeClass
@@ -188,7 +189,6 @@ export default Ember.Component.extend({
 		 * @return {[type]}      [description]
 		 */
 		onStart(file){
-			console.log('onStart', files);
 
 			if (!this.get('_recentUploadStatus')) {
 				return;
@@ -198,23 +198,25 @@ export default Ember.Component.extend({
 			let nextFileList = this.get('_fileList').concat();
 
 			if (file.length > 0) {
-				targetItem = file.map(f => {
+				targetItems = file.map(f => {
 					const fileObject = fileToObject(f);
 					fileObject.status = 'uploading';
+					fileObject.percent = 0;
 					return fileObject;
 				});
-				nextFileList = nextFileList.concat(targetItem);
+				nextFileList = nextFileList.concat(targetItems);
 			} else {
 				targetItem = fileToObject(file);
 				targetItem.status = 'uploading';
-				nextFileList.pushObject(targetItem);
+				targetItem.percent = 0;
+				nextFileList.push(targetItem);
 			}
 
 			this.send('onChange', {
 				file: targetItem,
 				fileList: nextFileList
 			});
-
+			
 			if (!window.FormData) {
 				this.autoUpdateProgress(0, targetItem);
 			}
@@ -230,7 +232,6 @@ export default Ember.Component.extend({
 		 * @return {[type]}       [description]
 		 */
 		beforeUpload(defer) {
-			console.log('onBeforeUpload');
 			if (!this.get('beforeUpload')) {
 				defer.resolve();
 				this.set('_recentUploadStatus', true);
@@ -242,6 +243,7 @@ export default Ember.Component.extend({
 					defer.resolve();
 				});
 				this.sendAction('beforeUpload', defer, file);
+				return false
 			}
 		},
 		/**
@@ -251,7 +253,6 @@ export default Ember.Component.extend({
 		 * @return {[type]}       [description]
 		 */
 		onProgress(event, file) {
-			console.log('onProgress', event, file);
 			let fileList = this.get('_fileList');
 			let targetItem = getFileItem(file, fileList);
 			if (!targetItem) {return;}
@@ -269,7 +270,6 @@ export default Ember.Component.extend({
 		 * @return {[type]}      [description]
 		 */
 		onSuccess(ret, file) {
-			console.log('onSuccess', ret, file);
 			this.clearProgressTimer();
 
 			try {
@@ -299,11 +299,11 @@ export default Ember.Component.extend({
 		 * @return {[type]}      [description]
 		 */
 		onError(error, response, file) {
-			console.log('onError');
 			this.clearProgressTimer();
-			let fileList = this.get('fileList');
+			let fileList = this.get('_fileList');
 			let targetItem = getFileItem(file, fileList);
 			targetItem.error = error;
+			targetItem.response = response;
 			targetItem.status = 'error';
 			this.handleRemove(targetItem);
 		},
@@ -314,7 +314,7 @@ export default Ember.Component.extend({
 		 */
 		onChange(ev) {
 			this.set('_file', ev.file);
-			this.set('_fileList', ev.nextFileList);
+			this.set('_fileList', ev.fileList);
 			if (this.get('onChange')) {
 				this.sendAction('onChange', ev)
 			}
