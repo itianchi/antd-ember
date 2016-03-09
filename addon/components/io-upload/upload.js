@@ -285,7 +285,7 @@ export default Ember.Component.extend({
 			let targetItem = getFileItem(file, fileList);
 			if (targetItem) {
 				targetItem.status = 'done';
-				targetItem.response = response;
+				targetItem.response = ret;
 				this.send('onChange', {
 					file: targetItem,
 					fileList: fileList
