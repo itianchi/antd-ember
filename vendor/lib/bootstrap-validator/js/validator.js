@@ -29,7 +29,8 @@
 +function ($) {
   'use strict';
 
-  var inputSelector = ':input:not([type="submit"], button):enabled:visible'
+  var inputSelector = ':input:not([type="submit"], button):enabled:visible,.input-custom'
+  var nativeInputSelector =  ':input:not([type="submit"], button):enabled:visible'
   // VALIDATOR CLASS DEFINITION
   // ==========================
 
@@ -84,39 +85,70 @@
     minlength: function ($el) {
       var minlength = $el.data('minlength')
       return !$el.val() || $el.val().length >= minlength
+    },
+    required: function($el) {
+      if ($el.is('[required]')) {
+        return !!($el.val() && $el.val() !== '');
+      } 
+      return true;
     }
   }
 
   Validator.prototype.validateInput = function (e) {
+    var self       = this;
     var $el        = $(e.target)
     var prevErrors = $el.data('bs.validator.errors')
     var errors
 
-    if ($el.is('[type="radio"]')) $el = this.$element.find('input[name="' + $el.attr('name') + '"]')
 
-    this.$element.trigger(e = $.Event('validate.bs.validator', {relatedTarget: $el[0]}))
+    /**
+     * [if custom input element]
+     * @param  {[type]} #el.is('.input-custom') [description]
+     * @return {[type]}                         [description]
+     */
+    
+    if (!$el.is(inputSelector) && !$el.is('input')) {
+      $el = $el.parents('.input-custom');
+    }
 
-    if (e.isDefaultPrevented()) return
+    if ($el.length < 1) {
+      return
+    }
 
-    var self = this
-
-    this.runValidators($el).done(function (errors) {
-      $el.data('bs.validator.errors', errors)
-
-      errors.length ? self.showErrors($el) : self.clearErrors($el)
-
-      if (!prevErrors || errors.toString() !== prevErrors.toString()) {
-        e = errors.length
-          ? $.Event('invalid.bs.validator', {relatedTarget: $el[0], detail: errors})
-          : $.Event('valid.bs.validator', {relatedTarget: $el[0], detail: prevErrors})
-
-        self.$element.trigger(e)
+    if ($el.is('.input-custom')) {
+      $el.val = function() {
+        return $el.attr('data-value');
       }
+      doValidate();
+      return
+    }
 
-      self.toggleSubmit()
+    if ($el.is('[type="radio"]')) $el = this.$element.find('input[name="' + $el.attr('name') + '"]')
+    
+    doValidate();
 
-      self.$element.trigger($.Event('validated.bs.validator', {relatedTarget: $el[0]}))
-    })
+    function doValidate() {
+      self.$element.trigger(e = $.Event('validate.bs.validator', {relatedTarget: $el[0]}))
+      if (e.isDefaultPrevented()) return
+
+      self.runValidators($el).done(function (errors) {
+        $el.data('bs.validator.errors', errors)
+
+        errors.length ? self.showErrors($el) : self.clearErrors($el)
+
+        if (!prevErrors || errors.toString() !== prevErrors.toString()) {
+          e = errors.length
+            ? $.Event('invalid.bs.validator', {relatedTarget: $el[0], detail: errors})
+            : $.Event('valid.bs.validator', {relatedTarget: $el[0], detail: prevErrors})
+
+          self.$element.trigger(e)
+        }
+
+        self.toggleSubmit()
+
+        self.$element.trigger($.Event('validated.bs.validator', {relatedTarget: $el[0]}))
+      })
+    }
   }
 
 
@@ -136,7 +168,7 @@
     }
 
     $.each(Validator.VALIDATORS, $.proxy(function (key, validator) {
-      if (($el.data(key) || key == 'native') && !validator.call(this, $el)) {
+      if (($el.data(key) || key == 'required' || key == 'native') && !validator.call(this, $el)) {
         var error = getErrorMessage(key)
         !~errors.indexOf(error) && errors.push(error)
       }
@@ -220,7 +252,7 @@
                                         $.trim(this.value) === ''
     }
 
-    return !!this.$element.find(inputSelector).filter('[required]').filter(fieldIncomplete).length
+    return !!this.$element.find(nativeInputSelector).filter('[required]').filter(fieldIncomplete).length
   }
 
   Validator.prototype.onSubmit = function (e) {

@@ -67,8 +67,18 @@ export default Ember.Component.extend({
 			Split(els,{
 				sizes,
 				minSize,
-				direction
+				direction,
+				onDrag: () => {
+					this.send('onDrag');
+				}
 			});
 		}, 10);
+	},
+	actions: {
+		onDrag(){
+			if (this.get('onDrag')) {
+				this.sendAction('onDrag');
+			}
+		}
 	}
 });

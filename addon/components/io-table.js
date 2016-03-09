@@ -153,7 +153,7 @@ export default Component.extend({
      * @name ModelsTable#showTableFooter
      * @default true
      */
-    showTableFooter: true,
+    showTableFooter: false,
     /**
      * Determines if numeric pagination should be used
      *
@@ -169,7 +169,7 @@ export default Component.extend({
      * @name ModelsTable#showColumnsDropdown
      * @default true
      */
-    showColumnsDropdown: true,
+    showColumnsDropdown: false,
     /**
      * Determines if filtering by columns should be available to the user
      *
