@@ -1,12 +1,14 @@
-# Ember-cli-idcos
+# Antd-Ember 
 
-iDCOS frontend UI Lib
+云霁科技企业产品 UI 基础库
 
-**Ember-cli-idcos = Ember + Antd**
+**Antd-Ember = Ember + Ant Design**
+
+![](./docs/site.png)
 
 ## Install
 
 ```shell
-  $ npm install ember-cli-idcos --save
+  $ ember install ember-cli-idcos --save
 ```
 
