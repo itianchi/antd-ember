@@ -15,10 +15,10 @@
         showConfirmButton: true,
         closeOnConfirm: true,
         closeOnCancel: true,
-        confirmButtonText: 'OK',
-        confirmButtonClass: 'btn-primary',
-        cancelButtonText: 'Cancel',
-        cancelButtonClass: 'btn-default',
+        confirmButtonText: '确认',
+        confirmButtonClass: 'io-btn-primary',
+        cancelButtonText: '取消',
+        cancelButtonClass: 'io-btn-default',
         containerClass: '',
         titleClass: '',
         textClass: '',
@@ -181,7 +181,21 @@
    */
 
   window.sweetAlertInitialize = function() {
-    var sweetHTML = '<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert" tabIndex="-1"><div class="icon error"><span class="x-mark"><span class="line left"></span><span class="line right"></span></span></div><div class="icon warning"> <span class="body"></span> <span class="dot"></span> </div> <div class="icon info"></div> <div class="icon success"> <span class="line tip"></span> <span class="line long"></span> <div class="placeholder"></div> <div class="fix"></div> </div> <div class="icon custom"></div> <h2>Title</h2><p class="lead text-muted">Text</p><p><button class="cancel btn btn-lg" tabIndex="2">Cancel</button> <button class="confirm btn btn-lg" tabIndex="1">OK</button></p></div>',
+    var sweetHTML = "<div class=\"sweet-overlay\" tabIndex=\"-1\"></div>"
+                    + "<div class=\"sweet-alert\" tabIndex=\"-1\">"
+                    + "    <div class=\"icon error\"><span class=\"x-mark\"><span class=\"line left\"></span><span class=\"line right\"></span></span></div>"
+                    + "    <div class=\"icon warning\"> <span class=\"body\"></span> <span class=\"dot\"></span> </div>"
+                    + "    <div class=\"icon info\"></div>"
+                    + "    <div class=\"icon success\">"
+                    + "        <span class=\"line tip\"></span> <span class=\"line long\"></span> "
+                    + "        <div class=\"placeholder\"></div>"
+                    + "        <div class=\"fix\"></div>"
+                    + "    </div>"
+                    + "    <div class=\"icon custom\"></div>"
+                    + "    <h2>Title</h2>"
+                    + "    <p class=\"lead text-muted\">Text</p>"
+                    + "    <p><button class=\"cancel io-btn io-btn-lg\" tabIndex=\"2\">Cancel</button> <button class=\"confirm io-btn io-btn-lg\" tabIndex=\"1\">OK</button></p>"
+                    + "</div>",
         sweetWrap = document.createElement('div');
 
     sweetWrap.innerHTML = sweetHTML;
@@ -570,7 +584,7 @@
     }
 
     // Reset confirm buttons to default class (Ugly fix)
-    $confirmBtn.className = 'confirm btn btn-lg';
+    $confirmBtn.className = 'confirm io-btn io-btn-lg';
 
     // Attach selected class to the sweet alert modal
     addClass(modal, params.containerClass);
