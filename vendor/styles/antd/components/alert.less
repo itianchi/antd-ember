@@ -11,7 +11,11 @@
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 10px;
-
+  
+  &-hidden {
+    display: none;
+  }
+  
   &-icon {
     margin-right: 8px;
     font-size: 14px;
@@ -69,7 +73,7 @@
     overflow: hidden;
     cursor: pointer;
 
-    @{iconfont-css-prefix}-cross {
+    .@{iconfont-css-prefix}-cross {
       color: @legend-color;
       transition: color .3s ease;
       &:hover {
