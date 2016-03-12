@@ -1,5 +1,5 @@
 
-<tr>
+<tr class="{{if record.row_class record.row_class}}">
   {{#each processedColumns as |column|}}
     {{#if column.isVisible}}
       <td class={{column.className}}>

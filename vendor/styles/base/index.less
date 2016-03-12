@@ -5,3 +5,21 @@
 .gray() {
 	color: #aaa;
 }
+
+/**
+ * bg-color helper
+ */
+.bg {
+	&-info, &-primary {
+		background: @primary-color;
+	}
+	&-success {
+		background: @success-color;
+	}
+	&-error, &-danger {
+		background: @danger-color;
+	}
+	&-warning {
+		background: @warning-color;
+	}
+}
