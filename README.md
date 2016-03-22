@@ -11,6 +11,8 @@
 
 CloudJ Enterprise-class UI Framework based on Ant Design and Emberjs
 
+**Note:** <i>This is a in progress project, don't use it in production</i>
+
 ## Features 
 
 - Enterprise-class design language based on Ant Design
