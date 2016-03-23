@@ -100,5 +100,10 @@ export default Ember.Component.extend(selectedClass, disabledClass, {
 			this.set('mouseOver', false);
 		}.bind(this), 100);
 		this.set('t', t);
+	},
+	click() {
+		if (this.get('onClick')) {
+			this.sendAction('onClick', this);
+		}
 	}
 });
