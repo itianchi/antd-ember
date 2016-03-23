@@ -1,1 +1,1 @@
-export { default } from 'ember-cli-idcos/components/io-select/select';
+export { default } from 'ember-cli-idcos/components/io-form/select/select';

@@ -1,23 +1,22 @@
 import Ember from 'ember';
-import DisabledClass from '../../mixin/disabled-class';
-import OutsideClick from '../../mixin/outside-click';
-import ComponentParent from '../../mixin/component-parent';
-import TreeModel from '../../utils/tree-model';
+import FormItemMixin from '../../../mixin/form-item';
+import OutsideClick from '../../../mixin/outside-click';
+import ComponentParent from '../../../mixin/component-parent';
+import TreeModel from '../../../utils/tree-model';
 
 /**
  * Select Component
  */
 
-export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideClick, {
+export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideClick, {
 	/**
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role', 'value:data-value', 'required'],
 	classNames: 'io-select input-custom',
 	classNamePrefix: 'io-select-',
 	classNameBindings: ['enabledClass', 'openClass'],
-	role: 'select',
+	role: 'form-item-select',
 	/**
 	 * @attribute value 
 	 * @type {String | Array}
@@ -122,6 +121,9 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 */
 	actions: {
 		toggleHidden: function() {
+			if (this.get('readonly')) {
+				return;
+			}
 			this.set('_hidden', !this.get('_hidden'));
 		},
 		selectOptions: function() {

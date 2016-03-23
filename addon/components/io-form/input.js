@@ -1,6 +1,7 @@
 import Ember from 'ember';
-import DisabledClass from '../../mixin/disabled-class';
+import FormItemMixin from '../../mixin/form-item';
 import translateSize from '../../utils/translate-size';
+
 
 /**
  * io-input Component
@@ -8,15 +9,14 @@ import translateSize from '../../utils/translate-size';
  ``` 
  */
 
-export default Ember.Component.extend(DisabledClass, {
+export default Ember.Component.extend(FormItemMixin, {
 	/**
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'type', 'role'],
 	classNames: 'io-input-wrapper',
-	classNamePrefix: ['io-input-'],
-	role: 'input',
+	classNamePrefix: 'io-input-',
+	role: 'form-item-input',
 	/**
 	 * @attribute  value
 	 */
@@ -25,34 +25,11 @@ export default Ember.Component.extend(DisabledClass, {
 	 * @attribute type
 	 */
 	type: 'text',
-	/**
-	 * @attribute diabled
-	 */
-	disabled: false,
-	/**
-	 * @attribute  disabled
-	 */
-	size: 'default',
-	/**
-	 * @attribute placeholder 
-	 * @type {String}
-	 */
-	placeholder: '请输入',
-	dataError: Ember.computed.alias('data-error'),
-	/**
-	 * @state inputClass
-	 */
 	inputClass: function() {
-		var ret = 'io-input ';
-
+		let ret = 'io-input '
 		if (this.get('size')) {
-			ret += this.get('classNamePrefix') + translateSize(this.get('size')) + ' ';
+			ret += this.get('classNamePrefix') + translateSize(this.get('size'));
 		}
-
-		if (this.get('disabled')) {
-			ret += this.get('classNamePrefix') + 'disabled ';
-		}
-
 		return ret;
-	}.property('disabled', 'size')
+	}.property('size'),
 });

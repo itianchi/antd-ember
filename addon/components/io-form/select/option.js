@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import SelectedClass from '../../mixin/selected-class';
-import DisabledClass from '../../mixin/disabled-class';
-import ComponentChild from '../../mixin/component-child';
+import SelectedClass from '../../../mixin/selected-class';
+import DisabledClass from '../../../mixin/disabled-class';
+import ComponentChild from '../../../mixin/component-child';
 
 /**
  * io-option Component

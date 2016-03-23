@@ -23,6 +23,17 @@ label {
 // Input styles
 .@{css-prefix}input-wrapper {
   display: block;
+  /**
+   * readonly style
+   */
+  &.@{css-prefix}input-readonly {
+    input {
+      border: none;
+      background: none;
+      font-size: 14px;
+      cursor: default;
+    }
+  }
 }
 .@{css-prefix}input {
   .input;
@@ -443,5 +454,21 @@ form {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+
+/** 
+ * readonly form
+ */
+
+form.@{css-prefix}form-readonly {
+  textarea {
+    border: none;
+    background-color: transparent !important;
+    cursor: default !important;
+  }
+  button[type=submit] {
+    display: none;
   }
 }
