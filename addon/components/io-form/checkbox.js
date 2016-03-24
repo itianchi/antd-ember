@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import FormItemMixin from '../../mixin/form-item';
 
 /**
  * Col Component
@@ -7,7 +8,7 @@ import Ember from 'ember';
  ``` 
  */
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(FormItemMixin, {
 	/**
 	 * [tagName description]
 	 */
@@ -15,7 +16,7 @@ export default Ember.Component.extend({
 	classNames: 'io-checkbox',
 	classNamePrefix: 'io-checkbox-',
 	attributeBindings: ['checked', 'disabled'],
-	classNameBindings: ['checkedClass', 'disabledClass'],
+	classNameBindings: ['checkedClass'],
 	checkedClass: function() {
 		if (this.get('checked') === true) {
 			return this.get('classNamePrefix') + 'checked';
@@ -23,13 +24,6 @@ export default Ember.Component.extend({
 			return '';
 		}
 	}.property('checked'),
-	disabledClass: function() {
-		if (this.get('disabled')) {
-			return this.get('classNamePrefix') + 'disabled';
-		} else {
-			return '';
-		}
-	}.property('disabled'),
 	/**
 	 * [checked attribute for component]
 	 * @type {Boolean}

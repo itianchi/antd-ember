@@ -1,0 +1,40 @@
+{{#if schema}}
+	{{#each schema.properties as |it|}}
+		{{!-- text field --}}
+		{{#if (eq it.type "text")}}
+			{{#io-form-group
+				labelColClass=it.labelColClass
+				inputColClass=it.inputColClass
+				required=it.required
+				help=it.help
+				label=it.label}}
+				{{io-input 
+					type="text"
+					value=(get formData it.field)
+					placeholder=it.placeholder
+					pattern=it.pattern
+					required=it.required
+					data-error=it.error}}
+			{{/io-form-group}}
+		{{/if}}
+		
+		{{!-- number field --}}
+		{{#if (eq item.type "number")}}
+			{{#io-form-group
+				labelColClass=it.labelColClass
+				inputColClass=it.inputColClass
+				required=it.required
+				help=it.help
+				label=it.label}}
+				{{io-input 
+					type="number"
+					value=(get formData it.field)
+					placeholder=it.placeholder
+					pattern=it.pattern
+					required=it.required
+					data-error=it.error}}
+			{{/io-form-group}}
+		{{/if}}
+	{{/each}}
+{{/if}}
+{{yield}}

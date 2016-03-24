@@ -5,7 +5,7 @@ import translateSize from '../utils/translate-size';
 export default Ember.Mixin.create({
 	classNamePrefix: 'form-item-',
 	classNames: ['form-item'],
-	attributeBindings: ['role', 'disabled', 'type', 'value:data-value', 'required', 'state'],
+	attributeBindings: ['role', 'disabled', 'type', 'value:data-value', 'required', 'state', 'checked'],
 	classNameBindings: ['disabledClass', 'readonlyClass', 'sizeClass'],
 	role: 'form-item',
 	/**

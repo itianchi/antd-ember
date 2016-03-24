@@ -3,9 +3,69 @@ import DisabledClass from '../../mixin/disabled-class';
 
 /**
  * io-form
+ 
+ # basic form
  ```
-  {{io-form}}
+  {{#io-form}}
   {{/io-form}}
+ ```
+ # dynamic form
+ ```
+  {{io-form schema=schema formData=data}}
+
+  // type = 
+  let schema = {
+    "title":"用户信息",
+    "description":"填写用户呢",
+    "properties": [{
+      // field key
+      field: "name",
+
+      // field type
+      // [text|number|password|select|enum|check|textarea]
+      "type": "string",
+
+      // field label
+      "label": "名称：",
+
+      // field placeholder
+      "placeholder": "请输入用户名",
+
+      // field label class
+      "labelColClass": "col-md-8",
+
+      // field input class
+      "inputColClass": "col-md-5"
+
+      // if required
+      "required": true,
+
+      // help message
+      // "help": "",
+
+      // error message
+      //  "error": "请输入名称",
+
+      //  regrex pattern
+      //  "pattern": ""
+    }, {
+      field: "sex",
+      type: "enum",
+      label: "选择性别",
+      enum: ["boy", "girl"],
+      enumLabels: ["男", "女"]
+    }, {
+      field: "location",
+      type: "select"
+      label: "选择所在省份",
+      options: ["a", "b", "c", "d"],
+      optionLables: ["重庆", "北京", "广州", "上海"]
+    }, {
+      field: "description",
+      type: "textarea",
+      label: "自我介绍"
+    }]
+  }
  ```
  */
 export default Ember.Component.extend(DisabledClass, {
@@ -13,6 +73,14 @@ export default Ember.Component.extend(DisabledClass, {
   classNames: ['io-form', 'io-form-horizontal'],
   classNamePrefix: 'io-form-',
   classNameBindings: ['readonlyClass'],
+  /**
+   * @attribute  schema
+   */
+  schema: null,
+  /**
+   * @attribute formData
+   */
+  formData: {},
   /**
    * @attribute disabled
    */
