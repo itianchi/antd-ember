@@ -11,9 +11,10 @@ export default Ember.Component.extend(FormItemMixin, {
 	/**
 	 * [tagName description]
 	 */
-	tagName: 'textarea',
-	attributeBindings: ['rows', 'cols'],
-	classNames: 'io-input',
+	tagName: 'span',
+	classNames: 'textarea-wrapper',
 	role: 'form-item-textarea',
-	value: ''
+	value: '',
+	rows: 4,
+	cols: 3
 });

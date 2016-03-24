@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'div',
-	classNames: 'form-group',
+	classNames: 'form-group row',
 	/**
 	 * @attribute  label
 	 */

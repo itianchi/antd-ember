@@ -37,5 +37,5 @@ export default Ember.Mixin.create({
      * @default 'default'
      * @public
      */
-    disabled: false
+    disabled: null
 });

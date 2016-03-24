@@ -17,7 +17,7 @@ export default Ember.Mixin.create({
 	 * [disabled description]
 	 * @type {Boolean}
 	 */
-	disabled: false,
+	disabled: null,
 	/**
 	 * [size description]
 	 * @type {String}
@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
 		const changeReadonly = () => {
 			const readonly = parent.get('readonly');
 			this.set('readonly', readonly);
-			this.set('disabled', readonly);
+			this.set('disabled', readonly ? 'disabled' : null);
 		}
 		if (parent) {
 			this.set('_form', parent);

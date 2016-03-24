@@ -1,6 +1,11 @@
 import Ember from 'ember';
 import DisabledClass from '../../mixin/disabled-class';
 
+const {
+  get, 
+  set,
+  on
+} = Ember;
 /**
  * io-form
  
@@ -12,60 +17,6 @@ import DisabledClass from '../../mixin/disabled-class';
  # dynamic form
  ```
   {{io-form schema=schema formData=data}}
-
-  // type = 
-  let schema = {
-    "title":"用户信息",
-    "description":"填写用户呢",
-    "properties": [{
-      // field key
-      field: "name",
-
-      // field type
-      // [text|number|password|select|enum|check|textarea]
-      "type": "string",
-
-      // field label
-      "label": "名称：",
-
-      // field placeholder
-      "placeholder": "请输入用户名",
-
-      // field label class
-      "labelColClass": "col-md-8",
-
-      // field input class
-      "inputColClass": "col-md-5"
-
-      // if required
-      "required": true,
-
-      // help message
-      // "help": "",
-
-      // error message
-      //  "error": "请输入名称",
-
-      //  regrex pattern
-      //  "pattern": ""
-    }, {
-      field: "sex",
-      type: "enum",
-      label: "选择性别",
-      enum: ["boy", "girl"],
-      enumLabels: ["男", "女"]
-    }, {
-      field: "location",
-      type: "select"
-      label: "选择所在省份",
-      options: ["a", "b", "c", "d"],
-      optionLables: ["重庆", "北京", "广州", "上海"]
-    }, {
-      field: "description",
-      type: "textarea",
-      label: "自我介绍"
-    }]
-  }
  ```
  */
 export default Ember.Component.extend(DisabledClass, {
@@ -77,10 +28,40 @@ export default Ember.Component.extend(DisabledClass, {
    * @attribute  schema
    */
   schema: null,
+  schemaFields: function() {
+    let schema = this.get('schema');
+    if (!schema) {
+      return
+    } 
+    const keys = Object.keys(schema.properties);
+    return keys.map((key) => {
+      let field = schema.properties[key]
+      set(field, 'name', key);
+      return field;
+    });
+  }.property('schema'),
   /**
    * @attribute formData
    */
   formData: {},
+  _onInit: function() {
+    let formData = this.get('formData');
+    let schemaFields = this.get('schemaFields');
+    if (schemaFields && schemaFields.length > 0) {
+      schemaFields.forEach((field) => {
+        const name = field.name;
+        set(field, 'value', formData[name]);
+        const path = `schema.properties.${name}.value`
+        console.log(path);
+        this.addObserver(path, () => {
+          const newValue = this.get(path);
+          this.set(`formData.${name}`, newValue);
+          this.send('fieldChange', field);
+        })
+      })
+    }
+
+  }.on('init'),
   /**
    * @attribute disabled
    */
@@ -114,11 +95,11 @@ export default Ember.Component.extend(DisabledClass, {
    * @param  {[type]} e [description]
    * @return {[type]}   [description]
    */
-  submit: function(e) {
+  submit(e) {
     if (e && e.isDefaultPrevented && !e.isDefaultPrevented()) {
    	  e.preventDefault();
       try {
-        this.sendAction('submitForm');
+        this.sendAction('submitForm', this.get('formData'));
       } catch (err) {
         console.log('warning: ', err);
       }
@@ -129,7 +110,7 @@ export default Ember.Component.extend(DisabledClass, {
    * [didInsertElement event handler]
    * @return {[type]} [description]
    */
-  didInsertElement: function() {
+  didInsertElement() {
     this.$().validator();
 
     if (this.get('disabled')) {
@@ -142,8 +123,15 @@ export default Ember.Component.extend(DisabledClass, {
    * [willDestroy event handler]
    * @return {[type]} [description]
    */
-  willDestroy: function() {
+  willDestroy() {
     const $form = this.$()
     $form && $form.validator('destroy');
+  },
+  actions: {
+    fieldChange(field) {
+      if (this.get('fieldChange')) {
+        this.sendAction('fieldChange', field);
+      }
+    }
   }
 });
