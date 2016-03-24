@@ -42,7 +42,7 @@ export default Ember.Mixin.create({
 		}
 	}.property('disabled'),
 	readonlyClass: function() {
-		if (this.get('readonly')) {
+		if (this.get('readonly') === true) {
 			return this.get('classNamePrefix') + 'readonly';
 		} else {
 			return '';
@@ -57,10 +57,15 @@ export default Ember.Mixin.create({
 	}.property('size'),
 	_didInsertElement: function() {
 		let parent = this.nearestOfType(Form);
+		const changeReadonly = () => {
+			const readonly = parent.get('readonly');
+			this.set('readonly', readonly);
+			this.set('disabled', readonly);
+		}
 		if (parent) {
 			this.set('_form', parent);
-			this.set('readonly', parent.get('readonly'));
-			this.set('disabled', parent.get('readonly'));
+			changeReadonly();
+			parent.addObserver('readonly', changeReadonly)
 		}
 	}.on('didInsertElement')
 })
