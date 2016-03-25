@@ -33,6 +33,10 @@ export default Em.Mixin.create({
         16: "shift",
         17: "ctrl",
         18: "alt",
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down",
         224: "meta",
         112: "f1",
         113: "f2",
@@ -47,9 +51,9 @@ export default Em.Mixin.create({
         122: "f11",
         123: "f12"
     },
-    keyPressHandler: function(e) {
+    keyPressHandler: function(e, type) {
         var command;
-        command = "";
+        command = `${type}-`;
         if (e.ctrlKey) {
             command += "ctrl+";
         }
@@ -67,16 +71,18 @@ export default Em.Mixin.create({
         } else {
             command += String.fromCharCode(e.which).toLowerCase();
         }
-        Em.debug("hotkey command: " + command);
-        return this.send(command);
+        if (this.get(`_actions.${command}`)) {
+            // Em.debug("hotkey command: " + command);
+            this.send(command);
+        }
     },
     keyDown: function(e) {
-        return this.keyPressHandler(e);
+        return this.keyPressHandler(e, 'keydown');
     },
     keyUp: function(e) {
-        return this.keyPressHandler(e);
+        return this.keyPressHandler(e, 'keyup');
     },
     keyPress: function(e) {
-        return this.keyPressHandler(e);
+        return this.keyPressHandler(e, 'keypress');
     }
 });
