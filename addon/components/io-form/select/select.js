@@ -31,11 +31,6 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 */
 	width: 120,
 	/**
-	 * @attribute options 
-	 * @type {[type]}
-	 */
-	options: null,
-	/**
 	 * @attribute disabled 
 	 */
 	disabled: false,
