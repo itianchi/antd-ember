@@ -13,17 +13,17 @@ export default {
     }
 
     defaultConfig['tree'] = {
-        classes: ['io-tree-branch', 'io-tree', 'fa-ul'],
-            branchClasses: ['io-tree-branch', 'fa-ul'],
-            nodeClasses: ['io-tree-node'],
-            nodeOpenClasses: [],
-            nodeCloseClasses: [],
-            nodeOpenIconClasses: ['fa-li', 'fa', 'fa-caret-down'],
-            nodeCloseIconClasses: ['fa-li', 'fa', 'fa-caret-right'],
-            nodeLeafClasses: ['leaf'],
-            nodeLeafIconClasses: ['fa-li', 'fa',''],
-            nodeLoadingIconClasses: ['fa-li', 'fa', 'fa-spinner', 'fa-spin'],
-            nodeSelectedClasses: ['io-tree-node-active']
+        classes: ['io-tree-branch', 'io-tree', 'io-ul'],
+        branchClasses: ['io-tree-branch', 'io-ul'],
+        nodeClasses: ['io-tree-node'],
+        nodeOpenClasses: [],
+        nodeCloseClasses: [],
+        nodeOpenIconClasses: ['io-tree-node__caret', 'ioicon', 'ioicon-caret-down'],
+        nodeCloseIconClasses: ['io-tree-node__caret', 'ioicon', 'ioicon-caret-right'],
+        nodeLeafClasses: ['io-tree-leaf'],
+        nodeLeafIconClasses: ['io-tree-leaf-icon', 'ioicon',''],
+        nodeLoadingIconClasses: ['io-tree-leaf-icon', 'ioicon', 'ioicon-loading'],
+        nodeSelectedClasses: ['io-tree-node-active']
     }
   }
 };
