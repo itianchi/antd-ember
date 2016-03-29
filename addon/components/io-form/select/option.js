@@ -14,7 +14,7 @@ export default Ember.Component.extend(ComponentChild, SelectedClass, DisabledCla
 	 * [tagName description]
 	 */
 	tagName: 'li',
-	attributeBindings: ['state', 'disabled', 'role', 'selected'],
+	attributeBindings: ['disabled', 'role', 'selected'],
 	classNames: 'io-select-dropdown-menu-item',
 	classNamePrefix: ['io-select-dropdown-menu-item-'],
 	classNameBindings: ['activeClass'],

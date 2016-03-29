@@ -21,7 +21,7 @@ export default Ember.Component.extend(OutsideClick, {
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'role'],
+	attributeBindings: ['disabled', 'role'],
 	classNames: 'io-dropdown',
 	classNamePrefix: 'io-dropdown-',
 	classNameBindings: ['activeClass'],

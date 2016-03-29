@@ -12,7 +12,7 @@ export default Ember.Component.extend(DisabledClass, {
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+	attributeBindings: ['disabled', 'onClick', 'role'],
 	classNames: 'io-switch',
 	classNamePrefix: 'io-switch-',
 	classNameBindings: ['checkedClass'],

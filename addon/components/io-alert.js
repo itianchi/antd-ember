@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'div',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+	attributeBindings: ['disabled', 'onClick', 'role'],
 	classNames: 'io-alert',
 	classNamePrefix: 'io-alert-',
 	classNameBindings: ['typeClass', 'visibleClass', 'descriptionClass', 'showIconClass'],

@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'i',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+	attributeBindings: ['disabled', 'onClick', 'role'],
 	type: '',
 	/**
 	 * [fa is fontawesome icon]
