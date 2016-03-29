@@ -27,11 +27,13 @@ label {
    * readonly style
    */
   &.@{css-prefix}input-readonly {
-    input {
+    input , input:focus, input:active{
       border: none;
       background: none;
       font-size: 14px;
       cursor: default;
+      outline: none;
+      box-shadow: none;
     }
   }
 }

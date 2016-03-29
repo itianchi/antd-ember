@@ -5,7 +5,7 @@ import translateSize from '../utils/translate-size';
 export default Ember.Mixin.create({
 	classNamePrefix: 'form-item-',
 	classNames: ['form-item'],
-	attributeBindings: ['role', 'disabled', 'type', 'value:data-value', 'required', 'checked', '_readonly:readonly'],
+	attributeBindings: ['role', '_disabled:disabled', 'type', 'value:data-value', 'required', 'checked', '_readonly:readonly'],
 	classNameBindings: ['disabledClass', 'readonlyClass', 'sizeClass'],
 	role: 'form-item',
 	/**
@@ -14,27 +14,35 @@ export default Ember.Mixin.create({
 	 */
 	placeholder: '请输入',
 	/**
-	 * [disabled description]
-	 * @type {Boolean}
-	 */
-	disabled: null,
-	/**
 	 * [size description]
 	 * @type {String}
 	 */
 	size: 'default',
 	/**
+	 * [disabled description]
+	 * @type {Boolean}
+	 */
+	disabled: null,
+	_disabled: function() {
+		if (this.get('disabled') || this.get('readonly')) {
+			return 'disabled';
+		} else {
+			return null;
+		}
+	}.property('disabled'),
+	/**
 	 * [readonly description]
 	 * @type {Boolean}
 	 */
-	readonly: false,
+	readonly: null,
 	_readonly: function() {
-		if (this.get('readonly') === true) {
+		if (this.get('readonly')) {
 			return 'readonly';
 		} else {
 			return null;
 		}
 	}.property('readonly'),
+
 	/**
 	 * [_form description]
 	 * @type {[type]}
@@ -62,17 +70,18 @@ export default Ember.Mixin.create({
 			return '';
 		}
 	}.property('size'),
-	_didInsertElement: function() {
+	_init: function() {
 		let parent = this.nearestOfType(Form);
 		const changeReadonly = () => {
 			const readonly = parent.get('readonly');
-			this.set('readonly', readonly);
-			this.set('disabled', readonly ? 'disabled' : null);
+			if (readonly !== null) {
+				this.set('readonly', readonly);
+			}
 		}
 		if (parent) {
 			this.set('_form', parent);
 			changeReadonly();
 			parent.addObserver('readonly', changeReadonly)
 		}
-	}.on('didInsertElement')
+	}.on('init')
 })

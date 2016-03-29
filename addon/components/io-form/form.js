@@ -65,7 +65,7 @@ export default Ember.Component.extend(DisabledClass, {
   /**
    * @attribute disabled
    */
-  readonly: false,
+  readonly: null,
   readonlyClass: function() {
     if (this.get('readonly')) {
       return this.get('classNamePrefix') + 'readonly';
