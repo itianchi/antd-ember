@@ -29,7 +29,7 @@ export default Ember.Mixin.create({
 		} else {
 			return null;
 		}
-	}.property('disabled'),
+	}.property('disabled', 'readonly'),
 	/**
 	 * [readonly description]
 	 * @type {Boolean}
@@ -57,7 +57,7 @@ export default Ember.Mixin.create({
 		}
 	}.property('disabled'),
 	readonlyClass: function() {
-		if (this.get('readonly') === true) {
+		if (this.get('readonly')) {
 			return this.get('classNamePrefix') + 'readonly';
 		} else {
 			return '';
