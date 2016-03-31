@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import FormItemMixin from '../../mixin/form-item';
 
 /**
  * Radio Component
@@ -6,15 +7,15 @@ import Ember from 'ember';
  ``` 
  */
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(FormItemMixin, {
 	/**
 	 * [tagName description]
 	 */
 	tagName: 'span',
 	classNames: 'io-radio',
 	classNamePrefix: 'io-radio-',
-	attributeBindings: ['checked', 'disabled', 'name'],
-	classNameBindings: ['checkedClass', 'disabledClass'],
+	attributeBindings: ['checked', 'name'],
+	classNameBindings: ['checkedClass'],
 	/**
 	 * [attributes for component]
 	 * @type {Boolean}
@@ -28,13 +29,6 @@ export default Ember.Component.extend({
 			return '';
 		}
 	}.property('checked'),
-	disabledClass: function() {
-		if (this.get('disabled')) {
-			return this.get('classNamePrefix') + 'disabled';
-		} else {
-			return '';
-		}
-	}.property('disabled'),
 	htmlChecked: function() {
 		return this.get('value') === this.get('checked');
 	}.property('checked', 'value'),

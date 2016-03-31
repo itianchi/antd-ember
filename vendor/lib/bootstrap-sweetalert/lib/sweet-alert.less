@@ -24,7 +24,7 @@
   background-color: @body-bg;
   width: @width;
   padding: @padding;
-  border-radius: 5px;
+  border-radius: 3px;
   text-align: center;
 
   position: fixed;
@@ -45,7 +45,10 @@
     left: (@grid-gutter-width / 2);
     right: (@grid-gutter-width / 2);
   }
-
+  
+  h2 {
+    font-size: 16px;
+  }
   .icon {
     width: 80px;
     height: 80px;
@@ -232,21 +235,21 @@
     }
   }
 
-  .btn-default {
-    .form-control-focus(@btn-default-border);
-  }
-  .btn-success {
-    .form-control-focus(@btn-success-border);
-  }
-  .btn-info {
-    .form-control-focus(@btn-info-border);
-  }
-  .btn-danger {
-    .form-control-focus(@btn-danger-border);
-  }
-  .btn-warning {
-    .form-control-focus(@btn-warning-border);
-  }
+  // .btn-default {
+  //   .form-control-focus(@btn-default-border);
+  // }
+  // .btn-success {
+  //   .form-control-focus(@btn-success-border);
+  // }
+  // .btn-info {
+  //   .form-control-focus(@btn-info-border);
+  // }
+  // .btn-danger {
+  //   .form-control-focus(@btn-danger-border);
+  // }
+  // .btn-warning {
+  //   .form-control-focus(@btn-warning-border);
+  // }
 
   button::-moz-focus-inner {
     border: 0;

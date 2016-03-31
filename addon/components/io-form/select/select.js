@@ -1,23 +1,25 @@
 import Ember from 'ember';
-import DisabledClass from '../../mixin/disabled-class';
-import OutsideClick from '../../mixin/outside-click';
-import ComponentParent from '../../mixin/component-parent';
-import TreeModel from '../../utils/tree-model';
+import FormItemMixin from '../../../mixin/form-item';
+import OutsideClick from '../../../mixin/outside-click';
+import ComponentParent from '../../../mixin/component-parent';
+import TreeModel from '../../../utils/tree-model';
+import KeyBindingMixin from '../../../mixin/hotkey-bindings';
 
 /**
  * Select Component
  */
 
-export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideClick, {
+export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideClick, KeyBindingMixin, {
 	/**
 	 * [tagName description]
 	 */
 	tagName: 'span',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role', 'value:data-value', 'required'],
 	classNames: 'io-select input-custom',
 	classNamePrefix: 'io-select-',
 	classNameBindings: ['enabledClass', 'openClass'],
-	role: 'select',
+	attributeBindings: ['tabindex', 'role'],
+	tabindex: 0,
+	role: 'form-item-select',
 	/**
 	 * @attribute value 
 	 * @type {String | Array}
@@ -28,11 +30,6 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 * @type {Number}
 	 */
 	width: 120,
-	/**
-	 * @attribute options 
-	 * @type {[type]}
-	 */
-	options: null,
 	/**
 	 * @attribute disabled 
 	 */
@@ -62,6 +59,11 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 * @description [hidden dropdown menu]
 	 */
 	_hidden: true,
+	/**
+	 * @state _activeValue
+	 * @type {[type]}
+	 */
+	_activeValue: null,
 	/**
 	 * @stae multipleClass
 	 * @description [multiple select class]
@@ -98,10 +100,6 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 		}
 	}.property('disabled'),
 	/**
-	 * @selectedOptions
-	 */
-	_selectedOptions: null,
-	/**
 	 * @observe selectedChildren
 	 */
 	_selectOptions: function() {
@@ -122,6 +120,9 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 	 */
 	actions: {
 		toggleHidden: function() {
+			if (this.get('readonly')) {
+				return;
+			}
 			this.set('_hidden', !this.get('_hidden'));
 		},
 		selectOptions: function() {
@@ -179,7 +180,71 @@ export default Ember.Component.extend(ComponentParent, DisabledClass, OutsideCli
 			}.bind(this), 100);
 
 			if (this.get('onChange')) {
-				this.send('onChange', this.get('value'));
+				this.sendAction('onChange', this.get('value'));
+			}
+		},
+		'keyup-down': function() {
+			const children = this.get('children');
+
+			if (children.length === 0) {
+				return;
+			}
+
+			if (this.get('_hidden')) {
+				this.set('_hidden', false);
+				children[0].set('active', true);
+			} else {
+				let selectedIndex = -1;
+				children.forEach((child, index) => {
+					if (child.get('active')) {
+						selectedIndex = index;
+					}
+					child.set('active', false);
+				});
+				selectedIndex += 1;
+				if (selectedIndex >= children.length) {
+					selectedIndex = 0;
+				}
+				children[selectedIndex].set('active', true);
+			}
+		},
+		'keyup-up': function() {
+			const children = this.get('children');
+
+			if (children.length === 0) {
+				return;
+			}
+
+			if (!this.get('_hidden')) {
+				let selectedIndex = 0;
+				children.forEach((child, index) => {
+					if (child.get('active')) {
+						selectedIndex = index;
+					}
+					child.set('active', false);
+				});
+				selectedIndex -= 1;
+				if (selectedIndex < 0) {
+					selectedIndex = children.length - 1;
+				}
+				children[selectedIndex].set('active', true);
+			}
+		},
+		'keyup-return': function() {
+			const children = this.get('children');
+
+			if (children.length === 0) {
+				return;
+			}
+
+			if (this.get('_hidden')) {
+				this.set('_hidden', false);
+			} else {
+				children.forEach((child) => {
+					if (child.get('active')) {
+						this.send('onSelect', child);
+					}
+				})
 			}
 		}
 	},

@@ -15,6 +15,6 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'div',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role'],
+	attributeBindings: ['disabled', 'onClick', 'role'],
 	classNames: 'io-btn-group'
 });

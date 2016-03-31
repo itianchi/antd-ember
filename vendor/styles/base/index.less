@@ -1,7 +1,25 @@
 @import "./variables.less";
-@import "./flexblock.less";
+// @import "./flexblock.less";
 @import "./reset.less";
 
 .gray() {
 	color: #aaa;
+}
+
+/**
+ * bg-color helper
+ */
+.bg {
+	&-info, &-primary {
+		background-color: @primary-color;
+	}
+	&-success {
+		background-color: @success-color;
+	}
+	&-error, &-danger {
+		background-color: @danger-color;
+	}
+	&-warning {
+		background-color: @warning-color;
+	}
 }

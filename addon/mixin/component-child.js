@@ -10,10 +10,12 @@ import ComponentParentMixin from './component-parent';
  */
 export default Ember.Mixin.create({
 
-  _didInsertElement: Ember.on('didInsertElement', function() {
+  _didInsertElement: Ember.on('init', function() {
     var parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
-      this.set('parent', parent);
+      Ember.run.schedule('sync', this, function() {
+        this.set('parent', parent);
+      });
       parent.registerChild(this);
     }
   }),
@@ -21,7 +23,9 @@ export default Ember.Mixin.create({
   _willDestroyElement: Ember.on('willDestroyElement', function() {
     var parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
-      this.set('parent', null);
+      Ember.run.schedule('sync', this, function() {
+        this.set('parent', null);
+      });
       parent.removeChild(this);
     }
   })

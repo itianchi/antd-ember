@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'button',
-	attributeBindings: ['state', 'disabled', 'onClick', 'role', 'htmlType:type'],
+	attributeBindings: ['disabled', 'onClick', 'role', 'htmlType:type'],
 	/**
 	 * [attibutes]
 	 * @type {String}
