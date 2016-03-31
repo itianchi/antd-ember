@@ -73,16 +73,13 @@ export default Ember.Component.extend(selectedClass, disabledClass, {
 			}
 		} 
 
-		if (this.get('isOpen')) {
-			ret += this.get('classNamePrefix') + 'open';
-		}
 		return ret;
 	}.property('mouseOver'),
 	openClass: function() {
 		var ret = '';
 		var isInlineSubmenu = this.get('isInlineSubmenu');
 		if (isInlineSubmenu && this.get('isOpen')) {
-			ret = this.get('classNamePrefix') + 'open'
+			ret = this.get('classNamePrefix') + 'open';
 		} 
 		return ret;
 	}.property('isOpen'),
