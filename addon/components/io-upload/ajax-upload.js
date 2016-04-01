@@ -255,6 +255,7 @@ export default Ember.Component.extend({
 	actions: {
 		onChange(ev) {
 			this.uploadFiles(ev.target.files);
+			this.$('input').val('');
 		}
 	}
 });
