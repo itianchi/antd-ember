@@ -73,10 +73,12 @@ export default Ember.Mixin.create({
 	_init: function() {
 		let parent = this.nearestOfType(Form);
 		const changeReadonly = () => {
-			const readonly = parent.get('readonly');
-			if (readonly !== null) {
-				this.set('readonly', readonly);
-			}
+			Ember.run.later(()=> {
+				const readonly = parent.get('readonly');
+				if (readonly !== null) {
+					this.set('readonly', readonly);
+				}
+			})
 		}
 		if (parent) {
 			this.set('_form', parent);
