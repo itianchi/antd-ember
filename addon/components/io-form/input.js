@@ -25,6 +25,13 @@ export default Ember.Component.extend(FormItemMixin, {
 	 * @attribute type
 	 */
 	type: 'text',
+	_placeholder: function() {
+		if (this.get('readonly')) {
+			return '';
+		} else {
+			return this.get('placeholder');
+		}
+	}.property('placeholder', 'readonly'),
 	inputClass: function() {
 		let ret = 'io-input '
 		if (this.get('size')) {

@@ -21,7 +21,9 @@
         	{{#if _selectedOptions}} 
         		{{_selectedOptions.label}}
         	{{else}}
-        		{{placeholder}}
+                {{#unless readonly}}
+            		{{placeholder}}
+                {{/unless}}
         	{{/if}}
         </span>
     </span>
