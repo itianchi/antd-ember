@@ -51,7 +51,7 @@ export default Em.Component.extend(WithConfigMixin, {
      * True if this node is currently single selected
      */
     isSelected: (function() {
-        return this.get('tree.selected') === this.get('model');
+        return this.get('tree.selected.id') === this.get('model.id');
     }).property('tree.selected'),
     /**
      * True if this node is currently loading,
