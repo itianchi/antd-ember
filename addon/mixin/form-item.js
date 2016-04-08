@@ -5,7 +5,7 @@ import translateSize from '../utils/translate-size';
 export default Ember.Mixin.create({
 	classNamePrefix: 'form-item-',
 	classNames: ['form-item'],
-	attributeBindings: ['role', '_disabled:disabled', 'type', 'value:data-value', 'required', 'checked', '_readonly:readonly'],
+	attributeBindings: ['role', '_disabled:disabled', 'type', '_value:data-value', 'required', 'checked', '_readonly:readonly'],
 	classNameBindings: ['disabledClass', 'readonlyClass', 'sizeClass'],
 	role: 'form-item',
 	/**
@@ -18,6 +18,14 @@ export default Ember.Mixin.create({
 	 * @type {String}
 	 */
 	size: 'default',
+	_value: function() {
+		const value = this.get('value');
+		if (Ember.isArray(value)) {
+			return value.join(',');
+		} else {
+			return value;
+		}
+	}.property('value', 'value.length'),
 	/**
 	 * [disabled description]
 	 * @type {Boolean}

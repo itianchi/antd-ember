@@ -161,9 +161,6 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 				this.set('value', option.get('value'));
 			}
 			this.send('onChange');
-			setTimeout(() => {
-				this.$().trigger('input.bs.validator');
-			}, 500);
 		},
 		removeOption: function(value) {
 			this.set('value', this.get('value').removeObject(value));
@@ -182,6 +179,10 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			if (this.get('onChange')) {
 				this.sendAction('onChange', this.get('value'));
 			}
+
+			setTimeout(() => {
+				this.$().trigger('input.bs.validator');
+			}, 500);
 		},
 		'keyup-down': function() {
 			const children = this.get('children');
