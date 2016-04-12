@@ -76,7 +76,37 @@
   Validator.VALIDATORS = {
     native: function ($el) {
       var el = $el[0]
-      return el.checkValidity ? el.checkValidity() : true
+      var value = el.value;
+      var isNumber = $el.attr('type') === 'number';
+
+      // if (el.checkValidity) {
+      //   return el.checkValidity()
+      // }
+
+      // pattern
+      var pattern = $el.attr('pattern');
+      if (pattern) {
+        var regex = new RegExp('^' + pattern + '$', 'g');
+        var matched = value && (value + '').match(regex);
+        if (!isNumber || !matched) {
+          return matched;
+        }
+      }
+
+      //  native pollyfill
+      if (isNumber) {
+        var min = ($el.attr('min') - 0) || -1000000000000;
+        var max = ($el.attr('max') - 0) || 100000000000;
+        value = value - 0;
+        if (value < min || value > max) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+
+      return true
     },
     match: function ($el) {
       var target = $el.data('match')
