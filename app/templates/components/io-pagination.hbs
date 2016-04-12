@@ -1,23 +1,23 @@
 {{#if isShow}}
 {{#unless pager}}
-  <li class="previous {{if isFirstDisabled 'disabled'}}">
-    <a href="{{previousUrl}}" {{action 'previous'}}>{{paginationPrevious}}</a>
+  <li class="io-pagination-prev {{if isFirstDisabled 'io-pagination-disabled'}}">
+    <a href="{{previousUrl}}" {{action 'previous'}}></a>
   </li>
 
   {{#each pages key="@index" as |page|}}
     {{#io-pagination-page-item disabled=disabled page=page selected=this.current seperator=seperator urlTemplate=urlTemplate pageSet='pageChanged'}}{{/io-pagination-page-item}}
   {{/each}}
 
-  <li class="next {{if isLastDisabled 'disabled'}}">
-    <a href="{{nextUrl}}" {{action 'next'}}>{{paginationNext}}</a>
+  <li class="io-pagination-next {{if pagerSpread 'next'}} {{if isLastDisabled 'io-pagination-disabled'}}">
+    <a href="{{nextUrl}}" {{action 'next'}}></a>
   </li>
 {{else}}
-  <li class="{{if pagerSpread 'previous'}} {{if isFirstDisabled 'disabled'}}">
-    <a href="{{previousUrl}}" {{action 'previous'}}>{{pagerPrevious}}</a>
+  <li class="io-pagination-prev {{if isFirstDisabled 'io-pagination-disabled'}}">
+    <a href="{{previousUrl}}" {{action 'previous'}}></a>
   </li>
 
-  <li class="{{if pagerSpread 'next'}} {{if isLastDisabled 'disabled'}}">
-    <a href="{{nextUrl}}" {{action 'next'}}>{{pagerNext}}</a>
+  <li class="io-pagination-next {{if pagerSpread 'next'}} {{if isLastDisabled 'io-pagination-disabled'}}">
+    <a href="{{nextUrl}}" {{action 'next'}}></a>
   </li>
 {{/unless}}
 {{/if}}

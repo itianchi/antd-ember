@@ -4,7 +4,8 @@ var computed = Ember.computed;
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNameBindings: ['isActive:active', 'disabled'],
+  classNames: 'io-pagination-item',
+  classNameBindings: ['isActive', 'disabled'],
   seperator: '…',
   selected: null,
 
@@ -18,7 +19,11 @@ export default Ember.Component.extend({
   }),
 
   isActive: computed('page', 'selected', function () {
-    return this.get('page') === this.get('selected');
+    if(this.get('page') === this.get('selected')) {
+      return 'io-pagination-item-active';
+    } else {
+      return '';
+    }
   }),
 
   isDots: computed('page', function () {

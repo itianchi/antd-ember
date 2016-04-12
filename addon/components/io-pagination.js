@@ -5,9 +5,11 @@ var alias = computed.alias;
 
 export default Ember.Component.extend({
   tagName: 'ul',
-  classNameBindings: ['pager:pager:pagination', 'isHidden:hidden', 'paginationSizeClass'],
-  pager: false,//是否为简洁模式
+  classNames: 'io-pagination',
+  classNameBindings: ['pager:pager', 'isHidden:hidden', 'paginationSizeClass', 'miniClass'],
+  pager: false, 
   hide: false,
+  mini: false,
   pagerNext: '下一页',
   pagerPrevious: '上一页',
   paginationPrevious: '«',
@@ -20,7 +22,13 @@ export default Ember.Component.extend({
   urlTemplate: '#',
   lastPage: alias('count'),
   count: 1,
-
+  miniClass: computed('mini', function() {
+    if (this.get('mini')) {
+      return 'mini';
+    } else {
+      return ''
+    }
+  }),
   previousUrl: computed('urlTemplate', 'current', 'firstPage', function () {
     var urlTemplate = this.get('urlTemplate');
     var current = this.get('current');
