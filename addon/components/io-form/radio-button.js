@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import FormItemMixin from '../../mixin/form-item';
+import ComponentChild from '../../mixin/component-child';
 
 /**
  * RadioButton Component
@@ -7,7 +8,7 @@ import FormItemMixin from '../../mixin/form-item';
  ``` 
  */
 
-export default Ember.Component.extend(FormItemMixin, {
+export default Ember.Component.extend(ComponentChild, FormItemMixin, {
 	/**
 	 * [tagName description]
 	 */
