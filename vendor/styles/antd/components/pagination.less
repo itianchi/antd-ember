@@ -26,12 +26,18 @@
     background-color: #fff;
     margin-right: 8px;
     font-family: Arial;
+    position: relative;
 
     a {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: inline-block;
       text-decoration: none;
       color: #666;
       transition: none;
-      margin: 0 6px;
     }
 
     &:hover {
@@ -116,10 +122,14 @@
   &-prev,
   &-next {
     border: 1px solid @border-color-base;
-
+    position: relative;
     a {
       color: #666;
-
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
       &:after {
         .iconfont-size-under-12px(8px);
         display: block;
