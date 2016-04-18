@@ -1,0 +1,297 @@
+<h1>table 表格</h1>
+
+<br><br>
+<a href="http://onechiporenko.github.io/ember-models-table/">参考链接</a>
+<div class="demo-type">
+	<h2>基本使用</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-table
+				columns=columns
+				data=data }}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html"> 
+    &#123;&#123;io-table
+	columns=columns
+	data=data&#125;&#125;
+    
+    // 换页 action
+    gotoFirst() {
+    	this.sendAction('gotoFirst');
+    },
+    gotoPrev() {
+        this.sendAction('gotoPrev');
+    },
+    gotoNext() {
+        this.sendAction('gotoNext');
+    },
+    gotoLast() {
+        this.sendAction('gotoLast');
+    },
+    gotoCustomPage(pageNumber) {
+        this.sendAction('gotoCustomPage', pageNumber);
+    }
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h2>API 参数说明</h2>
+
+<table class="table-striped table-bordered table-condensed table" style="display:block;" >
+        <thead>
+          <tr>
+            <td>Option</td>
+            <td>Type</td>
+            <td>Default value</td>
+            <td>Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>data</code></td>
+            <td>Ember.Object[]</td>
+            <td><pre>[]</pre></td>
+            <td><p>All table records</p></td>
+          </tr>
+          <tr>
+            <td><code>columns</code></td>
+            <td>Object[]</td>
+            <td><pre>[]</pre></td>
+            <td>
+              <p>All table columns</p>
+              <p>Each column may have such fields:</p>
+              <table class="table table-condensed table-column-options">
+                <tbody>
+                  <tr>
+                    <td><code>propertyName</code></td>
+                    <td>String</td>
+                    <td><p>Field-name of the data's object shown in the current column. If it isn't provided, sorting and filtering options for current column are ignored</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>title</code></td>
+                    <td>String</td>
+                    <td><p>Header for column. If it isn't provided, capitalized <code>propertyName</code> is used</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>template</code></td>
+                    <td>String</td>
+                    <td><p>Custom template for each cell in the current column</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>sortedBy</code></td>
+                    <td>String</td>
+                    <td><p>Field-name for sorting by current column. If it isn't provided, <code>propertyName</code> is used</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>isHidden</code></td>
+                    <td>Boolean</td>
+                    <td><p>Is current column hidden by default</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>mayBeHidden</code></td>
+                    <td>Boolean</td>
+                    <td><p>Is current column me be hidden. This field determines, if column appears in the columns-dropdown. If <code>mayBeHidden</code> is <code>true</code> and <code>isHidden</code> is also <code>true</code> for current column, this column always be hidden</p></td>
+                  </tr>
+                  <tr>
+                    <td><code>filterWithSelect</code></td>
+                    <td>Boolean</td>
+                    <td><p>If <code>true</code> select-dropdown will be used for filtering by current column. Options are unique values for <code>data.@each.${propertyName}</code></p></td>
+                  </tr>
+                  <tr>
+                    <td><code>predefinedFilterOptions</code></td>
+                    <td>String[]</td>
+                    <td><p>List of predefined options for select-dropdown. Used if <code>filterWithSelect</code> is <code>true</code>. It isn't overrode with <code>data.@each.${propertyName}</code></p></td>
+                  </tr>
+                  <tr>
+                    <td><code>className</code></td>
+                    <td>String</td>
+                    <td>Custom class-name for cells in the current column</td>
+                  </tr>
+                  <tr>
+                    <td><code>filterFunction</code></td>
+                    <td>Function</td>
+                    <td>Custom function used to filter rows (used if <code>filterWithSelect</code> is false)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><code>multipleColumnsSorting</code></td>
+            <td>Boolean</td>
+            <td><pre>true</pre></td>
+            <td><p>Determines if multi-columns sorting should be used</p></td>
+          </tr>
+          <tr>
+            <td><code>useNumericPagination</code></td>
+            <td>Boolean</td>
+            <td><pre>false</pre></td>
+            <td><p>Determines if numeric pagination should be used</p></td>
+          </tr>
+          <tr>
+            <td><code>showTableFooter</code></td>
+            <td>Boolean</td>
+            <td><pre>true</pre></td>
+            <td><p>Determines if table footer should be shown on the page</p></td>
+          </tr>
+          <tr>
+            <td><code>showColumnsDropdown</code></td>
+            <td>Boolean</td>
+            <td><pre>true</pre></td>
+            <td><p>Determines if columns-dropdown should be shown</p></td>
+          </tr>
+          <tr>
+            <td><code>useFilteringByColumns</code></td>
+            <td>Boolean</td>
+            <td><pre>true</pre></td>
+            <td><p>Determines if filtering by columns should be available to the user</p></td>
+          </tr>
+          <tr>
+            <td><code>filteringIgnoreCase</code></td>
+            <td>Boolean</td>
+            <td><pre>false</pre></td>
+            <td><p>Determines if filtering (global and by column) should ignore case</p></td>
+          </tr>
+          <tr>
+            <td><code>showGlobalFilter</code></td>
+            <td>Boolean</td>
+            <td><pre>true</pre></td>
+            <td><p>Determines if "Global filter"-field should be shown</p></td>
+          </tr>
+          <tr>
+            <td><code>displayDataChangedAction</code></td>
+            <td>String</td>
+            <td><pre>displayDataChanged</pre></td>
+            <td><p>Action-name sent on user interaction</p></td>
+          </tr>
+          <tr>
+            <td><code>sendDisplayDataChangedAction</code></td>
+            <td>Boolean</td>
+            <td><pre>false</pre></td>
+            <td><p>Determines if action on user interaction should be sent</p></td>
+          </tr>
+          <tr>
+            <td><code>columnsAreUpdateable</code></td>
+            <td>Boolean</td>
+            <td><pre>false</pre></td>
+            <td><p>Determines if <code>processedColumns</code> will be updated if <code>columns</code> are changed (<code>propertyName</code> and <code>template</code> are observed).</p><p class="alert alert-danger"><strong>IMPORTANT</strong> All filter, sort and visibility options will be dropped to the default values while updating.</p></td>
+          </tr>
+          <tr>
+            <td><code>columnFieldsToCheckUpdate</code></td>
+            <td>String[]</td>
+            <td><pre>propertyName,template</pre></td>
+            <td><p><code>columns</code>-fields which are observed to update shown table-columns. It is used only if <code>columnsAreUpdateable</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>simplePaginationTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/simple-pagination</pre></td>
+            <td><p>Path to the custom template with pagination. Ignored if <code>useNumericPagination</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>numericPaginationTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/numeric-pagination</pre></td>
+            <td><p>Path to the custom template with numeric pagination. Used if <code>useNumericPagination</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>tableFooterTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/table-footer</pre></td>
+            <td><p>Path to the custom template with table footer. Used if <code>showTableFooter</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>globalFilterTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/global-filter</pre></td>
+            <td><p>Path to the custom template with global filter. Used if <code>showGlobalFilter</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>columnsDropdownTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/columns-dropdown</pre></td>
+            <td><p>Path to the custom template with columns dropdown. Used if <code>showColumnsDropdown</code> is <code>true</code></p></td>
+          </tr>
+          <tr>
+            <td><code>rowTemplate</code></td>
+            <td>String</td>
+            <td><pre>components/models-table/row</pre></td>
+            <td><p>Path to the custom template with table's row</p></td>
+          </tr>
+          <tr>
+            <td><code>customMessages</code></td>
+            <td>Object</td>
+            <td><pre>{}</pre></td>
+            <td>
+              <p>Overrides for messages used in the component. Defaults:</p>
+              <pre><code class="javascript hljs">messages: Ember.Object.create({
+  <span class="hljs-string">"searchLabel"</span>: <span class="hljs-string">"Search:"</span>,
+  <span class="hljs-string">"columns-title"</span>: <span class="hljs-string">"Columns"</span>,
+  <span class="hljs-string">"columns-showAll"</span>: <span class="hljs-string">"Show All"</span>,
+  <span class="hljs-string">"columns-hideAll"</span>: <span class="hljs-string">"Hide All"</span>,
+  <span class="hljs-string">"columns-restoreDefaults"</span>: <span class="hljs-string">"Restore Defaults"</span>,
+  <span class="hljs-string">"tableSummary"</span>: <span class="hljs-string">"Show %@ - %@ of %@"</span>,
+  <span class="hljs-string">"allColumnsAreHidden"</span>: <span class="hljs-string">"All columns are hidden. Use &lt;strong&gt;columns&lt;/strong&gt;-dropdown to show some of them"</span>,
+  <span class="hljs-string">"noDataToShow"</span>: <span class="hljs-string">"No records to show"</span>
+})</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td><code>customIcons</code></td>
+            <td>Object</td>
+            <td><pre>{}</pre></td>
+            <td>
+              <p>Overrides for icons-classes used in the component. Defaults:</p>
+              <pre><code class="javascript hljs">icons: Ember.Object.create({
+  <span class="hljs-string">"sort-asc"</span>: <span class="hljs-string">"glyphicon glyphicon-triangle-bottom"</span>,
+  <span class="hljs-string">"sort-desc"</span>: <span class="hljs-string">"glyphicon glyphicon-triangle-top"</span>,
+  <span class="hljs-string">"column-visible"</span>: <span class="hljs-string">"glyphicon glyphicon-check"</span>,
+  <span class="hljs-string">"column-hidden"</span>: <span class="hljs-string">"glyphicon glyphicon-unchecked"</span>,
+  <span class="hljs-string">"nav-first"</span>: <span class="hljs-string">"glyphicon glyphicon-chevron-left"</span>,
+  <span class="hljs-string">"nav-prev"</span>: <span class="hljs-string">"glyphicon glyphicon-menu-left"</span>,
+  <span class="hljs-string">"nav-next"</span>: <span class="hljs-string">"glyphicon glyphicon-menu-right"</span>,
+  <span class="hljs-string">"nav-last"</span>: <span class="hljs-string">"glyphicon glyphicon-chevron-right"</span>,
+  <span class="hljs-string">"caret"</span>: <span class="hljs-string">"caret"</span>
+})</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td><code>customClasses</code></td>
+            <td>Object</td>
+            <td><pre>{}</pre></td>
+            <td>
+              <p>Overrides for css-classes (excluding <code>icons</code>) used in the component. Defaults:</p>
+              <pre><code class="javascript hljs">classes: Ember.Object.create({
+  <span class="hljs-string">"outerTableWrapper"</span>: <span class="hljs-string">"models-table-wrapper"</span>,
+  <span class="hljs-string">"innerTableWrapper"</span>: <span class="hljs-string">"inner-table-wrapper"</span>,
+  <span class="hljs-string">"table"</span>: <span class="hljs-string">"table table-striped table-bordered table-condensed"</span>,
+  <span class="hljs-string">"globalFilterWrapper"</span>: <span class="hljs-string">"pull-left"</span>,
+  <span class="hljs-string">"columnsDropdownWrapper"</span>: <span class="hljs-string">"pull-right columns-dropdown"</span>,
+  <span class="hljs-string">"columnsDropdownButtonWrapper"</span>: <span class="hljs-string">"btn-group"</span>,
+  <span class="hljs-string">"columnsDropdown"</span>: <span class="hljs-string">"dropdown-menu pull-right"</span>,
+  <span class="hljs-string">"theadCell"</span>: <span class="hljs-string">"table-header"</span>,
+  <span class="hljs-string">"tfooterWrapper"</span>: <span class="hljs-string">"table-footer clearfix"</span>,
+  <span class="hljs-string">"footerSummary"</span>: <span class="hljs-string">"table-summary"</span>,
+  <span class="hljs-string">"footerSummaryNumericPagination"</span>: <span class="hljs-string">"col-md-3 col-sm-3"</span>,
+  <span class="hljs-string">"footerSummaryDefaultPagination"</span>: <span class="hljs-string">"col-md-8 col-sm-8"</span>,
+  <span class="hljs-string">"pageSizeWrapper"</span>: <span class="hljs-string">"col-md-2 col-sm-2"</span>,
+  <span class="hljs-string">"pageSizeSelectWrapper"</span>: <span class="hljs-string">"pull-right"</span>,
+  <span class="hljs-string">"paginationWrapper"</span>: <span class="hljs-string">"table-nav"</span>,
+  <span class="hljs-string">"paginationWrapperNumeric"</span>: <span class="hljs-string">"col-md-7 col-sm-7"</span>,
+  <span class="hljs-string">"paginationWrapperDefault"</span>: <span class="hljs-string">"col-md-2 col-sm-2"</span>,
+  <span class="hljs-string">"buttonDefault"</span>: <span class="hljs-string">"btn btn-default"</span>,
+  <span class="hljs-string">"noDataCell"</span>: <span class="hljs-string">""</span>
+})</code></pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+

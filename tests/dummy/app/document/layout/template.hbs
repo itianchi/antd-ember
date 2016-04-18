@@ -1,0 +1,62 @@
+<h1>Layout 布局</h1>
+<p>24 格栅格系统</p>
+
+<h2>概述</h2>
+<p>布局的栅格化系统，我们是基于行（row）和列（col）来定义信息区块的外部框架，以保证页面的每个区域能够稳健地排布起来。下面简单介绍一下它的工作原理：</p>
+
+<ul>
+<li>通过<code>row</code>在水平方向建立一组<code>column</code>（简写col）</li>
+<li>你的内容应当放置于<code>col</code>内，并且，只有<code>col</code>可以作为<code>row</code>的直接元素</li>
+<li>栅格系统中的列是指1到24的值来表示其跨越的范围。例如，三个等宽的列可以使用<code>.col-8</code>来创建</li>
+<li>如果一个<code>row</code>中的<code>col</code>总和超过24，那么多余的<code>col</code>会作为一个整体另起一行排列</li>
+</ul>
+
+<div class="demo-grid">
+	<div class="demo-type">
+		<h2>使用方法</h2>
+	      <p>可同时使用自带图标和 font-awesome 图标</p>
+		<div class="demo">
+			<div class="demo-example">
+				{{#io-row}}
+					{{#io-col span="12"}}.col-12{{/io-col}}
+					{{#io-col span="12"}}.col-12{{/io-col}}
+				{{/io-row}}
+				{{#io-row class="testRowClassName"}}
+					{{#io-col span="8"}}.col-8{{/io-col}}
+					{{#io-col span="8"}}.col-8{{/io-col}}
+					{{#io-col span="8"}}.col-8{{/io-col}}
+				{{/io-row}}
+				{{#io-row class=""}}
+					{{#io-col span="6"}}.col-6{{/io-col}}
+					{{#io-col span="6"}}.col-6{{/io-col}}
+					{{#io-col span="6"}}.col-6{{/io-col}}
+					{{#io-col span="6"}}.col-6{{/io-col}}
+				{{/io-row}}
+			</div>
+			<div class="demo-code">
+	                  <div class="highlight">
+	<pre><code class="language-html" data-lang="html">
+	\{{#io-row}}
+		\{{#io-col span="12"}}.col-12\{{/io-col}}
+		\{{#io-col span="12"}}.col-12\{{/io-col}}
+	\{{/io-row}}
+	\{{#io-row class="testRowClassName"}}
+		\{{#io-col span="8"}}.col-8\{{/io-col}}
+		\{{#io-col span="8"}}.col-8\{{/io-col}}
+		\{{#io-col span="8"}}.col-8\{{/io-col}}
+	\{{/io-row}}
+	\{{#io-row class=""}}
+		\{{#io-col span="6"}}.col-6\{{/io-col}}
+		\{{#io-col span="6"}}.col-6\{{/io-col}}
+		\{{#io-col span="6"}}.col-6\{{/io-col}}
+		\{{#io-col span="6"}}.col-6\{{/io-col}}
+	\{{/io-row}}
+	</code></pre>
+	                  </div>
+	            </div>
+		</div>
+	</div>
+	
+</div>
+
+

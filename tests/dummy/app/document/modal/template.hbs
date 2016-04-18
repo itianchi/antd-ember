@@ -1,0 +1,54 @@
+<h1>Modal 模态框</h1>
+
+
+<div class="demo-type">
+	<h2>基本用法</h2>
+	<div class="demo">
+		<div class="demo-example">
+			<button class="btn btn-primary" {{action 'toggleModal'}}>打开模态框</button>
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre><code class="language-html">
+&#123;&#123;#io-modal show=isShowingModal&#125;&#125;
+&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal fade<span class="pl-pds">"</span></span> <span class="pl-e">data-backdrop</span>=<span class="pl-s"><span class="pl-pds">"</span>static<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-dialog modal-lg<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-content<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-header bg-primary<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>close<span class="pl-pds">"</span></span> &#123;&#123;<span class="pl-e">action</span> <span class="pl-s"><span class="pl-pds">'</span>toggleModal<span class="pl-pds">'</span></span>&#125;&#125;&gt;×&lt;/<span class="pl-ent">button</span>&gt;
+                &lt;<span class="pl-ent">h4</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-title<span class="pl-pds">"</span></span>&gt;模态框&lt;/<span class="pl-ent">h4</span>&gt;
+            &lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-body<span class="pl-pds">"</span></span>&gt;
+                 hello modal
+            &lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>modal-footer<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">button</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>btn btn-default<span class="pl-pds">"</span></span> &#123;&#123;<span class="pl-e">action</span> <span class="pl-s"><span class="pl-pds">'</span>toggleModal<span class="pl-pds">'</span></span>&#125;&#125;&gt;关　闭&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;/<span class="pl-ent">div</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+&#123;&#123;/io-modal&#125;&#125;
+				</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{#io-modal show=isShowingModal}}
+<div class="modal fade" data-backdrop="static">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" {{action 'toggleModal'}}>×</button>
+				<h4 class="modal-title">模态框</h4>
+			</div>
+			<div class="modal-body">
+				 hello modal
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" {{action 'toggleModal'}}>关　闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+{{/io-modal}}

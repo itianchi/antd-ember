@@ -1,0 +1,215 @@
+<h1>
+    Form 表单
+</h1>
+
+<div class="demo-type">
+    <h2> input 输入</h2>
+    <div class="demo">
+
+        <div class="demo-example">
+            {{#io-row}}
+                {{#io-col span=6}}
+                    {{io-input 
+                        type="text" 
+                        size="large"
+                        placeholder="请输入文字"}}
+                    &nbsp;&nbsp;
+                {{/io-col}}
+                {{#io-col span=6}}
+                    {{io-input 
+                        type="text" 
+                        placeholder="请输入文字"}}
+                    &nbsp;&nbsp;
+                {{/io-col}}
+                {{#io-col span=6}}
+                    {{io-input 
+                        type="text" 
+                        size="small"
+                        placeholder="请输入文字"}}
+                {{/io-col}}
+            {{/io-row}}
+        </div>
+        <div class="demo-code">
+            <pre><code class="language-html" data-lang="html">   
+\{{#io-row}}
+    \{{#io-col span=6}}
+        \{{io-input 
+            type="text" 
+            size="large"
+            placeholder="请输入文字"}}
+        &nbsp;&nbsp;
+    \{{/io-col}}
+    \{{#io-col span=6}}
+        \{{io-input 
+            type="text" 
+            placeholder="请输入文字"}}
+        &nbsp;&nbsp;
+    \{{/io-col}}
+    \{{#io-col span=6}}
+        \{{io-input 
+            type="text" 
+            size="small"
+            placeholder="请输入文字"}}
+    \{{/io-col}}
+\{{/io-row}}
+            </code></pre>
+        </div>
+    </div>
+</div>
+<div class="demo-type">
+    <h2>
+        基本表单
+    </h2>
+    <p>
+        <a href="http://1000hz.github.io/bootstrap-validator/">表单验证规则参考</a>
+    </p>
+    <div class="demo">
+        <div class="demo-example">
+            {{#io-form submitForm="saveAction"}}
+                {{#io-form-group
+                    label="Email Address"
+                    }}
+                    {{io-input 
+                    	value=model.email
+                    	type="email" 
+                    	id="assetsNo" 
+                    	required=true
+                    	placeholder="Email"
+                    	}}
+                {{/io-form-group}}
+                {{#io-form-group label="password"}}
+                    {{io-input 
+                    	value=model.password
+                    	type="password"  
+                    	required=true
+                    	placeholder="Password"
+                    	}}
+                {{/io-form-group}}
+                {{#io-form-group}}
+                    <div class="checkbox">
+                        <label>
+                            {{io-checkbox 
+    	                    	checked=model.checkMeOut
+    	                    	required=true }}
+                            记住我
+                        </label>
+                    </div>
+                {{/io-form-group}}
+                {{#io-button submit=true}} submit {{/io-button}}
+            {{/io-form}}
+        </div>
+        <div class="demo-code">
+        	<div class="highlight">
+        		<pre><code class="language-html" data-lang="html"> 
+\{{#io-form submitForm="saveAction"}}
+    \{{#io-form-group
+        label="Email Address"
+        }}
+        \{{io-input 
+            value=model.email
+            type="email" 
+            id="assetsNo" 
+            required=true
+            placeholder="Email"
+            }}
+    \{{/io-form-group}}
+    \{{#io-form-group label="password"}}
+        \{{io-input 
+            value=model.password
+            type="password"  
+            required=true
+            placeholder="Password"
+            }}
+    \{{/io-form-group}}
+    \{{#io-form-group}}
+        \{{io-checkbox 
+            checked=model.checkMeOut
+            required=true }}
+        记住我
+    \{{/io-form-group}}
+    \{{#io-button submit=true}} submit \{{/io-button}}
+\{{/io-form}}
+</code></pre>
+        	</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="demo-type">
+    <h2> 动态表单 </h2>
+    <p>同台类型的表单可以通过传入 <code>schema</code> 来生成表单，另设置 formData 对象对应表单项的值，可以通过 fieldChange action 来获取单个表单项的变化事件， submitForm 的参数为表单数据</p>
+    <div class="demo">
+        <div class="demo-example">
+            {{io-form schema=schema 
+                formData=formData 
+                submitForm="submitDynamicForm"
+                fieldChange="fieldChange"}}
+        </div>
+        <div class="demo-code">
+            <pre><code class="language-html" data-lang="html">   
+\{{io-form schema=schema formData=formData submitForm="submitDynamicForm" fieldChange="fieldChange"}}
+let schema = {
+    title: "用户信息",
+    description: "填写用户呢",
+    labelColClass: "col-8",
+    inputColClass: "col-5",
+    submit: {
+        text: "保存",
+        submitClass: "submit-button"
+    },
+    properties: {
+        name: {
+            // field type
+            // [text|number|password|select|enum|check|textarea]
+            type: "text",
+            // field label
+            label: "名称：",
+            // field placeholder
+            placeholder: "请输入用户名",
+            // field label class
+            labelColClass: "col-8",
+            // field input class
+            inputColClass: "col-5",
+            // if required
+            required: true,
+            // help message
+            help: "",
+            // error message
+            error: "请输入名称",
+            //  regrex pattern
+            pattern: "^.*$"
+        }, 
+        age: {
+            type: "number",
+            label: "年龄：",
+            required: true
+        }, 
+        sex: {
+            type: "enum",
+            label: "选择性别：",
+            enum: [["boy", "男"], ["girl", "女"]],
+        }, 
+        location: {
+            type: "select",
+            label: "选择所在省份：",
+            options: [["a", "重庆"], ["b", "北京"], ["c", "广州"], ["d", "上海"]],
+        }, 
+        description: {
+            type: "textarea",
+            label: "自我介绍："
+        }, 
+        checked: {
+            type: "check",
+            label: "记住我：",
+            checkLabel: "请勾选"
+        }
+    }
+}
+            </code></pre>
+        </div>
+    </div>
+</div>
+
+
+  

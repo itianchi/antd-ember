@@ -1,0 +1,106 @@
+<h1>
+    Menu 导航菜单
+</h1>
+
+<section class="demo-type">
+	<h2>基本用法</h2>
+	<p>menu 支持水平，垂直 menu, 同时可以嵌套使用</p>
+	<div class="demo">
+		<div class="demo-example">
+				{{#io-menu}}
+					{{#io-menu-item selected=true}} {{io-icon type="mail"}} 导航一 {{/io-menu-item}}
+					{{#io-menu-item }} {{io-icon type="appstore"}} 导航二 {{/io-menu-item}}	
+					{{#io-menu-item submenu=true}} 
+						{{#io-menu-title}} 
+							{{io-icon type="setting"}} 导航三 子菜单 
+						{{/io-menu-title}}
+						{{#io-menu sub=true}}
+							{{#io-menu-item value="1" selectedValue="1"}} 选项一 {{/io-menu-item}}
+							{{#io-menu-item}} 选项二 {{/io-menu-item}}
+							{{#io-menu-item-group title="分组1"}}
+								{{#io-menu-item}} 选项三 {{/io-menu-item}}
+								{{#io-menu-item}} 选项四 {{/io-menu-item}}
+							{{/io-menu-item-group}}
+						{{/io-menu}}
+					{{/io-menu-item}}
+					{{#io-menu-item }} <a href="">导航四链接</a> {{/io-menu-item}}
+				{{/io-menu}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{#io-menu}}
+	\{{#io-menu-item selected=true}} \{{io-icon type="mail"}} 导航一 \{{/io-menu-item}}
+	\{{#io-menu-item }} \{{io-icon type="appstore"}} 导航二 \{{/io-menu-item}}	
+	\{{#io-menu-item submenu=true}} 
+		\{{#io-menu-title}} 
+			\{{io-icon type="setting"}} 导航三 子菜单 
+		\{{/io-menu-title}}
+		\{{#io-menu sub=true}}
+			\{{#io-menu-item value="1" selectedValue="1"}} 选项一 \{{/io-menu-item}}
+			\{{#io-menu-item}} 选项二 \{{/io-menu-item}}
+			\{{#io-menu-item-group title="分组1"}}
+				\{{#io-menu-item}} 选项三 \{{/io-menu-item}}
+				\{{#io-menu-item}} 选项四 \{{/io-menu-item}}
+			\{{/io-menu-item-group}}
+		\{{/io-menu}}
+	\{{/io-menu-item}}
+	\{{#io-menu-item }} 导航四链接 \{{/io-menu-item}}
+\{{/io-menu}}
+
+</code></pre>
+			</div>			
+		</div>
+	</div>
+</section>
+
+
+<section class="demo-type">
+	<h2>侧边栏 inline menu</h2>
+	<p>添加 mode=inline</p>
+	<div class="demo">
+		<div class="demo-example">
+			{{#io-menu mode="inline" style="width: 240px;"}}
+				{{#io-menu-item }} {{io-icon type="mail"}} 导航一 {{/io-menu-item}}
+				{{#io-menu-item }} {{io-icon type="appstore"}} 导航二 {{/io-menu-item}}	
+				{{#io-menu-item submenu=true}} 
+					{{#io-menu-title}} {{io-icon type="setting"}} 导航三 子菜单 {{/io-menu-title}}
+					{{#io-menu mode="inline" sub=true}}
+						{{#io-menu-item value="1" selectedValue="1"}} 选项一 {{/io-menu-item}}
+						{{#io-menu-item}} 选项二 {{/io-menu-item}}
+						{{#io-menu-item-group title="分组1"}}
+							{{#io-menu-item}} 选项三 {{/io-menu-item}}
+							{{#io-menu-item}} 选项四 {{/io-menu-item}}
+						{{/io-menu-item-group}}
+					{{/io-menu}}
+				{{/io-menu-item}}
+			{{/io-menu}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{#io-menu mode="inline" style="width: 240px;"}}
+	\{{#io-menu-item }} \{{io-icon type="mail"}} 导航一 \{{/io-menu-item}}
+	\{{#io-menu-item }} \{{io-icon type="appstore"}} 导航二 \{{/io-menu-item}}	
+	\{{#io-menu-item submenu=true}} 
+		\{{#io-menu-title}} \{{io-icon type="setting"}} 导航三 子菜单 \{{/io-menu-title}}
+		\{{#io-menu mode="inline" sub=true}}
+			\{{#io-menu-item value="1" selectedValue="1"}} 选项一 \{{/io-menu-item}}
+			\{{#io-menu-item}} 选项二 \{{/io-menu-item}}
+			\{{#io-menu-item-group title="分组1"}}
+				\{{#io-menu-item}} 选项三 \{{/io-menu-item}}
+				\{{#io-menu-item}} 选项四 \{{/io-menu-item}}
+			\{{/io-menu-item-group}}
+		\{{/io-menu}}
+	\{{/io-menu-item}}
+\{{/io-menu}}
+</code></pre>
+			</div>			
+		</div>
+	</div>
+</section>
+
+
+
+
+ 

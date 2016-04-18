@@ -1,0 +1,42 @@
+ul.menu {
+	margin-left: 16px;
+	>li {
+		&.current {
+			border-right: 2px solid @brand-primary;
+			color: @brand-primary;
+			span.chinese {
+				color: @brand-primary;
+			}
+		}
+
+		> a {
+			padding-left: 24px;
+			color: #666;
+			line-height: 40px;
+			height: 40px;
+			font-size: 14px;
+			text-decoration: none;
+			&:hover {
+				color: @brand-primary;
+				span.chinese {
+					color: @brand-primary;
+				}
+			}
+		}
+
+		>ul {
+			margin-left: 16px;
+		}
+	}
+
+	span.chinese {
+		.gray();
+		margin-left: 10px;
+	}
+
+	li.type-divider {
+		.gray();
+		margin: 6px 0 6px 24px;
+		font-size: 12px;
+	}
+}

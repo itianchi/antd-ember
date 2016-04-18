@@ -1,0 +1,50 @@
+<h1>Upload 上传组件</h1>
+
+
+<section class="demo-type">
+	<h2>基本用法</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{#io-upload
+				action="/srv/app/ext/import/9e62f0a5-f69c-41aa-9b65-2420a7345f2b/dpUnit"
+				name="importFile" 
+				onChange="onChange"}}
+				{{#io-button type="ghost"}} 开始上传 {{/io-button}}
+			{{/io-upload}}
+
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+
+// template
+\{{#io-upload
+	action="/srv/app/ext/import/9e62f0a5-f69c-41aa-9b65-2420a7345f2b/dpUnit"
+	name="importFile" 
+	onChange="onChange"}}
+	\{{#io-button type="ghost"}} 开始上传 \{{/io-button}}
+\{{/io-upload}}
+
+// controller onChange action
+onChange(ev) {
+    if (ev.file.status !== 'uploading') {
+        console.log(`${ev.file.name} 正在上传.... ${ev.file.percent}`);
+    }
+
+    if (ev.file.status === 'done') {
+        console.log(`${ev.file.name} 上传成功。`);
+    } 
+
+    if (ev.file.status === 'error') {
+        console.log(ev.file.response);
+        console.log(`${ev.file.name} 上传失败。`);
+    }
+}
+</code></pre>
+			</div>			
+		</div>
+	</div>
+</section>
+
+
+

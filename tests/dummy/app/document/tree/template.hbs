@@ -1,0 +1,33 @@
+<h1>Tree 树</h1>
+
+
+<br>
+<a href="http://indexiatech.github.io/ember-idx-tree"> 参考链接 </a>
+
+<div class="demo-type">
+	<h2>基本使用</h2>
+	<div class="demo">
+		<div class="demo-example">
+			 {{io-tree 
+			 	model=model 
+			 	selected=selected
+			 	onSelectNode='onSelectNode'}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html"> 
+ \{{io-tree 
+    model=model 
+    selected=selected
+    onSelectNode='onSelectNode'}}
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{!-- {{#if (eq 1 1)}}
+	eq <b>{{person.firstName}} {{person.lastName}}</b>!
+{{/if}} --}}
+

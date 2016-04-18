@@ -1,0 +1,67 @@
+<h1>
+    Select 下拉选择
+</h1>
+
+<div class="demo-type">
+	<h2>单项选择</h2>
+	<p> value 值为双向绑定 </p>
+	<div class="demo">
+		<div class="demo-example">
+			{{#io-select width=200 value=value placeholder="请选择名称"}}
+				{{#io-option value="1"}} jack {{/io-option}}
+				{{#io-option value="2"}} lucy {{/io-option}}
+				{{#io-option value="disabled" disabled=true}} disabled {{/io-option}}
+				{{#io-option value="3"}} 6174 {{/io-option}}
+			{{/io-select}}
+
+			{{io-select width=200 value=value placeholder="请选择名称" options=options}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+// io-option
+\{{#io-select width=200 value=value placeholder="请选择名称" }}
+	\{{#io-option value="1"}} jack \{{/io-option}}
+	\{{#io-option value="2"}} lucy \{{/io-option}}
+	\{{#io-option value="3" disabled=true}} disabled \{{/io-option}}
+	\{{#io-option value="4"}} 6174 \{{/io-option}}
+\{{/io-select}}
+
+// options
+\{{io-select width=200 value=value placeholder="请选择名称" options=options}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>多项选择</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{#io-select width=200 value=values multiple=true}}
+				{{#io-option value="jack"}} jack {{/io-option}}
+				{{#io-option value="lucy"}} lucy {{/io-option}}
+				{{#io-option value="disabled" disabled=true}} disabled {{/io-option}}
+				{{#io-option value="6174"}} 6174 {{/io-option}}
+				{{#io-option value="golang"}} golang {{/io-option}}
+				{{#io-option value="ubuntu"}} ubuntu {{/io-option}}
+			{{/io-select}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{#io-select width=200 value=values multiple=true}}
+	\{{#io-option value="jack"}} jack \{{/io-option}}
+	\{{#io-option value="lucy"}} lucy \{{/io-option}}
+	\{{#io-option value="disabled" disabled=true}} disabled \{{/io-option}}
+	\{{#io-option value="6174"}} 6174 \{{/io-option}}
+	\{{#io-option value="golang"}} golang \{{/io-option}}
+	\{{#io-option value="ubuntu"}} ubuntu \{{/io-option}}
+\{{/io-select}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+

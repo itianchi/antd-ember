@@ -1,0 +1,92 @@
+<h1>Select 下拉选择</h1>
+
+下拉选择支持搜索过滤， 多项选择
+
+<br><br>
+<a href="https://tedconf.github.io/ember-searchable-select/"> 参考链接 </a>
+
+
+<div class="demo-type">
+	<h2>基本使用</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-searchable-select
+				content=list
+				sortBy="title"
+				on-change=(action "update")}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html"><span class="pl-c">&lt;!-- content[Array(Object)] 对应选择的 option --&gt;</span>
+<span class="pl-c">&lt;!-- label 默认为 Object.title --&gt;</span>
+<span class="pl-c">&lt;!-- sortBy 自定义字段 --&gt;</span>
+&#123;&#123;io-searchable-select
+    content=list
+    sortBy="title"
+    on-change=(action "update")&#125;&#125;
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>默认选择</h2>
+	<p>可以传入默认值作为初始选择， 但是选择的值不是双向绑定的</p>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-searchable-select
+				content=list
+				sortBy="title"
+				selected=initialSelection
+				on-change=(action "update")}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html">
+<span class="pl-c">&lt;!-- selected [Object] 默认选择值, 数组 content 的一项--&gt;</span>
+&#123;&#123;io-searchable-select
+    content=list
+    sortBy="title"
+    selected=initialSelection
+    on-change=(action "update")&#125;&#125;
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>ajax 远程选择搜索</h2>
+	<p>通过搜索来选择，添加on-search action, 动态设置 content, isLoading状态表示是否正在加载中</p>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-searchable-select
+				content=list
+				sortBy="title"
+				selected=initialSelection
+				on-change=(action "update")
+				on-search=(action "search")
+				isLoading=isLoading}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html">
+<span class="pl-c">&lt;!-- --&gt;</span>
+&#123;&#123;io-searchable-select
+    content=list
+    sortBy="title"
+    selected=initialSelection
+    isLoading=isLoading
+    on-change=(action "update")
+    on-search=(action "search")&#125;&#125;
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+

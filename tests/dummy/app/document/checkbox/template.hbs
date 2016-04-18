@@ -1,0 +1,43 @@
+<h1>Checkbox 复选框</h1>
+
+<section class="demo-type">
+	<h2>基本用法</h2>
+	<p>checked 属性为双向绑定，也可以添加 onChange action</p>
+	<div class="demo">
+		<div class="demo-example">
+			<label>
+				{{io-checkbox checked=checked onChange='onChange'}}
+				checkbox
+			</label>
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-checkbox checked=checked onChange='onChange'}}
+</code></pre>
+			</div>			
+		</div>
+	</div>
+</section>
+
+
+<section class="demo-type">
+	<h2>禁用状态</h2>
+	<p>添加 disabled</p>
+	<div class="demo">
+		<div class="demo-example">
+			<label>
+				{{io-checkbox checked=false  disabled=true onChange='onChange'}}
+				{{io-checkbox checked=true  disabled=true onChange='onChange'}}
+			</label>
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-checkbox checked=false  disabled=true onChange='onChange'}}
+\{{io-checkbox checked=true  disabled=true onChange='onChange'}}
+</code></pre>
+			</div>			
+		</div>
+	</div>
+</section>

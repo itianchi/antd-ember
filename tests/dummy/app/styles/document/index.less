@@ -1,0 +1,109 @@
+@import url('./menu.less');
+@import url('./demo.less');
+@import url('./markdown-body');
+.document {
+	padding-top: 30px;
+	.components-navigator {
+		width: 230px;
+		border-right: solid 1px whitesmoke;
+		padding-right: 10px;
+		// height: ~'calc(100vh - 191px - 50px)';
+	}
+	.component-detail {
+		padding: 0 20px;
+	}
+	.markdown-body .demo-doc {
+		ul, ol{
+			margin-left: 20px;
+		}
+		li {
+			list-style: circle;
+		}
+	}
+}
+
+#web-application a{
+	color: #444;
+}
+#web-application a i {
+	margin-right: 15px;
+}
+.fa-hover {
+	margin-bottom: 20px;
+}
+
+ul.ioicons-list {
+	margin: 20px 0;
+    list-style: none;
+    overflow: hidden;
+    li {
+    	list-style: none !important;
+	    float: left;
+	    margin: 5px 5px 5px 0;
+	    width: 155px;
+	    text-align: center;
+	    list-style: none;
+	    cursor: pointer;
+	    height: 110px;
+	    color: #5C6B77;
+	    transition: all 0.2s ease;
+	    position: relative;
+	    padding-top: 10px;
+	    .ioicon-class {
+    	    display: block;
+		    text-align: center;
+		    word-wrap: break-word;
+		    transform: scale(0.83);
+		    font-family: Consolas;
+	    }
+    }
+	li:after {
+	    position: absolute;
+	    top: 10px;
+	    left: 0;
+	    height: 100%;
+	    width: 100%;
+	    content: "Copied!";
+	    text-align: center;
+	    line-height: 110px;
+	    color: #fff;
+	    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	    opacity: 0;
+	}
+} 
+
+.testRowClassName {
+    background: #f0f0f0;
+}
+
+.demo-row {
+    background-image: linear-gradient(90deg, #F5F5F5 4.16666667%, transparent 4.16666667%, transparent 8.33333333%, #F5F5F5 8.33333333%, #F5F5F5 12.5%, transparent 12.5%, transparent 16.66666667%, #F5F5F5 16.66666667%, #F5F5F5 20.83333333%, transparent 20.83333333%, transparent 25%, #F5F5F5 25%, #F5F5F5 29.16666667%, transparent 29.16666667%, transparent 33.33333333%, #F5F5F5 33.33333333%, #F5F5F5 37.5%, transparent 37.5%, transparent 41.66666667%, #F5F5F5 41.66666667%, #F5F5F5 45.83333333%, transparent 45.83333333%, transparent 50%, #F5F5F5 50%, #F5F5F5 54.16666667%, transparent 54.16666667%, transparent 58.33333333%, #F5F5F5 58.33333333%, #F5F5F5 62.5%, transparent 62.5%, transparent 66.66666667%, #F5F5F5 66.66666667%, #F5F5F5 70.83333333%, transparent 70.83333333%, transparent 75%, #F5F5F5 75%, #F5F5F5 79.16666667%, transparent 79.16666667%, transparent 83.33333333%, #F5F5F5 83.33333333%, #F5F5F5 87.5%, transparent 87.5%, transparent 91.66666667%, #F5F5F5 91.66666667%, #F5F5F5 95.83333333%, transparent 95.83333333%);
+    overflow: hidden;
+}
+
+.demo-grid {
+	.row div, .row-flex div {
+	    padding: 5px 0;
+	    background: rgba(24, 115, 216, 0.7);
+	    text-align: center;
+	    min-height: 28px;
+	    border: 1px solid rgba(0, 0, 0, 0.1);
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    color: #fff;
+	}
+
+	.row .demo-col {
+	    text-align: center;
+	    padding: 40px 0;
+	    color: #fff;
+	    font-size: 18px;
+	    border: none;
+	    margin-top: 0;
+	    margin-bottom: 0;
+	}
+}
+
+.row .demo-col-1 {
+    background: rgba(24, 115, 216, 0.7);
+}

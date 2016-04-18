@@ -1,0 +1,89 @@
+<h1>Radio  单选框</h1>
+<br>
+
+<h2>何时使用</h2>
+<ul>
+	<li>用于在多个备选项中选中单个状态。</li>
+	<li>和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。</li>
+</ul>
+
+<div class="demo-type">
+	<h2>基本使用</h2>
+	<p>通过设置相同的 name 属性到 io-radio 组件中， value 属性表示radio 值， checked 属性为选中的 radio 值</p>
+	<div class="demo">
+		<div class="demo-example">
+			<label>
+				{{io-radio value="1" name=name checked=checked}}
+				<span>1</span>
+			</label>
+			&nbsp;&nbsp;
+			<label>
+				{{io-radio value="2" name=name checked=checked}}
+				<span>2</span>
+			</label>
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-radio value="1" name=name checked=checked}}
+\{{io-radio value="2" name=name checked=checked}}
+</code></pre>
+			</div>				
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>禁用状态</h2>
+	<p>disabled 状态</p>
+	<div class="demo">
+		<div class="demo-example">
+			<label>
+				{{io-radio value="1" disabled=true checked='2'}}
+			</label>
+			&nbsp;&nbsp;
+			<label>
+				{{io-radio value="2" disabled=true checked='2'}}
+			</label>
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-radio value="1" disabled=true checked='2'}}
+\{{io-radio value="2" disabled=true checked='2'}}
+</code></pre>
+			</div>				
+		</div>
+	</div>
+</div>
+
+
+<div class="demo-type">
+	<h2>radio button group</h2>
+	<p>radio 按钮组</p>
+	<div class="demo">
+		<div class="demo-example">
+			{{#io-button-group}}
+			 	{{#io-radio-button value="杭州" name=name checked=checked}} 杭州 {{/io-radio-button}}
+			 	{{#io-radio-button value="上海" name=name checked=checked}} 上海 {{/io-radio-button}}
+			 	{{#io-radio-button value="广州" name=name checked=checked}} 广州 {{/io-radio-button}}
+			 	{{#io-radio-button value="深圳" name=name checked=checked}} 深圳 {{/io-radio-button}}
+			{{/io-button-group}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+
+\{{#io-button-group}}
+ 	\{{#io-radio-button value="杭州" name=name checked=checked}} 杭州 \{{/io-radio-button}}
+ 	\{{#io-radio-button value="上海" name=name checked=checked}} 上海 \{{/io-radio-button}}
+ 	\{{#io-radio-button value="广州" name=name checked=checked}} 广州 \{{/io-radio-button}}
+ 	\{{#io-radio-button value="深圳" name=name checked=checked}} 深圳 \{{/io-radio-button}}
+\{{/io-button-group}}
+</code></pre>
+			</div>				
+		</div>
+	</div>
+</div>
+
+
