@@ -73,7 +73,7 @@ export default Em.Mixin.create({
         }
         if (this.get(`_actions.${command}`)) {
             // Em.debug("hotkey command: " + command);
-            this.send(command);
+            this.send(command, e);
         }
     },
     keyDown: function(e) {
