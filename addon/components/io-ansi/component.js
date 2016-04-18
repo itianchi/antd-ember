@@ -8,8 +8,7 @@ import Ember from 'ember';
 import ansi from './ansiup';
 
 const {
-  get,
-  set
+  get
 } = Ember;
 
 export default Ember.Component.extend({

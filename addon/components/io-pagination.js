@@ -26,7 +26,7 @@ export default Ember.Component.extend({
     if (this.get('mini')) {
       return 'mini';
     } else {
-      return ''
+      return '';
     }
   }),
   previousUrl: computed('urlTemplate', 'current', 'firstPage', function () {

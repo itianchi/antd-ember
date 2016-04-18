@@ -66,7 +66,7 @@ export default Ember.Component.extend({
 	 * @return {[type]} [description]
 	 */
 	typeClass: function() {
-		return this.get('classNamePrefix') + this.get('type')
+		return this.get('classNamePrefix') + this.get('type');
 	}.property('type'),
 	visibleClass: function() {
 		if (!this.get('_visible')) {
@@ -78,7 +78,7 @@ export default Ember.Component.extend({
 		if (this.get('description') !== '') {
 			return this.get('classNamePrefix') + 'with-description';
 		} 
-		return ''
+		return '';
 	}.property('description'),
 	showIconClass: function() {
 		if (!this.get('showIcon')) {

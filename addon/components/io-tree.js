@@ -1,7 +1,6 @@
 import Ember from 'ember';
 var set = Ember.set,
-    get = Ember.get,
-    isArray = Ember.isArray;
+    get = Ember.get;
 export default Ember.Component.extend({
     tagName: 'div',
     classNames: ['io-tree'],

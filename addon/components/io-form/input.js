@@ -33,7 +33,7 @@ export default Ember.Component.extend(FormItemMixin, {
 		}
 	}.property('placeholder', 'readonly'),
 	inputClass: function() {
-		let ret = 'io-input '
+		let ret = 'io-input ';
 		if (this.get('size')) {
 			ret += this.get('classNamePrefix') + translateSize(this.get('size'));
 		}

@@ -22,14 +22,13 @@ export default Ember.Component.extend(ComponentParent, FormItemMixin, {
 	checked: null,
 	_checkedChange: function() {
 		Ember.run.later(()=> {
-			const _this = this;
 			const checked = this.get('checked');
 			let children = this.get('children');
 			let checkedChild = children.any((child)=>{
 				if (child.get('value') === checked) {
 					return child;
 				} else {
-					return null
+					return null;
 				}
 			});
 

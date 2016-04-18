@@ -1,6 +1,5 @@
 import Em from 'ember';
 import WithConfigMixin from '../../mixin/with-config';
-var TreeNode, getProperty;
 var getProperty = function(obj, prop) {
     if (!obj) {
         return;
@@ -99,7 +98,9 @@ export default Em.Component.extend(WithConfigMixin, {
             return this.get('tree.multi-selection').pushObject(this.get('model'));
         } else {
             var multiSelection = this.get('tree.multi-selection');
-            multiSelection && multiSelection.removeObject(this.get('model'));
+            if (multiSelection) {
+                multiSelection.removeObject(this.get('model'));
+            }
         }
     }).observes('multi-selected').on('init'),
     iconClass: (function() {

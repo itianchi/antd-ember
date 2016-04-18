@@ -33,7 +33,7 @@ export default Ember.Component.extend(OutsideClick, {
 	_hidden: true,
 	activeClass: function() {
 		if (!this.get('_hidden')) {
-			return this.get('classNamePrefix') + 'active'
+			return this.get('classNamePrefix') + 'active';
 		} else {
 			return '';
 		}
@@ -46,7 +46,7 @@ export default Ember.Component.extend(OutsideClick, {
 	_mouseover: false,
 	mouseEnter() {
 		if (this.get('triggerEvent') !== 'mouseover') {
-			return
+			return;
 		}
 		clearTimeout(this.get('t'));
 		this.set('_mouseover', true);
@@ -54,7 +54,7 @@ export default Ember.Component.extend(OutsideClick, {
 	},
 	mouseLeave() {
 		if (this.get('triggerEvent') !== 'mouseover') {
-			return
+			return;
 		}
 		const t = setTimeout(function() {
 			this.set('_mouseover', false);

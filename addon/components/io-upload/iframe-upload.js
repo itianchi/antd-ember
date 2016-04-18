@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import uid from './uid';
+// import uid from './uid';
 
 
 /**

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import FormItemMixin from '../../../mixin/form-item';
 import OutsideClick from '../../../mixin/outside-click';
 import ComponentParent from '../../../mixin/component-parent';
-import TreeModel from '../../../utils/tree-model';
 import KeyBindingMixin from '../../../mixin/hotkey-bindings';
 
 /**
@@ -143,7 +142,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			});
 
 			if (!multiple) {
-				this.set('_selectedOptions', selectedOptions[0])
+				this.set('_selectedOptions', selectedOptions[0]);
 			} else {
 				this.set('_selectedOptions', selectedOptions);
 			}
@@ -245,7 +244,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 					if (child.get('active')) {
 						this.send('onSelect', child);
 					}
-				})
+				});
 			}
 		}
 	},

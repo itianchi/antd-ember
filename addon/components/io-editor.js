@@ -8,7 +8,6 @@ export default Ember.Component.extend({
 
 		// attributes
 		var key = this.get('key'), 
-			data = this.get('data'), 
 			content = this.get('content') || this.get('data.' + key) || '', 
 			editable = this.get('editable');
 
@@ -28,7 +27,7 @@ export default Ember.Component.extend({
 		    /**
 		     * content change event
 		     */
-		    editor.getSession().on('change', function(e) {
+		    editor.getSession().on('change', function() {
 		    	var currentValue = editor.getValue();
 		    	_this.set('data.' + key, currentValue);
 			});

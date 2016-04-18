@@ -1,6 +1,6 @@
 import Ember from 'ember';
 // import layout from '../templates/components/searchable-select';
-
+const $ = window.$;
 export default Ember.Component.extend({
     // layout,
     classNames: ['Searchable-select'],

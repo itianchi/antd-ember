@@ -3,8 +3,7 @@ import uid from './uid';
 import request from './request';
 
 const {
-	get,
-	set,
+	$,
 	RSVP
 } = Ember;
 
@@ -114,7 +113,7 @@ export default Ember.Component.extend({
 	 * @param  {[type]} event [description]
 	 * @return {[type]}       [description]
 	 */
-	dragLeave(event) {
+	dragLeave() {
 		if (!this.get('dragdrop')) {
 			return;
 		}
@@ -130,7 +129,7 @@ export default Ember.Component.extend({
 		if (!this.get('dragdrop')) {
 			return;
 		}
-		const files = e.dataTransfer.files;
+		const files = event.dataTransfer.files;
 		this.set('_dragEnter', false);
 		this.uploadFiles(files);
 		event.preventDefault();
@@ -167,14 +166,17 @@ export default Ember.Component.extend({
 			}
 
 			if (this.get('multiple')) {
-				parentComponent
-					? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files))
-					: this.sendAction('onStart', Array.prototype.slice.call(files));
-
+				if (parentComponent) {
+					parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files));
+				} else {
+					this.sendAction('onStart', Array.prototype.slice.call(files));
+				}
 			} else {
-				parentComponent
-					? parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files)[0])
-					: this.sendAction('onStart', Array.prototype.slice.call(files)[0]);
+				if (parentComponent) {
+					parentComponent.send(this.get('onStart'), Array.prototype.slice.call(files)[0]);
+				} else {
+					this.sendAction('onStart', Array.prototype.slice.call(files)[0]);
+				}
 			}
 		}
 	},
@@ -203,10 +205,11 @@ export default Ember.Component.extend({
 			this.postFile(file);
 		});
 
-		parentComponent 
-			? parentComponent.send(this.get('beforeUpload'), defer)
-			: this.send('beforeUpload', defer);
-
+		if (parentComponent) {
+			parentComponent.send(this.get('beforeUpload'), defer);
+		} else {
+			this.send('beforeUpload', defer);
+		}
 	},
 
 	/**
@@ -226,23 +229,29 @@ export default Ember.Component.extend({
 			withCredentials: this.get('withCredentials'),
 			onProgress: e => {
 				if (this.get('onProgress')) {
-					parentComponent 
-						? parentComponent.send(this.get('onProgress'), e, file)
-						: this.sendAction('onProgress', e, file);
+					if (parentComponent) {
+						parentComponent.send(this.get('onProgress'), e, file);
+					} else {
+						this.sendAction('onProgress', e, file);
+					}
 				}
 			},
 			onSuccess: ret => {
 				if (this.get('onSuccess')) {
-					parentComponent
-						? parentComponent.send(this.get('onSuccess'), ret, file)
-						: this.sendAction('onSuccess', ret, file);
+					if (parentComponent) {
+						parentComponent.send(this.get('onSuccess'), ret, file);
+					} else {
+						this.sendAction('onSuccess', ret, file);
+					}
 				}
 			},
 			onError: (err, ret) => {
 				if (this.get('onError')) {
-					parentComponent 
-						? parentComponent.send(this.get('onError'), err, ret, file)
-						: this.sendAction('onError', err, ret, file);
+					if (parentComponent) {
+						parentComponent.send(this.get('onError'), err, ret, file);
+					} else {
+						this.sendAction('onError', err, ret, file);
+					}
 				}
 			}
 		});

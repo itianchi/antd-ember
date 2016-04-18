@@ -30,7 +30,7 @@ export default Ember.Component.extend(DisabledClass, {
 		return '';
 	}.property('checked'),
 	click() {
-		this.send('toggle')
+		this.send('toggle');
 	},
 	actions: {
 		toggle() {

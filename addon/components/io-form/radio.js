@@ -33,7 +33,7 @@ export default Ember.Component.extend(FormItemMixin, {
 		return this.get('value') === this.get('checked');
 	}.property('checked', 'value'),
 	actions: {
-		change: function(ev) {
+		change: function() {
 			this.set('checked', this.get('value'));
 		}
 	}

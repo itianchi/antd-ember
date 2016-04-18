@@ -18,7 +18,7 @@ var expandTree = function(async, node, depth) {
     node.set('requestReload', true);
     children = node.get('children');
     if (children && "function" === typeof children.then) {
-        return children.then((function(_this) {
+        return children.then((function() {
             return function(loadedChildren) {
                 return loadedChildren.forEach(function(c) {
                     return expandTree(async, c, depth - 1);

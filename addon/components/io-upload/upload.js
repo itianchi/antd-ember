@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import uid from './uid';
+// import uid from './uid';
 
 /**
  * AjaxUpload Component
@@ -7,10 +7,8 @@ import uid from './uid';
  ``` 
  */
 
-function noop() {}
-function T(){
-	return true;
-}
+// function noop() {}
+// function T(){return true; }
 
 // Fix IE file.status problem
 // via coping a new Object
@@ -195,6 +193,7 @@ export default Ember.Component.extend({
 			}
 
 			let targetItem;
+			let targetItems;
 			let nextFileList = this.get('_fileList').concat();
 
 			if (file.length > 0) {
@@ -242,7 +241,7 @@ export default Ember.Component.extend({
 					this.set('_recentUploadStatus', ret);
 					defer.resolve();
 				});
-				this.sendAction('beforeUpload', defer, file);
+				this.sendAction('beforeUpload', defer);
 				return false
 			}
 		},
@@ -269,7 +268,7 @@ export default Ember.Component.extend({
 		 * @param  {[type]} file [description]
 		 * @return {[type]}      [description]
 		 */
-		onSuccess(ret, file) {
+		onSuccess(response, file) {
 			this.clearProgressTimer();
 
 			try {
@@ -285,7 +284,7 @@ export default Ember.Component.extend({
 			let targetItem = getFileItem(file, fileList);
 			if (targetItem) {
 				targetItem.status = 'done';
-				targetItem.response = ret;
+				targetItem.response = response;
 				this.send('onChange', {
 					file: targetItem,
 					fileList: fileList

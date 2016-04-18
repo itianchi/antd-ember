@@ -4,7 +4,6 @@ import OutsideClick from '../../mixin/outside-click';
 import TreeModel from '../../utils/tree-model';
 
 const  {
-	get,
 	set
 } = Ember;
 
@@ -85,12 +84,11 @@ export default Ember.Component.extend(DisabledClass, OutsideClick, {
 	 */
 	_activeOptions: function() {
 		var values = this.get('values');
-		var options = this.get('options');
 		var rootNode = this.get('_treeRoot');
 		var activeOptions =  values.map(function(value) {
 			return rootNode.first(function(node) {
-				return node.model.id === value
-			})
+				return node.model.id === value;
+			});
 		});
 
 		rootNode.walk(function(node) {
@@ -107,7 +105,6 @@ export default Ember.Component.extend(DisabledClass, OutsideClick, {
 	 * @return {[type]} [description]
 	 */
 	_showMenus: function() {
-		var values = this.get('values');
 		var menus = this.get('_activeOptions').filter(function(option) {
 			return option.children && option.children.length > 0;
 		}).map(function(option) {
@@ -130,7 +127,7 @@ export default Ember.Component.extend(DisabledClass, OutsideClick, {
 		var rootNode = this.get('_treeRoot');
 		return this.get('values').map(function(value) {
 			var node = rootNode.first(function(node) {
-				return node.model.id === value
+				return node.model.id === value;
 			});
 			return node.model.label;
 		}).join('/');

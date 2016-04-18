@@ -11,6 +11,7 @@ import Split from './split';
   	{{/io-split-panel}}
  ``` 
  */
+const $ = window.$;
 
 export default Ember.Component.extend({
 	/**
@@ -62,9 +63,9 @@ export default Ember.Component.extend({
 				minSize.push(Math.max(selfMinSize, _minSize || 0));
 				els.push(child);
 				$child.addClass('split-' + direction);
-			})
+			});
 
-			Split(els,{
+			new Split(els,{
 				sizes,
 				minSize,
 				direction,

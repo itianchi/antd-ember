@@ -2,9 +2,7 @@ import Ember from 'ember';
 import DisabledClass from '../../mixin/disabled-class';
 
 const {
-  get, 
-  set,
-  on
+  set
 } = Ember;
 /**
  * io-form
@@ -31,11 +29,11 @@ export default Ember.Component.extend(DisabledClass, {
   schemaFields: function() {
     let schema = this.get('schema');
     if (!schema) {
-      return
+      return;
     } 
     const keys = Object.keys(schema.properties);
     return keys.map((key) => {
-      let field = schema.properties[key]
+      let field = schema.properties[key];
       set(field, 'name', key);
       return field;
     });
@@ -51,14 +49,14 @@ export default Ember.Component.extend(DisabledClass, {
       schemaFields.forEach((field) => {
         const name = field.name;
         set(field, 'value', formData[name]);
-        const path = `schema.properties.${name}.value`
+        const path = `schema.properties.${name}.value`;
         console.log(path);
         this.addObserver(path, () => {
           const newValue = this.get(path);
           this.set(`formData.${name}`, newValue);
           this.send('fieldChange', field);
-        })
-      })
+        });
+      });
     }
 
   }.on('init'),
@@ -124,8 +122,10 @@ export default Ember.Component.extend(DisabledClass, {
    * @return {[type]} [description]
    */
   willDestroy() {
-    const $form = this.$()
-    $form && $form.validator('destroy');
+    const $form = this.$();
+    if ($form) {
+      $form.validator('destroy');
+    } 
   },
   actions: {
     fieldChange(field) {

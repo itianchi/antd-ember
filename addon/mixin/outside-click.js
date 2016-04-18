@@ -6,6 +6,7 @@ import Ember from 'ember';
  * @class TypeClass
  * @namespace Mixins
  */
+const $ = window.$;
 export default Ember.Mixin.create({
     _destroyed: false,
     _bindwillDestroyElement: function() {
@@ -33,4 +34,4 @@ function contains(root, n) {
   }
 
   return false;
-};
+}
