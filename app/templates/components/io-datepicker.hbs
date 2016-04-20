@@ -1,0 +1,109 @@
+<span>
+    <input class="io-calendar-picker-input io-input" placeholder="请选择日期"/>
+    <span class="io-calendar-picker-icon"> </span>
+</span>
+<div class="io-calendar-picker-container io-calendar-picker-container-placement-bottomLeft" style="top: 0;">
+    <div class="io-calendar" tabindex="0">
+        <div class="io-calendar-input-wrap">
+            <div class="io-calendar-time-picker-wrap">
+            </div>
+            <div class="io-calendar-date-input-wrap">
+                <input class="io-calendar-input " placeholder="请选择日期" value=""/>
+            </div>
+            <a class="io-calendar-clear-btn" role="button" title="清除">
+            </a>
+        </div>
+        <div class="io-calendar-date-panel">
+            <div class="io-calendar-header">
+                <div style="position:relative;">
+                    <a class="io-calendar-prev-year-btn" role="button" title="上一年 (Control键加左方向键)">
+                        «
+                    </a>
+                    <a class="io-calendar-prev-month-btn" role="button" title="上个月 (翻页上键)">
+                        ‹
+                    </a>
+                    <span class="io-calendar-ym-select">
+                        <a class="io-calendar-year-select" role="button" title="选择年份">
+                            {{_yearDisplay}}
+                        </a>
+                        <a class="io-calendar-month-select" role="button" title="选择月份">
+                            {{_monthDisplay}}
+                        </a>
+                    </span>
+                    <a class="io-calendar-next-month-btn" title="下个月 (翻页下键)">
+                        ›
+                    </a>
+                    <a class="io-calendar-next-year-btn" title="下一年 (Control键加右方向键)">
+                        »
+                    </a>
+                </div>
+            </div>
+            <div class="io-calendar-calendar-body">
+                <table cellspacing="0" class="io-calendar-table" role="grid">
+                    <thead>
+
+                        <tr role="row">
+                            <th class="io-calendar-column-header" role="columnheader" title="星期一">
+                                <span class="io-calendar-column-header-inner">
+                                    一
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期二">
+                                <span class="io-calendar-column-header-inner">
+                                    二
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期三">
+                                <span class="io-calendar-column-header-inner">
+                                    三
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期四">
+                                <span class="io-calendar-column-header-inner">
+                                    四
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期五">
+                                <span class="io-calendar-column-header-inner">
+                                    五
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期六">
+                                <span class="io-calendar-column-header-inner">
+                                    六
+                                </span>
+                            </th>
+                            <th class="io-calendar-column-header" role="columnheader" title="星期天">
+                                <span class="io-calendar-column-header-inner">
+                                    日
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="io-calendartbody">
+	                	{{#each _days as |group|}}
+                    		<tr role="row">
+                    			{{#each group as |day|}}
+                    				{{!-- io-calendar-today --}}
+                    				{{!-- io-calendar-last-month-cell --}}
+                    				<td class="io-calendar-cell {{day.classNames}}" role="gridcell" title="2016-3-28">
+		                                <span aria-disabled="false" aria-selected="false" class="io-calendar-date">
+		                                    {{day.display}}
+		                                </span>
+		                            </td>
+                    			{{/each}}
+                    		</tr>
+                    	{{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="io-calendar-footer">
+                <span class="io-calendar-footer-btn">
+                    <a class="io-calendar-today-btn " role="button" title="2016-4-19">
+                        今天
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
