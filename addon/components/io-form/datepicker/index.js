@@ -10,27 +10,38 @@ const moment = window.moment;
 export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 	tagName: 'span',
 	a: "heee",
-	classNames: 'io-datapicker io-calendar-picker',
+	classNames: 'io-datapicker io-calendar-picker input-custom',
+	// classNameBindings: [],
 	classNamePrefix: 'io-calendar-picker-',
-	/**
-	 * @attribute [value description]
-	 * @type {[type]}
-	 */
-	_selectedDate: moment(),
 	/**
 	 * @attribute [format description]
 	 * @type {String}
 	 */
-	format: 'yyyy/MM/dd',
+	format: 'YYYY-MM-DD',
 	/**
 	 * @attribute  [size description]
 	 * @type {String}
 	 */
 	size: 'medium',
 	/**
+	 * [value description]
+	 * @type {[type]}
+	 */
+	value: null,
+	/**
 	 * disabled Date
 	 */
 	disabledDate: () => {},
+	/**
+	 * @attribute [value description]
+	 * @type {[type]}
+	 */
+	_selectedDate: null,
+	/**
+	 * [_hidden description]
+	 * @type {Boolean}
+	 */
+	_hidden: true,
 	/**
 	 * @attribute  [locale description]
 	 * @type {String}
@@ -38,20 +49,33 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 	locale: 'zh-cn',
 	_onInit: function() {
 		moment.locale(this.get('locale'));
-		this.set('_selectedDate', moment());
+		// this.set('_selectedDate', moment());
 	}.on('init'),
+	/**
+	 * [_display description]
+	 * @return {[type]} [description]
+	 */
+	_display: function() {
+		if (this.get('_selectedDate')) {
+			return this.get('_selectedDate').format(this.get('format'));
+		} else {
+			return '';
+		}
+	}.property('_selectedDate'),
 	/**
 	 * @compute [ description]
 	 * @type {Object}
 	 */
 	_yearDisplay: function() {
-		return this.get('_selectedDate').format('Y') + '年';
+		let time = this.get('_selectedDate') || moment();
+		return time.format('Y') + '年';
 	}.property('_selectedDate'),
 	_monthDisplay: function() {
-		return this.get('_selectedDate').format('Mo');
+		let time = this.get('_selectedDate') || moment();
+		return time.format('Mo');
 	}.property('_selectedDate'),
 	_days: function() {
-		const selected = this.get('_selectedDate');
+		const selected = this.get('_selectedDate') || moment();
 		const firstDay = moment(selected).startOf('month');
 		const lastDay = moment(selected).endOf('month');
 		const firstDayInWeek = firstDay.day();
@@ -82,6 +106,7 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 		days.forEach((day) => {
 			day.display = day.m.date();
 			day.classNames = '';
+			day.title = day.m.format('YYYY-MM-DD');
 
 			if (day.currentMonth) {
 			}
@@ -106,7 +131,6 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 
 		let groups = [], tmpGroup = [];
 		for (i = 1, l = days.length; i <= l; i ++) {
-
 			// is current selected date
 			let day = days[i - 1];
 			tmpGroup.push(day);
@@ -122,8 +146,44 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 	_years: function() {
 	}.property('_selectedDate'),
 	actions: {
+		showPicker() {
+			this.set('_hidden', false);
+		},
+		clear() {
+			this.send('onChange', null);
+		},
+		today() {
+			this.send('onChange', moment());
+		},
 		onSelectDate(date) {
-
+			this.send('onChange', date);
+		},
+		onChange(date, notHidden) {
+			this.set('_selectedDate', date);
+			this.set('_hidden', !notHidden);
+			this.set('value', date.format('YYYY-MM-DD'));
+			if (this.get('onChange')) {
+				this.sendAction('onChange', date);
+			}
+		},
+		outsideClick() {
+			this.set('_hidden', true);
+		},
+		nextMonth() {
+			const selected = this.get('_selectedDate') || moment();
+			this.send('onChange', moment(selected).add('months', 1), true);
+		},
+		prevMonth() {
+			const selected = this.get('_selectedDate') || moment();
+			this.send('onChange', moment(selected).subtract('months', 1), true);
+		},
+		nextYear() {
+			const selected = this.get('_selectedDate') || moment();
+			this.send('onChange', moment(selected).add('years', 1), true);
+		},
+		prevYear() {
+			const selected = this.get('_selectedDate') || moment();
+			this.send('onChange', moment(selected).subtract('months', 1), true);
 		}
 	}
 });

@@ -1,27 +1,28 @@
 <span>
-    <input class="io-calendar-picker-input io-input" placeholder="请选择日期"/>
+    <input 
+        class="io-calendar-picker-input io-input"
+        value={{_display}} 
+        placeholder="请选择日期" 
+        {{action "showPicker"}}/>
     <span class="io-calendar-picker-icon"> </span>
 </span>
-<div class="io-calendar-picker-container io-calendar-picker-container-placement-bottomLeft" style="top: 0;">
+{{#unless _hidden}}
+<div class="io-calendar-picker-container io-calendar-picker-container-placement-bottomLeft" style="top: -3px; left: -3px;">
     <div class="io-calendar" tabindex="0">
         <div class="io-calendar-input-wrap">
             <div class="io-calendar-time-picker-wrap">
             </div>
             <div class="io-calendar-date-input-wrap">
-                <input class="io-calendar-input " placeholder="请选择日期" value=""/>
+                <input class="io-calendar-input " value={{_display}} placeholder="请选择日期" value=""/>
             </div>
-            <a class="io-calendar-clear-btn" role="button" title="清除">
+            <a class="io-calendar-clear-btn" role="button" title="清除" {{action 'clear'}}>
             </a>
         </div>
         <div class="io-calendar-date-panel">
             <div class="io-calendar-header">
                 <div style="position:relative;">
-                    <a class="io-calendar-prev-year-btn" role="button" title="上一年 (Control键加左方向键)">
-                        «
-                    </a>
-                    <a class="io-calendar-prev-month-btn" role="button" title="上个月 (翻页上键)">
-                        ‹
-                    </a>
+                    <a class="io-calendar-prev-year-btn" role="button" title="上一年 (Control键加左方向键)" {{action 'prevYear'}}> « </a>
+                    <a class="io-calendar-prev-month-btn" role="button" title="上个月 (翻页上键)" {{action 'prevMonth'}}> ‹ </a>
                     <span class="io-calendar-ym-select">
                         <a class="io-calendar-year-select" role="button" title="选择年份">
                             {{_yearDisplay}}
@@ -30,12 +31,8 @@
                             {{_monthDisplay}}
                         </a>
                     </span>
-                    <a class="io-calendar-next-month-btn" title="下个月 (翻页下键)">
-                        ›
-                    </a>
-                    <a class="io-calendar-next-year-btn" title="下一年 (Control键加右方向键)">
-                        »
-                    </a>
+                    <a class="io-calendar-next-month-btn" title="下个月 (翻页下键)" {{action "nextMonth"}}> › </a>
+                    <a class="io-calendar-next-year-btn" title="下一年 (Control键加右方向键)" {{action "nextYear"}}> » </a>
                 </div>
             </div>
             <div class="io-calendar-calendar-body">
@@ -86,7 +83,10 @@
                     			{{#each group as |day|}}
                     				{{!-- io-calendar-today --}}
                     				{{!-- io-calendar-last-month-cell --}}
-                    				<td class="io-calendar-cell {{day.classNames}}" role="gridcell" title="2016-3-28">
+                    				<td class="io-calendar-cell {{day.classNames}}" 
+                                        role="gridcell" 
+                                        title={{day.title}}
+                                        {{action 'onSelectDate' day.m}}>
 		                                <span aria-disabled="false" aria-selected="false" class="io-calendar-date">
 		                                    {{day.display}}
 		                                </span>
@@ -99,7 +99,7 @@
             </div>
             <div class="io-calendar-footer">
                 <span class="io-calendar-footer-btn">
-                    <a class="io-calendar-today-btn " role="button" title="2016-4-19">
+                    <a class="io-calendar-today-btn " role="button" title="2016-4-19" {{action 'today'}}>
                         今天
                     </a>
                 </span>
@@ -107,3 +107,4 @@
         </div>
     </div>
 </div>
+{{/unless}}
