@@ -16,7 +16,7 @@ const {
 export default Ember.Component.extend({
 	tagName: 'span',
 	attributeBindings: ['tabIndex'],
-	classNames: 'io-upload',
+	classNames: 'io-upload io-ajax-upload',
 	tabIndex: 0,
 	/**
 	 * @attribute action
@@ -263,6 +263,7 @@ export default Ember.Component.extend({
 	 */
 	actions: {
 		onChange(ev) {
+			debugger
 			this.uploadFiles(ev.target.files);
 			this.$('input').val('');
 		}
