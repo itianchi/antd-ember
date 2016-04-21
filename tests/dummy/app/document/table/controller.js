@@ -7,7 +7,8 @@ export
 default Ember.Controller.extend({
     columns: [{
         "propertyName": "id",
-        "title": "ID"
+        "title": "ID",
+        "headerTemplate": "snippets/city-header-template"
     }, {
         "propertyName": "firstName",
         "title": "First Name"
