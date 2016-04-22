@@ -1,0 +1,26 @@
+
+{{!-- toggle --}}
+{{#if model.children}}
+	<span class="io-select-tree-switcher io-select-tree-noline_{{if model.open 'open' 'close'}}" {{action 'toggleOpen'}}>
+	</span>
+{{else}}
+	<span class="io-select-tree-switcher io-select-tree-switcher-noop io-select-tree-noline_docu">
+	</span>
+{{/if}}
+
+<a title="parent 1" {{action 'onSelect'}} class="{{if selected 'io-select-tree-node-selected'}}">
+    <span class="io-select-tree-title">
+        {{model.label}}
+    </span>
+</a>
+
+{{!-- children --}}
+{{#if model.children}}
+	<ul class="io-select-tree-child-tree {{if model.open 'io-select-tree-child-tree-open' }}">
+		{{#each model.children as |node|}}
+			{{io-tree-select-option
+				model=node
+				root=root}}
+		{{/each}}
+	</ul>
+{{/if}}

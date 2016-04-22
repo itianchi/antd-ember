@@ -2,6 +2,42 @@
     Select 下拉选择
 </h1>
 
+<section class="demo-type">
+	<h2>树选择</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-tree-select treeData=treeData value=treeSelectedValue}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+const treeData = [{
+  label: '节点一',
+  value: '0-0',
+  children: [{
+    label: '子节点一',
+    value: '0-0-0',
+  }, {
+    label: '子节点二',
+    value: '0-0-1',
+  }],
+}, {
+  label: '节点二',
+  value: '0-1',
+  children: [{
+    label: '子节点三',
+    value: '0-1-0',
+  }, {
+    label: '子节点四',
+    value: '0-1-1',
+  }],
+}];
+\{{io-tree-select treeData=treeData value=treeSelectedValue}}
+</code></pre> </div>
+		</div>
+	</div>
+</section>
+
 <div class="demo-type">
 	<h2>单项选择</h2>
 	<p> value 值为双向绑定 </p>
