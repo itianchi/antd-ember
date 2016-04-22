@@ -83,7 +83,7 @@ export default Ember.Mixin.create({
 		const changeReadonly = () => {
 			Ember.run.later(()=> {
 				const readonly = parent.get('readonly');
-				if (readonly !== null) {
+				if (readonly !== null && !this.get('isDestroyed') && !this.get('isDestroying')) {
 					this.set('readonly', readonly);
 				}
 			})
