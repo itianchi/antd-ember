@@ -34,10 +34,9 @@ export default Ember.Mixin.create({
 	 * @return {[type]} [description]
 	 */
 	unsaveNotificationWindowClose(event) {
-		if (this.controller.get('unsaveNotification.hasunsavedate')) {
+		if (this.controller.get('unsaveNotification.hasUnsaveData')) {
 			return this.controller.get('unsaveNotification.options.text') || DEFAULT_OPTIONS.text; 
 		}
-		return true;
 	},
 	/**
 	 * [unsaveNotification description]
@@ -58,7 +57,7 @@ export default Ember.Mixin.create({
             closeOnConfirm: true
         }, (isConfirm) => {
         	if (isConfirm) {
-        		this.set('unsaveNotification.forceTransition', true);
+        		this.controller.set('unsaveNotification.forceTransition', true);
         	}
         	callback(isConfirm);
         	this.controller.set('unsaveNotification.forceTransition', false);
@@ -66,7 +65,7 @@ export default Ember.Mixin.create({
     },
     _actions: {
         willTransition(transition) {
-            if (this.controller.get('unsaveNotification.hasunsavedate') && !this.controller.get('unsaveNotification.forceTransition')) {
+            if (this.controller.get('unsaveNotification.hasUnsaveData') && !this.controller.get('unsaveNotification.forceTransition')) {
 	            transition.abort();
             	this.unsaveNotificationConfirm(this.controller.get('unsaveNotification.options'), (isConfirm) => {
             		if (isConfirm) {

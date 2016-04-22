@@ -7,9 +7,6 @@ const {
 
 export
 default Ember.Controller.extend({
-    unsaveNotification: {
-        hasunsavedate: true
-    },
     isShowingModal: false,
     model: {
         checkMeOut: false

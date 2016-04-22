@@ -31,6 +31,7 @@ Router.map(function() {
     this.route('alert');
     this.route('dropdown');
     this.route('datepicker');
+    this.route('unsave');
   });
 });
 
