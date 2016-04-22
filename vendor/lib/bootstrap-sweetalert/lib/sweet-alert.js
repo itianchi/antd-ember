@@ -194,7 +194,7 @@
                     + "    <div class=\"icon custom\"></div>"
                     + "    <h2>Title</h2>"
                     + "    <p class=\"lead text-muted\">Text</p>"
-                    + "    <p><button class=\"cancel io-btn io-btn-lg\" tabIndex=\"2\">Cancel</button> <button class=\"confirm io-btn io-btn-lg\" tabIndex=\"1\">OK</button></p>"
+                    + "    <p><button class=\"cancel io-btn io-btn-lg\" tabIndex=\"2\">Cancel</button> <button class=\"confirm io-btn io-btn-lg io-btn-ghost\" tabIndex=\"1\">OK</button></p>"
                     + "</div>",
         sweetWrap = document.createElement('div');
 
