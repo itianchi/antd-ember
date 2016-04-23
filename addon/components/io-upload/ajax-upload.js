@@ -16,7 +16,7 @@ const {
 export default Ember.Component.extend({
 	tagName: 'span',
 	attributeBindings: ['tabIndex'],
-	classNames: 'io-upload',
+	classNames: 'io-upload io-ajax-upload',
 	tabIndex: 0,
 	/**
 	 * @attribute action
@@ -152,7 +152,7 @@ export default Ember.Component.extend({
 	 * @return {[type]} [description]
 	 */
 	uploadFiles(files) {
-		const parentComponent = this.get('parentComponent');
+		const parentComponent = this.get('parent');
 		const len = files.length;
 		if (len > 0) {
 			for (let i = 0; i < len; i++) {

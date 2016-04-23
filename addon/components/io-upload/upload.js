@@ -113,6 +113,11 @@ export default Ember.Component.extend({
 	 * @type {Object}
 	 */
 	headers: {},
+	/**
+	 * [ajaxUpload description]
+	 * @type {[type]}
+	 */
+	_ajaxUpload: typeof window.FormData !== 'undefined',
 	//------------------------------
 	//        STATES
 	//------------------------------
@@ -191,7 +196,6 @@ export default Ember.Component.extend({
 			if (!this.get('_recentUploadStatus')) {
 				return;
 			}
-
 			let targetItem;
 			let targetItems;
 			let nextFileList = this.get('_fileList').concat();
@@ -270,7 +274,6 @@ export default Ember.Component.extend({
 		 */
 		onSuccess(response, file) {
 			this.clearProgressTimer();
-
 			try {
 				if (typeof response === 'string') {
 					JSON.parse(response);

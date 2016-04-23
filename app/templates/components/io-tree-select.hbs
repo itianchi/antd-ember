@@ -1,0 +1,47 @@
+<span class="io-select-selection {{multipleClass}}" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false"  {{action 'toggleHidden'}} style="width: {{width}}px;">
+    {{#if multiple}}
+	    {{#if (eq _selectedOptions.length 0)}}
+	    <span style="display: block;" class="io-select-search__field__placeholder">{{placeholder}}</span>
+	    {{else}}
+	    <ul class="io-select-selection__rendered" style="margin-bottom: 0;">
+	    	{{#each _selectedOptions as |option|}}
+	        <li class="io-select-selection__choice" title="a10" >
+	            <span class="io-select-selection__choice__content" >
+	                {{option.label}}
+	            </span>
+	            <span class="io-select-selection__choice__remove" {{action 'removeOption' option.value bubbles=false}}>
+	            </span>
+	        </li>
+	        {{/each}}
+	    </ul>
+	    {{/if}}
+    {{else}}
+    <span class="io-select-selection__rendered">
+        <span>
+        	{{#if _selectedOptions}} 
+        		{{_selectedOptions.label}}
+        	{{else}}
+                {{#unless readonly}}
+            		{{placeholder}}
+                {{/unless}}
+        	{{/if}}
+        </span>
+    </span>
+    <span class="io-select-arrow" tabindex="-1" style="outline:none;"> <b> </b> </span>
+    {{/if}}
+
+</span>
+{{!-- io-select-dropdown-placement-bottomLeft --}}
+<span class="io-select-dropdown {{hiddenClass}}" style="width: {{width}}px;">
+    <ul class="io-select-tree" role="tree-node" unselectable="true">
+        {{#if treeData}}
+            {{#if treeData.length}}
+                {{#each treeData as |model|}}
+                    {{io-tree-select-option model=model root=this}}
+                {{/each}}
+            {{else}}
+                {{io-tree-select-option model=treeData root=this}}
+            {{/if}}
+        {{/if}}
+    </ul>
+</span>
