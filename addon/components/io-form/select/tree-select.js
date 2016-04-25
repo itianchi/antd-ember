@@ -21,6 +21,11 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 	 */
 	treeData: null,
 	/**
+	 * [treeNodeTemplate description]
+	 * @type {[type]}
+	 */
+	treeNodeTemplate: null,
+	/**
 	 * [width description]
 	 * @type {Number}
 	 */
@@ -45,6 +50,7 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 	 * @type {String}
 	 */
 	placeholder: '请选择',
+	
 	/**
 	 * [_hidden description]
 	 * @type {Boolean}
@@ -110,7 +116,7 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 
 		},
 		onSelect: function(child) {
-			this.set('value', child.get('model').value);
+			this.set('value', child.get('model').id);
 			this.send('toggleHidden');
 		},
 		outsideClick: function() {
@@ -122,25 +128,25 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 /**
  * [find search tree]
  * @param  {[type]} tree  [description]
- * @param  {[type]} value [description]
+ * @param  {[type]} id [description]
  * @return {[type]}       [description]
  */
-function find(tree, value) {
+function find(tree, id) {
 	let ret = null;
 
 	if (Ember.isArray(tree)) {
 		for (let i = 0, l = tree.length; i < l; i++) {
-			ret = find(tree[i], value);
+			ret = find(tree[i], id);
 			if (ret) {
 				break;
 			}
 		}
 		return ret;
 	} else if (tree) {
-		if (tree.value === value) {
+		if (tree.id === id) {
 			return tree;
 		} else if (tree.children && tree.children.length > 0) {
-			return find(tree.children, value);
+			return find(tree.children, id);
 		}
 	}
 }

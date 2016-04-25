@@ -6,21 +6,87 @@
 
 <div class="demo-type">
 	<h2>基本使用</h2>
+	<p>
+		通过传入 io-tree 组件一个 tree model  就能渲染出树， 如果 model 是数组，io-tree 组件会将每个数组项当成一个 tree model 全部渲染出来。
+	</p>
+	<ul>
+		<li>
+			1. 自定义模板： 如果需要自定义 tree-node 的模板可以传入 treeNodeTemplate
+		</li>
+	</ul>
 	<div class="demo">
 		<div class="demo-example">
 			 {{io-tree 
 			 	model=model 
 			 	selected=selected
+			 	treeNodeTemplate='snippets/tree-node-template'
 			 	onSelectNode='onSelectNode'}}
 		</div>
 		<div class="demo-code">
 			<div class="highlight">
 				<pre>
 				<code class="language-html"> 
+// tree Model example				
+const family = {
+    title: 'Family',
+    id: 'Family',
+    // children 标识孩子节点
+    children: [{
+     	// 显示的名称
+        title: 'Susan',
+        // 每个 treeNode 必须有一个 id 标识
+        id: 'asd',
+        children: [{
+            title: 'Lucy'
+        }]
+    }, {
+        title: 'Luda',
+        id: 'haa'
+    }]
+};
+
  \{{io-tree 
-    model=model 
+    model=family 
+    selected=selected
+    treeNodeTemplate='snippets/tree-node-template'
+    onSelectNode='onSelectNode'}}
+
+// treeNodeTemplate example
+&lt;a href="" \{{action 'select'}}&gt;
+	\{{model.title}}
+&lt;/a&gt;
+    </code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>多选</h2>
+	<p>
+	树组件支持多选， 可以传入 in-multi-selection=true 标示多选功能，  multi-selection=multi 属性接收选择节点， multi 必须为数组
+	</p>
+	<div class="demo">
+		<div class="demo-example">
+			 {{io-tree 
+			 	model=model 
+			 	selected=selected
+			 	in-multi-selection=true
+			 	multi-selection=multi
+			 	onSelectNode='onSelectNode'}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+				<pre>
+				<code class="language-html"> 
+
+ \{{io-tree 
+    model=family 
+    in-multi-selection=true
+    multi-selection=multi
     selected=selected
     onSelectNode='onSelectNode'}}
+
     </code></pre>
 			</div>
 		</div>

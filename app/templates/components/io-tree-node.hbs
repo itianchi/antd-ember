@@ -12,17 +12,14 @@
     </span>
 {{/if}}
 
-<span {{action 'select'}} class="{{nodeSelectedClasses}}">
-    {{model.title}}
-
-    {{#if tree.hovered-actions}}
-        <span class="actions">
-        {{#each hoveredActions}}
-            {{io-tree-node-action meta=this model=model}}
-        {{/each}}
-        </span>
-    {{/if}}
-</span>
+{{!-- treeNodeTitle --}}
+{{#if tree.treeNodeTemplate}}
+    {{partial tree.treeNodeTemplate}}
+{{else}}
+    <span {{action 'select'}} class="{{nodeSelectedClasses}}">
+        {{model.title}}
+    </span>
+{{/if}}
 
 {{#if expanded}}
     <ul class="io-tree-branch fa-ul">
