@@ -1,26 +1,26 @@
 import Ember from 'ember';
 
 const treeData = [{
-  label: '节点一',
+  title: '节点一',
   value: '0-0',
   children: [{
-    label: '子节点一',
+    title: '子节点一',
     value: '0-0-0',
   }, {
-    label: '子节点二',
+    title: '子节点二',
     value: '0-0-1',
   }],
 }, {
-  label: '节点二',
+  title: '节点二',
   value: '0-1',
   children: [{
-    label: '子节点三',
+    title: '子节点三',
     value: '0-1-0',
   }, {
-    label: '子节点四',
+    title: '子节点四',
     value: '0-1-1',
     children: [{
-    	label: '子节点五',
+    	title: '子节点五',
     	value: '0-1-1-1'
     }]
   }],

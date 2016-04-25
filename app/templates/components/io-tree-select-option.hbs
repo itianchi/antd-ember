@@ -8,11 +8,15 @@
 	</span>
 {{/if}}
 
-<a title="parent 1" {{action 'onSelect'}} class="{{if selected 'io-select-tree-node-selected'}}">
-    <span class="io-select-tree-title">
-        {{model.label}}
-    </span>
-</a>
+{{#if root.treeNodeTemplate}}
+	{{partial root.treeNodeTemplate}}
+{{else}}
+	<a {{action 'select'}} class="{{if selected 'io-select-tree-node-selected'}}">
+	    <span class="io-select-tree-title">
+	        {{model.title}}
+	    </span>
+	</a>
+{{/if}}
 
 {{!-- children --}}
 {{#if model.children}}

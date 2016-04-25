@@ -18,6 +18,7 @@ default Ember.Controller.extend({
         };
         return this.set('model', family);
     },
+    multi: Ember.A(),
     actions: {
         expand: function() {
             this.get('selected').toggleProperty('expanded');

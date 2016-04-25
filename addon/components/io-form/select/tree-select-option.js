@@ -25,7 +25,7 @@ export default Ember.Component.extend(SelectedClass, DisabledClass, {
 		toggleOpen(){
 			this.set('model.open', !this.get('model.open'));
 		},
-		onSelect() {
+		select() {
 			const root = this.get('root');
 			root.send('onSelect', this);
 		}
