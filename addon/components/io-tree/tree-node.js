@@ -49,7 +49,7 @@ export default Em.Component.extend(WithConfigMixin, {
     /**
      * True if this node is currently single selected
      */
-    isSelected: (function() {
+    selected: (function() {
         return this.get('tree.selected.id') === this.get('model.id');
     }).property('tree.selected'),
     /**
@@ -84,12 +84,12 @@ export default Em.Component.extend(WithConfigMixin, {
     }).property('expanded', 'leaf', 'loading'),
     nodeSelectedClasses: (function() {
         var _ref;
-        if (this.get('isSelected')) {
+        if (this.get('selected')) {
             return (_ref = this.get('config.tree.nodeSelectedClasses')) != null ? _ref.join(" ") : void 0;
         } else {
             return null;
         }
-    }).property('isSelected'),
+    }).property('selected'),
     /*
      * Observes the 'multiSelected' and put the tree in multi selection mode if true
      */
