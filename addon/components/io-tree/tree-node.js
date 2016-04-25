@@ -19,12 +19,11 @@ function walk(tree, cb) {
     if (!tree) {
         return;
     }
-    cb(tree);
     if (Ember.isArray(tree.children)) {
-        tree.children.forEach((child) => {
-            walk(child, cb);
-        });
-    } 
+        tree.children.forEach(cb);
+    } else {
+        cb(tree);
+    }
 }
 
 /**
