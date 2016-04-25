@@ -1,6 +1,17 @@
-{{io-tree-node 
-	model=model 
-	tree=this 
-	async=async 
-	targetObject=targetObject
-}}
+{{#if model.length}}
+	{{#each model as |node|}}
+		{{io-tree-node 
+			model=node 
+			tree=this
+			async=async 
+			targetObject=targetObject
+		}}
+	{{/each}}
+{{else}}
+	{{io-tree-node 
+		model=model 
+		tree=this
+		async=async 
+		targetObject=targetObject
+	}}
+{{/if}}

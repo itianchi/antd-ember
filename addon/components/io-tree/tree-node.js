@@ -16,7 +16,7 @@ var getProperty = function(obj, prop) {
  * @class TreeNode
  */
 export default Em.Component.extend(WithConfigMixin, {
-    attributeBindings: ['multi-selected'],
+    attributeBindings: ['multiSelected'],
     /**
      * The model the tree node view is bound to
      */
@@ -37,7 +37,7 @@ export default Em.Component.extend(WithConfigMixin, {
      * True if this node view is currently checked
      * This is only relevant if the tree configured to support multi selection
      */
-    'multi-selected': Em.computed.alias('model.selected'),
+    'multiSelected': Em.computed.alias('model.selected'),
     /**
      * True if should render an icon tag for this node view
      */
@@ -91,10 +91,10 @@ export default Em.Component.extend(WithConfigMixin, {
         }
     }).property('isSelected'),
     /*
-     * Observes the 'multi-selected' and put the tree in multi selection mode if true
+     * Observes the 'multiSelected' and put the tree in multi selection mode if true
      */
     addMultiSelectionToTreeSelection: (function() {
-        if (this.get('multi-selected')) {
+        if (this.get('multiSelected')) {
             return this.get('tree.multi-selection').pushObject(this.get('model'));
         } else {
             var multiSelection = this.get('tree.multi-selection');
@@ -102,7 +102,7 @@ export default Em.Component.extend(WithConfigMixin, {
                 multiSelection.removeObject(this.get('model'));
             }
         }
-    }).observes('multi-selected').on('init'),
+    }).observes('multiSelected').on('init'),
     iconClass: (function() {
         var icons;
         icons = [];
@@ -204,10 +204,10 @@ export default Em.Component.extend(WithConfigMixin, {
             this.get('tree').send('selectNode', this.get('model'));
         },
         toggleSelection: function() {
-            if (this.get('multi-selected')) {
-                return this.set('multi-selected', '');
+            if (this.get('multiSelected')) {
+                return this.set('multiSelected', '');
             } else {
-                return this.set('multi-selected', 'true');
+                return this.set('multiSelected', 'true');
             }
         }
     },
