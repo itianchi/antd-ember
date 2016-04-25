@@ -40,6 +40,9 @@
 					placeholder=it.placeholder
 					pattern=it.pattern
 					required=it.required
+                    max=it.maximum
+                    min=it.minimum
+                    step=it.step
 					data-error=it.error}}
 			{{/io-form-group}}
 		{{/if}}
@@ -126,9 +129,26 @@
 			{{/io-form-group}}
 		{{/if}}
 
-		{{!-- textarea field --}}
-		{{#if (eq it.type "textarea")}}
-			{{#io-form-group
+        {{! -- switch --}}
+        {{#if (eq it.type "switch")}}
+            {{#io-form-group
+				labelColClass=(if it.labelColClass it.labelColClass schema.labelColClass)
+				inputColClass=(if it.inputColClass it.inputColClass schema.inputColClass)
+				required=it.required
+				help=it.help
+				label=it.label}}
+                {{#io-switch checked=it.value}}
+                    {{#if it.options}}
+                        <span class="checked">{{it.options.checked}}</span>
+                        <span class="unchecked">{{it.options.unchecked}}</span>
+                    {{/if}}
+                {{/io-switch}}
+			{{/io-form-group}}
+        {{/if}}
+
+        {{!-- textarea field --}}
+        {{#if (eq it.type "textarea")}}
+            {{#io-form-group
 				labelColClass=(if it.labelColClass it.labelColClass schema.labelColClass)
 				inputColClass=(if it.inputColClass it.inputColClass schema.inputColClass)
 				required=it.required
