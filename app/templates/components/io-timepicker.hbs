@@ -1,0 +1,31 @@
+<span>
+    <input 
+        class="io-time-picker-input io-input"
+        value={{ _display }} 
+        placeholder="请选择时间" 
+        {{action "showPicker"}}/>
+    <span class="io-time-picker-icon"> </span>
+</span>
+{{#unless _hidden}}
+<div class="io-time-picker-panel io-time-picker-panel-placement-topLeft">
+    <div class="io-time-picker-panel-inner">
+        <div class="io-time-picker-panel-input-wrap">
+            <input class="io-time-picker-panel-input  " value={{ _display }} placeholder="请选择时间">
+            <a class="io-time-picker-panel-clear-btn" role="button" title="清除" {{action 'clear'}}></a>
+        </div>
+        <div class="io-time-picker-panel-combobox">
+            {{#each _times as | time | }}
+                <div class="io-time-picker-panel-select">
+                    <ul>
+                        {{#each time.values as | value |}}
+                            <li class="{{if (eq now.time value) 'io-time-picker-panel-select-option-selected'}}" {{action "onSelectTime" time.title value}}>
+                                {{ value }}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/unless}}
