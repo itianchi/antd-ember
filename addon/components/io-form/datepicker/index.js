@@ -161,7 +161,7 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
 		onChange(date, notHidden) {
 			this.set('_selectedDate', date);
 			this.set('_hidden', !notHidden);
-			this.set('value', date.format('YYYY-MM-DD'));
+			this.set('value', date ? date.format('YYYY-MM-DD') : null);
 			if (this.get('onChange')) {
 				this.sendAction('onChange', date);
 			}
