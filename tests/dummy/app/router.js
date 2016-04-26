@@ -32,6 +32,7 @@ Router.map(function() {
     this.route('dropdown');
     this.route('datepicker');
     this.route('unsave');
+    this.route('transfer');
   });
 });
 

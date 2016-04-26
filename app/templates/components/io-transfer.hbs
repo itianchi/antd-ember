@@ -1,0 +1,76 @@
+{{!-- source list --}}
+<div class="io-transfer-list">
+    <div class="io-transfer-list-header">
+        {{io-checkbox checked=_sourceListChecked}}
+        <span class="io-transfer-list-header-selected">
+            <span>
+                <span> {{_sourceList.length}} </span>
+                <span>
+                    条
+                </span>
+            </span>
+            <span class="io-transfer-list-header-title">
+                源列表
+            </span>
+        </span>
+    </div>
+    <div class="io-transfer-list-body">
+        <ul>
+            {{#each _sourceList as |it|}}
+            <li title={{it.label}}>
+                {{io-checkbox checked=it.checked}}
+                <span> {{it.label}} </span>
+            </li>
+            {{/each}}
+            
+            {{#if (eq _sourceList.length 0)}}
+                <div class="io-transfer-list-body-not-found">
+                    Not Found   
+                </div>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+{{!-- operation --}}
+<div class="io-transfer-operation">
+    <button disabled={{_transferBackButtonDisabled}} type="button" class="io-btn io-btn-primary io-btn-sm" {{action 'transferBack'}}>
+        <span> <i class=" ioicon ioicon-left"> </i> </span>
+    </button>
+    <button disabled={{_transferButtonDisabled}} type="button" class="io-btn io-btn-primary io-btn-sm" {{action 'transfer'}}>
+        <span> <i class=" ioicon ioicon-right"> </i> </span>
+    </button>
+</div>
+{{!-- target list --}}
+<div class="io-transfer-list">
+    <div class="io-transfer-list-header">
+        {{io-checkbox checked=_targetListChecked}}
+        <span class="io-transfer-list-header-selected">
+            <span>
+                <span>
+                    {{_targetList.length}}
+                </span>
+                <span>
+                    条
+                </span>
+            </span>
+            <span class="io-transfer-list-header-title">
+                目的列表
+            </span>
+        </span>
+    </div>
+    <div class="io-transfer-list-body">
+        <ul> 
+            {{#each _targetList as |it|}}
+            <li title={{it.label}}>
+                {{io-checkbox checked=it.checked}}
+                <span> {{it.label}} </span>
+            </li>
+            {{/each}}
+            {{#if (eq _targetList.length 0)}}
+                <div class="io-transfer-list-body-not-found">
+                    Not Found   
+                </div>
+            {{/if}}
+        </ul>
+    </div>
+</div>
