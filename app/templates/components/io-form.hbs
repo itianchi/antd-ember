@@ -146,6 +146,71 @@
 			{{/io-form-group}}
         {{/if}}
 
+        {{! -- date --}}
+        {{#if (eq it.type "date")}}
+            {{#io-form-group
+				labelColClass=(if it.labelColClass it.labelColClass schema.labelColClass)
+				inputColClass=(if it.inputColClass it.inputColClass schema.inputColClass)
+				required=it.required
+				help=it.help
+				label=it.label}}
+                {{io-datepicker
+                    value=it.value
+                    required=it.required
+                    format=it.format
+					placeholder=it.placeholder
+                    }}
+			{{/io-form-group}}
+        {{/if}}
+
+
+        {{! -- time --}}
+        {{#if (eq it.type "time")}}
+            {{#io-form-group
+				labelColClass=(if it.labelColClass it.labelColClass schema.labelColClass)
+				inputColClass=(if it.inputColClass it.inputColClass schema.inputColClass)
+				required=it.required
+				help=it.help
+				label=it.label}}
+                {{io-timepicker
+                    value=it.value
+                    required=it.required
+                    format=it.format
+					placeholder=it.placeholder
+                    }}
+			{{/io-form-group}}
+        {{/if}}
+
+
+        {{! -- datetime --}}
+        {{#if (eq it.type "datetime")}}
+            {{#io-form-group
+				labelColClass=(if it.labelColClass it.labelColClass schema.labelColClass)
+				inputColClass=(if it.inputColClass it.inputColClass schema.inputColClass)
+				required=it.required
+				help=it.help
+				label=it.label}}
+                {{#io-row}}
+                    {{#io-col span=12}}
+                        {{io-datepicker
+                            value=it.date
+                            required=it.required
+                            format=it.format
+                            placeholder=it.placeholder
+                            }}
+                    {{/io-col}}
+                    {{#io-col span=12}}
+                        {{io-timepicker
+                            value=it.time
+                            required=it.required
+                            format=it.format
+                            placeholder=it.placeholder
+                            }}
+                        {{/io-col}}
+                {{/io-row}}
+			{{/io-form-group}}
+        {{/if}}
+
         {{!-- textarea field --}}
         {{#if (eq it.type "textarea")}}
             {{#io-form-group
