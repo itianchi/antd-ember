@@ -99,7 +99,7 @@ export default Ember.Component.extend(FormItemMixin, OutsideClick, {
     return range;
   },
   _times: function() {
-		const selected = this.get('_selectedTime') || moment();
+		const selected = moment(this.get('_selectedTime')||undefined);
     let times = [];
     // hours
     times.push({title: "hours", values: this._range(0, 24), now: selected.format("HH")});
