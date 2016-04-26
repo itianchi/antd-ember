@@ -1,0 +1,48 @@
+<h1>transfer 穿梭框</h1>
+
+<seciton class="demo-type">
+
+	<div class="demo-doc">
+		<h2>基本用法</h2>
+	</div>
+	
+	<div class="demo">
+		<div class="demo-example">
+			{{io-transfer 
+				dataSource=dataSource 
+				targetValues=targetValues}}
+			<br>
+			<p>
+			选择结果：
+			{{#each targetValues as |val|}}
+				<span>{{val}}，</span>
+			{{/each}}
+			</p>
+		</div>
+		<div class="demo-code">
+<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+// dataSource 
+let targetValues = [];
+let mockData = [];
+for (let i = 0; i &lt; 20; i++) {
+  const data = {
+    value: i,
+    label: `内容${i + 1}`,
+    description: `内容${i + 1}的描述`,
+    chosen: Math.random() * 2 > 1
+  };
+  if (data.chosen) {
+    targetValues.push(data.value);
+  }
+  mockData.push(data);
+}
+
+\{{io-transfer 
+	dataSource=dataSource 
+	targetValues=targetValues}}
+</code></pre>
+</div>
+		</div>
+	</div>
+</seciton>

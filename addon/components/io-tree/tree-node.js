@@ -10,6 +10,22 @@ var getProperty = function(obj, prop) {
         return obj[prop];
     }
 };
+
+/**
+ * [walk description]
+ * @return {[type]} [description]
+ */
+function walk(tree, cb) {
+    if (!tree) {
+        return;
+    }
+    if (Ember.isArray(tree.children)) {
+        tree.children.forEach(cb);
+    } else {
+        cb(tree);
+    }
+}
+
 /**
  * A node of a tree.
  *
@@ -37,7 +53,7 @@ export default Em.Component.extend(WithConfigMixin, {
      * True if this node view is currently checked
      * This is only relevant if the tree configured to support multi selection
      */
-    'multiSelected': Em.computed.alias('model.selected'),
+    multiSelected: Em.computed.alias('model.selected'),
     /**
      * True if should render an icon tag for this node view
      */
@@ -203,12 +219,11 @@ export default Em.Component.extend(WithConfigMixin, {
             this.set('tree.selected', this.get('model'));
             this.get('tree').send('selectNode', this.get('model'));
         },
-        toggleSelection: function() {
-            if (this.get('multiSelected')) {
-                return this.set('multiSelected', '');
-            } else {
-                return this.set('multiSelected', 'true');
-            }
+        multiSelectedChange: function() {
+            const selected = this.get('multiSelected');
+            walk(this.get('model'), (node) => {
+                Ember.set(node, 'selected', selected);
+            });
         }
     },
     /*
