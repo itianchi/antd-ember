@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement: function () {
-    var $node = this.$('.modal');
+    var $node = this.$('.modal').first();
     this.set('modalNode', $node);
     $node.modal(this.get('visibility'));
 
