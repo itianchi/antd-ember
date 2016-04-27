@@ -36,7 +36,6 @@ export default function upload(option) {
   }
 
   const formData = new FormData();
-
   
   formData.append(option.filename, option.file);
   if (option.data) {
