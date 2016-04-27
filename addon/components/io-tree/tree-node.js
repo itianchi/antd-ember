@@ -73,11 +73,12 @@ export default Em.Component.extend(WithConfigMixin, {
      * Usually that means the node is defined asynchronously and its children are currently being loaded
      */
     loading: false,
-    branch: Em.computed.alias('parentView'),
     /**
      * true if the loading mode of the node's children should be async
      */
-    async: Em.computed.alias('parentView.async'),
+    async: function() {
+        return this.get('model.async');
+    }.property('model.async'),
     /**
      * true if this is a leaf node, meaning it has no children
      */
