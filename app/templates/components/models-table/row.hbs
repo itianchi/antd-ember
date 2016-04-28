@@ -1,5 +1,8 @@
 
 <tr class="{{if record.row_class record.row_class}}">
+  {{#if showIndexNumber}}
+    <td>{{record.__index}}</td>
+  {{/if}}
   {{#each processedColumns as |column|}}
     {{#if column.isVisible}}
       <td class={{column.className}}>

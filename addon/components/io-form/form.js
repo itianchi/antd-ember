@@ -31,7 +31,8 @@ export default Ember.Component.extend(DisabledClass, {
     if (!schema) {
       return;
     } 
-    const keys = Object.keys(schema.properties);
+    // 增加已排序
+    const keys = this.get("ordered")? this.get("ordered"): Object.keys(schema.properties);
     return keys.map((key) => {
       let field = schema.properties[key];
       set(field, 'name', key);
@@ -60,6 +61,11 @@ export default Ember.Component.extend(DisabledClass, {
     }
 
   }.on('init'),
+  didUpdateAttrs() {
+    // 修复formData改变导致数据未更新的问题
+    this._super(...arguments);
+    this._onInit();
+  },
   /**
    * @attribute disabled
    */

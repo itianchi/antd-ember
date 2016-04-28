@@ -8,7 +8,7 @@ default Ember.Controller.extend({
     columns: [{
         "propertyName": "id",
         "title": "ID",
-        "headerTemplate": "snippets/city-header-template"
+        // "headerTemplate": "snippets/city-header-template"
     }, {
         "propertyName": "firstName",
         "title": "First Name"
@@ -22,8 +22,8 @@ default Ember.Controller.extend({
     }],
     data: [{
         "id": 1,
-        "firstName": "Ingeborg",
-        "lastName": "Brown",
+        "firstName": "陈",
+        "lastName": " 学家",
         "age": 34,
         "city": "Shanghai",
         "cityWithHtml": "<i>Shanghai</i>"

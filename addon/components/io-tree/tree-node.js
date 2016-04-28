@@ -10,13 +10,29 @@ var getProperty = function(obj, prop) {
         return obj[prop];
     }
 };
+
+/**
+ * [walk description]
+ * @return {[type]} [description]
+ */
+function walk(tree, cb) {
+    if (!tree) {
+        return;
+    }
+    if (Ember.isArray(tree.children)) {
+        tree.children.forEach(cb);
+    } else {
+        cb(tree);
+    }
+}
+
 /**
  * A node of a tree.
  *
  * @class TreeNode
  */
 export default Em.Component.extend(WithConfigMixin, {
-    attributeBindings: ['multi-selected'],
+    attributeBindings: ['multiSelected'],
     /**
      * The model the tree node view is bound to
      */
@@ -37,7 +53,7 @@ export default Em.Component.extend(WithConfigMixin, {
      * True if this node view is currently checked
      * This is only relevant if the tree configured to support multi selection
      */
-    'multi-selected': Em.computed.alias('model.selected'),
+    multiSelected: Em.computed.alias('model.selected'),
     /**
      * True if should render an icon tag for this node view
      */
@@ -49,7 +65,7 @@ export default Em.Component.extend(WithConfigMixin, {
     /**
      * True if this node is currently single selected
      */
-    isSelected: (function() {
+    selected: (function() {
         return this.get('tree.selected.id') === this.get('model.id');
     }).property('tree.selected'),
     /**
@@ -57,11 +73,12 @@ export default Em.Component.extend(WithConfigMixin, {
      * Usually that means the node is defined asynchronously and its children are currently being loaded
      */
     loading: false,
-    branch: Em.computed.alias('parentView'),
     /**
      * true if the loading mode of the node's children should be async
      */
-    async: Em.computed.alias('parentView.async'),
+    async: function() {
+        return this.get('model.async');
+    }.property('model.async'),
     /**
      * true if this is a leaf node, meaning it has no children
      */
@@ -84,17 +101,17 @@ export default Em.Component.extend(WithConfigMixin, {
     }).property('expanded', 'leaf', 'loading'),
     nodeSelectedClasses: (function() {
         var _ref;
-        if (this.get('isSelected')) {
+        if (this.get('selected')) {
             return (_ref = this.get('config.tree.nodeSelectedClasses')) != null ? _ref.join(" ") : void 0;
         } else {
             return null;
         }
-    }).property('isSelected'),
+    }).property('selected'),
     /*
-     * Observes the 'multi-selected' and put the tree in multi selection mode if true
+     * Observes the 'multiSelected' and put the tree in multi selection mode if true
      */
     addMultiSelectionToTreeSelection: (function() {
-        if (this.get('multi-selected')) {
+        if (this.get('multiSelected')) {
             return this.get('tree.multi-selection').pushObject(this.get('model'));
         } else {
             var multiSelection = this.get('tree.multi-selection');
@@ -102,7 +119,7 @@ export default Em.Component.extend(WithConfigMixin, {
                 multiSelection.removeObject(this.get('model'));
             }
         }
-    }).observes('multi-selected').on('init'),
+    }).observes('multiSelected').on('init'),
     iconClass: (function() {
         var icons;
         icons = [];
@@ -203,12 +220,11 @@ export default Em.Component.extend(WithConfigMixin, {
             this.set('tree.selected', this.get('model'));
             this.get('tree').send('selectNode', this.get('model'));
         },
-        toggleSelection: function() {
-            if (this.get('multi-selected')) {
-                return this.set('multi-selected', '');
-            } else {
-                return this.set('multi-selected', 'true');
-            }
+        multiSelectedChange: function() {
+            const selected = this.get('multiSelected');
+            walk(this.get('model'), (node) => {
+                Ember.set(node, 'selected', selected);
+            });
         }
     },
     /*

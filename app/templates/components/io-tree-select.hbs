@@ -7,7 +7,7 @@
 	    	{{#each _selectedOptions as |option|}}
 	        <li class="io-select-selection__choice" title="a10" >
 	            <span class="io-select-selection__choice__content" >
-	                {{option.label}}
+	                {{option.title}}
 	            </span>
 	            <span class="io-select-selection__choice__remove" {{action 'removeOption' option.value bubbles=false}}>
 	            </span>
@@ -19,7 +19,7 @@
     <span class="io-select-selection__rendered">
         <span>
         	{{#if _selectedOptions}} 
-        		{{_selectedOptions.label}}
+        		{{_selectedOptions.title}}
         	{{else}}
                 {{#unless readonly}}
             		{{placeholder}}
