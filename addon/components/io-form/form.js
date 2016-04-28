@@ -61,6 +61,11 @@ export default Ember.Component.extend(DisabledClass, {
     }
 
   }.on('init'),
+  didUpdateAttrs() {
+    // 修复formData改变导致数据未更新的问题
+    this._super(...arguments);
+    this._onInit();
+  },
   /**
    * @attribute disabled
    */
