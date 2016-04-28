@@ -231,14 +231,16 @@
 		{{/if}}
 
 	{{/each}}
-	
-	<div class="form-group row">
-		<div class="{{schema.labelColClass}}">&nbsp;</div>
-		<div class="{{schema.inputColClass}}">
-			{{#io-button type="primary" class=schema.submit.submitClass submit=true}} 
-				{{schema.submit.text}}
-			{{/io-button}}
-		</div>
-	</div>
+
+    {{#if schema.submit}}
+      <div class="form-group row">
+          <div class="{{schema.labelColClass}}">&nbsp;</div>
+          <div class="{{schema.inputColClass}}">
+              {{#io-button type="primary" class=schema.submit.submitClass submit=true}} 
+                  {{schema.submit.text}}
+              {{/io-button}}
+          </div>
+      </div>
+    {{/if}}
 {{/if}}
 {{yield}}
