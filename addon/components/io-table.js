@@ -439,7 +439,7 @@ export default Component.extend({
         const indexNumberBase = this.get('indexNumberBase') || 0;
         const showIndexNumber = this.get('showIndexNumber');
         data.forEach((it, index) => {
-            it.__index = index + indexNumberBase;
+            set(it, '__index', index + indexNumberBase);
         });
 
         // global search
