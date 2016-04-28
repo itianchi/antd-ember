@@ -18,6 +18,9 @@
       {{! table header start }}
       <thead class="io-table-thead">
       <tr>
+        {{#if showIndexNumber}}
+          <th>#</th>
+        {{/if}}
         {{#each processedColumns as |column|}}
           {{#if column.isVisible}}
             {{#if column.headerTemplate}}
@@ -34,7 +37,7 @@
         {{/each}}
       </tr>
       {{!-- useFilteringByColumns --}}
-      {{#if false}}
+      {{#if useFilteringByColumns}}
         <tr>
           {{#each processedColumns as |column|}}
             {{#if column.isVisible}}

@@ -37,7 +37,7 @@ const {
 } = Ember;
 const NOT_SORTED = -1;
 const defaultMessages = {
-    searchLabel: 'Search:',
+    'searchLabel': 'Search:',
     'columns-title': 'Columns',
     'columns-showAll': 'Show All',
     'columns-hideAll': 'Hide All',
@@ -47,8 +47,8 @@ const defaultMessages = {
     noDataToShow: '无记录'
 };
 const defaultIcons = {
-    'sort-asc': 'glyphicon glyphicon-triangle-bottom',
-    'sort-desc': 'glyphicon glyphicon-triangle-top',
+    'sort-asc': 'ioicon ioicon-caret-down',
+    'sort-desc': 'ioicon ioicon-caret-top',
     'column-visible': 'glyphicon glyphicon-check',
     'column-hidden': 'glyphicon glyphicon-unchecked',
     'nav-first': 'glyphicon glyphicon-chevron-left',
@@ -127,6 +127,15 @@ export default Component.extend({
      */
     pageSize: 10,
     /**
+     * [showIndexNumber index number]
+     * @type {Boolean}
+     */
+    showIndexNumber: false,
+    /**
+     * indexNumberBase needed if showIndexNumber
+     */
+    indexNumberBase: 0,
+    /**
      * @type {number}
      * @name ModelsTable#currentPageNumber
      * @default 1
@@ -137,7 +146,7 @@ export default Component.extend({
      * @name ModelsTable#sortProperties
      * @default []
      */
-    sortProperties: A([]),
+    sortProperties: A(['__index']),
     /**
      * Determines if multi-columns sorting should be used
      *
@@ -145,7 +154,7 @@ export default Component.extend({
      * @name ModelsTable#multipleColumnsSorting
      * @default false
      */
-    multipleColumnsSorting: true,
+    multipleColumnsSorting: false,
     /**
      * Determines if table footer should be shown on the page
      *
@@ -177,7 +186,7 @@ export default Component.extend({
      * @name ModelsTable#useFilteringByColumns
      * @default true
      */
-    useFilteringByColumns: true,
+    useFilteringByColumns: false,
     /**
      * @type {string}
      * @name ModelsTable#filterString
@@ -191,7 +200,7 @@ export default Component.extend({
      * @name ModelsTable#filteringIgnoreCase
      * @default false
      */
-    filteringIgnoreCase: false,
+    filteringIgnoreCase: true,
     /**
      * Determines if "Global filter"-field should be shown
      *
@@ -423,6 +432,16 @@ export default Component.extend({
         if (!data) {
             return A([]);
         }
+        /**
+         * [indexNumberBase description]
+         * @type {[type]}
+         */
+        const indexNumberBase = this.get('indexNumberBase') || 0;
+        const showIndexNumber = this.get('showIndexNumber');
+        data.forEach((it, index) => {
+            set(it, '__index', index + indexNumberBase);
+        });
+
         // global search
         var globalSearch = data.filter(function(row) {
             return processedColumns.length ? processedColumns.any(c => {
@@ -485,6 +504,7 @@ export default Component.extend({
             pageSize,
             currentPageNumber
         } = getProperties(this, 'arrangedContent', 'pageSize', 'currentPageNumber');
+
         const startIndex = pageSize * (currentPageNumber - 1);
         if (get(arrangedContent, 'length') < pageSize) {
             return arrangedContent;
