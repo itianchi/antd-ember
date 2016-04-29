@@ -1,0 +1,29 @@
+<div class="io-progress-circle-inner" style="width:{{width}}px;height:{{width}}px;font-size:{{fontSize}}px;" >
+    <svg class="rc-progress-circle" viewBox="0 0 100 100" >
+        <path class="rc-progress-circle-trail" 
+        	d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" 
+        	stroke="#f3f3f3" 
+        	stroke-width="6" 
+        	fill-opacity="0" >
+        </path>
+        <path class="rc-progress-circle-path" 
+        	d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" 
+        	stroke-linecap="round" 
+        	stroke="{{strokeColor}}" 
+        	stroke-width="6" 
+        	fill-opacity="0" 
+        	style="stroke-dasharray:{{strokeDash}}px {{strokeDash}}px;stroke-dashoffset:{{strokeDashOffset}}px;transition:stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease;" >
+        </path>
+    </svg>
+    <span class="io-progress-circle-text" >
+        {{#if isSuccess}}
+			<span class="ioicon ioicon-check"></span>
+		{{else}}
+			{{#if isError}}
+				<span class="ioicon ioicon-exclamation"></span>
+			{{else}}
+			    {{percent}}%
+			{{/if}}
+		{{/if}}
+    </span>
+</div>

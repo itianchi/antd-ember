@@ -1,0 +1,113 @@
+<h1>Progress 进度条</h1>
+
+<div class="demo-doc">
+	<h2>何时使用</h2>
+	<p>在操作需要较长时间才能完成时，为用户显示该操作的当前进度和状态。</p>
+	<ul>
+		<li>当一个操作会打断当前界面，或者需要在后台运行，且耗时可能超过2秒时；</li>
+		<li>当需要显示一个操作完成的百分比时。</li>
+	</ul>
+</div>
+
+
+<div class="demo-type">
+	<h2>进度条</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-progress percent=30}}
+			{{io-progress percent=50 status="active"}}
+			{{io-progress percent=70 status="exception"}}
+			{{io-progress percent=100}}
+			{{io-progress percent=50 showInfo=false}}
+		</div>
+		<div class="demo-code">
+		<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-progress percent=30}}
+\{{io-progress percent=50 status="active"}}
+\{{io-progress percent=70 status="exception"}}
+\{{io-progress percent=100}}
+\{{io-progress percent=50 showInfo=false}}
+</code></pre>
+		</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>进度条宽度</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-progress strokeWidth=5 percent=30 }}
+			{{io-progress strokeWidth=5 percent=50 status="active"}}
+			{{io-progress strokeWidth=5 percent=70 status="exception"}}
+			{{io-progress strokeWidth=5 percent=100}}
+			{{io-progress strokeWidth=5 percent=50 showInfo=false}}
+		</div>
+		<div class="demo-code">
+		<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-progress strokeWidth=5 percent=30}}
+\{{io-progress strokeWidth=5 percent=50 status="active"}}
+\{{io-progress strokeWidth=5 percent=70 status="exception"}}
+\{{io-progress strokeWidth=5 percent=100}}
+\{{io-progress strokeWidth=5 percent=50 showInfo=false}}
+</code></pre>
+		</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>进度圈</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-progress-circle percent=75}}
+			{{io-progress-circle percent=60 status="exception"}}
+			{{io-progress-circle percent=100}}
+		</div>
+		<div class="demo-code">
+		<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-progress-circle percent=75}}
+\{{io-progress-circle percent=60 status="exception"}}
+\{{io-progress-circle percent=100}}
+</code></pre>
+		</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>小型进度圈</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-progress-circle width=80 percent=75}}
+			{{io-progress-circle width=80 percent=60 status="exception"}}
+			{{io-progress-circle width=80 percent=100}}
+		</div>
+		<div class="demo-code">
+		<div class="highlight">
+<pre><code class="language-html" data-lang="html">
+\{{io-progress-circle width=80 percent=75}}
+\{{io-progress-circle width=80 percent=60 status="exception"}}
+\{{io-progress-circle width=80 percent=100}}
+</code></pre>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

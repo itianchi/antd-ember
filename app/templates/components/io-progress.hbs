@@ -1,0 +1,20 @@
+<div class="io-progress-line-outer" >
+    <div class="io-progress-line-inner" >
+        <div class="io-progress-line-bg" style="width:{{percent}}%;height:{{strokeWidth}}px;" >
+        </div>
+    </div>
+</div>
+
+{{#if showInfo}}
+<span class="io-progress-line-text" >
+	{{#if isSuccess}}
+		<span class="ioicon ioicon-check-circle"></span>
+	{{else}}
+		{{#if isError}}
+			<span class="ioicon ioicon-cross-circle"></span>
+		{{else}}
+		    {{percent}}%
+		{{/if}}
+	{{/if}}
+</span>
+{{/if}}

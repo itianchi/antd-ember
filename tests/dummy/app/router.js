@@ -33,6 +33,7 @@ Router.map(function() {
     this.route('datepicker');
     this.route('unsave');
     this.route('transfer');
+    this.route('progress');
   });
 });
 
