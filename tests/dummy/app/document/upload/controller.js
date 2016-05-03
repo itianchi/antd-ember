@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import request from 'ember-cli-idcos/components/io-upload/request';
+import request from 'ember-cli-idcos/components/io-upload/ajax-file-upload';
 const {
     // get,
     // set
@@ -23,21 +23,18 @@ default Ember.Controller.extend({
             alert('click button')
         },
         submitForm: function() {
-            const files = $('#fileUpload input')[0];
+            const $file = $('#fileUpload input')[0];
             const data = this.get('form');
             request({
                 action: '/api/uploadfile',
                 filename: 'filename',
                 data: data,
-                file: files[0],
-                onProgress: e => {
-
-                },
+                fileElement: $file,
                 onSuccess: ret => {
-
+                    console.log('success');
                 },
                 onError: ret => {
-
+                    console.log('error');
                 }
             });  
         },

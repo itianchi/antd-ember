@@ -65,14 +65,13 @@ function request(option) {
 	option.filename = option.filename || $(fileElement).attr('name') || 'file';
 
 	option.onStart();
+
 	if (window.FormData) {
 		// console.log('ajax-upload');
 		option.action = option.action || option.url;
 		option.file = fileElement.files[0];
 		return ajaxRequest(option);
 	}
-
-	// console.log('iframe-upload');
 
 	option = $.extend({}, $.ajaxSettings, option);
 	const domain = option.domain || document.domain;
@@ -97,6 +96,7 @@ function request(option) {
 		} else {
 			$form.attr('enctype', 'multipart/form-data');
 		}
+		// $form.find('button[type=submit]').trigger('click');
 		$form.submit();
 	} catch (e) {
 		option.onError(e);
@@ -111,7 +111,6 @@ function request(option) {
 	 */
 	function uploadCallback(isTimeout) {
 		let xhr = {};
-
 		if (isTimeout === 'timeout') {
 			xhr.status = 'Error';
 			xhr.msg = 'timeout';
@@ -229,6 +228,13 @@ function createUploadForm(id, option, domain) {
 	$(fileElement).before($newFile);
 	$(fileElement).appendTo($form);
 	$(fileElement).attr('name', option.filename || $(fileElement).attr('name'));
+
+	/**
+	 * submit button
+	 * @type {String}
+	 */
+	$(`<button type="submit" value="Submit">Submit</button>`).appendTo($form);
+
 	$form.appendTo('body');
 
 	return $form;

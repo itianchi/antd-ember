@@ -220,9 +220,9 @@ export default Ember.Component.extend({
 				fileList: nextFileList
 			});
 			
-			if (!window.FormData) {
-				this.autoUpdateProgress(0, targetItem);
-			}
+			// if (!window.FormData) {
+			// 	this.autoUpdateProgress(0, targetItem);
+			// }
 
 		},	
 		/**
@@ -276,7 +276,7 @@ export default Ember.Component.extend({
 			this.clearProgressTimer();
 			try {
 				if (typeof response === 'string') {
-					JSON.parse(response);
+					response = JSON.parse(response);
 				}
 			} catch (e) {
 				this.send('onError', new Error('No response'), response, file);

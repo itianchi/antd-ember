@@ -51,6 +51,8 @@ onChange(ev) {
 	
 	{{#io-form}}
 		{{io-input type="file" id="fileUpload" value=file}}
+		<br>
+		{{#io-button type="primary" id="submitBtn" submit="true" onClick="submitForm"}} submit {{/io-button}}
 	{{/io-form}}
 
 
