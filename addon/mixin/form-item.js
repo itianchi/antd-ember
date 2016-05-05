@@ -58,12 +58,12 @@ export default Ember.Mixin.create({
 	_form: null,
 	dataError: Ember.computed.alias('data-error'),
 	disabledClass: function() {
-		if (this.get('disabled')) {
+		if (this.get('disabled') || this.get('readonly')) {
 			return this.get('classNamePrefix') + 'disabled';
 		} else {
 			return '';
 		}
-	}.property('disabled'),
+	}.property('disabled', 'readonly'),
 	readonlyClass: function() {
 		if (this.get('readonly')) {
 			return this.get('classNamePrefix') + 'readonly';

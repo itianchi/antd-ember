@@ -63,12 +63,12 @@
 	<p>radio 按钮组</p>
 	<div class="demo">
 		<div class="demo-example">
-			{{#io-button-group}}
-			 	{{#io-radio-button value="杭州" name=name checked=checked}} 杭州 {{/io-radio-button}}
-			 	{{#io-radio-button value="上海" name=name checked=checked}} 上海 {{/io-radio-button}}
-			 	{{#io-radio-button value="广州" name=name checked=checked}} 广州 {{/io-radio-button}}
-			 	{{#io-radio-button value="深圳" name=name checked=checked}} 深圳 {{/io-radio-button}}
-			{{/io-button-group}}
+			{{#io-radio-button-group}}
+			 	{{#io-radio-button disabled=true value="杭州" name=name checked=checked}} 杭州 {{/io-radio-button}}
+			 	{{#io-radio-button disabled=true value="上海" name=name checked=checked}} 上海 {{/io-radio-button}}
+			 	{{#io-radio-button disabled=true value="广州" name=name checked=checked}} 广州 {{/io-radio-button}}
+			 	{{#io-radio-button disabled=true value="深圳" name=name checked="深圳"}} 深圳 {{/io-radio-button}}
+			{{/io-radio-button-group}}
 		</div>
 		<div class="demo-code">
 			<div class="highlight">

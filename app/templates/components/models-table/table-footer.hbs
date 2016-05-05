@@ -15,7 +15,7 @@
   <div class="col-sm-12">
     {{partial numericPaginationTemplate}}
     <div class="{{classes.pageSizeSelectWrapper}} pull-right" style="margin-right: 30px;">
-      {{#io-select value=selectedValue placeholder="--每页显示--"}}
+      {{#io-select value=pageSize placeholder="--每页显示--"}}
         {{#each pageSizeValues as |item|}}
           {{io-option value=item label=item}}
         {{/each}}

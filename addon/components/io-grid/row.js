@@ -12,6 +12,5 @@ export default Ember.Component.extend({
 	 * [tagName description]
 	 */
 	tagName: 'div',
-	classNames: 'row',
-	classNameBindings: ['class']
+	classNames: 'row'
 });

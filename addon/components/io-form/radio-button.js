@@ -35,6 +35,9 @@ export default Ember.Component.extend(ComponentChild, FormItemMixin, {
 	}.property('checked', 'value'),
 	actions: {
 		change: function() {
+			if (this.get('disabled') || this.get('readonly')) {
+				return;
+			}
 			this.set('checked', this.get('value'));
 		}
 	}
