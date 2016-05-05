@@ -134,7 +134,7 @@ export default Component.extend({
     /**
      * indexNumberBase needed if showIndexNumber
      */
-    indexNumberBase: 0,
+    indexNumberBase: 1,
     /**
      * @type {number}
      * @name ModelsTable#currentPageNumber
