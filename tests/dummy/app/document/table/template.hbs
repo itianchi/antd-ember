@@ -9,37 +9,46 @@
 			{{io-table
 				columns=columns
         showIndexNumber=true
-        indexNumberBase=10
+        indexNumberBase=20
 				data=data}}
 		</div>
 		<div class="demo-code">
 			<div class="highlight">
 				<pre>
 				<code class="language-html"> 
-    &#123;&#123;io-table
-	columns=columns
-	data=data&#125;&#125;
-    
-    // 换页 action
-    gotoFirst() {
-    	this.sendAction('gotoFirst');
-    },
-    gotoPrev() {
-        this.sendAction('gotoPrev');
-    },
-    gotoNext() {
-        this.sendAction('gotoNext');
-    },
-    gotoLast() {
-        this.sendAction('gotoLast');
-    },
-    gotoCustomPage(pageNumber) {
-        this.sendAction('gotoCustomPage', pageNumber);
-    }
+   \{{io-table
+        columns=columns
+        showIndexNumber=true
+        indexNumberBase=20
+        data=data}}
     </code></pre>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="demo-type">
+  <h2>固定头部</h2>
+  <div class="demo">
+    <div class="demo-example">
+    {{io-table
+        columns=columns1
+        useFixedHeader=true
+        data=data2}}
+    </div>
+    <div class="demo-code">
+      <div class="highlight">
+        <pre>
+        <code class="language-html"> 
+  // 每个 column 需要定义宽度， 不然 header 和 body 无法对齐
+  \{{io-table
+        columns=columns
+        useFixedHeader=true
+        data=data}}
+    </code></pre>
+      </div>
+    </div>
+  </div>
 </div>
 
 <h2>API 参数说明</h2>

@@ -1,0 +1,47 @@
+  <thead class="io-table-thead">
+  <tr>
+    {{#if showIndexNumber}}
+      <th>#</th>
+    {{/if}}
+    {{#each processedColumns as |column|}}
+      {{#if column.isVisible}}
+        {{#if column.headerTemplate}}
+          <th class="{{classes.theadCell}}">
+            {{partial column.headerTemplate}}
+          </th>
+        {{else}}
+          <th class="{{classes.theadCell}}" {{action "sort" column}}>
+            {{column.title}}
+            <i class="ioicon {{if column.sortAsc 'ioicon-caret-up'}} {{if column.sortDesc 'ioicon-caret-down'}}" style="color: #999; font-size: 12px; margin-left: 12px;"></i>
+          </th>
+        {{/if}}
+      {{/if}}
+    {{/each}}
+  </tr>
+  {{!-- useFilteringByColumns --}}
+  {{#if useFilteringByColumns}}
+    <tr>
+      {{#each processedColumns as |column|}}
+        {{#if column.isVisible}}
+          <th class="{{classes.theadCell}}">
+            {{#if column.useFilter}}
+              {{#if column.filterWithSelect}}
+                <select class="form-control changeFilterForColumn {{column.propertyName}}" {{action 'changeFilterForColumn' column on='change'}}>
+                  {{#each column.filterOptions key="@index" as |item|}}
+                    <option value="{{item}}" selected={{is-equal item selectedValue}}>
+                      {{item}}
+                    </option>
+                  {{/each}}
+                </select>
+              {{else}}
+                {{input type="text" value=column.filterString class="form-control"}}
+              {{/if}}
+            {{else}}
+              &nbsp;
+            {{/if}}
+          </th>
+        {{/if}}
+      {{/each}}
+    </tr>
+  {{/if}}
+  </thead>

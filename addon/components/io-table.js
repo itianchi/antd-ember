@@ -694,6 +694,26 @@ export default Component.extend({
                 sorting: defaultSorting,
                 sortPrecedence: defaultSortPrecedence
             });
+
+            /**
+             * width
+             * @type {[type]}
+             */
+            const widthType = typeof c.width;
+            let widthString = null;
+            switch(widthType) {
+                case 'number':
+                    widthString = c.width + 'px';
+                    break;
+                case 'string':
+                    widthString = c.width;
+                    break;
+                default:
+                    break;
+            }
+
+            set(c, 'widthString', widthString);
+
             if (get(c, 'filterWithSelect') && get(c, 'useFilter')) {
                 let predefinedFilterOptions = get(column, 'predefinedFilterOptions');
                 if (predefinedFilterOptions && predefinedFilterOptions.length && '' !== predefinedFilterOptions[0]) {
