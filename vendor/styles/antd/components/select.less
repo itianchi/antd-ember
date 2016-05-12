@@ -367,9 +367,9 @@
       z-index: 1;
       transition: all .3s @ease-in-out;
 
-      &:focus {
-        box-shadow: 0 0 0 1px tint(@primary-color, 20%), 0 0 0 3px tint(@primary-color, 80%);
-      }
+      // &:focus {
+      //   box-shadow: 0 0 0 1px tint(@primary-color, 20%), 0 0 0 3px tint(@primary-color, 80%);
+      // }
     }
     .@{select-prefix-cls}-selection__rendered {
       padding: 0;
@@ -524,9 +524,10 @@
   .@{select-prefix-cls}-dropdown-search {
     display: block;
     padding: 4px;
+    height: 42px;
     .@{select-prefix-cls}-search__field__placeholder {
-      left: 7px;
-      top: 5px;
+      left: 11px;
+      top: 9px;
     }
     .@{select-prefix-cls}-search__field__wrap {
       width: 100%;

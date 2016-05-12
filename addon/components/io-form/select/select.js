@@ -34,12 +34,6 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 */
 	disabled: false,
 	/**
-	 * @attribute showSearch
-	 * @type {[Boolean]}
-	 * @description [show search input in dropdown menu if true]
-	 */
-	showSearch: false,
-	/**
 	 * @attribute multiple
 	 * @description  [multiple select]
 	 */
@@ -53,6 +47,11 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 */
 	options: Ember.A(),
 	/**
+	 * [combobox description]
+	 * @type {Boolean}
+	 */
+	combobox: false,
+	/**
 	 * @state _hidden
 	 * @type {Boolean}
 	 * @description [hidden dropdown menu]
@@ -63,6 +62,45 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @type {[type]}
 	 */
 	_activeValue: null,
+	/**
+	 * @attribute showDropdownSearch
+	 * @type {[Boolean]}
+	 * @description [show search input in dropdown menu if true]
+	 */
+	showDropdownSearch: false,
+	/**
+	 * [dropdownSearchText description]
+	 * @type {String}
+	 */
+	dropdownSearchText: '',
+	/**
+	 * [dropdownSeachPlaceholder description]
+	 * @type {String}
+	 */
+	dropdownSearchPlaceholder: '搜索',
+	/**
+	 * [_dropdownSearchPlaceholderVisible description]
+	 * @return {[type]} [description]
+	 */
+	_dropdownSearchPlaceholderVisible: function() {
+		const text = this.get('dropdownSearchText') || '';
+		if (text === '') {
+			return true;
+		}
+		return false;
+	}.property('dropdownSearchText'),
+	/**
+	 * [_placeholderVisible description]
+	 * @return {[type]} [description]
+	 * _hidden === false indicated input element focused
+	 */
+	_comboboxPlaceholderVisible: function() {
+		const text = this.get('value') || '';
+		if (text === '') {
+			return true;
+		}
+		return false;
+	}.property('value'),
 	/**
 	 * @stae multipleClass
 	 * @description [multiple select class]
@@ -75,19 +113,43 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @state hiddenClass
 	 */
 	hiddenClass: function() {
-		if (this.get('_hidden')) {
+		const options = this.get('options');
+		if (this.get('_hidden') || options.length === 0) {
 			return this.get('classNamePrefix') + 'dropdown-hidden';
 		} else {
 			return '';
 		}
-	}.property('_hidden'),
+	}.property('_hidden', 'options.length'),
+	/**
+	 * [comboboxClass description]
+	 * @return {[type]} [description]
+	 */
+	comboboxClass: function() {
+		if (this.get('combobox')) {
+			return this.get('classNamePrefix') + 'combobox';
+		} else {
+			return '';
+		}
+	}.property('combobox'),
+	/**
+	 * [openClass description]
+	 * @return {[type]} [description]
+	 */
 	openClass: function() {
+		const options = this.get('options');
 		if (!this.get('_hidden')) {
+			if (this.get('combobox')) {
+				if (options.length > 0) {
+					return this.get('classNamePrefix') + 'open';
+				} else {
+					return '';
+				}
+			}
 			return this.get('classNamePrefix') + 'open';
 		} else {
 			return '';
 		}
-	}.property('_hidden'),
+	}.property('_hidden', 'options', 'options.length'),
 	/**
 	 * @state enabledClass
 	 */
@@ -104,9 +166,32 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	_selectOptions: function() {
 		this.send('selectOptions');
 	}.observes('value', 'value.length'),
+	/**
+	 * [_childrenChange description]
+	 * @return {[type]} [description]
+	 */
 	_childrenChange: function() {
 		this.send('selectOptions');
 	}.observes('children', 'children.length'),
+	/**
+	 * [_comboSeachTextChange description]
+	 * @return {[type]} [description]
+	 */
+	_comboSeachTextChange: function() {
+		this.send('comboboxChange');
+	}.observes('value'),
+	/**
+	 * dropdown search Text
+	 */
+	_dropdownSearchTextChange: function() {
+		if (this.get('onSearch')) {
+			this.sendAction('onSearch', this.get('dropdownSearchText'));
+		}
+	}.observes('dropdownSearchText'),
+	/**
+	 * [didInsertElement description]
+	 * @return {[type]} [description]
+	 */
 	didInsertElement: function() {
 		var _this = this;
 		Ember.run.later(function() {
@@ -118,12 +203,20 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @type {Object}
 	 */
 	actions: {
+		/**
+		 * [toggleHidden description]
+		 * @return {[type]} [description]
+		 */
 		toggleHidden: function() {
 			if (this.get('readonly')) {
 				return;
 			}
 			this.set('_hidden', !this.get('_hidden'));
 		},
+		/**
+		 * [selectOptions description]
+		 * @return {[type]} [description]
+		 */
 		selectOptions: function() {
 			const children = this.get('children');
 			const multiple = this.get('multiple');
@@ -146,8 +239,12 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			} else {
 				this.set('_selectedOptions', selectedOptions);
 			}
-
 		},
+		/**
+		 * [onSelect description]
+		 * @param  {[type]} option [description]
+		 * @return {[type]}        [description]
+		 */
 		onSelect: function(option) {
 			if (this.get('multiple')) {
 				if (this.isSelectedOption(option)) {
@@ -161,19 +258,32 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			}
 			this.send('onChange');
 		},
+		/**
+		 * [removeOption description]
+		 * @param  {[type]} value [description]
+		 * @return {[type]}       [description]
+		 */
 		removeOption: function(value) {
 			this.set('value', this.get('value').removeObject(value));
 			this.send('onChange');
 		},
+		/**
+		 * [outsideClick description]
+		 * @return {[type]} [description]
+		 */
 		outsideClick: function() {
 			this.set('_hidden', true);
 		},
+		/**
+		 * [onChange description]
+		 * @return {[type]} [description]
+		 */
 		onChange: function() {
-			Ember.run.later(function() {
+			Ember.run.later(() => {
 				var $el = this.$();
 				var $menu = this.$('.io-select-dropdown');
 				$menu.css('top', ($el.height() + 5) + 'px' );
-			}.bind(this), 100);
+			}, 100);
 
 			if (this.get('onChange')) {
 				this.sendAction('onChange', this.get('value'));
@@ -246,6 +356,28 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 					}
 				});
 			}
+		},
+		/**
+		 * [comboboxOnFocus description]
+		 * @return {[type]} [description]
+		 */
+		comboboxOnFocus: function() {
+			this.set('_hidden', false);
+		},
+		/**
+		 * [comboboxOnFocusout description]
+		 * @return {[type]} [description]
+		 */
+		comboboxOnFocusout: function() {
+			// this.set('_hidden', true);
+		},
+		/**
+		 * [comboboxChange description]
+		 * @param  {[type]} value [description]
+		 * @return {[type]}       [description]
+		 */
+		comboboxChange: function() {
+			this.send('onChange');
 		}
 	},
 	/**

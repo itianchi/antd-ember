@@ -48,9 +48,46 @@ export default Ember.Controller.extend({
 	_valueChange: Ember.observer('value', function() {
 		alert('value change' + this.get('value'));
 	}),
+	comboboxValue: '',
+	comboboxOptions: [],
 	actions: {
 		onChange: function(values) {
 			console.log(values);
+		},
+		comboboxOnChange: function() {
+
+			if (this.get('comboboxValue') === '') {
+				this.set('comboboxOptions', []);
+				return;
+			}
+
+			setTimeout(() => {
+				this.set('comboboxOptions', [{
+					value: 'jack',
+					label: 'jack'
+				}, {
+					value: 'lucy',
+					label: 'lucy'
+				}, {
+					value: '6174',
+					label: '6174'
+				}]);
+			}, 1000);
+		},
+
+		onSearch: function(value) {
+			setTimeout(() => {
+				this.set('options', [{
+					value: 'jack',
+					label: 'jack'
+				}, {
+					value: 'lucy',
+					label: 'lucy'
+				}, {
+					value: '6174',
+					label: '6174'
+				}]);
+			}, 10);
 		}
 	}
 });

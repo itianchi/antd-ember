@@ -2,6 +2,141 @@
     Select 下拉选择
 </h1>
 
+<div class="demo-type">
+	<h2>单项选择</h2>
+	<p> value 值为双向绑定 </p>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select width=200 value=value placeholder="请选择名称" options=options}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{io-select width=200 value=value placeholder="请选择名称" options=options}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<h2>多项选择</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select width=200 value=values multiple=true options=options}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{io-select width=200 value=values multiple=true options=options}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<section class="demo-type">
+	<h2>搜索过滤</h2>
+	<div class="demo-doc">
+		<p>可自行根据搜索条件做过滤或者远程获取新数据渲染options</p>
+	</div>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select
+				showDropdownSearch=true
+				width=200
+				placeholder="可过滤搜索"
+				dropdownSearchPlaceholder="搜索。。"
+				value=value
+				options=options
+				onSearch="onSearch"
+				}}
+		</div>
+		<div class="demo-code">
+<div class="highlight">
+<pre><code class="language-html">
+\{{io-select
+	showDropdownSearch=true
+	width=200
+	placeholder="可过滤搜索"
+	dropdownSearchPlaceholder="搜索。。"
+	value=value
+	options=options
+	onSearch="onSearch"
+	}}
+
+onSearch: function(value) {
+	setTimeout(() => {
+		this.set('options', [{
+			value: 'jack',
+			label: 'jack'
+		}, {
+			value: 'lucy',
+			label: 'lucy'
+		}, {
+			value: '6174',
+			label: '6174'
+		}]);
+	}, 10);
+}
+</code></pre>
+			</div>
+
+		</div>
+	</div>
+</section>
+<section class="demo-type">
+	<h2>输入提示</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select
+				combobox=true
+				width=200
+				placeholder="搜索选择"
+				value=comboboxValue
+				onChange="comboboxOnChange"
+				options=comboboxOptions
+				}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{io-select
+	combobox=true
+	width=200
+	placeholder="搜索选择"
+	value=comboboxValue
+	onChange="comboboxOnChange"
+	options=comboboxOptions
+	}}
+
+comboboxOnChange: function() {
+
+	if (this.get('comboboxValue') === '') {
+		this.set('comboboxOptions', []);
+		return;
+	}
+
+	setTimeout(() => {
+		this.set('comboboxOptions', [{
+			value: 'jack',
+			label: 'jack'
+		}, {
+			value: 'lucy',
+			label: 'lucy'
+		}, {
+			value: '6174',
+			label: '6174'
+		}]);
+	}, 1000);
+}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</section>
+
 <section class="demo-type">
 	<h2>树选择</h2>
 	<div class="demo">
@@ -46,66 +181,5 @@ const treeData = [{
 	</div>
 </section>
 
-<div class="demo-type">
-	<h2>单项选择</h2>
-	<p> value 值为双向绑定 </p>
-	<div class="demo">
-		<div class="demo-example">
-			{{#io-select width=200 value=value placeholder="请选择名称"}}
-				{{#io-option value="1"}} jack {{/io-option}}
-				{{#io-option value="2"}} lucy {{/io-option}}
-				{{#io-option value="disabled" disabled=true}} disabled {{/io-option}}
-				{{#io-option value="3"}} 6174 {{/io-option}}
-			{{/io-select}}
 
-			{{io-select width=200 value=value placeholder="请选择名称" options=options}}
-		</div>
-		<div class="demo-code">
-			<div class="highlight">
-<pre><code class="language-html">
-// io-option
-\{{#io-select width=200 value=value placeholder="请选择名称" }}
-	\{{#io-option value="1"}} jack \{{/io-option}}
-	\{{#io-option value="2"}} lucy \{{/io-option}}
-	\{{#io-option value="3" disabled=true}} disabled \{{/io-option}}
-	\{{#io-option value="4"}} 6174 \{{/io-option}}
-\{{/io-select}}
-
-// options
-\{{io-select width=200 value=value placeholder="请选择名称" options=options}}
-</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="demo-type">
-	<h2>多项选择</h2>
-	<div class="demo">
-		<div class="demo-example">
-			{{#io-select width=200 value=values multiple=true}}
-				{{#io-option value="jack"}} jack {{/io-option}}
-				{{#io-option value="lucy"}} lucy {{/io-option}}
-				{{#io-option value="disabled" disabled=true}} disabled {{/io-option}}
-				{{#io-option value="6174"}} 6174 {{/io-option}}
-				{{#io-option value="golang"}} golang {{/io-option}}
-				{{#io-option value="ubuntu"}} ubuntu {{/io-option}}
-			{{/io-select}}
-		</div>
-		<div class="demo-code">
-			<div class="highlight">
-<pre><code class="language-html">
-\{{#io-select width=200 value=values multiple=true}}
-	\{{#io-option value="jack"}} jack \{{/io-option}}
-	\{{#io-option value="lucy"}} lucy \{{/io-option}}
-	\{{#io-option value="disabled" disabled=true}} disabled \{{/io-option}}
-	\{{#io-option value="6174"}} 6174 \{{/io-option}}
-	\{{#io-option value="golang"}} golang \{{/io-option}}
-	\{{#io-option value="ubuntu"}} ubuntu \{{/io-option}}
-\{{/io-select}}
-</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
 
