@@ -74,6 +74,10 @@ const family = {
 			 	in-multi-selection=true
 			 	multi-selection=multi
 			 	onSelectNode='onSelectNode'}}
+			 选择了：
+			 {{#each multi as |it|}}
+			 	<span class="code">{{it.title}}</span>，
+			 {{/each}}
 		</div>
 		<div class="demo-code">
 			<div class="highlight">

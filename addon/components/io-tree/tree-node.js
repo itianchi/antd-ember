@@ -12,10 +12,10 @@ var getProperty = function(obj, prop) {
 };
 
 /**
- * [walk description]
+ * [walkArray array description]
  * @return {[type]} [description]
  */
-function walk(tree, cb) {
+function walkArray(tree, cb) {
     if (!tree) {
         return;
     }
@@ -23,6 +23,24 @@ function walk(tree, cb) {
         tree.children.forEach(cb);
     } else {
         cb(tree);
+    }
+}
+
+/**
+ * [walkTree description]
+ * @param  {[type]}   tree [description]
+ * @param  {Function} cb   [description]
+ * @return {[type]}        [description]
+ */
+function walkTree(tree, cb) {
+    if (!tree) {
+        return;
+    }
+    cb(tree);
+    if (Ember.isArray(tree.children)) {
+        tree.children.forEach((it) => {
+            walkTree(it, cb);
+        });
     }
 }
 
@@ -111,15 +129,41 @@ export default Em.Component.extend(WithConfigMixin, {
      * Observes the 'multiSelected' and put the tree in multi selection mode if true
      */
     addMultiSelectionToTreeSelection: (function() {
-        if (this.get('multiSelected')) {
-            return this.get('tree.multi-selection').pushObject(this.get('model'));
-        } else {
-            var multiSelection = this.get('tree.multi-selection');
-            if (multiSelection) {
-                multiSelection.removeObject(this.get('model'));
+        let multiSelection = this.get('tree.multi-selection');
+        const model = this.get('model');
+        const multiSelected = this.get('multiSelected');
+        if (!multiSelection) {
+            return;
+        }
+        
+        if (!Ember.isArray(multiSelection)) {
+            multiSelection = [];
+            this.set('tree.multi-selection', multiSelection);
+        }
+
+        if (this.get('expanded')) {
+            // only need add/remove self to multi-selection if expanded
+            if (multiSelected) {
+                multiSelection.pushObject(model);
+            } else {
+                multiSelection.removeObject(model);
             }
+        } else {
+            // need to add/remove children and self
+            walkTree(model, (node) => {
+                if (multiSelected) {
+                    multiSelection.pushObject(node);
+                } else {
+                    multiSelection.removeObject(node);
+                }
+            });
         }
     }).observes('multiSelected').on('init'),
+    /**
+     * [description]
+     * @param  {Array}
+     * @return {[type]}   [description]
+     */
     iconClass: (function() {
         var icons;
         icons = [];
@@ -222,7 +266,7 @@ export default Em.Component.extend(WithConfigMixin, {
         },
         multiSelectedChange: function() {
             const selected = this.get('multiSelected');
-            walk(this.get('model'), (node) => {
+            walkArray(this.get('model'), (node) => {
                 Ember.set(node, 'selected', selected);
             });
         }
