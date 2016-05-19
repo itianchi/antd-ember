@@ -16,8 +16,8 @@
     <a href="{{previousUrl}}" {{action 'previous'}}></a>
   </li>
 
-  <li class="io-pagination-next {{if pagerSpread 'next'}} {{if isLastDisabled 'io-pagination-disabled'}}" {{action 'next'}}>
-    <a {{action 'previous'}}></a>
+  <li class="io-pagination-next {{if pagerSpread 'next'}} {{if isLastDisabled 'io-pagination-disabled'}}">
+    <a href="{{nextUrl}}" {{action 'next'}}></a>
   </li>
 {{/unless}}
 {{/if}}
