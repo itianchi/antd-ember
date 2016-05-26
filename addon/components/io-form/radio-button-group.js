@@ -43,5 +43,5 @@ export default Ember.Component.extend(ComponentParent, FormItemMixin, {
 				this.$().trigger('input.bs.validator');
 			}, 100);
 		});
-	}.observes('checked')
+	}.observes('checked').on('init')
 });
