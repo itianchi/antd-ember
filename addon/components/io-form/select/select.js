@@ -282,7 +282,9 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			Ember.run.later(() => {
 				var $el = this.$();
 				var $menu = this.$('.io-select-dropdown');
-				$menu.css('top', ($el.height() + 5) + 'px' );
+				if ($menu) {
+					$menu.css('top', ($el.height() + 5) + 'px' );
+				}
 			}, 100);
 
 			if (this.get('onChange')) {
@@ -290,7 +292,9 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			}
 
 			setTimeout(() => {
-				this.$().trigger('input.bs.validator');
+				if (this.$() && this.$().trigger) {
+					this.$().trigger('input.bs.validator');
+				}
 			}, 500);
 		},
 		'keyup-down': function() {
