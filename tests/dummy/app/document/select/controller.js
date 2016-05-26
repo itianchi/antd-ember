@@ -5,6 +5,7 @@ const treeData = [{
   id: '0-0',
   children: [{
     title: '子节点一',
+    disabled: true,
     id: '0-0-0',
   }, {
     title: '子节点二',

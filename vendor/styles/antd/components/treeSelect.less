@@ -38,6 +38,14 @@
       &.@{tree-select-tree-prefix-cls}-node-selected {
         background-color: tint(@primary-color, 80%);
       }
+
+      &.@{tree-select-tree-prefix-cls}-node-disabled {
+        opacity: 0.5;
+        cursor: no-drop;
+        &:hover {
+          background: none;
+        }
+      }
     }
     span {
       &.@{tree-select-tree-prefix-cls}-checkbox {

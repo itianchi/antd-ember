@@ -26,6 +26,9 @@ export default Ember.Component.extend(SelectedClass, DisabledClass, {
 			this.set('model.open', !this.get('model.open'));
 		},
 		select() {
+			if (this.get('model.disabled')) {
+				return;
+			}
 			const root = this.get('root');
 			root.send('onSelect', this);
 		}

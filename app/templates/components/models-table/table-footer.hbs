@@ -4,15 +4,10 @@
     <i style="color: #999;"> {{summary}} </i>
   </div>
 
-  {{! table summary end }}
-  {{! pagesize selection start }}
-  <div class="col-sm-4">
-  </div>
-
   {{! pagesize selection end }}
   {{! pagination start }}
   {{!-- {{#if useNumericPagination}} --}}
-  <div class="col-sm-12">
+  <div class="col-sm-16">
     {{partial numericPaginationTemplate}}
     <div class="{{classes.pageSizeSelectWrapper}} pull-right" style="margin-right: 30px;">
       {{#io-select value=pageSize placeholder="--每页显示--"}}

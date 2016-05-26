@@ -37,10 +37,10 @@
         {{#if treeData}}
             {{#if treeData.length}}
                 {{#each treeData as |model|}}
-                    {{io-tree-select-option model=model root=this}}
+                    {{io-tree-select-option model=model  disabled=model.disabled root=this}}
                 {{/each}}
             {{else}}
-                {{io-tree-select-option model=treeData root=this}}
+                {{io-tree-select-option model=treeData disabled=model.disabled root=this}}
             {{/if}}
         {{/if}}
     </ul>

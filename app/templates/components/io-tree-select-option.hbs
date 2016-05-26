@@ -11,7 +11,7 @@
 {{#if root.treeNodeTemplate}}
 	{{partial root.treeNodeTemplate}}
 {{else}}
-	<a {{action 'select'}} class="{{if selected 'io-select-tree-node-selected'}}">
+	<a {{action 'select'}} class="{{if selected 'io-select-tree-node-selected'}} {{if model.disabled 'io-select-tree-node-disabled'}}">
 	    <span class="io-select-tree-title">
 	        {{model.title}}
 	    </span>

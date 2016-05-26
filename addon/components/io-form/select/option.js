@@ -29,6 +29,9 @@ export default Ember.Component.extend(ComponentChild, SelectedClass, DisabledCla
 
 	}.property('active'),
 	click: function() {
+		if (this.get('disabled')) {
+			return;
+		}
 		var parent = this.get('parent');
 		parent.send('onSelect', this);
 	}
