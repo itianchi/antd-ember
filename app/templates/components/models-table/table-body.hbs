@@ -7,7 +7,10 @@
       {{partial rowTemplate}}
     {{/each}}
   {{else}}
-    <tr><td colspan={{processedColumns.length}}>{{{messages.noDataToShow}}}</td></tr>
+    <tr>
+    	{{#if showIndexNumber}} <td></td> {{/if}}
+    	<td colspan={{processedColumns.length}}>{{{messages.noDataToShow}}}</td>
+    </tr>
   {{/if}}
 {{/if}}
 </tbody>
