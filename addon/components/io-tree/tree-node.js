@@ -144,7 +144,7 @@ export default Em.Component.extend(WithConfigMixin, {
         if (this.get('expanded')) {
             // only need add/remove self to multi-selection if expanded
             if (multiSelected) {
-                multiSelection.pushObject(model);
+                push(model);
             } else {
                 multiSelection.removeObject(model);
             }
@@ -152,12 +152,19 @@ export default Em.Component.extend(WithConfigMixin, {
             // need to add/remove children and self
             walkTree(model, (node) => {
                 if (multiSelected) {
-                    multiSelection.pushObject(node);
+                    push(node);
                 } else {
                     multiSelection.removeObject(node);
                 }
             });
         }
+
+        function push(node) {
+            if (multiSelection.indexOf(node) < 0) {
+                multiSelection.pushObject(node);
+            }
+        }
+
     }).observes('multiSelected').on('init'),
     /**
      * [description]

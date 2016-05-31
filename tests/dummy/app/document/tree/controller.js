@@ -19,6 +19,10 @@ default Ember.Controller.extend({
         return this.set('model', family);
     },
     multi: Ember.A(),
+    multiChange: function() {
+        let multi = this.get('multi');
+        console.log(multi.length, multi);
+    }.observes('multi.length'),
     actions: {
         expand: function() {
             this.get('selected').toggleProperty('expanded');
