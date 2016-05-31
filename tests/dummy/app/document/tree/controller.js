@@ -5,11 +5,14 @@ default Ember.Controller.extend({
         var family = {
             title: 'Family',
             id: 'Family',
+            selected: true,
             children: [{
                 title: 'Susan',
                 id: 'asd',
+                selected: true,
                 children: [{
-                    title: 'Lucy'
+                    title: 'Lucy',
+                    selected: true
                 }]
             }, {
                 title: 'Luda',

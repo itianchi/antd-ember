@@ -142,21 +142,29 @@ export default Em.Component.extend(WithConfigMixin, {
         }
 
         if (this.get('expanded')) {
-            // only need add/remove self to multi-selection if expanded
-            if (multiSelected) {
-                push(model);
-            } else {
-                multiSelection.removeObject(model);
-            }
+            // if node is expanded only need to set node.selected
+            // child will add self to tree-multiSelection
+            walkArray(model, (node) => {
+                Ember.set(node, 'selected', multiSelected);
+            });
         } else {
-            // need to add/remove children and self
+            // if node is not expanded manually add to tree-multiselection
             walkTree(model, (node) => {
                 if (multiSelected) {
+                    Ember.set(node, 'selected', true);
                     push(node);
                 } else {
-                    multiSelection.removeObject(node);
+                    Ember.set(node, 'selected', false);
+                    pop(node);
                 }
             });
+        }
+
+        // add self
+        if (multiSelected) {
+            push(model);
+        } else {
+            pop(model);
         }
 
         function push(node) {
@@ -165,7 +173,33 @@ export default Em.Component.extend(WithConfigMixin, {
             }
         }
 
+        function pop(node) {
+            multiSelection.removeObject(node);
+        }
+
     }).observes('multiSelected').on('init'),
+    /**
+     * [childrenSelectChange description]
+     * @return {[type]} [description]
+     */
+    childrenMultiSelectionChange: function() {
+        const children = this.get('model.children');
+        const allSelected = children.reduce((acc, node) => {
+            return acc && node.selected;
+        }, true);
+
+        const allNotSelected = children.reduce((acc, node) => {
+            return acc && !node.selected;
+        }, true);
+
+        if (allNotSelected) {
+            this.set('multiSelected', false);
+        }
+
+        if (allSelected) {
+            this.set('multiSelected', true);
+        }
+    }.observes('model.children.@each.selected'),
     /**
      * [description]
      * @param  {Array}
@@ -270,12 +304,6 @@ export default Em.Component.extend(WithConfigMixin, {
             }
             this.set('tree.selected', this.get('model'));
             this.get('tree').send('selectNode', this.get('model'));
-        },
-        multiSelectedChange: function() {
-            const selected = this.get('multiSelected');
-            walkArray(this.get('model'), (node) => {
-                Ember.set(node, 'selected', selected);
-            });
         }
     },
     /*
