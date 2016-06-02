@@ -21,6 +21,9 @@ export default Ember.Component.extend(ComponentParent, FormItemMixin, {
 	value: null,
 	checked: null,
 	_checkedChange: function() {
+		if (!this.get('required')) {
+			return;
+		}
 		Ember.run.later(()=> {
 			const checked = this.get('checked');
 			let children = this.get('children');

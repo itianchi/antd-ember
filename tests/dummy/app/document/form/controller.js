@@ -24,7 +24,7 @@ let schema = {
             // field input class
             inputColClass: "col-5",
             // if required
-            required: true,
+            required: false,
             // help message
             help: "",
             // error message
@@ -40,6 +40,7 @@ let schema = {
         sex: {
             type: "enum",
             label: "选择性别：",
+            required: true,
             enum: [["boy", "男"], ["girl", "女"]],
         }, 
         location: {
@@ -65,11 +66,11 @@ export default Ember.Controller.extend({
     },
     schema: schema,
     formData: {
-        sex: "boy",
+        sex: "",
         age: 18,
         location: "a",
         description: "this is my default description",
-        name: "papijiang"
+        name: ""
     },
     actions: {
         saveAction: function() {

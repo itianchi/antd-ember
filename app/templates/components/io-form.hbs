@@ -73,7 +73,9 @@
 				required=it.required
 				help=it.help
 				label=it.label}}
-				{{#io-button-group}}
+				{{#io-radio-button-group 
+					required=it.required 
+					checked=it.value }}
 					{{#each it.enum as |enumItem|}}
 					 	{{#io-radio-button 
 					 		value=enumItem.[0]
@@ -82,7 +84,7 @@
 						 	{{enumItem.[1]}}
 						 {{/io-radio-button}}
 					{{/each}}
-				{{/io-button-group}}
+				{{/io-radio-button-group}}
 
 			{{/io-form-group}}
 		{{/if}}

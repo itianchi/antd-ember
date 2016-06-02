@@ -76,7 +76,7 @@
   Validator.VALIDATORS = {
     native: function ($el) {
       var el = $el[0]
-      var value = el.value;
+      var value = el.value || '';
       var isNumber = $el.attr('type') === 'number';
 
       // if (el.checkValidity) {
@@ -87,7 +87,7 @@
       var pattern = $el.attr('pattern');
       if (pattern) {
         var regex = new RegExp('^' + pattern + '$', 'g');
-        var matched = value && (value + '').match(regex);
+        var matched = (value + '').match(regex);
         if (!isNumber || !matched) {
           return matched;
         }
@@ -118,6 +118,9 @@
     },
     required: function($el) {
       if ($el.is('[required]')) {
+        if ($el[0].getAttribute('required') === "false") {
+          return true;
+        }
         return !!($el.val() && $el.val() !== '');
       } 
       return true;
