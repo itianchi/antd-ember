@@ -45,6 +45,28 @@ function walkTree(tree, cb) {
 }
 
 /**
+ * [arrPush description]
+ * @param  {[type]} arr  [description]
+ * @param  {[type]} item [description]
+ * @return {[type]}      [description]
+ */
+function arrPush(arr, item) {
+    if (arr.indexOf(item) < 0) {
+        arr.pushObject(item);
+    }
+}
+
+/**
+ * [arrRemove description]
+ * @param  {[type]} arr  [description]
+ * @param  {[type]} item [description]
+ * @return {[type]}      [description]
+ */
+function arrRemove(arr, item) {
+    arr.removeObject(item);
+}
+
+/**
  * A node of a tree.
  *
  * @class TreeNode
@@ -125,6 +147,34 @@ export default Em.Component.extend(WithConfigMixin, {
             return null;
         }
     }).property('selected'),
+    /**
+     * handleToggleMultiSelect
+     * if toggle triggered by hand ,then all the children of the node should toggled
+     */
+    handToggleMultiSelect: function() {
+        let multiSelection = this.get('tree.multi-selection');
+        const model = this.get('model');
+        const multiSelected = this.get('multiSelected');
+        if (!multiSelection) {
+            return;
+        }
+        
+        if (!Ember.isArray(multiSelection)) {
+            multiSelection = [];
+            this.set('tree.multi-selection', multiSelection);
+        }
+ 
+        // if node is not expanded manually add to tree-multiselection
+        walkTree(model, (node) => {
+            if (multiSelected) {
+                Ember.set(node, 'selected', true);
+                arrPush(multiSelection, node);
+            } else {
+                Ember.set(node, 'selected', false);
+                arrRemove(multiSelection, node);
+            }
+        });
+    },
     /*
      * Observes the 'multiSelected' and put the tree in multi selection mode if true
      */
@@ -141,42 +191,12 @@ export default Em.Component.extend(WithConfigMixin, {
             this.set('tree.multi-selection', multiSelection);
         }
 
-        if (this.get('expanded')) {
-            // if node is expanded only need to set node.selected
-            // child will add self to tree-multiSelection
-            walkArray(model, (node) => {
-                Ember.set(node, 'selected', multiSelected);
-            });
-        } else {
-            // if node is not expanded manually add to tree-multiselection
-            walkTree(model, (node) => {
-                if (multiSelected) {
-                    Ember.set(node, 'selected', true);
-                    push(node);
-                } else {
-                    Ember.set(node, 'selected', false);
-                    pop(node);
-                }
-            });
-        }
-
         // add self
         if (multiSelected) {
-            push(model);
+            arrPush(multiSelection, model);
         } else {
-            pop(model);
+            arrRemove(multiSelection, model);
         }
-
-        function push(node) {
-            if (multiSelection.indexOf(node) < 0) {
-                multiSelection.pushObject(node);
-            }
-        }
-
-        function pop(node) {
-            multiSelection.removeObject(node);
-        }
-
     }).observes('multiSelected').on('init'),
     /**
      * [childrenSelectChange description]
@@ -304,6 +324,13 @@ export default Em.Component.extend(WithConfigMixin, {
             }
             this.set('tree.selected', this.get('model'));
             this.get('tree').send('selectNode', this.get('model'));
+        },
+        /**
+         * [handToggleMultiSelect toggle multiselect by hand]
+         * @return {[type]} [description]
+         */
+        handToggleMultiSelect: function() {
+            this.handToggleMultiSelect();
         }
     },
     /*

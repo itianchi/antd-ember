@@ -36,4 +36,15 @@ export default Ember.Component.extend(FormItemMixin, {
 	onChecked: function() {
 		this.sendAction('onChange', this.get('checked'));
 	}.observes('checked'),
+	/**
+	 * [onClick description]
+	 * @return {[type]} [description]
+	 */
+	click: function() {
+		if (this.get('onClick')) {
+			Ember.run.later(() => {
+				this.sendAction('onClick');
+			}, 50);
+		}
+	}
 });
