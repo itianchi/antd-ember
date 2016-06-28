@@ -37,9 +37,12 @@ export default Ember.Component.extend(selectedClass, disabledClass, {
 			if (this.get('selected')) {
 				ret += ' io-menu-submenu-selected';
 			}
+			if (this.get('active')) {
+				ret += ' io-menu-submenu-active';
+			}
 		}
 		return ret;
-	}.property('submenu'),
+	}.property('submenu', 'selected', 'active'),
 	selectedValueClass: function() {
 		var selectedValue = this.get('selectedValue');
 		var value = this.get('value');
