@@ -736,6 +736,18 @@ export default Component.extend({
                 set(column, 'title', self._propertyNameToTitle(propertyName));
             }
             self.addObserver(`data.@each.${propertyName}`, self, self.contentChangedAfterPolling);
+
+            /**
+             * style for column
+             */
+            let style = '';
+            const width = get(column, 'width') || get(column, 'widthString');
+
+            if (width) {
+                style += `width:${width}; `;
+            }
+
+            set(column, 'style', style);
         });
         set(this, 'processedColumns', nColumns);
         this._updateFiltersWithSelect();

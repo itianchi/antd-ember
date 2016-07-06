@@ -3,10 +3,6 @@
 	<col style="width: 40px;">
 {{/if}}
 {{#each processedColumns as |column|}}
-	{{#if column.widthString}}
-		<col style="width:{{column.widthString}}"/> 
-	{{else}}
-		<col/>
-	{{/if}}
+	<col style="{{column.style}}"/> 
 {{/each}}
 </colgroup>

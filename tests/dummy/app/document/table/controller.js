@@ -8,16 +8,17 @@ default Ember.Controller.extend({
     columns: [{
         "propertyName": "id",
         "title": "ID",
-        width: 150
+        // "width": "150px"
+        "maxWidth": "10px",
         // "headerTemplate": "snippets/city-header-template"
     }, {
         "propertyName": "firstName",
         "title": "First Name",
-        width: 200
+        "width": "200px"
     }, {
         "propertyName": "lastName",
         "title": "Last Name",
-        width: 150
+        "width": "150px"
     }, {
         "propertyName": "city",
         "title": "City",
