@@ -6,10 +6,22 @@
   {{#each processedColumns as |column|}}
     {{#if column.isVisible}}
       <td class={{column.className}}>
-        {{#if column.template}}
-          {{partial column.template}}
+        {{!-- max width limited--}}
+        {{#if column.maxWidth}}
+          <div class="column-wrapper" style="max-width: {{column.maxWidth}}">
+            {{#if column.template}}
+              {{partial column.template}}
+            {{else}}
+              {{get record column.propertyName}}
+            {{/if}}
+          </div>
+        {{!-- normal --}}
         {{else}}
-          {{get record column.propertyName}}
+            {{#if column.template}}
+              {{partial column.template}}
+            {{else}}
+              {{get record column.propertyName}}
+            {{/if}}
         {{/if}}
       </td>
     {{/if}}
