@@ -457,6 +457,7 @@ export default Component.extend({
                 return false;
             }) : true;
         });
+        
         if (!useFilteringByColumns) {
             return A(globalSearch);
         }
@@ -745,6 +746,8 @@ export default Component.extend({
 
             if (width) {
                 style += `width:${width}; `;
+            } else {
+                style += "width: 150px;";
             }
 
             set(column, 'style', style);
