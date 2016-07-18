@@ -15,7 +15,7 @@ export default Ember.Component.extend(ComponentChild, FormItemMixin, {
 	tagName: 'label',
 	classNames: 'io-radio-button io-btn',
 	classNamePrefix: 'io-radio-button-',
-	attributeBindings: ['checked', 'name'],
+	attributeBindings: ['checked', 'name', 'onClick'],
 	classNameBindings: ['checkedClass'],
 	/**
 	 * [attributes for component]
@@ -39,6 +39,12 @@ export default Ember.Component.extend(ComponentChild, FormItemMixin, {
 				return;
 			}
 			this.set('checked', this.get('value'));
-		}
-	}
+
+            if (this.get('onClick')) {
+                this.sendAction('onClick', this);
+            } else {
+                this.sendAction(this);
+            }
+        },
+    }
 });
