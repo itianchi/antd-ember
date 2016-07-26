@@ -6,7 +6,7 @@ import translateSize from '../../utils/translate-size';
 /**
  * io-input Component
  ```html
- ``` 
+ ```
  */
 
 export default Ember.Component.extend(FormItemMixin, {
@@ -32,6 +32,28 @@ export default Ember.Component.extend(FormItemMixin, {
 			return this.get('placeholder');
 		}
 	}.property('placeholder', 'readonly'),
+
+  /**
+	 * @attribute type
+   */
+  _focusIn: function() {
+		if (this.get('readonly')) {
+			return '';
+		} else {
+			return this.get('focusIn');
+		}
+	}.property('focusIn', 'readonly'),
+
+  /**
+	 * @attribute type
+   */
+  _focusOut: function() {
+		if (this.get('readonly')) {
+			return '';
+		} else {
+			return this.get('focusOut');
+		}
+	}.property('focusOut', 'readonly'),
 	inputClass: function() {
 		let ret = 'io-input ';
 		if (this.get('size')) {
@@ -39,4 +61,19 @@ export default Ember.Component.extend(FormItemMixin, {
 		}
 		return ret;
 	}.property('size'),
+
+  actions: {
+    focusIn() {
+      if (this.get("_focusIn")) {
+      console.log("FOO");
+        this.sendAction("_focusIn", this.get("value"));
+      }
+    },
+    focusOut() {
+      if (this.get("_focusOut")) {
+      console.log("BAR");
+        this.sendAction("_focusOut", this.get("value"));
+      }
+    }
+  }
 });
