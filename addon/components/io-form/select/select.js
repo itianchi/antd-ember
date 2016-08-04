@@ -15,7 +15,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	tagName: 'span',
 	classNames: 'io-select input-custom',
 	classNamePrefix: 'io-select-',
-	classNameBindings: ['enabledClass', 'openClass'],
+	classNameBindings: ['enabledClass', 'openClass', 'showSearchClass'],
 	attributeBindings: ['tabindex', 'role'],
 	tabindex: 0,
 	role: 'form-item-select',
@@ -47,7 +47,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 */
 	options: Ember.A(),
 	/**
-	 * [combobox description]
+	 * [combobox 自动提示搜索输入框]
 	 * @type {Boolean}
 	 */
 	combobox: false,
@@ -67,7 +67,8 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @type {[Boolean]}
 	 * @description [show search input in dropdown menu if true]
 	 */
-	showDropdownSearch: false,
+	showSearch: false,
+	showDropdownSearch: Ember.computed.alias('showSearch'),
 	/**
 	 * [dropdownSearchText description]
 	 * @type {String}
@@ -78,17 +79,6 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @type {String}
 	 */
 	dropdownSearchPlaceholder: '搜索',
-	/**
-	 * [_dropdownSearchPlaceholderVisible description]
-	 * @return {[type]} [description]
-	 */
-	_dropdownSearchPlaceholderVisible: function() {
-		const text = this.get('dropdownSearchText') || '';
-		if (text === '') {
-			return true;
-		}
-		return false;
-	}.property('dropdownSearchText'),
 	/**
 	 * [_placeholderVisible description]
 	 * @return {[type]} [description]
@@ -151,6 +141,22 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 		}
 	}.property('_hidden', 'options', 'options.length'),
 	/**
+	 * [showSearchClass description]
+	 * @return {[type]} [description]
+	 */
+	showSearchClass: function() {
+		const combobox = this.get('combobox');
+		const showSearch = this.get('showDropdownSearch');
+		const hidden = this.get('_hidden');
+
+		if (combobox || !showSearch || hidden) {
+			return '';
+		} else {
+			return this.get('classNamePrefix') + 'show-search';
+		}
+
+	}.property('_hidden', 'showDropdownSearch', 'combobox'),
+	/**
 	 * @state enabledClass
 	 */
 	enabledClass: function() {
@@ -184,10 +190,51 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * dropdown search Text
 	 */
 	_dropdownSearchTextChange: function() {
+
 		if (this.get('onSearch')) {
 			this.sendAction('onSearch', this.get('dropdownSearchText'));
 		}
+
+		this.searchBoxTextChange();
+
 	}.observes('dropdownSearchText'),
+	/**
+	 * [searchBoxTextChange description]
+	 * @return {[type]} [description]
+	 */
+	searchBoxTextChange: function() {
+		const dropdownSearchText = this.get('dropdownSearchText');
+		const $els = this.$('.io-select-selection-selected-value, .io-select-selection__placeholder, io-select-search__field__placeholder');
+		if (dropdownSearchText === '') {
+			$els.css({
+				opacity: .4,
+				display: 'block'
+			});
+		} else {
+			$els.css({
+				opacity: 1,
+				display: 'none'
+			});
+		}
+
+		if (this.get('multiple')) {
+			const $input = this.$('.io-select-search input');
+			$input.css('width', stringWidth(dropdownSearchText) + 'px');
+		}
+
+		function stringWidth(string) {
+			const $ = Ember.$;
+			const $span = $(`<span>${string}</span>`);
+			const $body = $('body');
+			$span.css({
+				'font-size': '12px'
+			});
+			$body.append($span);
+			const width = $span.width();
+			$span.remove();
+			return Math.max(width, 30);
+		}
+	},
 	/**
 	 * [didInsertElement description]
 	 * @return {[type]} [description]
@@ -198,6 +245,41 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			_this.send('selectOptions');
 		}, 10);
 	},
+	toggleSearchbox: function() {
+		let combobox = this.get('combobox');
+		let hidden = this.get('_hidden');
+		let showSearch = this.get('showDropdownSearch');
+		if (!showSearch || combobox) {
+			return;
+		}
+
+		this.set('dropdownSearchText', '');
+
+		const $inputSearch = this.$('.io-select-search');
+		const $selectedValue = this.$('.io-select-selection-selected-value');
+		const $placeholder = this.$('.io-select-selection__placeholder');
+		const $input = this.$('.io-select-search input');
+
+		if (hidden) {
+			$inputSearch.css({
+				display: 'none'
+			});
+			$selectedValue.css({
+				opacity: 1
+			});
+			$placeholder.css({
+				opacity: 1
+			});
+		} else {
+			$inputSearch.css({
+				display: 'block'
+			});
+			$selectedValue.css({
+				opacity: .4
+			});
+			$input.focus();
+		}
+	}.observes('_hidden'),
 	/**
 	 * [actions description]
 	 * @type {Object}
@@ -211,8 +293,10 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			if (this.get('readonly')) {
 				return;
 			}
-			this.set('_hidden', !this.get('_hidden'));
+			const hidden = !this.get('_hidden');
+			this.set('_hidden', hidden);
 		},
+
 		/**
 		 * [selectOptions description]
 		 * @return {[type]} [description]
@@ -252,6 +336,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 				} else {
 					this.set('value', this.get('value').addObject(option.get('value')));
 				}
+				this.set('dropdownSearchText', '');
 			} else {
 				this.set('_hidden', true);
 				this.set('value', option.get('value'));

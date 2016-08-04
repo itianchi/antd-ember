@@ -1,0 +1,22 @@
+<span class="io-select-search__field__placeholder">{{placeholder}}</span>
+
+<ul class="io-select-selection__rendered" style="margin-bottom: 0;">
+
+	{{#each _selectedOptions as |option|}}
+        <li class="io-select-selection__choice" title="a10" >
+            <span class="io-select-selection__choice__content" >
+                {{option.label}}
+            </span>
+            <span class="io-select-selection__choice__remove" {{action 'removeOption' option.value bubbles=false}}>
+            </span>
+        </li>
+    {{/each}}
+
+    {{#if showDropdownSearch}}
+        <li class="io-select-search io-select-search--inline">
+            <div class="io-select-search__field__wrap">
+                {{input class="io-select-search__field" value=dropdownSearchText}}
+            </div>
+        </li>
+    {{/if}}
+</ul>

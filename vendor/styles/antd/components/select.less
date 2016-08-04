@@ -96,6 +96,7 @@
     }
   }
 
+  
 
   /**
    * disable state
@@ -237,11 +238,21 @@
     position: relative;
   }
 
-  &-search__field__placeholder {
-    position: absolute;
-    top: 0;
-    left: 3px;
-    color: #aaa;
+  &-search__field__placeholder, 
+  &-selection__placeholder {
+      position: absolute;
+      top: 50%;
+      left: 9px;
+      right: 9px;
+      color: #ccc;
+      line-height: 20px;
+      height: 20px;
+      max-width: 100%;
+      margin-top: -10px;
+      cursor: text;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
   }
 
   &-search--inline {
@@ -269,11 +280,6 @@
   &-selection--multiple {
     min-height: 28px;
     cursor: text;
-
-    .@{select-prefix-cls}-search__field__placeholder {
-      top: 6px;
-      left: 10px;
-    }
 
     .@{select-prefix-cls}-search--inline {
       width: auto;
@@ -341,6 +347,40 @@
   }
   
   /**
+   * open class
+   */
+  &-open{
+    
+    .@{select-prefix-cls}-arrow {
+      .ie-rotate(2);
+      -ms-transform: rotate(180deg);
+      &:before {
+        .rotate(180deg);
+      }
+    }
+    .@{select-prefix-cls}-selection {
+      .active();
+    }
+    .@{select-prefix-cls}-dropdown {
+      display: block;
+    }
+
+  }
+
+  &-open.@{select-prefix-cls}-show-search .@{select-prefix-cls}-selection--single .@{select-prefix-cls}-selection-selected-value{
+    position: absolute;
+    left: 8px;
+    top: 0;
+  }
+
+  &:focus {
+    outline: none;
+    .@{select-prefix-cls}-selection {
+      .active();
+    }
+  }
+
+  /**
    * combobox
    */
   &-combobox {
@@ -375,32 +415,6 @@
       padding: 0;
       height: 100%;
       overflow: visible;
-    }
-  }
-  
-  /**
-   * open class
-   */
-  &-open{
-    
-    .@{select-prefix-cls}-arrow {
-      .ie-rotate(2);
-      -ms-transform: rotate(180deg);
-      &:before {
-        .rotate(180deg);
-      }
-    }
-    .@{select-prefix-cls}-selection {
-      .active();
-    }
-    .@{select-prefix-cls}-dropdown {
-      display: block;
-    }
-  }
-  &:focus {
-    outline: none;
-    .@{select-prefix-cls}-selection {
-      .active();
     }
   }
 }

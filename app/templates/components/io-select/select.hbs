@@ -1,0 +1,11 @@
+<span 
+    {{action 'toggleHidden'}} 
+    class="io-select-selection {{multipleClass}} {{comboboxClass}}" 
+    style="width: {{width}}px;">
+    {{!-- multiple select--}}
+    {{#if multiple}}
+	    {{partial 'components/io-select/select-result-multiple'}}
+    {{else}}
+        {{partial 'components/io-select/select-result-single'}}
+    {{/if}}
+</span>

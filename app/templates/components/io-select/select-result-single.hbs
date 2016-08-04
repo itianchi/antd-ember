@@ -1,0 +1,28 @@
+<div class="io-select-selection__rendered">
+		{{#if _selectedOptions}}
+		    <div 
+		    	class="io-select-selection-selected-value" 
+		    	title="{{_selectedOptions.label}}">
+				{{_selectedOptions.label}}
+		    </div>
+		{{else}}
+		    <div 
+		    	class="io-select-selection__placeholder" 
+		    	style="-webkit-user-select: none;" 
+		    	unselectable="unselectable">
+		        {{placeholder}}
+		    </div>
+		{{/if}}
+		
+		{{#if showDropdownSearch}}
+		    <div class="io-select-search io-select-search--inline">
+		        <div class="io-select-search__field__wrap">
+		            {{input class="io-select-search__field" value=dropdownSearchText}}
+		        </div>
+		    </div>
+	    {{/if}}
+</div>
+
+
+<span class="io-select-arrow" tabindex="-1" style="outline:none;"> <b> </b> </span>
+ 

@@ -1,0 +1,11 @@
+<span class="io-select-dropdown {{hiddenClass}}" style="width: 100%;">
+    <ul class="io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root" role="menu" aria-activedescendant="" >
+    	{{#if (gt options.length 0)}}
+    		{{#each options as |option|}}
+    			{{io-option value=option.value  disabled=option.disabled label=option.label}}
+    		{{/each}}
+    	{{else}}
+	        {{yield}}
+    	{{/if}}
+    </ul>
+</span>

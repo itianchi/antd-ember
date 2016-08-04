@@ -19,27 +19,10 @@
 	</div>
 </div>
 
-<div class="demo-type">
-	<h2>多项选择</h2>
-	<div class="demo">
-		<div class="demo-example">
-			{{io-select width=200 value=values multiple=true options=options}}
-		</div>
-		<div class="demo-code">
-			<div class="highlight">
-<pre><code class="language-html">
-\{{io-select width=200 value=values multiple=true options=options}}
-</code></pre>
-			</div>
-		</div>
-	</div>
-</div>
-
-
 <section class="demo-type">
-	<h2>搜索过滤</h2>
 	<div class="demo-doc">
-		<p>可自行根据搜索条件做过滤或者远程获取新数据渲染options</p>
+		<p>带搜索的单项选择</p>
+		<p><i>可自行根据搜索条件做过滤或者远程获取新数据渲染options</i></p>
 	</div>
 	<div class="demo">
 		<div class="demo-example">
@@ -57,10 +40,9 @@
 <div class="highlight">
 <pre><code class="language-html">
 \{{io-select
-	showDropdownSearch=true
 	width=200
+	showDropdownSearch=true
 	placeholder="可过滤搜索"
-	dropdownSearchPlaceholder="搜索。。"
 	value=value
 	options=options
 	onSearch="onSearch"
@@ -86,6 +68,47 @@ onSearch: function(value) {
 		</div>
 	</div>
 </section>
+
+
+<div class="demo-type">
+	<h2>多项选择</h2>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select width=200 value=values multiple=true options=options}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{io-select width=200 value=values multiple=true options=options}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="demo-type">
+	<div class="demo-doc">
+		<p>带搜索的多项选择</p>
+	</div>
+	<div class="demo">
+		<div class="demo-example">
+			{{io-select 
+				width=500 
+				value=values 
+				multiple=true 
+				showDropdownSearch=true
+				options=options}}
+		</div>
+		<div class="demo-code">
+			<div class="highlight">
+<pre><code class="language-html">
+\{{io-select width=200 value=values multiple=true options=options}}
+</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
 <section class="demo-type">
 	<h2>输入提示</h2>
 	<div class="demo">

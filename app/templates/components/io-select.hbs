@@ -1,83 +1,9 @@
 {{!-- combobox for searchable select --}}
 {{#if combobox}}
-    <span class="io-select-selection {{multipleClass}} {{comboboxClass}}" style="width: {{width}}px;">
-        <div class="io-select-selection__rendered">
-            {{#if _comboboxPlaceholderVisible}}
-                <div class="io-select-search__field__placeholder">
-                    {{placeholder}}
-                </div>
-            {{/if}}
-            <ul>
-                <li class="io-select-search io-select-search--inline">
-                    <div class="io-select-search__field__wrap">
-                        {{input class="io-select-search__field" value=value focus-in="comboboxOnFocus" focus-out="comboboxOnFocusout"}}
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </span>
+    {{partial 'components/io-select/select-combobox'}}
 {{else}}
-    <span class="io-select-selection {{multipleClass}} {{comboboxClass}}" {{action 'toggleHidden'}} style="width: {{width}}px;">
-
-    {{!-- multiple select--}}
-    {{#if multiple}}
-	    {{#if (eq _selectedOptions.length 0)}}
-    	    <span style="display: block;" class="io-select-search__field__placeholder">{{placeholder}}</span>
-	    {{else}}
-    	    <ul class="io-select-selection__rendered" style="margin-bottom: 0;">
-    	    	{{#each _selectedOptions as |option|}}
-    	        <li class="io-select-selection__choice" title="a10" >
-    	            <span class="io-select-selection__choice__content" >
-    	                {{option.label}}
-    	            </span>
-    	            <span class="io-select-selection__choice__remove" {{action 'removeOption' option.value bubbles=false}}>
-    	            </span>
-    	        </li>
-    	        {{/each}}
-    	    </ul>
-	    {{/if}}
-    {{else}}
-        {{!-- single select --}}
-        <span class="io-select-selection__rendered">
-            <span>
-            	{{#if _selectedOptions}} 
-            		{{_selectedOptions.label}}
-            	{{else}}
-                    {{#unless readonly}}
-                		{{placeholder}}
-                    {{/unless}}
-            	{{/if}}
-            </span>
-        </span>
-        <span class="io-select-arrow" tabindex="-1" style="outline:none;"> <b> </b> </span>
-    {{/if}}
-    </span>
+    {{partial 'components/io-select/select'}}
 {{/if}}
 
-
 {{!-- io-select-dropdown-placement-bottomLeft --}}
-<span class="io-select-dropdown {{hiddenClass}}" style="width: 100%;">
-    {{#if showDropdownSearch}}
-        <div class="io-select-dropdown-search">
-            {{#if _dropdownSearchPlaceholderVisible}}
-                <div class="io-select-search__field__placeholder">
-                    {{dropdownSearchPlaceholder}}
-                </div>
-            {{/if}}
-            <div class="io-select-search io-select-search--inline" style="width: 100%;">
-                <div class="io-select-search__field__wrap">
-                    {{input class="io-select-search__field" value=dropdownSearchText}}
-                </div>
-            </div>
-        </div>
-    {{/if}}
-    <ul class="io-select-dropdown-menu io-select-dropdown-menu-vertical  io-select-dropdown-menu-root" role="menu" aria-activedescendant="" >
-    	{{#if (gt options.length 0)}}
-    		{{#each options as |option|}}
-    			{{io-option value=option.value  disabled=option.disabled label=option.label}}
-    		{{/each}}
-    	{{else}}
-	        {{yield}}
-    	{{/if}}
-    </ul>
-</span>
+{{partial 'components/io-select/select-dropdown'}}
