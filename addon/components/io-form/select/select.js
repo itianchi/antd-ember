@@ -191,11 +191,11 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 */
 	_dropdownSearchTextChange: function() {
 
+		this.searchBoxTextChange();
+
 		if (this.get('onSearch')) {
 			this.sendAction('onSearch', this.get('dropdownSearchText'));
 		}
-
-		this.searchBoxTextChange();
 
 	}.observes('dropdownSearchText'),
 	/**
