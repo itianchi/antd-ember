@@ -948,6 +948,15 @@ export default Component.extend({
             if (isNone(sortedBy)) {
                 return;
             }
+
+            if (this.get('onSort')) {
+                this.sendAction('onSort', {
+                    column,
+                    sortedBy
+                });
+                return;
+            }
+
             var currentSorting = get(column, 'sorting');
             var newSorting = sortMap[currentSorting.toLowerCase()];
             var sortingArgs = [column, sortedBy, newSorting];
