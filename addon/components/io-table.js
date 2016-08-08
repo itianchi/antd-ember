@@ -37,13 +37,13 @@ const {
 } = Ember;
 const NOT_SORTED = -1;
 const defaultMessages = {
-    'searchLabel': 'Search:',
-    'columns-title': 'Columns',
-    'columns-showAll': 'Show All',
-    'columns-hideAll': 'Hide All',
-    'columns-restoreDefaults': 'Restore Defaults',
-    tableSummary: 'Show %@ - %@ of %@',
-    allColumnsAreHidden: 'All columns are hidden. Use <strong>columns</strong>-dropdown to show some of them',
+    'searchLabel': '搜索:',
+    'columns-title': '列选项',
+    'columns-showAll': '全部显示',
+    'columns-hideAll': '全部隐藏',
+    'columns-restoreDefaults': '重置默认',
+    tableSummary: '显示 %@ - %@ of %@',
+    allColumnsAreHidden: '所有列被隐藏，使用 <strong>列选项</strong> 下拉框修改显示和隐藏',
     noDataToShow: '无记录'
 };
 const defaultIcons = {
