@@ -65,14 +65,12 @@ export default Ember.Component.extend(FormItemMixin, {
   actions: {
     focusIn() {
       if (this.get("_focusIn")) {
-      console.log("FOO");
-        this.sendAction("_focusIn", this.get("value"));
+        this.sendAction("_focusIn", this.get("value"), this);
       }
     },
     focusOut() {
       if (this.get("_focusOut")) {
-      console.log("BAR");
-        this.sendAction("_focusOut", this.get("value"));
+        this.sendAction("_focusOut", this.get("value"), this);
       }
     }
   }

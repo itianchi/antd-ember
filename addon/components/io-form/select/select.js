@@ -20,17 +20,17 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	tabindex: 0,
 	role: 'form-item-select',
 	/**
-	 * @attribute value 
+	 * @attribute value
 	 * @type {String | Array}
 	 */
 	value: null,
 	/**
-	 * @attribute width 
+	 * @attribute width
 	 * @type {Number}
 	 */
 	width: 120,
 	/**
-	 * @attribute disabled 
+	 * @attribute disabled
 	 */
 	disabled: false,
 	/**
@@ -38,7 +38,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @description  [multiple select]
 	 */
 	multiple: false,
-	/** 
+	/**
 	 * @attribute [placeholder]
 	 */
 	placeholder: '请选择',
@@ -373,7 +373,8 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			}, 100);
 
 			if (this.get('onChange')) {
-				this.sendAction('onChange', this.get('value'));
+			  console.log(this);
+				this.sendAction('onChange', this.get('value'), this);
 			}
 
 			setTimeout(() => {
