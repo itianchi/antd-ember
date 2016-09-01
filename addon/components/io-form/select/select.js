@@ -103,7 +103,7 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 	 * @state hiddenClass
 	 */
 	hiddenClass: function() {
-		const options = this.get('options');
+		const options = this.get('options') || [];
 		if (this.get('_hidden') || options.length === 0) {
 			return this.get('classNamePrefix') + 'dropdown-hidden';
 		} else {
