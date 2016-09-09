@@ -309,10 +309,11 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			children.forEach((child) => {
 				if (this.isSelectedOption(child)) {
 					child.set('selected', true);
-					selectedOptions.push({
+					let option = {
 						value: child.get('value'),
 						label: child.$().text()
-					});
+					};
+					selectedOptions.push(option);
 				} else  {
 					child.set('selected', false);
 				}
@@ -321,7 +322,24 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 			if (!multiple) {
 				this.set('_selectedOptions', selectedOptions[0]);
 			} else {
-				this.set('_selectedOptions', selectedOptions);
+				this.set('_selectedOptions', unique(selectedOptions));
+			}
+
+			function unique(arr) {
+				let ret = [];
+				for (let i = 0, l = arr.length; i < l; i++) {
+					if (!find(ret, arr[i])) {
+						ret.push(arr[i]);
+					}
+				}
+				console.log('unique', arr, ret)
+				return ret;
+			}
+
+			function find(arr, item) {
+				return arr.some((it) => {
+					return it.value === item.value && it.label === it.label;
+				});
 			}
 		},
 		/**
