@@ -332,7 +332,6 @@ export default Ember.Component.extend(FormItemMixin, ComponentParent, OutsideCli
 						ret.push(arr[i]);
 					}
 				}
-				console.log('unique', arr, ret)
 				return ret;
 			}
 
