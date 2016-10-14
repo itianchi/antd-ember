@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import fmt from '../utils/fmt';
+import Pinyin from '../utils/pinyin';
+
 /**
  * @typedef {object} ModelsTable~ModelsTableColumn
  * @property {string} propertyName data's property shown in the current column
@@ -101,6 +103,9 @@ function smartExtend(customs, defaults) {
     });
     return result;
 }
+
+const pinyin = new Pinyin();
+
 /**
  * Default filter-function used in the filter by columns
  *
@@ -109,6 +114,8 @@ function smartExtend(customs, defaults) {
  * @returns {boolean}
  */
 function defaultFilter(cellValue, filterString) {
+    cellValue = pinyin.getFullChars(cellValue).toLowerCase();
+    filterString = pinyin.getFullChars(filterString).toLowerCase();
     return -1 !== cellValue.indexOf(filterString);
 }
 /**
@@ -186,7 +193,7 @@ export default Component.extend({
      * @name ModelsTable#useFilteringByColumns
      * @default true
      */
-    useFilteringByColumns: false,
+    useFilteringByColumns: true,
     /**
      * @type {string}
      * @name ModelsTable#filterString

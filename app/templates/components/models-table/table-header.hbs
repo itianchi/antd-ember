@@ -21,6 +21,9 @@
   {{!-- useFilteringByColumns --}}
   {{#if useFilteringByColumns}}
     <tr>
+      {{#if showIndexNumber}}
+        <th></th>
+      {{/if}}
       {{#each processedColumns as |column|}}
         {{#if column.isVisible}}
           <th class="{{classes.theadCell}}">

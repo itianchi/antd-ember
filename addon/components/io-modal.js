@@ -24,6 +24,12 @@ export default Ember.Component.extend({
     this.set('modalNode', $node);
     $node.modal(this.get('visibility'));
 
+    if ($($node).draggable) {
+      $($node).draggable({
+        handle: ".modal-header"
+      })
+    }
+
     $node.on('shown.bs.modal', function () {
       openedModals += 1;
     });
