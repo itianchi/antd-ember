@@ -104,7 +104,7 @@ function smartExtend(customs, defaults) {
     return result;
 }
 
-const pinyin = new Pinyin();
+const pinyinTranslator = new Pinyin();
 
 /**
  * Default filter-function used in the filter by columns
@@ -114,8 +114,7 @@ const pinyin = new Pinyin();
  * @returns {boolean}
  */
 function defaultFilter(cellValue, filterString) {
-    cellValue = pinyin.getFullChars(cellValue).toLowerCase();
-    filterString = pinyin.getFullChars(filterString).toLowerCase();
+    filterString = pinyinTranslator.getFullChars(filterString);
     return -1 !== cellValue.indexOf(filterString);
 }
 /**
@@ -447,6 +446,13 @@ export default Component.extend({
         const showIndexNumber = this.get('showIndexNumber');
         data.forEach((it, index) => {
             set(it, '__index', index + indexNumberBase);
+            processedColumns.forEach(c => {
+                const propertyName = get(c, 'propertyName');
+                if (propertyName) {
+                    var cellValue = '' + get(it, propertyName);
+                    set(it, propertyName + '__pinyin', pinyinTranslator.getFullChars(cellValue));              
+                }
+            });
         });
 
         // global search
@@ -454,12 +460,12 @@ export default Component.extend({
             return processedColumns.length ? processedColumns.any(c => {
                 const propertyName = get(c, 'propertyName');
                 if (propertyName) {
-                    var cellValue = '' + get(row, propertyName);
+                    var cellValue = '' + get(row, propertyName + '__pinyin');
                     if (filteringIgnoreCase) {
                         cellValue = cellValue.toLowerCase();
                         filterString = filterString.toLowerCase();
                     }
-                    return -1 !== cellValue.indexOf(filterString);
+                    return defaultFilter(cellValue, filterString);
                 }
                 return false;
             }) : true;
@@ -473,6 +479,7 @@ export default Component.extend({
             return processedColumns.length ? processedColumns.every(c => {
                 const propertyName = get(c, 'propertyName');
                 if (propertyName) {
+                    var cellValuePinyin = '' + get(row, propertyName + '__pinyin');
                     var cellValue = '' + get(row, propertyName);
                     if (get(c, 'useFilter')) {
                         var filterString = get(c, 'filterString');
@@ -484,9 +491,11 @@ export default Component.extend({
                         } else {
                             if (filteringIgnoreCase) {
                                 cellValue = cellValue.toLowerCase();
+                                cellValuePinyin = cellValuePinyin.toLowerCase();
                                 filterString = filterString.toLowerCase();
                             }
-                            return c.filterFunction(cellValue, filterString);
+
+                            return c.filterFunction(cellValuePinyin, filterString);
                         }
                     }
                     return true;
@@ -862,6 +871,7 @@ export default Component.extend({
      * @name ModelsTable#_singleColumnSorting
      */
     _singleColumnSorting(column, sortedBy, newSorting) {
+        sortedBy += '__pinyin';
         get(this, 'processedColumns').setEach('sorting', 'none');
         set(column, 'sorting', newSorting);
         set(this, 'sortProperties', 'none' === newSorting ? [] : [`${sortedBy}:${newSorting}`]);

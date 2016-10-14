@@ -24,8 +24,8 @@ export default Ember.Component.extend({
     this.set('modalNode', $node);
     $node.modal(this.get('visibility'));
 
-    if ($($node).draggable) {
-      $($node).draggable({
+    if (this.$('.modal-content').draggable) {
+      this.$('.modal-content').draggable({
         handle: ".modal-header"
       })
     }

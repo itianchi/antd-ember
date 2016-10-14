@@ -63,6 +63,10 @@ Pinyin.prototype = {
 	},
 	
 	_getFullChar: function(str){
+			if (str === '内')  {
+				return 'Nei'
+			}
+
 	    for (var key in this.full_dict){
 	        if (this.full_dict[key].indexOf(str)!=-1) {
 	            return this._capitalize(key); break;
