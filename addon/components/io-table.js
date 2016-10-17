@@ -192,7 +192,7 @@ export default Component.extend({
      * @name ModelsTable#useFilteringByColumns
      * @default true
      */
-    useFilteringByColumns: true,
+    useFilteringByColumns: false,
     /**
      * @type {string}
      * @name ModelsTable#filterString
