@@ -114,7 +114,7 @@ const pinyinTranslator = new Pinyin();
  * @returns {boolean}
  */
 function defaultFilter(cellValue, filterString) {
-    filterString = pinyinTranslator.getFullChars(filterString);
+    filterString = (pinyinTranslator.getFullChars(filterString) || '').toLowerCase();
     return -1 !== cellValue.indexOf(filterString);
 }
 /**
