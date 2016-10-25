@@ -26,7 +26,8 @@ export default Ember.Component.extend({
 
     if (this.$('.modal-content').draggable) {
       this.$('.modal-content').draggable({
-        handle: ".modal-header"
+        handle: ".modal-header",
+        revert: true
       })
     }
 
