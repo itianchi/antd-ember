@@ -423,6 +423,12 @@ export default Component.extend({
     gotoForwardEnabled: computed('currentPageNumber', 'pagesCount', function() {
         return get(this, 'currentPageNumber') < get(this, 'pagesCount');
     }),
+    filterStringIsNone: Ember.observer('filterString', function() {
+        var filterString=this.get("filterString");
+        if(filterString==""||filterString==undefined){
+            this.send("searchAction",this.get("filterString"));
+        }
+    }),
     /**
      * @type {Ember.Object[]}
      * @name ModelsTable#filteredContent
